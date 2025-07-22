@@ -122,9 +122,9 @@ The internal structure of the proton is encoded in the parton distribution funct
 \label{subsubsec:proton}
 From these principles, the cross-sections for the processes that unfold at hadron colliders can be factorized into two contributions. The \acrshort{pdf}s describe the colliding partons $i$, $j$, within the colliding hadrons $H_{1}$, $H_{2}$. In the collision, the hard scattering process of interest corresponds to the short-distance interaction between both partons, each carrying a fraction of the parent hadrons's momentum. These interactions are characterised by a large momentum transfer and are described within the framework of perturbative \acrshort{qcd}. However, the collision environment also includes soft interactions with low momentum transfer, collectively referred to as the underlying event (UE), which encompasses remnants of the hadron-hadron system as well as potential multi-parton interactions (MPI), which are cases where more than one partonic interaction occurs within a single event.
 
-Radiative processes such as Bremsstrahlung are inherent to high-energy collisions due to the acceleration of colour and electric charges. Initial State Radiation (ISR) arises from the incoming partons before the hard interaction, while Final State Radiation (FSR) originates from the outgoing partons. Following the hard interaction, partons undergo hadronisation, a non-perturbative \acrshort{qcd} process, wherein coloured partons are confined into colour-singlet hadrons. These hadrons are typically collimated into jets, observable in the detector.
+Radiative processes such as Bremsstrahlung are inherent to high-energy collisions due to the acceleration of colour and electric charges. Initial State Radiation (ISR) arises from the incoming partons before the hard interaction, while Final State Radiation (FSR) originates from the outgoing partons. Following the hard interaction, partons undergo hadronisation, a non-perturbative \acrshort{qcd} process in which coloured partons are confined into colour-singlet hadrons. These hadrons are typically collimated into jets, observable in the detector.
 
-Hence, the total cross-section for a given final state $X$ in a $pp$ collision is obtained via the factorisation theorem [reference]:
+Hence, the total cross-section for a given final state $X$ in a $pp$ collision is obtained via the factorisation theorem~\cite{fact_them,collins2004factorizationhardprocessesqcd}:
 \begin{equation}
 \sigma_{AB \to X} = \sum_{a,b} \int \mathrm{d}x_a \, \mathrm{d}x_b \, f_{a/A}(x_a, \mu_F^2) \, f_{b/B}(x_b, \mu_F^2) \, \hat{\sigma}_{ab \to X}(\hat{s}, \mu_R^2),
 \end{equation}
@@ -263,7 +263,7 @@ m_\gamma &= 0,
 where $v = 246 \text{  GeV}$ is the Higgs field vacuum expectation value and g is the weak isospin coupling constant. 
 This mechanism results in two massive vector bosons $W^{\pm}$ which corresponds to the weak charged current, and other massive boson Z, carrier of the neutral weak current. It also remains a massless gauge boson, $A_{\mu}$, which corresponds to the photon and is consistent with the unbroken \acrshort{qed} symmetry $U(1)$.
 
-From eq.~\cite{eq:ew_broken}, the mass term for the scalar field $H$ turns to be:
+From eq.~\ref{eq:ew_broken}, the mass term for the scalar field $H$ turns to be:
 \begin{equation}
 m_H^2 = 2 \mu^2,
 \end{equation}
@@ -324,10 +324,10 @@ where the off-diagonal elements cause flavour changing weak charged current inte
 %++++++++++++++++++++++++++++++++++++++++++++++
 After integrating all the essential elements forming the Standard Model, the theory is characterized by nineteen undetermined parameters:
 \begin{itemize}
-  \item a total of nine Yukawa couplings corresponding to the three charged leptons and six quarks.
+  \item a total of nine Yukawa couplings corresponding to the three charged leptons and six quarks,
   \item three gauge coupling constants governing the strengths of the interactions: \( g_s \), \( g \), and \( g' \),
-  \item two parameters characterizing the Higgs potential: the vacuum expectation value \(\nu\) and the Higgs boson mass \(m_H\).
-  \item four resulting mixing angles defining the structure of the \acrshort{ckm} matrix.
+  \item two parameters characterizing the Higgs potential: the vacuum expectation value \(\nu\) and the Higgs boson mass \(m_H\),
+  \item four resulting mixing angles defining the structure of the \acrshort{ckm} matrix,
   \item a single strong CP-violating phase \(\theta_{CP}\), which is conventionally assumed to be zero, implying the absence of CP violation in strong interactions.
 \end{itemize}
 Despite being defined by only 19 free parameters, the Standard Model has demonstrated extraordinary predictive power, with theoretical predictions consistently matching experimental results over several decades. This success is exemplified in Figure~\ref{fig:totalxsect}, which presents the cross-sections measured by the ATLAS experiment for a variety of processes occurring across multiple orders of magnitude.
@@ -384,7 +384,7 @@ The top quark, proposed by Kobayashi and Maskawa in 1973~\cite{10.1143/PTP.49.65
 
 \subsubsection*{Top quark production}
 \label{subsec:top_quark_prod}
-At hadron colliders such as the \acrshort{lhc}, the top quark production mostly ocurrs in pairs ($t\bar{t}$) through the strong interaction. At \acrshort{lo}, the two leading subprocesses are gluon-gluon fusion (\acrshort{ggf}) and $q\bar{q}$ annihilation, as represented in Figure~\cite{fig:tt-production}. Gluon fusion accounts for roughly $90\%$ of the total $t\bar{t}$ cross-section at a centre-of-mass energy of 13 TeV, which is the practical scenario when protons collide at \acrshort{lhc} where gluon parton densities are dominant. 
+At hadron colliders such as the \acrshort{lhc}, the top quark production mostly ocurrs in pairs ($t\bar{t}$) through the strong interaction. At \acrshort{lo}, the two leading subprocesses are gluon-gluon fusion (\acrshort{ggf}) and $q\bar{q}$ annihilation, as represented in Figure~\ref{fig:tt-production}. Gluon fusion accounts for roughly $90\%$ of the total $t\bar{t}$ cross-section at a centre-of-mass energy of 13 TeV, which is the practical scenario when protons collide at \acrshort{lhc} where gluon parton densities are dominant. 
 \begin{figure}[htbp]
     \centering
 
@@ -429,7 +429,9 @@ As mentioned, top quarks are mainly produced at hadron colliders in $t\bar{t}$ p
     \caption{Left: classification of $t\bar{t}$ decay channels based on the $W$ decay modes~\cite{Lannon_2012}. Right: inclusive branching ratios for the $t\bar{t}$ system decay~\cite{ParticleDataGroup}.}
     \label{fig:diagram-and-table-top}
 \end{figure}
+
 The fully hadronic final state corresponds to the case where both $W$ bosons decay into quark-antiquark pairs. This is the most frequent decay mode. An smaller fraction of events corresponds to the semileptonic final state, in which one of the bosons decays hadronically, while the other decays leptonically producing a charged lepton and a neutrino. In the case of the dileptonic final state, both $W$ bosons decay into leptons.
+
 The table in Figure~\ref{fig:diagram-and-table-top} considers $\tau$-leptons within the general category of leptons. However, in the context of physics analysis, it is common for the term "leptonic decay" to be used only to refer to decays into light charged leptons, i.e. electrons and muons, including those from the decay of $\tau$ leptons. For experimental reasons, hadronic decays of $\tau$-leptons are treated differently, as discussed in Section~\ref{sec:ttH}.
 
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -477,12 +479,12 @@ The main production modes at tree level in which the Higgs boson can be produced
         \includegraphics[width=0.46\textwidth]{images/higgs_dec.pdf} & 
         \includegraphics[width=0.46\textwidth]{images/higgs_prod.pdf}
         \end{tabular}
-        \caption{ (a)Cross-sections measured for Higgs boson production at center of mass energy of 13 TeV as a function
+        \caption{ (a) Cross-sections measured for Higgs boson production at center of mass energy of 13 TeV as a function
         of the Higgs boson mass. (b) Branching ratios for the different Higgs boson decay modes as a function of the Higgs boson mass~\cite{Nature_ATLAS}}
         \label{fig:higgs_comb}
     \end{figure}
 
-The dominant production mode is gluon-gluon fusion (\acrshort{ggf}), where two gluons from the colliding protons interact via a heavy quark loop, primarily involving the top quark, to produce a Higgs boson. This process accounts for about 90\% of the total Higgs production cross-section at a centre-of-mass energy of 13 TeV, due to the high gluon density within the proton.
+The dominant production mode is gluon-gluon fusion, where two gluons from the colliding protons interact via a heavy quark loop, primarily involving the top quark, to produce a Higgs boson. This process accounts for about 90\% of the total Higgs boson production cross-section at a centre-of-mass energy of 13 TeV, due to the high gluon density within the proton.
 
 Another important channel is vector boson fusion (VBF), responsible of $6.8\%$ of the total cross-section. The Higgs boson is produced via a $t$-channel exchange of two weak bosons radiated from the incoming quarks, being this mechanism characterized by the presence of two high-momentum hard jets emitted at small angles from the colliding protons, while the Higgs is tipically produced between them in the central region, offering a clean and efficient experimental signature. 
 
@@ -491,7 +493,7 @@ Associated production with a vector boson (VH), also called "Higgs-strahlung", w
 Finally, the associated production with a pair of top quarks ($t\bar{t}H$) provides a direct probe of the Yukawa coupling between the Higgs and the top quark, the strongest coupling in the \acrshort{sm}. Although its cross-section is significantly lower than other channels, around the $0.92\%$, it plays a strategic role in testing the interaction responsible for the top quark mass generation, which will be discussed in the following.
 The rarest considered production mode is the associated production with a single top quark, accouting for a $0.16\%$. This process could also contribute to the determination of the direct top quark Yukawa coupling. However, its cross-section is significantly smaller than that of \( t\bar{t}H \) production. Furthermore, additional \acrshort{lo} diagrams for \( tH \) production involve the \( W \)-Higgs coupling, which already blurs the measurement. It is also worth noting that this process is sensitive to the sign of the top quark Yukawa coupling, which causes the interference between the dominant contributing channels to be destructive, hence its small cross-section.
 
-Additionally, there are other production modes that remain experimentally challenging, such as Higgs production in association with bottom quark pairs, \( b\bar{b}H \). While this mode has a cross-section comparable to that of \( t\bar{t}H \), it suffers from a much less clean experimental signature due to the large background contribution from \acrshort{qcd} processes.
+Additionally, there are other production modes that remain experimentally challenging, such as Higgs boson production in association with bottom quark pairs, \( b\bar{b}H \). While this mode has a cross-section comparable to that of \( t\bar{t}H \), it suffers from a much less clean experimental signature due to the large background contribution from \acrshort{qcd} processes.
 
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 \subsubsection*{Higgs boson decay modes}
@@ -541,7 +543,7 @@ The decay into a pair of $\tau$ leptons is also possible for the \acrshort{sm} H
 
 Secondly, the $H \rightarrow \tau\tau$ decay is affected by a significant background from $Z \rightarrow \tau\tau$ events, whose production cross-section is several orders of magnitude larger than that of the Higgs boson. Despite these difficulties, this decay channel offers an unique opportunity to probe the Yukawa interaction between the Higgs boson and the tau lepton, providing the most precise measurement of a fermionic coupling to date due to its relatively large branching ratio. Furthermore, it allows for the study of the CP properties of the Higgs boson, both in its production mechanisms and decay, and offers good sensitivity to the vector boson fusion (VBF) production mode.
 
-In the context of the Yukawa sector, the \acrshort{sm} also predicts Higgs decays to fermions of the first and second generation. The decay into muons, \( H \rightarrow \mu\mu \), although having a very small branching ratio of about 0.02\%, presents a clean experimental signature with two well-reconstructed muons in the final state. However, its measurement is significantly affected by the dominant background from the Drell--Yan process. On the other hand, the \( H \rightarrow c\bar{c} \) decay has a larger branching ratio of approximately 2.9\%, but its measurement at the \acrshort{lhc} is hampered by the large \acrshort{qcd} multijet background. In addition, the identification of charm quarks remains a difficult task in the environment of a hadron collider. Decays of the Higgs boson to lighter fermions have exceedingly small branching fractions, rendering their direct observation unfeasible with current experimental sensitivity~\cite{https://doi.org/10.23731/cyrm-2017-002}.
+In the context of the Yukawa sector, the \acrshort{sm} also predicts Higgs boson decays to fermions of the first and second generation. The decay into muons, \( H \rightarrow \mu\mu \), although having a very small branching ratio of about 0.02\%, presents a clean experimental signature with two well-reconstructed muons in the final state. However, its measurement is significantly affected by the dominant background from the Drell--Yan process. On the other hand, the \( H \rightarrow c\bar{c} \) decay has a larger branching ratio of approximately 2.9\%, but its measurement at the \acrshort{lhc} is hampered by the large \acrshort{qcd} multijet background. In addition, the identification of charm quarks remains a difficult task in the environment of a hadron collider. Decays of the Higgs boson to lighter fermions have exceedingly small branching fractions, rendering their direct observation unfeasible with current experimental sensitivity~\cite{https://doi.org/10.23731/cyrm-2017-002}.
 
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 \subsection{The \ttH process: a gateway to the Yukawa sector}
@@ -562,7 +564,7 @@ However, the main analysis presented in this thesis focuses on the case where bo
 
 
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-\subsection{Measurements of production cross-section and decay branching ratios: the STXS framework}
+\subsection{Measurements of cross-section and branching ratios: the STXS framework}
 \label{sec:stxs_yukawa}
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
@@ -572,7 +574,7 @@ Measurements targeting a Higgs boson signal commonly focus on determining a sign
 \label{signal_strength}
     \mu = \frac{\sigma \times \mathcal{B}}{\sigma_{\mathrm{\acrshort{sm}}} \times \mathcal{B}_{\mathrm{\acrshort{sm}}}},
 \end{equation}
-Such measurements aim to maximize sensitivity to the Higgs boson signal by comparing observed event yields in data to the expected yields from the \acrshort{sm} for each of the main Higgs production modes.
+Such measurements aim to maximize sensitivity to the Higgs boson signal by comparing observed event yields in data to the expected yields from the \acrshort{sm} for each of the main Higgs boson production modes.
 
 During the Run 2 period of the Large Hadron Collider (\acrshort{lhc}), all the main Higgs boson production and decay modes have been observed with varying degrees of significance. The latest combined results from the ATLAS experiment for production cross-section and decay branching ratio measurements show a remarkable agreement with \acrshort{sm} expectations, as illustrated in Figure~\ref{higgs_mu}, resulting in a measured inclusive signal strength of $\mu = 1.05 \pm 0.06$~\cite{Nature_ATLAS}. Similar value was obtained by the CMS collaboration~\cite{CMS:2022dwd}. Evidence for rare decay modes, such as $H \to Z\gamma$ and $H \to \mu\mu$, has also been reported~\cite{Aad_2024,muon2021}.
 
@@ -594,9 +596,9 @@ Fiducial cross-section measurements can be further extended to differential cros
 
 To find a balance between inclusive and fiducial differential measurements, the Simplified Template Cross-Section (STXS) framework has been developed~\cite{badger2016leshouches2015physics}. The STXS framework partitions the Higgs boson production phase space into multiple exclusive regions or bins, each defined by kinematic criteria involving the Higgs boson and associated objects in the final states such as jets or vector bosons. This binning scheme is optimized to enhance sensitivity to possible B\acrshort{sm} effects while keeping a reasonable independence and control over theoretical uncertainties.
 
-STXS measurements offer differential information about Higgs production, allowing the use of complex multivariate analysis techniques in event selections. This is particularly advantageous for decay channels with challenging final-state reconstruction, such as $H \to \tau\tau$ or $H \to b\bar{b}$, where detector resolution and background contamination are more significant compared to cleaner channels like $H \to \gamma\gamma$ or $H \to ZZ^*$.
+STXS measurements offer differential information about Higgs boson production, allowing the use of complex multivariate analysis techniques in event selections. This is particularly advantageous for decay channels with challenging final-state reconstruction, such as $H \to \tau\tau$ or $H \to b\bar{b}$, where detector resolution and background contamination are more significant compared to cleaner channels like $H \to \gamma\gamma$ or $H \to ZZ^*$.
 
-The STXS framework also facilitates the combination of results from analyses targeting different Higgs decay modes, maximizing the overall experimental sensitivity. The current binning scheme, referred to as Stage 1.2 and shown in Figure~\ref{fig:STXSbins}, refines the granularity introduced in earlier stages (so called Stage 1.1~\cite{STXS11}) to better exploit the available data. A simplified fiducial volume common to all STXS analyses requires the Higgs boson to have rapidity $|y| < 2.5$, matching the typical detector acceptance, where the pseudorapidity is defined as $y = 0.5 \ln{\left( \frac{E+p_Z}{E-p_Z} \right)}$.
+The STXS framework also facilitates the combination of results from analyses targeting different Higgs boson decay modes, maximizing the overall experimental sensitivity. The current binning scheme, referred to as Stage 1.2 and shown in Figure~\ref{fig:STXSbins}, refines the granularity introduced in earlier stages (so called Stage 1.1~\cite{STXS11}) to better exploit the available data. A simplified fiducial volume common to all STXS analyses requires the Higgs boson to have rapidity $|y| < 2.5$, matching the typical detector acceptance, where the pseudorapidity is defined as $y = 0.5 \ln{\left( \frac{E+p_Z}{E-p_Z} \right)}$.
 
 \begin{figure}[htbp]
     \centering
@@ -609,18 +611,18 @@ The STXS framework also facilitates the combination of results from analyses tar
 \end{figure}
 
 
-Higgs production modes are classified into categories within the STXS scheme, based on the production mechanism and associated particles:
+Higgs boson production modes are classified into categories within the STXS scheme, based on the production mechanism and associated particles:
 
 \begin{itemize}
     \item \textbf{Gluon-gluon fusion (ggF)}: including the dominant gluon-gluon fusion process and gluon-induced associated production with a $Z$ boson decaying hadronically, $gg \to ZH \to q\bar{q}H$. Production of $b\bar{b}H$ is also included here.
-    \item \textbf{$qq'\to qq'H$}: it includes the Higgs production via fusion of vector bosons and quark-initiated associated production of a Higgs boson with a vector boson where the vector boson decays hadronically ($qq'\to VH \to qq'H$).
-    \item \textbf{Vector boson associated production ($VH \to (ll, l\nu)H$)}: Higgs produced in association with a $W$ or $Z$ boson decaying leptonically.
-    \item \textbf{Top-associated production ($t\bar{t}H$ and $tH$)}: Higgs produced with a top quark pair or single top quark (in a single bin).
+    \item \textbf{$qq'\to qq'H$}: it includes the Higgs boson production via fusion of vector bosons and quark-initiated associated production of a Higgs boson with a vector boson where the vector boson decays hadronically ($qq'\to VH \to qq'H$).
+    \item \textbf{Vector boson associated production ($VH \to (ll, l\nu)H$)}: Higgs boson produced in association with a $W$ or $Z$ boson decaying leptonically.
+    \item \textbf{Top-associated production ($t\bar{t}H$ and $tH$)}: Higgs boson produced with a top quark pair or single top quark (in a single bin).
 \end{itemize}
 
 Within each category, the STXS bins are further subdivided based on key variables such as the transverse momentum of the Higgs boson ($p^H_T$) or vector boson ($p^V_T$), the number of jets, and the invariant mass of leading jets. The binning scheme is flexible and can be adapted to the experimental sensitivity: bins with insufficient data can be merged, and finer bins can be introduced as more data becomes available.
 
-The latest combination of ATLAS Run 2 data using the STXS framework has produced measurements of the Higgs production cross-section in 36 exclusive kinematic regions~\cite{Nature_ATLAS}. The results are consistent with \acrshort{sm} predictions, providing stringent constraints on \acrshort{bsm} scenarios. Figure~\ref{fig:atlas-stxs-results} summarizes these measurements.
+The latest combination of ATLAS Run 2 data using the STXS framework has produced measurements of the Higgs boson production cross-section in 36 exclusive kinematic regions~\cite{Nature_ATLAS}. The results are consistent with \acrshort{sm} predictions, providing stringent constraints on \acrshort{bsm} scenarios. Figure~\ref{fig:atlas-stxs-results} summarizes these measurements.
 
 \begin{figure}[htbp]
     \centering
