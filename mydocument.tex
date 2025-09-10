@@ -21,6 +21,7 @@
 % Packages
 % ------------------------------------------------------------------------------
 % Figure paths
+\usepackage{placeins} % en el preámbulo
 \usepackage[percent]{overpic} % en el preámbulo
 \usepackage{pdflscape}  % en el preámbulo
 \usepackage{rotating}
@@ -57,6 +58,7 @@
 
 
 %|||||||||||||||||||||||DEFINITIONS|||||||||||||||||||||||||||||||||||||||||
+\newcommand*{\tauhadvis}{\ensuremath{\tau_{\text{had-vis}}}\xspace}
 \newcommand*{\mmc}{\ensuremath{m^\text{MMC}_{\tau\tau}}\xspace}
 \newcommand*{\ttbar}{\ensuremath{t\overline{t}}\xspace}
 \newcommand*{\ttHtt}{\ensuremath{t\overline{t}H(\tau\tau)}\xspace}
@@ -152,8 +154,9 @@ Here it should be written the preface of this document.
 %-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
-\chapter{Results}
-\label{chap:result}
+\chapter{\ttH production in the $H \to \tau \tau$ decay channel}
+\label{chap:htautau}
+\input{chapters/higgs_analysis}
 %-------------------------------------------------------------------------------
 
 Place your results here.
