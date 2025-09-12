@@ -260,7 +260,7 @@ Given the large background contribution observed in events with exactly five jet
         \centering
         \includegraphics[width=\textwidth]{plot_ditau_pt_NN_kin_hh_tth.pdf}
         \caption{}
-        \label{reconstructed_preselection_a}
+        \label{reconstructed_preselection_b}
     \end{subfigure}
     \caption{Distributions of (a) the Higgs boson mass, reconstructed with the mixed MMC/collinear estimator, and (b) the Higgs transverse momentum $p_{\text{T}}^H$, shown at the $t\bar{t}H$ preselection level. Only statistical uncertainties are included.}
     \label{reconstructed_preselection}
@@ -346,10 +346,279 @@ Given their very small impact across all the regions considered, the fit cannot 
 \section{MVA strategy for \ttHtt}
 \label{sec:tth_mva}
 
+Beyond the event selection described in the previous section, the preselected \ttHtt events are further divided into categories designed to optimise the signal-to-background separation, thereby increasing both sensitivity and purity, as will be detailed in Section~\ref{sec:tth_categories}. This categorisation relies on ML techniques, in particular on the use of BDTs introduced in Section~\ref{sec:bdt_general}, to enhance the separation of \ttH signal events from the dominant backgrounds \ztautau and \ttbar.
+
+This strategy follows the approach adopted in the previous round of this \htautau analysis~\cite{couplings}, where two binary BDTs were trained independently to separate \ttH from \ztautau and \ttH from \ttbar, respectively. The outputs of the two discriminants were then combined by applying selection cuts to define the analysis categories. 
+The BDT classifiers primarily exploit kinematic differences between signal and background processes, encoded in representative observables of the events used as training inputs. These observables are chosen to maximise the discriminating power between the targeted processes. 
+It is worth noting that correlations among input variables are not a priori problematic, since the BDT can take advantage of them, provided that the correlation patterns differ across the considered processes.
+
+In this work, the strategy of using two independent binary classifiers has been replaced by a multiclass BDT, trained to simultaneously distinguish between \ttH, \ztautau and \ttbar events. The output of this classifier consists of three scores, each associated with one event class, and normalised by construction to fulfil the condition $BDT_{\text{\ttH}} + BDT_{\text{Z}} + BDT_{\text{\ttbar}} = 1$.
+The training employs MC simulated events of the three processes, following the procedure described in Section~\ref{subsec:higgs_mc}. In addition, the available statistics of the \ttbar background are enhanced with fast-simulated samples, and alternative samples with modified top-quark mass are included, as introduced in Section~\ref{sec:tth_systematics}.
+
+The choice of a multiclass classifier suits particularly well when the classes to be separated are correlated and when the characteristic observables used as inputs are themselves related. This is indeed the case here, as the independent binary trainings were largely driven by jet-related features in the final state or by properties of the two \tauhadvis candidates. In such situations, where binary BDTs rely on similar and correlated input variables, the adoption of a multiclass approach provides a clear advantage.
+
+\subsection{Multiclass BDT setup}
+
+It is also worth noting, before introducing the details of the BDT setup, that the MC event selection employed for the training is based solely on the preselection described in Section~\ref{sec:event_selection_background}. The BDT is trained to handle three event classes, corresponding to the three considered processes. The structure of the decision trees, together with the hyperparameters and additional methods that define the algorithm, are presented in Section~\ref{sec:bdt_general} and are summarised below.
+\begin{itemize}
+    \small
+    \item Number of trees: 1000
+    \item Minimum node size: 2.5\%
+    \item Maximum depth of a tree: 2
+    \item Boosting algorithm used: Grad
+    \item Bagging is used with bagged sample fraction of 0.2~\footnote{Bagging is a resampling technique that is commonly used, in which a classifier is repeatedly trained using resampled training
+    events such that the final classifier is an average representation of each individual classifier.}
+    \item Number of cuts on the variables: 20
+\end{itemize}
+These hyperparameters were chosen as they provided the best performance, with no significant improvement observed from further optimisation. In order to enhance the sensitivity and to maximise the use of the available statistics, a cross-validation procedure is also implemented, ensuring that all events are employed for both training and testing. This is carried out using a total of five folds.
+
+\subsection{Input variables selection}
+
+Most of the variables used in the training of the multiclass BDT result from merging those already employed in the two previous binary BDT trainings, many of which were common to both. These variables will be detailed below, but it is worth starting by highlighting the new observables included in this work.
+
+The first of these is the minimum angular distance between any pair of jets in the event, $\Delta R^{\text{min}}_{jj}$. This variable is particularly useful for discriminating \ttbar from the signal and from \ztautau, since jet pairs in top-antitop production tend to be more widely separated. A related quantity is the minimum distance between a reconstructed \tauhad and a $b$-tagged jet, $\Delta R^{\text{min}}_{(\tau,b\text{-jet})}$. In this case, while in the \ttbar background both \tauhad originate from top-quark decays, in the \ttH signal the $\tau$-leptons come from the Higgs boson. Consequently, the angular separation between a \tauhad and a $b$-jet, considering all possible combinations, carries discriminating power. 
+
+In addition, and primarily with the aim of further improving the classification of \ttbar events, further angular observables associated with jets in the final state are included. Specifically, the pseudorapidity $\eta$ of up to the five leading jets is added to the input set.
+
+Finally, in order to enhance the discrimination against \ztautau events, we exploit the fact that the jets produced in this process exhibit non-trivial correlations. As discussed in Ref.~\cite{ztt_jets}, jets in $Z+\text{jets}$ events mainly originate from QCD radiation, which results in characteristic patterns in their transverse momenta. In contrast, in \ttH events jets predominantly arise from top-quark decays and from the hard matrix element. As a consequence, consecutive jets in the $Z+\text{jets}$ background tend to preserve similar $p_{\text{T}}$ ratios, yielding a roughly flat cross-section distribution as a function of these ratios. This observation motivates the inclusion of jet $p_{\text{T}}$ ratios as discriminating variables for the BDT.  
+Several possibilities were explored, such as jet multiplicities above various $p_{\text{T}}$ thresholds and different combinations of $p_{\text{T}}$ ratios up to the fourth leading jet. However, due to strong correlations among them and with already included observables, only three ratios with the highest separation power between signal and background were used:
+\begin{itemize}
+    \small
+    \item \textbf{ratio01} : \pt($\text{jet}_1$)/\pt($\text{jet}_0$)
+    \item \textbf{ratio12} : \pt($\text{jet}_2$)/\pt($\text{jet}_1$)
+    \item \textbf{ratio13} : \pt($\text{jet}_3$)/\pt($\text{jet}_1$)
+\end{itemize}
+
+Alongside these, the rest of variables used in the training can be grouped into four main categories:  
+\begin{itemize}
+    \item Jet system properties: as already mentioned, variables such as the jet pseudorapidities are complemented with quantities related to their transverse momenta. These include $\sum_{\text{jets}}p_{\text{T}}$, defined as the scalar sum of the transverse momenta of all jets in the event (denoted $H^{\text{jets}}_{\text{T}}$), and $\sum_{b\text{-jets}}p_{\text{T}}$ for the case of $b$-tagged jets ($SumPtBjet$). Variables associated with the reconstruction of the top quark are also included in this category, since they involve particles present in the signal process. A $W$-boson candidate, $m^{\text{best}}_{W}$, is reconstructed from pairs of non-$b$-tagged jets by selecting the combination with invariant mass closest to the nominal $W$ mass. This $W$ candidate is then combined with a $b$-tagged jet to build top-quark candidates, with $m^{\text{top}}_{W_{\text{best}}}$ defined as the invariant mass of the candidate lying closest to the expected top-quark mass.
+    \item Properties of $\tau$-leptons: variables of both $\tau$ candidates in the final state are included, such as the transverse momentum of the sub-leading \tauhad, $p^{\tau_1}_{\text{T}}$, and the pseudorapidity of the leading one, $\eta_{\tau_0}$. The transverse momentum of the di-$\tau$ system is also considered, since its properties differ significantly across the three processes under study.
+    \item Angular distances: a set of variables related to angular separations between objects in the event are included. These comprise the pseudorapidity difference of the two $\tau$ candidates, $\Delta\eta(\tau_0,\tau_1)$, as well as their angular distance $\Delta R(\tau_0,\tau_1)$. The previously introduced minimum angular distances between jets, and between a $b$-tagged jet and a \tauhad candidate, are also considered.
+    \item \etmiss description: two additional variables are added to characterise the missing transverse energy, namely the total \etmiss itself and the minimum azimuthal angle between $\vec{E}^{\text{miss}}_{\text{T}}$ and a \tauhad.
+\end{itemize}
+
+All these variables are summarised in Table~\ref{tab:ttH_variables}. It should be emphasised that the \mmc, although highly discriminating, is not included as part of the training. Instead, it is used directly in the binned likelihood fit employed to extract the signal. If it were included at the event-selection level of the training (for instance by restricting events to the Higgs boson mass window), a large fraction of the background statistics would be removed, which is not desirable. Moreover, if introduced as an input to the BDT, the classifier would be biased to produce a peak around $125$~GeV also for the background processes, thereby degrading its discriminating power.
+
+\begin{table}[htbp]
+    \small
+    \centering
+    \caption{Variables used in the multivariate tagger for the $t\bar{t}H$ analysis.}
+    \renewcommand{\arraystretch}{1.3}
+    \setlength{\tabcolsep}{10pt}
+    \begin{tabular}{p{2cm} p{8cm}}
+      \toprule
+      \textbf{Group} & \textbf{Variable} \\
+      \midrule
+
+      \multirow{9}{*}{\rotatebox{90}{Jet properties}} 
+      & Invariant mass of the two leading jets $p_{T}(jj)$ \\
+      & Product of $\eta$ of the two leading jets \\
+      & Sub-leading jet $p_{T}$ \\
+      & $\eta$ of the 5 leading jets \\
+      & Scalar sum of all jets $p_{T}$ \\
+      & Scalar sum of all $b$-tagged jets $p_{T}$ \\
+      & Best $W$-candidate dijet invariant mass \\
+      & Best top-quark-candidate three-jet invariant mass \\
+      & Ratio of the $p_{T}$ of jet pairs \\
+      \midrule
+
+      \multirow{6}{*}{\rotatebox{90}{Angular distances}} 
+      & $\Delta\phi$ between the two leading jets \\
+      & $\Delta\eta$ between the two leading jets \\
+      & Minimum $\Delta R$ between two jets \\
+      & Minimum $\Delta R$ between a $b$-tagged jet and a $\tau$ \\
+      & $|\Delta\eta(\tau,\tau)|$ \\
+      & $\Delta R(\tau,\tau)$ \\
+      \midrule
+
+      \multirow{3}{*}{\rotatebox{90}{$\tau$-lepton}} 
+      & $p_{T}(\tau)$ \\
+      & Sub-leading $\tau$ $p_{T}$ \\
+      & Leading $\tau$ $\eta$ \\
+      \midrule
+
+      \multirow{2}{*}{\rotatebox{90}{\etmiss}} 
+      & Missing transverse momentum $E_{T}^{\text{miss}}$ \\
+      & Smallest $\Delta\phi(\tau, \vec{E}_{T}^{\text{miss}})$ \\
+      \bottomrule
+    \end{tabular}
+    \label{tab:ttH_variables}
+\end{table}
+
+Figures~\ref{tth_vars_tmva_1} and~\ref{tth_vars_tmva_2} show the distributions of all input variables used for each of the event classes. As already anticipated, these distributions provide a direct indication of which variables are expected to be most discriminating and therefore most effectively exploited by the BDT. Characteristic observables of the di-$\tau$ system exhibit markedly different shapes across the three processes, such as the pseudorapidity difference or the transverse momentum of the system. Jet-related quantities are also highly valuable, in particular the pseudorapidity of the leading and sub-leading jets, as well as their transverse momentum ratio.
+
+\begin{figure}[htbp]
+    \centering
+    % Primera figura
+    \begin{subfigure}{0.95\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{new_vars_1}
+    \end{subfigure}
+    \vspace{0.5cm} % Espacio vertical entre las dos
+    % Segunda figura
+    \begin{subfigure}{0.95\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{new_vars_2}
+    \end{subfigure}
+    \caption{Input variables for the multiclass BDT training for \ttHtt. Preselection requirements used for the training are included.}
+    \label{tth_vars_tmva_1}
+  \end{figure}
+
+  \begin{figure}[htbp]
+    \centering
+    % Primera figura
+    \begin{subfigure}{0.95\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{new_vars_3}
+    \end{subfigure}
+    \vspace{0.5cm} % Espacio vertical entre las dos
+    % Segunda figura
+    \begin{subfigure}{0.95\linewidth}
+      \centering
+      \includegraphics[width=\linewidth]{new_vars_4}
+    \end{subfigure}
+    \caption{Input variables for the multiclass BDT training for \ttHtt. Preselection requirements used for the training are included.}
+    \label{tth_vars_tmva_2}
+  \end{figure}
+
+\subsubsection*{Data-MC modelling}
+
+Beyond evaluating the discriminating power of the variables to justify their inclusion in the training, it is equally important to verify that they are accurately modelled in the MC simulations employed. This is not always trivial, particularly in such restricted and selective regions of phase space as those considered in this analysis. Since the discriminant trained on these simulations will ultimately be applied to real collision data, it is essential to guarantee a proper data/MC agreement from the outset.  
+
+Figures~\ref{tth_vars_modelling_1} and~\ref{tth_vars_modelling_2} illustrate the good data/MC agreement observed for the input variables, by comparing their distributions across all relevant processes in the channel at the \ttH preselection level.
+
+\begin{figure}[htbp]
+    \centering
+    % Ajusta el espacio horizontal entre paneles (columna a columna)
+    \setlength{\tabcolsep}{1.5pt}
+    \renewcommand{\arraystretch}{0}
+  
+    \begin{tabular}{@{}c c c@{}}
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_ditau_dr_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_ditau_deta_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_met_reco_et_hh_tth.pdf} \\[4pt]
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_mWbest_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_SumPtBjet_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_mTopWbest_hh_tth.pdf} \\[4pt]
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_ditau_pt_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_jjdrmin_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_minDRbtau_hh_tth.pdf}
+    \end{tabular}
+  
+    \caption{Data/MC modelling for the \ttH BDT input variables at the \ttHtt preselection.}
+    \label{tth_vars_modelling_1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    % Ajusta el espacio horizontal entre paneles (columna a columna)
+    \setlength{\tabcolsep}{1.5pt}
+    \renewcommand{\arraystretch}{0}
+  
+    \begin{tabular}{@{}c c c@{}}
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_jet_2_eta_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_jet_3_eta_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_jet_4_eta_hh_tth.pdf} \\[4pt]
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_tau_1_pt_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_SumPtBjet_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_tau_0_eta_hh_tth.pdf} \\[4pt]
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_jet_1_eta_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_jet_0_eta_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_ditau_met_min_dphi_hh_tth.pdf} \\[4pt]
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_ratio01_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_ratio12_hh_tth.pdf} &
+      \includegraphics[width=0.33\textwidth]{images/modelling_tmva_vars/plot_ratio13_hh_tth.pdf} 
+    \end{tabular}
+  
+    \caption{Data/MC modelling for the \ttH BDT input variables at the \ttHtt preselection.}
+    \label{tth_vars_modelling_2}
+\end{figure}
+
+\subsection{BDT training}
+
+In practice, and as already mentioned, in order to more precisely target the STXS phase-space bins for this \ttH production mode, two separate BDT trainings are performed with the setup described above. Taking advantage of the new, more accurate method for reconstructing \pth, a ``low-\pth'' training is carried out with events satisfying \pth$<200$~GeV, and a ``high-\pth'' training is implemented using events with \pth$>200$~GeV.  
+
+This strategy is further motivated by the fact that the relative contributions of the two dominant background sources vary as a function of \pth. For instance, most of the \ttbar events populate the region with \pth$<200$~GeV, while at higher values the \ztautau background becomes dominant, as illustrated in Figure~\ref{reconstructed_preselection_b}. It was verified that splitting the training in this way improves the discrimination against the \ttbar background in the low-\pth region, compared to an inclusive training in this variable.
+
+The highest ranked variables in both trainings do not vary significantly, nor do they across the different folds in the cross-validation, as expected. In all cases, the jet $p_{\text{T}}$ ratios and the angular distances between the $\tau$ candidates are among the most influential observables, together with the pseudorapidity of the leading jets and other jet-related properties. It is also important to monitor the correlation coefficients among the input variables for the three considered processes, which are shown in Figure~\ref{tth_vars_corr}.
+\begin{figure}[htbp]
+  \centering
+  \setlength{\tabcolsep}{2pt}
+  \renewcommand{\arraystretch}{0}
+
+  \begin{tabular}{@{}c c@{}}
+    \multicolumn{2}{c}{\includegraphics[width=0.48\textwidth]{corr_signal}} \\[6pt]
+    \includegraphics[width=0.48\textwidth]{corr_ttbar} &
+    \includegraphics[width=0.48\textwidth]{corr_Z}
+  \end{tabular}
+
+  \caption{Correlation coefficients among the variables used to train the multiclass BDT for signal (top), \ttbar (bottom left) and \ztautau (bottom right). All events at preselection level are included.}
+  \label{tth_vars_corr}
+\end{figure}
+
+As can be seen, the chosen variables are not excessively correlated with each other, and for some of them the correlation coefficients vary depending on the process. This is the case, for instance, for the transverse momentum and the angular distance of the two $\tau$ candidates, or for the pseudorapidity of the leading jets with respect to that of the leading \tauhad. Other variables display comparable correlations across the three processes, yet the selected set was found to provide the best performance in the final categorisation, rather than excluding any of them.
+
+As a result of the training, the expected distributions of the three BDT scores obtained for both trainings are shown in Figures~\ref{lowpt_scores} and~\ref{highpt_scores}, corresponding to the low- and high-\pth trainings, respectively. These distributions are evaluated on the training sample, represented by coloured markers, and on the testing sample, shown as boxes, allowing us to assess the level of overtraining. The effect is not particularly pronounced, although it is more visible in the low-\pth case due to the smaller statistics and the presence of larger fluctuations.  
+
+From Figure~\ref{lowpt_scores} it can be seen that, at low \pth, the BDT focuses primarily on the identification of \ttbar events, also because the available statistics for \ttHtt and \ztautau are smaller. In contrast, Figure~\ref{highpt_scores} shows that at high \pth the discrimination of signal and of the \ztautau background is enhanced. Ideally, the score of each class is expected to peak around unity for events of its own class and to be close to zero for the others, bearing in mind that the outputs are normalised in both trainings.
+\begin{figure}[htbp]
+  \centering
+  \setlength{\tabcolsep}{1.5pt}
+  \renewcommand{\arraystretch}{0}
+  \begin{tabular}{@{}c c c@{}}
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_lt200/overtrain_Signal_BDTG.png} &
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_lt200/overtrain_bkgZ_BDTG.png} &  
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_lt200/overtrain_bkgtt_BDTG.png}
+  \end{tabular}
+  \caption{Multiclass BDT score distributions for the low \pth training.}
+  \label{lowpt_scores}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \setlength{\tabcolsep}{1.5pt}
+  \renewcommand{\arraystretch}{0}
+  \begin{tabular}{@{}c c c@{}}
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_gt200/overtrain_Signal_BDTG.png} &
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_gt200/overtrain_bkgZ_BDTG.png} &  
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_gt200/overtrain_bkgtt_BDTG.png}
+  \end{tabular}
+  \caption{Multiclass BDT score distributions for the high \pth training.}
+  \label{highpt_scores}
+\end{figure}
+
+
+As a final step, since the discriminants in both \pth regions will be used to define the analysis categories entering the final statistical fit, it is necessary to confirm that these variables are correctly modelled and that good agreement is observed between data and MC. Figures~\ref{lowpt_modelling} and~\ref{highpt_modelling} show the score distributions of both trainings, comparing collision data with MC simulations at the \ttH preselection level. A good level of agreement is observed between the data and the estimated backgrounds.
+
+\begin{figure}[htbp]
+  \centering
+  \setlength{\tabcolsep}{1.5pt}
+  \renewcommand{\arraystretch}{0}
+  \begin{tabular}{@{}c c c@{}}
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_lt200/plot_tth_signal_multiclass_lt200_hh_tth.pdf} &
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_lt200/plot_tth_Z_multiclass_lt200_hh_tth.pdf} &  
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_lt200/plot_tth_ttbar_multiclass_lt200_hh_tth.pdf}   
+  \end{tabular}
+  \caption{Multiclass BDT score distributions for the low \pth training.}
+  \label{lowpt_modelling}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \setlength{\tabcolsep}{1.5pt}
+  \renewcommand{\arraystretch}{0}
+  \begin{tabular}{@{}c c c@{}}
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_gt200/plot_tth_signal_multiclass_gt200_hh_tth.pdf} &
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_gt200/plot_tth_Z_multiclass_gt200_hh_tth.pdf} &  
+    \includegraphics[width=0.32\textwidth]{images/plots_overtrain_gt200/plot_tth_ttbar_multiclass_gt200_hh_tth.pdf} 
+  \end{tabular}
+  \caption{Multiclass BDT score distributions for the high \pth training.}
+  \label{highpt_modelling}
+\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Event categorization}
 \label{sec:tth_categories}
-
+triangulito para empezar 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Systematic Uncertainties}
 \label{sec:tth_systematics}
