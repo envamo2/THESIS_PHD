@@ -1,7 +1,7 @@
 \newcommand*{\zee}{$Z \to e^{+}e^{-}$\xspace}
 \newcommand*{\et}{$E_{\text{T}}$\xspace}
-\newcommand*{\zmass}{$\text{Z}_{\text{mass}}$\xspace}
-\newcommand*{\ziso}{$\text{Z}_{\text{iso}}$\xspace}
+\newcommand*{\zmass}{$\texttt{Z}_{\text{mass}}$\xspace}
+\newcommand*{\ziso}{$\texttt{Z}_{\text{iso}}$\xspace}
 \newcommand*{\tp}{T$\&$P\xspace}
 \newcommand*{\et}{$E_{\text{T}}$\xspace}
 \newcommand*{\eta}{$\eta$\xspace}
@@ -232,6 +232,7 @@ A similar situation arises with electrons from Heavy-Flavour decays: although ge
 
 
 \subsubsection{Inputs and preprocessing}
+\label{inputs_preproc}
 %Define which variables are used and why, as well as how we treat them before they're passed through the NN. Hablar obviamente de correction factors, fudging, problems with fudging, correlations and so on.
 In order to feed the DNN with the features from the different classes of electron candidates, information left by these particles in almost all ATLAS subdetectors (except the MS) is used, as well as matching information between the tracking systems and energy deposits in the calorimeter. 
 In Table~\ref{table:inputs}, all the variables used are listed, along with a brief definition for each of them.
@@ -1008,183 +1009,264 @@ To determine the identification efficiency of the different WPs in data, an appr
 
 To obtain the purest possible dataset of signal electrons from collision data, it is essential to have the best possible control over the background. Since MC simulations are not fully accurate in modelling this contribution, we focus on the extraction of background templates from dedicated control regions, defined as regions of the phase space where specific selections enhance the background electron population. In our case, we concentrate on the measurement of SFs and signal identification efficiencies for electrons with $E_{\mathrm{T}} > 15$~GeV. Two methods are used to obtain a pure dataset of signal electrons and to model the background templates: the \zmass and \ziso methods.
 
-Both approaches are based on events from the \zee resonance, initially selected through the Tag-and-Probe (\tp) technique, already introduced earlier, to obtain an unbiased set of electrons satisfying the ID WPs. In the \zmass method, background templates are obtained from the invariant mass distribution of the di-electron pair, while in the \ziso method they are derived from the distribution of a calorimeter isolation variable.
+Both approaches are based on events from the \zee resonance, initially selected using the tag-and-probe technique (referred to as \tp in the following), already introduced earlier, to obtain an unbiased set of electrons satisfying the ID WPs. In the \zmass method, background templates are obtained from the invariant mass distribution of the di-electron pair, while in the \ziso method they are derived from the distribution of a calorimeter isolation variable.
 
-The \ziso method will not be further discussed here, as it is not used in this thesis. However, it is worth noting that the official ATLAS efficiency and SF results provided for other physics analyses are obtained by statistically combining both methods, leading to more robust results in terms of uncertainties. In the low-$E_{\mathrm{T}}$ region, below $15$~GeV, electron identification efficiencies are measured using $J/\psi \to e^+e^-$ decays, which provide a clean source of low-energy electrons. Backgrounds from non-prompt $J/\psi$ production, mainly originating from heavy-flavour hadron decays, are suppressed with invariant mass selections around the $J/\psi$ peak and isolation requirements, and their residual contribution is estimated using either template fits to the invariant mass and pseudo-proper lifetime distributions or cut-based methods that enhance the prompt fraction. Although not used in this thesis, the $J/\psi$ method is widely employed in ATLAS to extend the efficiency measurements to this low-$E_{\mathrm{T}}$ regime, and is then combined with the \zmass and \ziso results.
+The \ziso method will not be further discussed, as it is not used in this thesis. However, it is worth noting that the official ATLAS efficiency and SF results provided to physics analyses are obtained by statistically combining both methods, leading to reduced uncertainties. 
 
-The binning used for these measurements is the same as that employed in the tuning of the DNN output, presented in Table~\ref{tune:binning}, excluding the low-energy region. The next section will describe in more detail how efficiencies are measured with the \zmass method and the selection applied.
+In the low-$E_{\mathrm{T}}$ region, below $20$~GeV, electron identification efficiencies are measured using $J/\psi \to e^+e^-$ decays, which provide a clean source of low-energy electrons. Backgrounds from non-prompt $J/\psi$ production, mainly originating from heavy-flavour hadron decays, are suppressed with invariant mass selections around the $J/\psi$ peak and isolation requirements, and their residual contribution is estimated using either template fits to the invariant mass and pseudo-proper lifetime distributions or cut-based methods that enhance the prompt fraction. Although not used in this thesis, the $J/\psi$ method is widely employed in ATLAS to extend the efficiency measurements to this low-$E_{\mathrm{T}}$ regime, and it is combined with the \zmass and \ziso results.
 
-\subsubsection{\zmass efficiency method}
+The binning used for these measurements is the same as that employed in the tuning of the DNN output, presented in Table~\ref{tune:binning}. The next section will describe in more detail how efficiencies are measured with the \zmass method.
 
-The \zmass method for measuring identification efficiencies in data also requires Monte Carlo simulations. Unless otherwise stated, the results presented here use only Run-2 data from 2018, reprocessed with release R.22, together with a single simulated \zee\ sample as described in Sec.~\ref{subsec:electron_mc}. An identical baseline selection is applied to both collision data and simulations, and consistently used for both the LH and DNN identification menus.
+\subsubsection{Tag and probe selections}
 
-Events are required to pass at least one of the single-electron triggers listed in Table~\ref{tab:electron_triggers_2018}. For the \tp\ pair, the tag electron must have transverse energy \et$>27$~GeV, lie within the ID acceptance $|\eta|<2.47$, and be outside the calorimeter crack region ($1.37<|\eta|<1.52$). Additional quality requirements are applied, including cuts on impact-parameter-related variables to suppress backgrounds and ensure the tag is a genuine electron. The tag must also satisfy the Tight WP of the corresponding algorithm (DNN or LH) and an isolation requirement $p_{\mathrm{T}}^{\mathrm{topocone20}}/p_{\mathrm{T}}<0.1$ to ensure track isolation. Finally, the tag is required to match the object that fired the trigger.
+The \zmass method for measuring identification efficiencies in data also requires MC simulations. Unless otherwise stated, the results presented here use only Run-2 data from 2018, together with a single simulated \zee\ sample as described in Sec.~\ref{subsec:electron_mc}, both using release 22. An identical baseline selection is applied to both collision data and MC, also identical for both the LH and DNN identification menus.
+
+Events are required to pass at least one of the single-electron triggers defined during 2018 data-taking period~\footnote{The electron trigger chains used for 2018 were \texttt{HLT\_e26\_lhtight\_nod0\_ivarloose, HLT\_e60\_lhmedium\_nod0, HLT\_e140\_lhloose\_nod0 and HLT\_e300\_etcut}.}. For the \tp\ pair, 
+in order to ensure the tag is a genuine electron, it is required to have transverse energy \et$>27$~GeV, lie within the ID acceptance $|\eta|<2.47$, and be outside the calorimeter crack region ($1.37<|\eta|<1.52$). 
+Additional quality requirements are applied on impact-parameter-related variables to suppress backgrounds.
+The tag must also satisfy the Tight WP of the corresponding algorithm (DNN or LH) and an isolation requirement $p_{\mathrm{T}}^{\mathrm{topocone20}}/p_{\mathrm{T}}<0.1$ to ensure track isolation. 
+Finally, the tag is required to match the object that fired the trigger.
+
+The probe electron is required to fulfil looser requirements, without applying impact-parameter or track-isolation cuts as in the tag selection.
+Instead, only a jet veto is imposed to ensure the electron candidate is isolated from any jet in the event.
+Minimum track-quality requirements are enforced ($n_{\mathrm{Si}} \ge 8$ and $n_{\mathrm{Pixel}} \ge 1$), together with \et$>15$~GeV.
+This \textit{preselected probe} is then tested against the identification working point (DNN or LH) under study.
 
 \begin{table}[htbp]
-  \small 
   \centering
-  \begin{tabular}{lc}
-  \hline
-  \textbf{Year} & \textbf{Electron triggers} \\
-  \hline
-  2018 & HLT\_e26\_lhtight\_nod0\_ivarloose \\
-       & HLT\_e60\_lhmedium\_nod0 \\
-       & HLT\_e140\_lhloose\_nod0 \\
-       & HLT\_e300\_etcut \\
-  \hline
+  \small
+  \caption{Summary of the preselection requirements for tag and probe electrons in the \zmass method.}
+  \renewcommand{\arraystretch}{1.3}
+  \setlength{\tabcolsep}{10pt}
+  \begin{tabular}{p{5cm}cc}
+    \toprule
+    \textbf{Requirement} & \textbf{Tag} & \textbf{Preselected probe} \\
+    \midrule
+    \scriptsize{$|\eta|<2.47$, excluding $1.37<|\eta|<1.52$} & \checkmark & \checkmark \\
+    Minimum \et & $>27$~GeV & $>15$~GeV \\
+    Track quality & $n_{\mathrm{Si}} \ge 8$, $n_{\mathrm{Pixel}} \ge 2$ & $n_{\mathrm{Si}} \ge 8$, $n_{\mathrm{Pixel}} \ge 1$ \\
+    Impact-parameter & \checkmark & -- \\
+    Identification WP (DNN or LH) & Tight & -- \\
+    Track $p_{\mathrm{T}}^{\mathrm{topocone20}}/p_{\mathrm{T}}<0.1$ & \checkmark & -- \\
+    Jet veto  & -- & \checkmark \\
+    Trigger matching & \checkmark & -- \\
+    \bottomrule
   \end{tabular}
-  \caption{Single-electron high-level triggers used in 2018 for this analysis.}
-  \label{tab:electron_triggers_2018}
 \end{table}
 
-The probe electron is initially required to fulfil the same object-quality requirements, but no impact-parameter cuts are applied. A jet veto is imposed to ensure the electron candidate is isolated from any \antikt\ jet within a given cone. Minimum track-quality requirements are enforced ($n_{\mathrm{Si}} \ge 8$ and $n_{\mathrm{Pixel}} \ge 1$), together with \et$>15$~GeV. This \textit{preselected probe} is then tested against the identification working point (DNN or LH) under study.
+For the \tp pair, both electrons must have opposite charge and an invariant mass within $75 < m_{e^+e^-} < 105$~GeV. If multiple valid pairs are found in an event (e.g.\ interchanging the roles of tag and probe), all are considered. 
+Variations in the tag definition or in the invariant-mass window are treated as systematic uncertainties, as will be explained below.
 
-For the \tp pair, both electrons must have opposite charge and an invariant mass within $75 < m_{e^+e^-} < 105$~GeV. If multiple valid pairs are found in an event (e.g.\ interchanging tag and probe), all are considered. Variations in the tag definition or in the invariant-mass window are treated as systematic uncertainties. Each variation is applied individually, and the efficiency difference with respect to the nominal choice is taken as the systematic variation. For example, the nominal isolation requirement $p_{\mathrm{T}}^{\mathrm{topocone20}}/p_{\mathrm{T}}<0.1$ is varied up and down to $<0.14$ and $<0.06$, respectively.
 
-Recalling the definition of the identification efficiency in Eq.~\ref{eq:id_eff}, the denominator is composed of the preselected probes, while the numerator is the subset passing the identification menu under consideration. In practice, even when both electrons from the $Z$-boson resonance pass the ID requirements, non-negligible background can be present near the mass peak. Therefore, the signal identification efficiency is computed as:
+\subsubsection{\zmass efficiency method}
+\label{method_itself}
+
+In the identification efficiency (Eq.~\ref{eq:id_eff}), the denominator is composed of the preselected probes, while the numerator is the subset passing the identification menu under consideration. In practice, even when both electrons from the $Z$-boson resonance pass the ID requirements, non-negligible background contributions can still remain. Therefore, the signal identification efficiency is computed as:
 \begin{equation}
   \small 
-  \epsilon^{WP}_{\mathrm{ID}} = \frac{N^{\mathrm{WP}}_{\mathrm{ID}} - N_{\mathrm{bkg,ID}}}{N_{\mathrm{reco}} - N_{\mathrm{bkg,preselected\ probes}}},
+  \epsilon^{\text{WP}}_{\mathrm{ID}} = \frac{N^{\mathrm{WP}}_{\mathrm{ID}} - N_{\mathrm{bkg,ID}}}{N_{\mathrm{reco}} - N_{\mathrm{bkg,preselected\ probes}}},
 \label{eq:id_eff}  
 \end{equation}
-where the background contribution in the signal region is estimated and subtracted prior to the calculation. This is precisely where the \zmass method plays its role.
+where the background contribution in the signal region is estimated and subtracted prior to the calculation using the \zmass method.
 
-In this method, the invariant mass $m_{e^+e^-}$ in the decay $Z\rightarrow e^+e^-$ is used as a discriminant between signal and background. The nominal mass range $75 < m_{e^+e^-} < 105$~GeV defines the signal region, while broader intervals are used to model and normalise the background. The method relies on template fits to separate the signal contribution from backgrounds, with templates for signal derived from simulated $Z\rightarrow e^+e^-$ events and templates for background obtained from dedicated data control regions.
+In this method, the invariant mass $m_{e^+e^-}$ in the decay $Z\rightarrow e^+e^-$ is used as a discriminant between signal and background. The nominal mass range used in the selection, $75 < m_{e^+e^-} < 105$~GeV, defines the signal region, while broader intervals are used to model and normalise the background. The method relies on template fits to separate the signal contribution from backgrounds, with templates for signal derived from simulated $Z\rightarrow e^+e^-$ events and templates for background obtained from dedicated data control regions.
 
-In earlier implementations, background estimation under the $Z$ peak was performed by normalising the background template in the $m_{e^+e^-}$ sidebands. This approach was limited by biases from asymmetries between the low- and high-mass sidebands and by its strong dependence on simulation. The improved procedure adopted here, schematically shown in Fig.~\ref{fig:zmass_algo}, reduces the dependence on MC and optimises the subtraction of signal contamination from the background template. The method proceeds iteratively through the following main steps, separately for each $(E_{\mathrm{T}},\eta)$ bin:
+In earlier implementations of the \zmass method, background estimation under the $Z$ peak was performed by normalising the background template in the $m_{e^+e^-}$ sidebands. This approach was limited by biases from asymmetries between the low- and high-mass sidebands and by its strong dependence on simulation. The improved procedure adopted here, schematically shown in Fig.~\ref{fig:zmass_algo}, reduces the dependence on MC and optimises the subtraction of signal contamination from the background template.
+
+The method proceeds iteratively through the following main steps, separately for each $(E_{\mathrm{T}},\eta)$ bin:
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.8\linewidth]{zmass_diagram.png}
-  \caption{Schematic view of the \zmass method for electron identification efficiency calculation. The five steps in which it consists are represented, where after the reweighting step, the second, third and fifth steps are repeated iteratively. Taken from Ref.~\cite{elias_thesis}. }
+  \caption{Schematic view of the \zmass method for electron identification efficiency calculation. The five steps in which it consists are represented, where after the reweighting step, the second, third and fifth steps are repeated iteratively~\cite{elias_thesis}.}
   \label{fig:zmass_algo}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.6\linewidth]{plot_bkg_template_cleaning.png}
-  \caption{Background cleaning procedure in the \zmass method for a representative $(E_{\mathrm{T}},\,|\eta|)$ bin. The data in the background-enriched control region is fitted with a polynomial function (red curve) describing the background component, together with a MC signal template representing the residual signal contamination. The cleaned background template, obtained after subtracting the signal contribution, is shown in blue.}
+  \caption{Background cleaning procedure in the \zmass method for a representative $(E_{\mathrm{T}},\,\eta)$ bin. The data in the background-enriched control region is fitted with a polynomial function (red curve) describing the background component, together with a MC signal template representing the residual signal contamination. The cleaned background template, obtained after subtracting the signal contribution, is shown in blue.}
   \label{fig:bkg_clean}
 \end{figure}
 
 \begin{enumerate}
     \item \textbf{Background control region definition:} a background-enriched sample is selected by requiring the probe to fail a relaxed version of the Loose ID WP (either LH or DNN) and to satisfy a mild calorimeter isolation cut ($E_{\mathrm{T}}^{\mathrm{cone30}}/E_{\mathrm{T}}>0.12$). Signal templates are built from MC events fulfilling either numerator or denominator requirements, while background templates are taken from this control region in data, with MC providing the estimate of residual signal contamination.
 
-    \item \textbf{Background template cleaning:} the residual signal present in the background control region is modelled as a sum of a polynomial background and an MC signal template in the $70 < m_{e^+e^-} < 115$~GeV range. The fitted signal component is subtracted from the data-driven background template to yield a “clean” background shape. Figure~\ref{fig:bkg_clean} shows this fit to data, with the background represented as a polynomial plus the signal template derived from MC in the mentioned mass range, yielding in blue the cleaned background template when removing the green (signal) contribution.
+    \item \textbf{Background template cleaning:} the residual signal present in the background control region is modelled as a sum of a polynomial background and an MC signal template in the $70 < m_{e^+e^-} < 115$~GeV range. The fitted signal component is subtracted from the data-driven background template to yield a “clean” background shape. Figure~\ref{fig:bkg_clean} shows an example of these fits to data, with the background represented as a polynomial plus the signal template derived from MC in the mentioned mass range, yielding in blue the cleaned background template when removing the green (signal) contribution.
 
-    \item \textbf{Background subtraction in the signal region:} the cleaned background template is normalised to the data in the signal region, in combination with the MC signal template, to extract the background yield. This yield is then subtracted from the total number of events to obtain the signal counts.
+    \item \textbf{Background subtraction in the signal region:} the cleaned background template is normalised to the data in the signal region, in combination with the MC signal template, to extract the background yield. This yield is then subtracted from the total number of data events to obtain the signal counts.
 
-    \item \textbf{MC re-weighting:} before computing the efficiency, a re-weighting procedure is applied to correct for differences in the $Z$-boson line shape between data and simulation, which may arise from effects such as additional bremsstrahlung in the detector material.
+    \item \textbf{MC re-weighting:} before computing the efficiency, a re-weighting procedure is applied to correct for differences in the $Z$-boson invariant mass line shape between data and simulation, which may arise from effects such as additional bremsstrahlung in the detector material.
 
-    \item \textbf{Efficiency and scale factor extraction:} the identification efficiency in data is computed as in Eq.~\ref{eq:id_eff}, replacing $N_{bkg}$ by the background yields from the fit. MC efficiencies are evaluated as the simple ratio of identified probes to all preselected probes. Scale factors are then obtained from the ratio of data to MC efficiencies for each $(E_{\mathrm{T}},\eta)$ bin.
+    \item \textbf{Efficiency and scale factor extraction:} the identification efficiency in data is computed as in Eq.~\ref{eq:id_eff}, replacing $N_{bkg}$ by the background yields estimated from the fit. For the MC efficiency, Eq.~\ref{eq:id_eff} reduces to the simple initial ratio of identified probes to all preselected probes, since no background subtraction is required and the measurement can be performed using signal-only events. Scale factors are then obtained from the ratio of data to MC efficiencies for each $(E_{\mathrm{T}},\eta)$ bin.
 \end{enumerate}
 
-As already mentioned, each step of the method introduces potential systematic uncertainties, evaluated by varying key aspects of the procedure, such as the background control region definition, the $m_{e^+e^-}$ fit range, the polynomial order in the signal contamination fit, or the tag electron isolation requirement. 
-This is the procedure applied to measure the identification efficiencies in collision data. For the MC efficiency, Eq.~\ref{eq:id_eff} reduces to the simple initial ratio, since no background subtraction is required and the measurement can be performed using signal-only events.
-
-The plots in Figure~\ref{fig:zmass_fit_dnn_medium} show examples of the signal-plus-background template fits obtained with the \zmass method, in the invariant mass distribution of the di-electron pairs. The left panel corresponds to the reconstructed probes, which form the denominator in the efficiency calculation, while the right panel shows the fits for the numerator probes passing the Medium DNN identification working point. These results are extracted from the case of the DNN identification menu, where the two discriminants defined in the previous sections are combined to build the selection. In both cases, the orange line represents the MC signal template, the blue line the estimated background, and the red line the sum of both contributions. The background level is significantly reduced when moving from the inclusive probe selection to the numerator probes passing the Medium ID, illustrating the increased purity of the sample as the identification requirements become stricter. 
-The lower panels display the Data-to-Expectation ratio, highlighting the good agreement between data and the fitted templates in the mass range considered for the efficiency extraction. A slight degradation of the agreement is observed at very high invariant masses due to the limited statistics in that region, and a small percent-level discrepancy is also visible for the denominator case around the $Z$-boson peak. The latter is precisely the type of effect that the calculation of scale factors aims to correct.
+The plots in Figure~\ref{fig:zmass_fit_dnn_medium} show examples of the signal-plus-background template fits obtained with the \zmass method for the DNN efficiencies measurement, in the invariant mass distribution of the di-electron pairs. Figure~\ref{fig:zmass_fit_dnn_medium_a} corresponds to the reconstructed probes, which form the denominator in the efficiency calculation, while Figure~\ref{fig:zmass_fit_dnn_medium_b} shows the fits for the numerator probes passing the Medium DNN identification working point. These results are extracted from the case of the DNN identification menu, where the two discriminants defined in the previous sections are combined to build the selection. 
+In both cases, the orange line represents the MC signal template, the blue line the estimated background, and the red line the sum of both contributions. The background level is significantly reduced when moving from the inclusive probe selection to the numerator probes passing the Medium DNN identifiction, illustrating the increased purity of the sample as the identification requirements become stricter. 
+The lower panels display the Data-to-Expectation ratio, highlighting the good agreement between data and the fit model in the mass range considered for the efficiency extraction. A slight degradation of the agreement is observed at very high invariant masses due to the limited statistics in that region. A small percent-level discrepancy is also visible for the denominator case around the $Z$-boson peak, which is precisely the type of effect that the calculation of scale factors aims to correct.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.9\linewidth]{hist_dnn_CFID_medium_mass.png}
+  \begin{subfigure}[b]{0.49\linewidth}
+    \includegraphics[width=\linewidth]{hist_dnn_CFID_medium_mass_a.pdf}
+    \caption{}
+    \label{fig:zmass_fit_dnn_medium_a}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.49\linewidth}
+    \includegraphics[width=\linewidth]{hist_dnn_CFID_medium_mass_b.pdf}
+    \caption{}
+    \label{fig:zmass_fit_dnn_medium_b}
+  \end{subfigure}
   \caption{
-    Signal and background template fits to the invariant mass $m_{e^{+}e^{-}}$ of the di-electron pairs for the \zmass\ method, shown for the reconstructed probes (left), which constitute the denominator in the efficiency calculation, and for the numerator probes passing the Medium DNN identification (right). The orange line shows the MC signal template, the blue line the estimated background, and the red line the sum of both contributions. The lower panels display the Data-to-Expectation ratio.}
+    Signal and background template fits to the invariant mass $m_{e^{+}e^{-}}$ of the di-electron pairs for the \zmass\ method, shown for the reconstructed probes (a), which constitute the denominator in the efficiency calculation, and for the numerator probes passing the Medium DNN identification (b). The orange line shows the MC signal template, the blue line the estimated background, and the red line the sum of both contributions. The lower panels display the Data-to-prediction ratio.}
   \label{fig:zmass_fit_dnn_medium}
 \end{figure}
 
+Before concluding this section, where the construction of the \zmass method and the calculation of the identification efficiencies presented in Section~\ref{eff_meas} have been described, it is important to emphasise that, each step of the method introduces potential systematic uncertainties. These are evaluated by varying key aspects of the procedure, such as the definition of the background control region, the fit range of the $m_{e^+e^-}$ distribution, the polynomial order used in the signal contamination fit, or the tag-electron isolation requirement. 
+Each variation is applied individually, and the difference in efficiency with respect to the nominal choice is taken as the systematic variation. The total systematic uncertainty of the efficiency measurement is then obtained as the sum in quadrature of all individual contributions. The main systematic variations considered in the \zmass method are the following:
+\begin{itemize}
+  \item Background control region: obtained by modifying the requirement that probe candidates must fail a very loose likelihood identification, either by replacing it with an ultra-loose requirement or by changing the isolation condition to $p_{\mathrm{T}}^{\mathrm{cone40}}/p_{\mathrm{T}} > 0.07$. This ensures that no bias is introduced in the background shape.
+  \item Background fit range: recomputing the background fit only in restricted regions of the di-electron mass, namely $65 < m_{e^+e^-} < 120$~GeV for the low range and $80 < m_{e^+e^-} < 250$~GeV for the high range.
+  \item Signal contamination fit: varying the polynomial order used to describe the signal contamination in the background fit.
+  \item Tag-electron isolation: tightening the tag isolation requirement by imposing the additional condition $p_{\mathrm{T}}^{\mathrm{cone40}} < 5$~GeV. This minimises the possibility of background objects passing the tag selection.
+  \item $m_{e^+e^-}$ window: the choice of the signal window is arbitrary; to estimate the potential bias, the efficiency extraction is repeated in two alternative mass ranges, [70, 110]~GeV and [80, 100]~GeV.
+\end{itemize}
 
-There is also the case in which we aim to test the background rejection power of the DNN identification menu in collision data.  
-For this purpose, we employ the same method as before, but the event selection in this case starts from those events that have fired one of the prescaled triggers listed in Table~\ref{tab:electron_triggers_prescaled_2018}.  
-In this case, none of these trigger strings include associated identification requirements, unlike in the signal case, in order to avoid introducing a selection bias.
-
-\begin{table}[htbp]
-  \centering
-  \scriptsize
-  \begin{tabular}{ll}
-    \toprule
-    \textbf{Year} & \textbf{Electron triggers (prescaled, \textit{etcuts})} \\
-    \midrule
-    2018 &
-    HLT\_e4\_etcut, HLT\_e5\_etcut, HLT\_e9\_etcut \\
-    & HLT\_e10\_etcut\_L1EM7, HLT\_e14\_etcut, HLT\_e15\_etcut \\
-    & HLT\_e15\_etcut\_L1EM7, HLT\_e17\_etcut, HLT\_e20\_etcut\_L1EM7 \\
-    & HLT\_e20\_etcut\_L1EM15, HLT\_e25\_etcut\_L1EM15, HLT\_e30\_etcut\_L1EM15 \\
-    & HLT\_e40\_etcut\_L1EM15, HLT\_e40\_etcut\_L1EM9, HLT\_e50\_etcut \\
-    & HLT\_e60\_etcut, HLT\_e80\_etcut, HLT\_e100\_etcut \\
-    & HLT\_e120\_etcut, HLT\_e140\_etcut, HLT\_e160\_etcut \\
-    & HLT\_e180\_etcut, HLT\_e200\_etcut, HLT\_e250\_etcut \\
-    & HLT\_e300\_etcut \\
-    \bottomrule
-  \end{tabular}
-  \caption{Prescaled \textit{etcuts} single-electron triggers used for background-electron selection in 2018, including Level-1 seeds where applicable.}
-  \label{tab:electron_triggers_prescaled_2018}
-\end{table}
-
-In this way, we obtain a set fully composed of background electrons, allowing the treatment to follow the same approach as for the MC signal efficiency measurements, without the need to derive templates or subtract signal contamination.  
-Therefore, in this case, to further reduce potential signal contamination, no tag electron is required, so that the only remaining signal comes from $W \to e\nu$ decays, which is negligible compared to the large QCD background faking electrons.  
-For the probes, we apply exactly the same requirements as in the previous case, varying only the identification WP.  
-Since no tag electron is required and the invariant mass loses its purpose, the electron counting for estimating the efficiency (or, in this case, the rejection $1/\epsilon$) is performed directly in $(E_{\text{T}},\eta)$ bins.
-
-
-\subsection{Identification efficiency measurements: DNN versus LH}
+\subsection{Efficiency measurements: DNN versus LH}
+\label{eff_meas}
 %ID only vs LH? ID+CF should I show anything? Must be the default one, but regarding comparisons...
 %Here we show eff vs pt. , eff vs eta (MC20, DATA18 AS ALWAYS), eff vs mu? Effs vs pt and eta, inclusive and in 1 pT bin. Need to derive them, since I only did it for ID+CF as far as I remember.
 
 %We also show bkg rejection in Data, and the plots of the estimated significance which are also a good figure of merit of the improvement of DNN over LH.
 %Some other plots to be shown? H4L plots maybe could be stolen?
 
+\subsubsection{Signal identification efficiencies}
 
-The results presented in this section summarise the measured identification efficiencies and scale factors (SFs) for the DNN identification menu, as well as comparisons with the LH-based algorithm. Unless otherwise stated, all efficiencies are evaluated for $E_{\mathrm{T}}>15$~GeV and are shown for the three working points defined for the DNN, both in data and MC simulation. It is also worth noting that all MC efficiency measurements include the previously discussed shower-shape corrections.
+The results presented in this section summarise the measured identification efficiencies and SFs for the DNN identification menu, as well as comparisons with the LH-based menu. Unless otherwise stated, all efficiencies are evaluated for $E_{\mathrm{T}}>15$~GeV and are shown for the three defined DNN WPs, both in data and MC. All MC efficiency measurements include shower-shape corrections discussed in Section~\ref{inputs_preproc}.
 
-Figure~\ref{fig:eff_sfs_dnn_vs_lh} displays the inclusive signal identification efficiency in data and MC, together with the corresponding SFs, for the three DNN working points without applying the charge-flip discriminant. The same selection is repeated using the LH identification menu, enabling a direct performance comparison in the case of the Medium WP. This comparison is shown separately in selected $(E_{\mathrm{T}},\eta)$ bins in order to highlight differences in specific kinematic regions. 
+Figure~\ref{fig:eff_sfs_dnn_inclusive} shows the inclusive signal identification efficiency in data and MC, together with the corresponding SFs, for the three DNN working points without applying the charge-flip discriminant. The same selection is repeated in Figure~\ref{fig:eff_sfs_dnn_vs_lh_bins} using the LH identification menu, enabling a direct performance comparison in the case of the Medium WP. This comparison is shown separately in selected $(E_{\mathrm{T}},\eta)$ bins in order to highlight differences in specific kinematic regions. 
 
-As illustrated in Figure~\ref{fig:eff_inclusive_pt_dnn_id}, the efficiency is typically reduced in the central barrel region ($|\eta|\sim0$) and in the transition region between barrel and end-cap ($1.37 < |\eta| < 1.52$). A general decrease in efficiency is also observed towards the end-cap, at large $|\eta|$ values. When studied as a function of $E_{\mathrm{T}}$, the identification efficiency is lower at small transverse energies. This behaviour originates from a larger background contamination in this regime, where the estimation of efficiencies with the \zmass method becomes more challenging, unlike at higher energies.
-
-Concerning the SFs, the values for the three DNN working points remain close to unity, as expected given the corrections applied to the MC samples. The largest deviations are found for the Tight WP, which is reasonable since the stricter thresholds applied on the discriminant amplify potential mismodellings with respect to data and therefore affect the efficiency calculation more strongly. In general, the SFs tend to be closer to unity in the barrel region. A small asymmetry is also observed as a function of $\eta$, affecting all three WPs. Since the same feature is present in the LH measurements shown in Figures~\ref{fig:eff_dnn_lh_25_30},\ref{fig:eff_dnn_lh_0p1_0p6}, it cannot be attributed to the DNN algorithm itself.
 \begin{figure}[htbp]
   \centering
-
   % Dos subfiguras arriba
   \begin{subfigure}{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_primary_cluster_be2_eta_for_pt_15p0_250p0.pdf}
-    \caption{DNN signal identification efficiencies vs. $\eta$.}
+    \caption{Inclusive in \et}
     \label{fig:eff_inclusive_pt_dnn_id}
   \end{subfigure}
   \hfill
   \begin{subfigure}{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_pt_for_primary_cluster_be2_eta_-2p47_2p47.pdf}
-    \caption{DNN signal identification efficiencies vs. \et.}
+    \caption{Inclusive in $\eta$}
     \label{fig:eff_inclusive_eta_dnn_id}
   \end{subfigure}
-
-  \vspace{0.6cm}
-
-  % Dos subfiguras debajo
-  \begin{subfigure}{0.48\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_25p0_30p0.png}
-    \caption{Comparison between DNN and LH in a representative $E_{\mathrm{T}}$ bin.}
-    \label{fig:eff_dnn_lh_25_30}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}{0.48\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_0p1_0p6.png}
-    \caption{Comparison between DNN and LH in a representative $\eta$ bin.}
-    \label{fig:eff_dnn_lh_0p1_0p6}
-  \end{subfigure}
-
-  \caption{Signal identification efficiencies in data and MC, together with SFs, for the DNN menu without CF cuts. The top panel shows the inclusive efficiencies for the three working points, while the bottom panels illustrate the comparison with the LH algorithm in two representative $(E_{\mathrm{T}},\eta)$ bins.}
-  \label{fig:eff_sfs_dnn_vs_lh}
+  \caption{Signal identification efficiencies in data and MC, together with SFs, for the three DNN WPs without CF cuts. The identification efficiencies were performed inclusively in \et (a) and $\eta$ (b), respectively.}
+  \label{fig:eff_sfs_dnn_inclusive}
 \end{figure}
 
-A direct comparison of the signal identification efficiency between both algorithms is shown in Figure~\ref{fig:eff_dnn_lh_25_30} as a function of $\eta$ for $25 < E_{\mathrm{T}} < 30$~GeV, and in Figure~\ref{fig:eff_dnn_lh_0p1_0p6} as a function of $E_{\mathrm{T}}$ for $0.1 < \eta < 0.6$. In both cases, the obtained values are very similar, which is expected since both menus were tuned to match the same target identification efficiencies, as described in Section~\ref{dnn:tuning}.
+As illustrated in Figures~\ref{fig:eff_inclusive_pt_dnn_id}, the efficiency is typically reduced in the central barrel region ($|\eta|\sim0$) and in the transition region between barrel and end-cap ($1.37 < |\eta| < 1.52$). A general decrease in efficiency is also observed towards the end-cap, at large $|\eta|$ values. When studied as a function of $E_{\mathrm{T}}$, the identification efficiency is lower at small transverse energies. This behaviour originates from a larger background contamination in this regime, where the estimation of efficiencies with the \zmass method becomes more challenging, unlike at higher energies.
 
-In addition, Figure~\ref{fig:eff_sfs_dnn_vs_lh_mu} presents the efficiency as a function of the average number of interactions per bunch crossing, $\mu$, for all three DNN working points, along with a direct comparison between DNN and LH for the Medium and Loose ones. For the three DNN working points, a decreasing trend is observed as pile-up increases, with the Tight WP being the most sensitive to these variations. Nevertheless, the comparison with LH in Figures~\ref{fig:eff_sfs_dnn_vs_lh_loose_mu,fig:eff_sfs_dnn_vs_lh_medium_mu} shows a similar trend, with the LH algorithm exhibiting slightly more stability. This behaviour can be explained by the fact that the LH menu applies explicit pile-up dependent corrections, whereas the DNN, by construction, has no direct notion of pile-up.
+Apart from the fact that the level of uncertainty associated with the SF measurements is observed to be very low, 
+the values for the three DNN working points remain close to unity, 
+as expected given the corrections applied to the MC samples. The largest deviations are found for the Tight WP, which is reasonable since the stricter thresholds applied on the discriminant amplify potential mismodellings with respect to data and therefore affect the efficiency calculation more strongly. In general, the SFs tend to be closer to unity in the barrel region. A small asymmetry is also observed as a function of $\eta$, affecting all DNN and also LH WPs, as can be seen in Figure~\ref{fig:eff_sfs_dnn_vs_lh_bins}.
 
+For completeness, Figure~\ref{fig:eff_sfs_dnn_4bins} also shows the efficiencies and SFs measured for the three DNN WPs in selected \et and $\eta$ bins.
+
+\begin{figure}[htbp]
+  \centering
+
+  % --- Subfiguras: bins en pT (vs eta) ---
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_primary_cluster_be2_eta_for_pt_15p0_20p0.pdf}
+    \caption{$15 < p_{\text{T}} < 20$~GeV}
+    \label{fig:eff_sfs_dnn_ptbin1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_primary_cluster_be2_eta_for_pt_40p0_45p0.pdf}
+    \caption{$40 < p_{\text{T}} < 45$~GeV}
+    \label{fig:eff_sfs_dnn_ptbin2}
+  \end{subfigure}
+
+  \vspace{0.5cm}
+
+  % --- Subfiguras: bins en eta (vs pT) ---
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_pt_for_primary_cluster_be2_eta_0p1_0p6.pdf}
+    \caption{$0.1 < \eta < 0.6$}
+    \label{fig:eff_sfs_dnn_etabin1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_pt_for_primary_cluster_be2_eta_1p52_1p81.pdf}
+    \caption{$1.52 < \eta < 1.81$}
+    \label{fig:eff_sfs_dnn_etabin2}
+  \end{subfigure}
+
+  \caption{
+    Signal identification efficiencies in data and MC, together with scale factors, 
+    for the three DNN WPs without CF cuts. 
+    The top row shows efficiencies as a function of $\eta$ in two representative $p_{\text{T}}$ bins, 
+    while the bottom row shows efficiencies as a function of $p_{\text{T}}$ in two representative $\eta$ bins.}
+  \label{fig:eff_sfs_dnn_4bins}
+\end{figure}
+
+As mentioned, a direct comparison of the signal identification efficiencies measured with both the DNN and LH algorithms is presented in Figure~\ref{fig:eff_sfs_dnn_vs_lh_bins}. 
+The top row shows the efficiencies as a function of $\eta$ in two representative $E_{\mathrm{T}}$ bins ($15 < E_{\mathrm{T}} < 20$~GeV and $40 < E_{\mathrm{T}} < 45$~GeV), 
+while the bottom row displays the efficiencies as a function of $E_{\mathrm{T}}$ in two representative $\eta$ bins ($0.1 < \eta < 0.6$ and $1.52 < \eta < 1.81$). 
+In all cases, the obtained values are very similar, as expected since both menus were tuned to match the same target identification efficiencies, as described in Section~\ref{dnn:tuning}.
+
+\begin{figure}[htbp]
+  \centering
+
+  % --- Subfiguras: bins en ET (vs eta) ---
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_15p0_20p0.png}
+    \caption{$15 < p_{\mathrm{T}} < 20$~GeV}
+    \label{fig:eff_dnn_lh_15_20}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_40p0_45p0.png}
+    \caption{$40 < p_{\mathrm{T}} < 45$~GeV}
+    \label{fig:eff_dnn_lh_40_45}
+  \end{subfigure}
+
+  \vspace{0.5cm}
+
+  % --- Subfiguras: bins en eta (vs ET) ---
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_0p1_0p6.png}
+    \caption{$0.1 < \eta < 0.6$}
+    \label{fig:eff_dnn_lh_0p1_0p6}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_1p52_1p81.png}
+    \caption{$1.52 < \eta < 1.81$}
+    \label{fig:eff_dnn_lh_1p52_1p81}
+  \end{subfigure}
+
+  \caption{
+    Comparison between DNN and LH signal identification efficiencies measured using the Medium WP in data and MC, together with scale factors, 
+    for the DNN menu without CF cuts. The top row shows the efficiencies as a function of $\eta$ in two representative $E_{\mathrm{T}}$ bins, 
+    while the bottom row shows the efficiencies as a function of $E_{\mathrm{T}}$ in two representative $\eta$ bins.}
+  \label{fig:eff_sfs_dnn_vs_lh_bins}
+\end{figure}
+
+
+In addition, Figure~\ref{fig:eff_sfs_dnn_vs_lh_mu} presents the efficiency as a function of the average number of interactions per bunch crossing, $\mu$, for all three DNN working points, along with a direct comparison between DNN and LH for the Medium and Loose ones. For the three DNN working points, a decreasing trend is observed as pile-up increases, with the Tight WP being the most sensitive to these variations. Nevertheless, the comparison with LH in Figures~\ref{fig:eff_sfs_dnn_vs_lh_loose_mu} and~\ref{fig:eff_sfs_dnn_vs_lh_medium_mu} shows a similar trend, with the LH algorithm exhibiting slightly more stability. This behaviour can be explained by the fact that the LH menu applies explicit pile-up dependent corrections, whereas the DNN, by construction, has no direct notion of pile-up.
+It is worth noting that the corresponding scale factors show no significant dependence on $\mu$ and remain stable across the pile-up spectrum.
 \begin{figure}[htbp]
   \centering
   % Inclusivo grande arriba
@@ -1216,12 +1298,17 @@ In addition, Figure~\ref{fig:eff_sfs_dnn_vs_lh_mu} presents the efficiency as a 
   \label{fig:eff_sfs_dnn_vs_lh_mu}
 \end{figure}
 
-
-%From here: background ==> DNN ID+CF VS. LH+ECIDS
+\subsubsection{Background rejection measurements}
 
 It is not only necessary to draw conclusions from the performance on signal electrons, which are used for the tuning, but the background rejection power must also be investigated. Figure~\ref{fig:bkg_acceptance_mc} shows the background acceptance, simply defined as the number of background electrons passing each working point. This performance is compared between the combined DNN ID+CF menu and the LH+ECIDs, evaluated on the $\text{JF}17$ MC background sample, which contains a mixture of QCD jet flavours as described in Section~\ref{subsec:electron_mc}. 
 
-The results are shown as a function of $\eta$ in two $E_{\mathrm{T}}$ bins, one at lower energies and one at higher energies, illustrating the performance across part of the kinematic range. A clear improvement of the DNN algorithm over the LH is observed across the full $\eta$ range, as it allows significantly fewer background electrons to pass. This is also evident in the lower pads where the ratio between both methods is displayed. At higher $E_{\mathrm{T}}$, the performance of LH is particularly degraded in the crack region, highlighting the challenges of electron identification in this part of the detector.
+The results are shown as a function of $\eta$ in two $E_{\mathrm{T}}$ bins, illustrating the performance across part of the kinematic range. A clear improvement of the DNN algorithm over the LH is observed across the full $\eta$ range, as it allows significantly fewer background electrons to pass. The lower pads show the ratio between both methods. 
+At lower $E_{\mathrm{T}}$, the improvement of the DNN over the LH is particularly striking: 
+in the barrel region the background acceptance is reduced by about 40\%, 
+while in the calorimeter crack the DNN rejects up to four times more background electrons than the LH. 
+At higher $E_{\mathrm{T}}$, a similar behaviour is observed, with the DNN achieving a factor of two improvement in the barrel region, 
+although the differences become less pronounced in the endcap. 
+At higher $E_{\mathrm{T}}$, the performance of LH is particularly degraded in the crack region, highlighting the challenges of electron identification in this part of the detector.
 
 %First MC JF17 since it's the easiest way to evaluate
 \begin{figure}[htbp]
@@ -1248,7 +1335,7 @@ The results are shown as a function of $\eta$ in two $E_{\mathrm{T}}$ bins, one 
 %Total Integral between 75 and 105 GeV LH : 209467.0
 %Total Integral between 75 and 105 GeV LH+ECIDS : 34372.0
 
-However, final decisions on the background performance cannot be extracted by looking at a single MC sample alone. For this reason, it is necessary to also examine real collision data. A complementary validation is performed on same-sign $Z\to e^{+}e^{-}$ events in data, which are largely populated by CF electrons. Figure~\ref{fig:cf_bkg_data} shows the invariant mass distribution around the $Z$-boson peak, requiring a tag and a probe electron passing the Medium WP of the identification menus displayed in different coloured lines. The identification menu providing the best rejection of CF electrons is the one yielding the lowest curve. 
+However, final decisions on the background performance cannot be extracted by looking at a single MC sample alone, it is necessary to also examine real collision data. A complementary validation is performed on same-sign $Z\to e^{+}e^{-}$ events in data, which are largely populated by CF electrons. Figure~\ref{fig:cf_bkg_data} shows the invariant mass distribution around the $Z$-boson peak, requiring a tag and a probe electron passing the Medium WP of the identification menus displayed in different coloured lines. The identification menu providing the best rejection of CF electrons is the one yielding the lowest curve. 
 
 It can be observed that the DNN menu, when only applying ID cuts (black), allows more CF electrons to pass, which is expected since in the original $\mathcal{D}_{el}$ (defined in Eq.~\ref{dnn_discriminant}), this class is treated as signal. However, when comparing the LH menu with the dedicated ECIDS method, and the DNN combined with cuts on both $\mathcal{D}_{el}$ and $\mathcal{D}_{CF}$, not only is the same rejection recovered but it is surpassed, without the need to train a dedicated algorithm. This improvement is mainly due to the inclusion of new variables in the DNN training. A reduction of about $16\%$ in CF electrons is achieved within the $[75,105]$~GeV interval around the $Z$-boson mass.
 
@@ -1259,17 +1346,54 @@ It can be observed that the DNN menu, when only applying ID cuts (black), allows
   \label{fig:cf_bkg_data}
 \end{figure}
 
-Finally, background rejection values can also be computed directly in collision data as described previously. However, these results are not shown here. Instead, since small variations are observed not only in the background rejection but also in the signal identification performance, we present in Figure~\ref{fig:significance_block} an estimation of the significance for the DNN (ID-only) and LH menus, computed in data as
+Finally, background rejection values can also be computed directly in collision data. 
+For this purpose it can be empoyed the \zmass method introduced before in Section~\ref{method_itself}, but the event selection in this case starts from those events that have fired one of the prescaled triggers listed in Table~\ref{tab:electron_triggers_prescaled_2018}.  
+In this case, none of these trigger strings include associated identification requirements, unlike in the signal case, in order to avoid introducing a selection bias.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Prescaled \textit{etcuts} single-electron triggers used for background-electron selection in 2018, including Level-1 seeds where applicable.}
+  \scriptsize
+  \begin{tabular}{l}
+    \toprule
+    \textbf{Electron triggers (prescaled, \textit{etcuts})} \\
+    \midrule
+    HLT\_e4\_etcut, HLT\_e5\_etcut, HLT\_e9\_etcut \\
+    & HLT\_e10\_etcut\_L1EM7, HLT\_e14\_etcut, HLT\_e15\_etcut \\
+    & HLT\_e15\_etcut\_L1EM7, HLT\_e17\_etcut, HLT\_e20\_etcut\_L1EM7 \\
+    & HLT\_e20\_etcut\_L1EM15, HLT\_e25\_etcut\_L1EM15, HLT\_e30\_etcut\_L1EM15 \\
+    & HLT\_e40\_etcut\_L1EM15, HLT\_e40\_etcut\_L1EM9, HLT\_e50\_etcut \\
+    & HLT\_e60\_etcut, HLT\_e80\_etcut, HLT\_e100\_etcut \\
+    & HLT\_e120\_etcut, HLT\_e140\_etcut, HLT\_e160\_etcut \\
+    & HLT\_e180\_etcut, HLT\_e200\_etcut, HLT\_e250\_etcut \\
+    & HLT\_e300\_etcut \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:electron_triggers_prescaled_2018}
+\end{table}
+
+In this way, a data sample with high purity of background electrons is obtained, allowing the treatment to follow the same approach as for the MC signal efficiency measurements, without the need to derive templates or subtract signal contamination.  
+To further reduce potential signal contamination, no tag electron is required, so that the only remaining signal comes from $W \to e\nu$ decays, which is negligible compared to the large contribution from QCD multijet production with fake electrons.  
+For the probes, we apply exactly the same requirements as in the previous case, varying only the identification WP.  
+Since no tag electron is required and the invariant mass loses its purpose, the electron counting for estimating the efficiency (or, in this case, the rejection $1/\epsilon$) is performed directly in $(E_{\text{T}},\eta)$ bins.
+
+In the following, instead of presenting direct background rejection measurements on data, 
+the combination of signal identification and background rejection is shown, 
+as it provides a more representative picture of the improvement. 
+The signal identification efficiencies obtained with DNN and LH are essentially identical 
+(as already discussed, since both menus were tuned to the same target efficiencies), 
+while differences arise in the background rejection. 
+For this reason, an estimation of the significance for the DNN (ID-only) and LH menus is presented in Figures~\ref{fig:significance_inclusive} and~\ref{fig:significance_bins}, computed in data as
 \begin{equation}
 \hat{\sigma} = S_{\mathrm{eff}} \times \sqrt{\mathrm{Bkg}_{\mathrm{rej}}},
 \end{equation}
 for each working point of the DNN and LH menus. This metric, derived from the combination of signal efficiency and background rejection, provides a direct figure of merit for the expected sensitivity improvement when moving from LH to the DNN approach.
 
 
+% --- Figura 1: Inclusivas ---
 \begin{figure}[htbp]
   \centering
 
-  % --- Row 1: Inclusive vs eta and vs pT ---
   \begin{subfigure}{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/significance_data/significance_vs_pt_etaInclusive_GOOD_ONE.pdf}
@@ -1283,9 +1407,17 @@ for each working point of the DNN and LH menus. This metric, derived from the co
     \label{fig:significance_inclusive_pt}
   \end{subfigure}
 
-  \vspace{0.55cm}
+  \caption{Inclusive significance estimator $S_{\mathrm{eff}} \times \sqrt{\mathrm{Bkg}_{\mathrm{rej}}}$ 
+  computed in data for the DNN and LH identification menus, shown versus $|\eta|$ (a) 
+  and $E_{\mathrm{T}}$ (b) for the three working points.}
+  \label{fig:significance_inclusive}
+\end{figure}
 
-  % --- Row 2: Fixed-bin projections ---
+
+% --- Figura 2: Proyecciones en bins fijos ---
+\begin{figure}[htbp]
+  \centering
+
   \begin{subfigure}{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/significance_data/significance_vs_pt_etaBin_0.60_0.80.pdf}
@@ -1299,12 +1431,25 @@ for each working point of the DNN and LH menus. This metric, derived from the co
     \label{fig:significance_vs_eta_ptBin}
   \end{subfigure}
 
-  \caption{Significance estimator $S_{\mathrm{eff}} \times \sqrt{\mathrm{Bkg}_{\mathrm{rej}}}$ computed in data for the DNN and LH identification menus. Top: inclusive measurements versus $|\eta|$ (a) and $E_{\mathrm{T}}$ (b) for the three working points. Bottom: projections in fixed kinematic regions, shown versus $E_{\mathrm{T}}$ at fixed $|\eta|$ (c) and versus $|\eta|$ at fixed $E_{\mathrm{T}}$ (d).}
-  \label{fig:significance_block}
+  \caption{Significance estimator $S_{\mathrm{eff}} \times \sqrt{\mathrm{Bkg}_{\mathrm{rej}}}$ 
+  computed in data for the DNN and LH identification menus. 
+  Results are shown versus $E_{\mathrm{T}}$ at fixed $|\eta|$ (a) and versus $|\eta|$ at fixed $E_{\mathrm{T}}$ (b).}
+  \label{fig:significance_bins}
 \end{figure}
 
-From these plots, both for the inclusive case in the top row and for the selected $\eta$ and $E_{\mathrm{T}}$ bins, the overall improvement of the DNN menu over the LH approach is evident. 
-As particularly observed in the background rejection performance, the LH algorithm exhibits a clear degradation in the crack region, which is not present for the DNN. In this case, specific treatments were applied during training, such as masking problematic variables in that region in order to avoid mis-modelling effects.  
 
-In addition, from the bottom ratio plots it can be seen that the improvement follows an approximately consistent trend. For intermediate to lower $E_{\mathrm{T}}$ values, the DNN shows its best relative performance, reaching a peak around $E_{\mathrm{T}}=30$~GeV. Overall, these results indicate that the DNN menu provides a more robust performance particularly in regions with larger background contribution.
+From these plots, both for the inclusive case in the top row and for the selected $\eta$ and $E_{\mathrm{T}}$ bins, 
+the overall improvement of the DNN menu over the LH approach is clearly established. 
+The gain is particularly visible in the crack region, where the LH algorithm shows a marked degradation while the DNN remains stable. 
+In this region, the background acceptance is reduced by factors of three to four with respect to the LH, as already discussed, 
+thanks to the dedicated treatments applied during the DNN training, such as masking problematic variables to avoid mis-modelling effects. 
+
+From the bottom ratio panels it can be seen that the relative improvement follows a consistent trend across the full kinematic range. 
+For intermediate to low transverse energies, the DNN exhibits its strongest relative performance, with significance gains of up to 40-50\% around $E_{\mathrm{T}} \sim 30$~GeV. 
+At higher $E_{\mathrm{T}}$, the difference between the two algorithms becomes less pronounced, but the DNN still maintains a systematic advantage of about 20-30\% across most of the $\eta$ spectrum. 
+
+Overall, these results demonstrate that the DNN menu provides a more robust and reliable performance than the traditional LH approach, 
+particularly in regions where background contributions are dominant. 
+This confirms the possible advantages of adopting modern machine learning techniques for electron identification in ATLAS and 
+highlights the DNN algorithm as the new baseline for Run-3 and beyond.
 

@@ -10,7 +10,7 @@
 
 
 
-This chapter presents the core analysis developed in the context of this thesis, focusing on the study of the Higgs boson decay into a pair of $\tau$-leptons produced in association with top-quark pairs. The \( H \to \tau_{\text{had}}\tau_{\text{had}}\) final state is of particular importance, both because of its experimental challenges and because it provides unique sensitivity to the top-Higgs Yukawa interaction. The following sections describe the motivation behind this measurement, the general and specific strategy pursued in ATLAS, the definition of physics objects and event selection, and the improvements introduced during this work with respect to earlier iterations of the analysis. Special emphasis is given to the implementation of multivariate techniques (MVA) for event categorization and to the transition from Run-2 to Run-3 datasets, which mark the evolution of the current measurement program.
+This chapter presents the core analysis developed in the context of this thesis, focusing on the study of the Higgs boson decay into a pair of $\tau$-leptons produced in association with top-quark pairs. The \ttHtt final state is of particular importance, both because of its experimental challenges and because it provides unique sensitivity to the top-Higgs Yukawa interaction. The following sections describe the motivation behind this measurement, the general and specific strategy pursued in ATLAS, the definition of physics objects and event selection, and the improvements introduced during this work with respect to earlier iterations of the analysis. Special emphasis is given to the implementation of multivariate techniques (MVA) for event categorization and to the transition from Run-2 to Run-3 datasets, which mark the evolution of the current measurement program.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -126,7 +126,7 @@ Finally, the missing transverse momentum, \etmiss, in the events considered for 
 A crucial ingredient of the \htautau analysis, and in particular for $t\bar{t}H(\tau_{\text{had}}\tau_{\text{had}})$, is the reconstruction of the Higgs boson system from the two $\tau$-leptons. In particular, the invariant mass and the transverse momentum of the di-$\tau$ system are the key observables exploited throughout the analysis. The invariant mass serves as the primary handle to discriminate the Higgs boson signal from the dominant irreducible background $Z\to\tau\tau$, as well as from reducible contributions such as $t\bar{t}$ events with misidentified $\tau_{\text{had}}$ candidates. 
 
 \subsection{Higgs boson mass reconstruction}
-\label{subsec:higgs_mass}
+\label{subsec:higgs_pt}
 
 Since each $\tau$-lepton decay involves one or more neutrinos that escape detection, the full invariant mass cannot be reconstructed directly, and dedicated algorithms are required. In this analysis two approaches are employed: the collinear approximation and the Missing Mass Calculator (MMC).  
 
@@ -200,7 +200,7 @@ In particular, the angular separation between the two $\tau_{\text{had-vis}}$ ca
 
 Furthermore, the two $\tau_{\text{had-vis}}$ candidates are required to have opposite electric charge. 
 Unlike other production modes considered in the \htautau\ analysis, no $b$-jet veto is applied in this channel, since $b$-jets are expected from the top-quark decays accompanying the Higgs boson in \ttH\ production. 
-Finally, to enhance the reconstruction efficiency of the invariant mass of the system, additional requirements are imposed on the missing transverse momentum $\met$ and on the visible momentum fractions of the $\tau$-leptons ($x_0$ and $x_1$). 
+Finally, to enhance the reconstruction efficiency of the invariant mass of the system, additional requirements are imposed on the missing transverse momentum \etmiss and on the visible momentum fractions of the $\tau$-leptons ($x_0$ and $x_1$). 
 All selection requirements are summarised in Table~\ref{tab:tth_hadhad_selection}.
 
 \begin{table}[htbp]
@@ -321,7 +321,7 @@ The estimation of the fake background is obtained by weighting the \tauhadhad an
 The set of regions used for the application of FFs depends on the identification criteria adopted. 
 Further details on the FF application can be found in earlier rounds of the \Htautau analysis~\cite{couplings} and in Chapter~\ref{chap:run3_tth}, where a direct contribution was made to the re-estimation of fakes using the reprocessed Run-2 and Run-3 data, including the implementation of new $\tau$-lepton identification techniques.  
 
-Although the full discussion of systematic uncertainties affecting this analysis is deferred to Section~\ref{sec:tth_systematics}, the specific uncertainties associated with the estimation of this background are evaluated through three types of variations. 
+Although the full discussion of systematic uncertainties affecting this analysis is deferred to Section~\ref{sec:tth_systematics}, here the specific uncertainties associated with the estimation of this background are introduced, which are evaluated through three types of variations. 
 The differences observed with respect to the nominal procedure are taken as the systematic uncertainty assigned to the fake background estimate.  
 
 The first group corresponds to the statistical uncertainties of the fake factors derived in the $W+$jets control regions (CRs).  
@@ -618,15 +618,197 @@ As a final step, since the discriminants in both \pth regions will be used to de
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Event categorization}
 \label{sec:tth_categories}
-triangulito para empezar 
+
+In order to measure the signal strength of the process under study, while keeping the normalisation of the main backgrounds under control, regions enriched in either signal or background events are defined, referred to as signal regions (SRs) and control regions (CRs). These are obtained by applying requirements on the classifier scores provided by the multiclass BDT introduced above, from which a promising separation between the signal and the main background processes of interest can be achieved, as illustrated in Figure~\ref{fig:triangle}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{triangle}
+  \caption{Distributions of signal, \ztautau and \ttbar background MC events events in the plane defined by the three BDT scores in the Multiclass training, performed inclusively in \pth for this representation.}
+  \label{fig:triangle}
+\end{figure}
+
+The requirements consist of rectangular cuts on each score, optimised to maximise the sensitivity to the corresponding process. The optimisation is performed through a one-dimensional scan of each class score, aiming to maximise the expected statistical significance of a counting experiment, which is used as the figure of merit. As defined in Ref.~\cite{ATL-PHYS-PUB-2020-025}, this significance function computes the $Z$-value (the significance in standard deviations for a counting experiment) by testing a background-only hypothesis against a signal+background alternative. It accounts for the relative background uncertainty, treated as Poisson-distributed, thereby providing a refined estimate compared to the simple $S/\sqrt{S+B}$ approximation. In this analysis, both the MC statistical uncertainties and an additional $10\%$ relative uncertainty, representative of \ttbar-related systematic effects (the most relevant in this channel) discussed in the next section, are considered.
+
+The \ttH\ signal region is defined by performing the scan on the $\text{BDT}_{\text{\ttH}}$ score. The \ztautau control region is obtained from events lying outside the \ttH SR, by inverting the cut on the $\text{BDT}_{\text{\ttH}}$ score and subsequently applying the scan on the $\text{BDT}_{Z}$ score. Finally, the \ttbar control region is determined by inverting the cuts on the other two BDT scores, resulting in three orthogonal regions, taking advantage of the the normalisation of the multiclass scores mentioned before.
+
+This procedure is applied to events in both regions, above and below $200$~GeV in \pth, using the set of multiclass scores from the corresponding training. A summary of the cuts on the scores that define the different \ttH categories is provided in Table~\ref{tab:tth_cat}. Events in the SRs are further subdivided into three categories according to \pth, with bin boundaries at $200$ and $300$~GeV, motivated by the STXS binning targeted in this analysis for the measurement of the \ttH cross-section. For this categorisation, the \pth estimated with the NN described in Section~\ref{subsec:higgs_pt} is used.
+
+\begin{table}[htbp]
+  \caption{Definition of the signal and control regions for the different \ttHtt categories as a function of the \pth. $\text{BDT}^{\text{low}}_{\text{\tth}}$ and $\text{BDT}^{\text{low}}_{Z}$ denote the \ttH and \ztautau scores from the low \pth training, while $\text{BDT}^{\text{high}}_{\text{\tth}}$ and $\text{BDT}^{\text{high}}_{Z}$ refer to the \tth and \ztautau scores from the high \pth training.}
+  \centering
+  \renewcommand{\arraystretch}{1.2}
+  \setlength{\tabcolsep}{12pt}
+  \begin{tabular}{lccc}
+  \toprule
+   & \multicolumn{3}{c}{\pth bins in GeV} \\
+  \cmidrule(lr){2-4}
+   & $<200$ & [200, 300] & $>300$ \\
+  \midrule
+  Signal region &
+  $ \text{BDT}^{\text{low}}_{t\bar{t}H} > 0.65 $ &
+  \multicolumn{2}{c}{$ \text{BDT}^{\text{high}}_{t\bar{t}H} > 0.65 $} \\
+  \midrule
+  $Z(\to \tau\tau)$ control region &
+  \begin{tabular}[c]{@{}c@{}} 
+  $ \text{BDT}^{\text{low}}_{t\bar{t}H} < 0.65 $ \\
+  $ \text{BDT}^{\text{low}}_{Z} > 0.2 $ 
+  \end{tabular} &
+  \multicolumn{2}{c}{\begin{tabular}[c]{@{}c@{}} 
+  $ \text{BDT}^{\text{high}}_{t\bar{t}H} < 0.65 $ \\
+  $ \text{BDT}^{\text{high}}_{Z} > 0.2 $ 
+  \end{tabular}} \\
+  \midrule
+  $t\bar{t}$ control region &
+  \begin{tabular}[c]{@{}c@{}} 
+  $ \text{BDT}^{\text{low}}_{t\bar{t}H} < 0.65 $ \\
+  $ \text{BDT}^{\text{low}}_{Z} < 0.2 $ 
+  \end{tabular} &
+  \multicolumn{2}{c}{\begin{tabular}[c]{@{}c@{}} 
+  $ \text{BDT}^{\text{high}}_{t\bar{t}H} < 0.65 $ \\
+  $ \text{BDT}^{\text{high}}_{Z} < 0.2 $ 
+  \end{tabular}} \\
+  \bottomrule
+  \end{tabular}
+  \label{tab:tth_cat}
+  \end{table}
+  
+Moreover, the events classified in the signal regions for each \pth bin are further divided into two categories: a sideband region and a window region in the Higgs boson mass. The window region contains events with a reconstructed Higgs boson mass within the interval $100 < m_{\tau\tau} < 150$~GeV, while the sideband region contains the remaining events. The window regions provide enhanced purity in signal events, whereas the sideband regions, despite their lower signal purity, can still be exploited to constrain the background processes in the signal regions of this analysis.
+
+Figures~\ref{fig:bdt_ztt} and~\ref{fig:bdt_ttbar} display the BDT score distributions in data and MC for the \ztautau and \ttbar control regions, respectively, showing good agreement with the background predictions in the corresponding regions of phase space that are used to validate the normalisation of these backgrounds. Figure~\ref{fig:bdt_signal} presents the distributions of the \ttH BDT scores and the invariant mass in data for the defined SRs. Most of the bins are blinded so that, prior to performing the statistical fit, no data are shown in bins where a signal contribution above $5\%$ is expected, unless explicitly stated otherwise, in order to avoid any potential bias.
+
+\begin{figure}[htbp]
+  \centering
+  \setlength{\tabcolsep}{2pt}
+  \renewcommand{\arraystretch}{0}
+  
+  \begin{tabular}{ccc}
+    \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_signal_multiclass_lt200_hh_tth_cr_Ztt.pdf} &
+    \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_ttbar_multiclass_lt200_hh_tth_cr_Ztt.pdf} &
+    \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_Z_multiclass_lt200_hh_tth_cr_Ztt.pdf} \\[4pt]
+    \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_signal_multiclass_gt200_hh_tth_cr_Ztt.pdf} &
+    \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_ttbar_multiclass_gt200_hh_tth_cr_Ztt.pdf} &
+    \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_Z_multiclass_gt200_hh_tth_cr_Ztt.pdf} \\
+  \end{tabular}
+  
+  \caption{Distribution of the \ttH\ multiclass BDT scores, trained for low \pth (top) 
+  and high \pth (bottom), for the signal (left), \ttbar\ (center), and \ztautau\ (right) 
+  classes in the $Z(\to \tau\tau)$ control region. Only statistical uncertainties are shown. 
+  Data are blinded for bins with a signal-over-background ratio above 5\%.}
+  \label{fig:bdt_ztt}
+  \end{figure}
+
+  \begin{figure}[htbp]
+    \centering
+    \setlength{\tabcolsep}{2pt}
+    \renewcommand{\arraystretch}{0}
+    
+    \begin{tabular}{ccc}
+      \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_signal_multiclass_lt200_hh_tth_cr_ttbar.pdf} &
+      \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_ttbar_multiclass_lt200_hh_tth_cr_ttbar.pdf} &
+      \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_Z_multiclass_lt200_hh_tth_cr_ttbar.pdf} \\[4pt]
+      \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_signal_multiclass_gt200_hh_tth_cr_ttbar.pdf} &
+      \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_ttbar_multiclass_gt200_hh_tth_cr_ttbar.pdf} &
+      \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_Z_multiclass_gt200_hh_tth_cr_ttbar.pdf} \\
+    \end{tabular}
+    
+    \caption{Distribution of the \ttH\ multiclass BDT scores, trained for low \pth (top) 
+    and high \pth (bottom), for the signal (left), \ttbar\ (center), and \ztautau\ (right) 
+    classes in the \ttbar\ control region. Only statistical uncertainties are shown. 
+    Data are blinded for bins with a signal-over-background ratio above 5\%.}
+    \label{fig:bdt_ttbar}
+    \end{figure}
+
+    \begin{figure}[htbp]
+      \centering
+      \setlength{\tabcolsep}{2pt}
+      \renewcommand{\arraystretch}{0}
+      
+      \begin{tabular}{ccc}
+        \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_signal_multiclass_lt200_hh_tth_sr_pth_lt200.pdf} &
+        \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_signal_multiclass_gt200_hh_tth_sr_pth_200_300.pdf} &
+        \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_tth_signal_multiclass_gt200_hh_tth_sr_pth_gt300.pdf} \\[4pt]
+        \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_ditau_mmc_mlm_m_hh_tth_sr_pth_lt200.pdf} &
+        \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_ditau_mmc_mlm_m_hh_tth_sr_pth_200_300.pdf} &
+        \includegraphics[width=0.32\textwidth]{images/sr_cr_plots/plot_ditau_mmc_mlm_m_hh_tth_sr_pth_gt300.pdf} \\
+      \end{tabular}
+      
+      \caption{Distribution of the \ttH\ multiclass signal BDT scores (top) and mass distributions (bottom) 
+      in the signal regions. Only statistical uncertainties are shown. Data are blinded for bins with a 
+      signal-over-background ratio above 5\%.}
+      \label{fig:bdt_signal}
+    \end{figure}
+
+A summary of the expected purity of \ttHtt events according to the SM in each of the previously defined signal regions is shown in Figure~\ref{fig:tth_purity}. The diagonal structure of this submatrix, obtained from the global case where the remaining regions dedicated to other production modes included in the \htautau analysis are also considered, indicates that the defined signal regions are highly pure in the \ttH process, with only some contamination mainly arising from ggF events at high \pth.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{tth_purity}
+  \caption{Expected SM \ttHtt signal purity in each signal region of the analysis. Adapted from Ref.~\cite{differential_htautau}.}
+  \label{fig:tth_purity}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Systematic Uncertainties}
 \label{sec:tth_systematics}
+
+Systematic uncertainties from multiple sources affect the measurement of the \ttH cross-section in the \tauhad \tauhad channel, both in the signal and in the background estimation. They can be grouped according to their origin into experimental uncertainties, arising from detector performance and object reconstruction; theoretical uncertainties related to the modelling of the dominant backgrounds (\ttbar and \ztautau); and theoretical uncertainties affecting the prediction of the \ttH signal itself. Each type of uncertainty requires a dedicated treatment to propagate its impact into the analysis. 
+In practice, systematic variations are typically evaluated through $\pm 1\sigma$ shifts, which are then propagated to the final distributions employed in the statistical fit.  
+
+These uncertainties can also be distinguished by the way they impact our measurement. A first category is devoted to those affecting event weights, which modify how events are weighted within a given category. To account for these effects, alternative weight sets are applied on an event-by-event basis, and the resulting distributions are compared with the nominal case. Such variations can alter not only the overall normalization but also the shape and relative contribution of different processes. Since the event weights often depend on specific kinematic variables, these uncertainties propagate to both the normalization and the shape of the final distributions.  
+
+A second category refers to uncertainties that impact the reconstructed kinematic properties of the events, such as the four-momenta of final-state objects. In this case, a full reprocessing of the event is required, recalculating derived quantities such as the \etmiss or the \mmc. Variations of this type can induce migrations of events between different analysis regions, altering the signal acceptance or modifying the kinematic distributions within a given category.  
+
+The incorporation of systematic uncertainties in the likelihood statistical fit as nuisance parameters (NPs) is discussed in Section~\ref{sec:statistical_tth}. The following subsections summarise the main sources of systematic uncertainties relevant for \ttHtt final state.
+
+\subsection{Signal theoretical uncertainties}
+\label{subsec:signal_theo_syst}
+
+Theoretical uncertainties on the \ttH signal prediction are evaluated following the recommendations of the LHC Higgs Cross-Section Working Group~\cite{https://doi.org/10.23731/cyrm-2017-002, https://doi.org/10.5170/cern-2013-004}. These prescriptions ensure consistency across Higgs boson analyses and provide a common framework that allows results to be combined. The considered sources include parton distribution functions (PDFs), the strong coupling constant $\alpha_{s}$, QCD scale variations, as well as uncertainties related to parton shower modelling and to the choice of matrix-element generator.  
+
+The impact of PDF uncertainties is estimated using the eigenvector variations of the \textsc{pdf4lhc\_nlo\_30} set, applied through the reweighting scheme implemented in the \textsc{powhegbox} generator. The resulting variations are treated as independent sources of uncertainty in the statistical model. The uncertainty in $\alpha_{s}$ is derived by varying its value around the central choice. 
+
+For this production mode, QCD scale uncertainties are separated into six independent components. These include one uncertainty on the inclusive cross-section and five additional components corresponding to migrations between different \pth bins, following the STXS~1.2 definition (as shown in Figure~\ref{fig:STXSbins}).
+
+Uncertainties associated with parton shower and matrix-element modelling are also included. They are assessed by comparing the nominal samples with alternative samples where the parton shower model is replaced by \textsc{Herwig7}, while keeping the same matrix-element generator, as explained in Section~\ref{subsec:higgs_mc}. This procedure allows for an evaluation of the systematic effects arising from the modelling of QCD radiation in \ttH signal events.
+
+\subsection{Background theoretical uncertainties}
+\label{subsec:bkg_theo_syst}
+
+Theoretical uncertainties affecting the background prediction are particularly relevant for the dominant \ztautau and \ttbar processes.  
+
+For the \ztautau background, several sources are considered, including uncertainties from the parton distribution functions, renormalization and factorization scales, the CKKW matching scheme, QCD scale factors, as well as uncertainties associated with the underlying event and the parton shower model. The PDF uncertainties are evaluated using 100 weight variations provided by the \textsc{sherpa} generator, based on the eigenvector variations of the \textsc{nnpdf3.0nnlo} set. The resulting variations are combined to obtain the total PDF uncertainty. Uncertainties from missing higher-order corrections are estimated by varying the factorization and renormalization scales, with the envelope of these variations taken as the systematic uncertainty. 
+Correlations between normalization and shape components of the PDF uncertainties are preserved between the \ztautau control region and the corresponding signal regions. This treatment ensures that normalization factors extracted in specific control regions do not artificially constrain the background description in other regions.  
+
+An additional uncertainty is applied to cover modelling deficiencies in the electroweak component of the \ztautau\ background in the MC simulation. This component is estimated using MC samples, and a scale factor is derived by comparing the nominal \textsc{sherpa} prediction with alternative samples generated with different matrix-element generators. An uncertainty is then assigned to this scale factor, defined as the full difference between the unscaled prediction and the scaled template, with the upward variation obtained by symmetrization.  
+
+For the top-quark related backgrounds, including inclusive \ttbar, the main sources of uncertainty are variations in the PDFs (evaluated using the 30 most relevant eigenvector variations of the chosen set), comparisons between different matrix-element generators while keeping the parton shower fixed, comparisons between parton shower models with a fixed matrix-element generator, and variations in initial- and final-state radiation. The latter are implemented through reweighting of the nominal predictions. These uncertainties are particularly relevant in this analysis where top-quark related backgrounds constitute a large fraction of the total background.
+
+\subsection{Experimental uncertainties}
+\label{subsec:exp_syst}
+
+The most relevant experimental uncertainties arising from different detector components and reconstruction techniques for the \ttHtt final states are those associated with jets, hadronic $\tau$-leptons, \etmiss, $b$-tagging, and the integrated luminosity.  
+
+Jet-related uncertainties are a major source of systematics. The jet energy scale (JES) uncertainty originates from multiple sources, including in-situ calibration, pile-up effects, high-$p_{\text{T}}$ extrapolations, and flavour-dependent responses of quark- and gluon-initiated jets. JES uncertainties are decomposed into several uncorrelated nuisance parameters describing flavour composition, flavour response, $b$-jet response, pile-up effects, and $\eta$-intercalibration. Additional nuisance parameters account for non-closure effects in specific $p_{\text{T}}$ and $\eta$ regions, as well as uncertainties related to tile calorimeter calibration. Jet energy resolution uncertainties are also included, impacting \etmiss and thereby the reconstructed di-$\tau$ mass (\mmc).  
+
+Uncertainties related to hadronic $\tau$-leptons play a central role. These include the $\tau$-lepton identification efficiency, the energy scale, the trigger efficiency, and the performance of the BDT used to reject electrons misidentified as $\tau$-leptons. The identification efficiency uncertainties, typically in the range 2-6\%, are derived from comparisons between data and MC and are decorrelated according to $p_{\text{T}}$. The energy scale uncertainty ranges between 1\% and 4\%, depending on momentum and track multiplicity, and is described by dedicated nuisance parameters. The trigger efficiency uncertainty is smaller (about 1-1.5\%) but non-negligible.  
+
+For $b$-tagging, uncertainties in the tagging efficiencies of $b$-jets, as well as mis-tag rates for $c$-jets and light-flavour jets, are considered. These are implemented through variations of scale factors derived from eigenvector decompositions of the associated covariance matrices. Additional parameters cover extrapolations to high-$p_{\text{T}}$ jets and the extension of $c$-jet calibrations to hadronic $\tau$-lepton jets.  
+
+The uncertainties in the reconstruction of \etmiss mainly arise from the modelling of the soft term. Variations in its energy scale and resolution, both parallel and perpendicular to the hard-object $p_{\text{T}}$, are included as independent systematic sources.  
+
+The uncertainty in the integrated luminosity is an additional systematic affecting the normalisation of signal and MC-based backgrounds. The absolute luminosity calibration carries an uncertainty of $\pm 0.83\%$, dominated by the extrapolation from low-$\mu$ calibration conditions to the data-taking periods. This uncertainty is applied coherently to all MC processes except those whose normalisation is directly constrained in data control regions.  
+
+Finally, background estimation methods introduce further experimental uncertainties. In particular, in the \ttHtt channel, these uncertainties mainly arise from the statistical precision of the fake factors, whose derivation has been described in Section~\ref{sec:event_selection_background}.
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Statistical fit}
 \label{sec:statistical_tth}
 
+%aqui hay que meter el diagramita explicando cuantas SRs y CRs tenemos en total y tal, así como VR.
 
 %From the previous Statistical Methods Chapters, reduced to Machine Learning Techniques
 
@@ -647,5 +829,8 @@ triangulito para empezar
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{STXS results for \ttH}
+\section{STXS results}
 \label{sec:results_ttH}
+
+aquí hablamos fundamentalmente de ttH, pero también se muestran los resultados finales con el resto de modos de producción y canales y se cuenta que para mas detalles sobre el resto de modos de produccion, categorizacion y tal que se mire el differential paper y que 
+se detalla en dataset.tex como se produjeron los samples de estos main production modes del boson de Higgs.
