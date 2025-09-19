@@ -1,0 +1,171 @@
+
+\chapter*{Resumen en español}
+\addcontentsline{toc}{chapter}{Resumen en español}
+
+Este documento presenta de manera extensa y detallada el trabajo de investigación realizado en el marco
+del experimento ATLAS del CERN, dentro del Gran Colisionador de Hadrones (LHC). A lo largo de la tesis se han
+abordado dos líneas de investigación principales y complementarias: por un lado, el desarrollo de nuevas técnicas
+de identificación de electrones mediante redes neuronales profundas, y por otro, el estudio de la producción del
+bosón de Higgs en asociación con quarks top en el canal de decaimiento a pares de leptones tau. Este resumen en
+castellano sintetiza los resultados obtenidos en todo el documento, ofreciendo una visión global del contexto
+teórico, el marco experimental, los desarrollos metodológicos y las contribuciones fenomenológicas. 
+
+% ===========================
+% INTRODUCCIÓN Y MOTIVACIÓN
+% ===========================
+La física de partículas moderna se apoya en el Modelo Estándar (SM), una teoría cuántica de campos que describe
+con gran éxito tres de las cuatro interacciones fundamentales conocidas: la fuerte, la débil y la electromagnética.
+A pesar de su carácter predictivo, el SM deja sin respuesta cuestiones esenciales como la naturaleza de la materia
+oscura, la jerarquía de masas de las partículas elementales, el origen de la asimetría materia-antimateria o la
+inclusión de la gravedad en un marco cuántico. En este contexto, el bosón de Higgs, descubierto en 2012 por ATLAS
+y CMS, constituye la piedra angular que confiere masa a los fermiones y bosones portadores de la interacción débil.
+Su estudio en detalle es crucial no solo para verificar la estructura del SM, sino también para abrir posibles
+ventanas hacia nueva física.
+
+El quark top, la partícula elemental más masiva conocida, desempeña un papel igualmente central. Su fuerte
+acoplamiento de Yukawa con el bosón de Higgs lo convierte en un actor fundamental en la estabilidad del vacío
+electrodébil y en la dinámica de ruptura espontánea de simetría. Precisamente el proceso de producción de Higgs en
+asociación con un par de quarks top (\ttH) permite acceder directamente a esta interacción, convirtiéndose en uno
+de los canales más relevantes y desafiantes de la física del LHC.
+
+La tesis doctoral se estructura en torno a estos dos ejes. El primero tiene un marcado carácter metodológico y se
+centra en la identificación de electrones en ATLAS. A través del desarrollo, entrenamiento y optimización de un
+modelo basado en redes neuronales profundas, se logra una mejora significativa respecto al método clásico basado
+en verosimilitud. El segundo eje es de carácter fenomenológico y aborda el estudio del proceso \ttH en el canal
+$H\to\tau\tau$, empleando técnicas multivariantes avanzadas y analizando tanto los datos de Run-2 como los
+primeros de Run-3.
+
+% ===========================
+% MARCO TEÓRICO
+% ===========================
+El documento arranca con una revisión del marco teórico. El Modelo Estándar describe fermiones organizados en tres
+familias, los bosones portadores de interacción y el mecanismo de Brout--Englert--Higgs, mediante el cual las
+partículas adquieren masa sin romper la invariancia gauge. Se detallan las propiedades del bosón de Higgs, sus modos
+de producción en el LHC (fusión de gluones, fusión de bosones vectoriales, producción asociada a bosones W/Z y
+asociada a quarks top), y sus principales canales de decaimiento (a quarks bottom, leptones tau, fotones y bosones W/Z).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/higgs_prod_decay.pdf}
+  \caption{Modos dominantes de producción y decaimiento del bosón de Higgs en colisiones protón-protón.}
+  \label{fig:higgs_resumen}
+\end{figure}
+
+Se hace especial hincapié en la relevancia del acoplamiento de Yukawa con el quark top, cuyo valor cercano a la
+unidad lo convierte en la interacción fermiónica más intensa del SM. El análisis de este acoplamiento, a través del
+proceso \ttH, permite probar la estructura del potencial de Higgs y explorar la estabilidad del vacío hasta escalas
+energéticas cercanas a la de Planck.
+
+% ===========================
+% LHC Y ATLAS
+% ===========================
+En la segunda parte se describe el marco experimental: el Gran Colisionador de Hadrones (LHC), la máquina más
+potente jamás construida, y el detector ATLAS, uno de los cuatro grandes experimentos del LHC. Se explican las
+características principales del acelerador, como la energía en el centro de masas (13 y 13.6 TeV en Run-2 y Run-3),
+la luminosidad alcanzada y los retos derivados del fenómeno conocido como \textit{pile-up}, que consiste en múltiples
+colisiones protón-protón en un mismo cruce de haces.
+
+El detector ATLAS se detalla en sus distintos subsistemas: el trazador interno, encargado de reconstruir trayectorias
+de partículas cargadas; los calorímetros electromagnéticos y hadrónicos, que miden la energía depositada; el
+espectrómetro de muones, que identifica y mide partículas penetrantes; y el sistema de disparo y adquisición de
+datos. El calorímetro electromagnético de argón líquido destaca por su papel crucial en la reconstrucción de
+electrones y fotones, siendo protagonista en esta tesis.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{images/atlas_detector.pdf}
+  \caption{Esquema general del detector ATLAS, mostrando sus principales subsistemas.}
+  \label{fig:atlas_resumen}
+\end{figure}
+
+% ===========================
+% SIMULACIONES Y MUESTRAS
+% ===========================
+El trabajo dedica también una sección a describir la generación de muestras simuladas mediante programas de Monte
+Carlo, esenciales para entrenar algoritmos de identificación y estimar fondos en los análisis. Se explican los
+generadores empleados, la simulación de la respuesta del detector y la importancia de disponer de muestras
+equilibradas y realistas de electrones de señal y procesos de fondo como $Z\to\tau\tau$, $t\bar{t}$ y multijet.
+
+% ===========================
+% TÉCNICAS DE APRENDIZAJE AUTOMÁTICO
+% ===========================
+El quinto capítulo introduce las técnicas de aprendizaje automático utilizadas en la tesis. Se presentan conceptos
+básicos de redes neuronales profundas: capas densas, funciones de activación, regularización, algoritmos de
+optimización y procedimientos de entrenamiento. Se explica cómo estos modelos pueden aprender relaciones
+complejas y no lineales entre decenas de variables experimentales, mejorando la discriminación entre señal y fondo
+respecto a métodos más tradicionales. También se describe brevemente el uso de bosques de decisión potenciados
+(BDTs), empleados en el análisis de \ttH.
+
+% ===========================
+% RECONSTRUCCIÓN E IDENTIFICACIÓN DE ELECTRONES
+% ===========================
+El sexto capítulo constituye uno de los pilares de la tesis: la reconstrucción e identificación de electrones. Se
+explica el proceso de reconstrucción, desde la formación de clústeres en el calorímetro hasta el emparejamiento con
+trazas en el detector interno. Posteriormente se presentan los algoritmos de identificación: el método clásico
+basado en verosimilitud (LH) y el nuevo enfoque basado en redes neuronales profundas (DNN).
+
+La DNN fue entrenada con muestras etiquetadas de electrones de señal y diferentes tipos de fondo: jets ligeros,
+fotones convertidos, hadrones pesados y leptones no puntuales. Las variables de entrada incluyen formas de los
+depósitos de energía en el calorímetro, información de las trazas y variables globales del evento. Se aplicaron
+técnicas de preprocesado y corrección de variables para asegurar un entrenamiento robusto.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{images/dnn_vs_lh.pdf}
+  \caption{Comparación entre el rendimiento del discriminante basado en DNN y el método de verosimilitud (LH).}
+  \label{fig:dnn_lh_resumen}
+\end{figure}
+
+Los resultados muestran una mejora significativa en el rechazo de fondos para una misma eficiencia de señal. Se
+definieron diferentes \textit{working points} (loose, medium, tight) optimizando la relación entre eficiencia y
+pureza, lo que permitirá su aplicación flexible en futuros análisis de ATLAS.
+
+% ===========================
+% EFICIENCIAS Y MEDIDAS
+% ===========================
+Una parte importante del trabajo consistió en validar experimentalmente las eficiencias del nuevo algoritmo mediante
+el método de \textit{tag-and-probe} en eventos $Z\to ee$. Se obtuvieron curvas de eficiencia en función de la energía
+transversal y pseudorapidez del electrón, confirmando la mejora observada en simulación. Estas medidas garantizan
+que el nuevo identificador pueda emplearse con confianza en análisis de física de precisión.
+
+% ===========================
+% ttH EN EL CANAL H->TAUTAU
+% ===========================
+El séptimo capítulo aborda la segunda línea de investigación: el análisis del proceso \ttH en el canal $H\to\tau\tau$.
+Este canal, aunque experimentalmente complejo debido a la presencia de múltiples neutrinos en los decaimientos de los
+taus, ofrece una oportunidad única para medir directamente el acoplamiento de Yukawa del quark top.
+
+El análisis se llevó a cabo sobre el conjunto completo de datos de Run-2 (139 fb$^{-1}$ a $\sqrt{s}=13$ TeV). Se definieron
+criterios de selección de objetos y desencadenadores específicos, se implementaron técnicas de reconstrucción de la masa
+del sistema di-tau y se emplearon BDTs multiclase para separar la señal de los principales procesos de fondo: $t\bar{t}$,
+$Z\to\tau\tau$ y producción asociada de Higgs con un solo top (tH).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{images/postfit_tth_tautau.pdf}
+  \caption{Distribuciones post-fit en regiones de señal del análisis de \ttH en el canal $H\to\tau\tau$.}
+  \label{fig:tth_resumen}
+\end{figure}
+
+Los resultados se interpretaron en el marco del esquema de secciones eficaces simplificadas (STXS), lo que permite
+realizar comparaciones directas con predicciones teóricas y con otros canales de producción y decaimiento del Higgs.
+
+% ===========================
+% RUN-3
+% ===========================
+\todo{Completar con los resultados preliminares del análisis de \ttH en Run-3 y el estudio de la producción de tH.}
+
+% ===========================
+% CONCLUSIONES
+% ===========================
+En las conclusiones se destaca la doble aportación de esta tesis. En el ámbito metodológico, el desarrollo de un
+nuevo identificador de electrones mediante DNN constituye un avance sustancial respecto al método previo, con
+impacto inmediato en la mejora de la pureza de muestras electrónicas en ATLAS. En el ámbito fenomenológico, el
+análisis de \ttH en el canal $H\to\tau\tau$ aporta una medida directa del acoplamiento de Yukawa del top, clave para
+la estabilidad del vacío electrodébil y para futuras combinaciones globales de acoplamientos del Higgs.
+
+Este resumen extenso refleja la importancia de integrar técnicas avanzadas de aprendizaje automático en la física
+experimental de partículas, y cómo estas herramientas permiten extraer información más precisa de los complejos datos
+generados en el LHC. El trabajo combina innovación metodológica y análisis fenomenológico de frontera, contribuyendo
+al programa científico de ATLAS y al conocimiento global de las propiedades del bosón de Higgs.
+

@@ -70,6 +70,9 @@
 \newcommand*{\tauh}{\ensuremath{\tauhad}\xspace}
 \newcommand*{\crt}{\ensuremath{CR$_{t\overline{t}}$}\xspace}  
 \newcommand*{\crz}{\ensuremath{CR$_{Z}$}\xspace}
+\newcommand*{\th}{\ensuremath{tH}\xspace}
+\newcommand*{\thtth}{\ensuremath{tH+t\overline{t}H}\xspace}
+\newcommand*{\thtthtt}{\ensuremath{(tH+t\overline{t}H)(\tau\tau)}\xspace}
 %||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 \setcounter{secnumdepth}{4}
@@ -112,15 +115,14 @@
 %-------------------------------------------------------------------------------
 \chapter*{Preface}
 \label{chap:preface}
+\input{chapters/preface}
 %-------------------------------------------------------------------------------
-
-Here it should be written the preface of this document.
 
 \addcontentsline{toc}{section}{Preface}
 
-
+\clearpage
 %-------------------------------------------------------------------------------
-\chapter{Introduction to Standard Model and Higgs Boson Physics}
+\chapter{Standard Model and Higgs Boson Physics}
 \label{chap:intro}
 \input{chapters/introduction_sm_higgs}
 %-------------------------------------------------------------------------------
@@ -156,12 +158,17 @@ Here it should be written the preface of this document.
 %-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
-\chapter{\ttH production in the $H \to \tau \tau$ decay channel}
+\chapter{Measurement of \ttH production cross-section in the $H \to \tau \tau$ decay channel for Run-2}
 \label{chap:htautau}
 \input{chapters/higgs_analysis}
 %-------------------------------------------------------------------------------
 
-Place your results here.
+
+%-------------------------------------------------------------------------------
+\chapter{\thtth studies in \htautau with Run-2 + partial Run-3 data}
+\label{chap:run3_tth}
+\input{chapters/th_tth_run3}
+%-------------------------------------------------------------------------------
 
 % All figures and tables should appear before the summary and conclusion.
 % The package placeins provides the macro \FloatBarrier to achieve this.
@@ -173,7 +180,6 @@ Place your results here.
 \label{chap:conclusion}
 %-------------------------------------------------------------------------------
 
-Place your conclusion here.
 
 
 %-------------------------------------------------------------------------------

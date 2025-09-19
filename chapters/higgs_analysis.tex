@@ -7,17 +7,17 @@
 \newcommand*{\mmc}{\ensuremath{m^\text{MMC}_{\tau\tau}}\xspace}
 \newcommand*{\taulephad}{$\tau_{\text{lep}}\tau_{\text{had}}$\xspace}
 \newcommand*{\tauhadhad}{$\tau_{\text{had}}\tau_{\text{had}}$\xspace}
+\newcommand*{\mtt}{\ensuremath{m_{\tau\tau}}\xspace}
 
 
-
-This chapter presents the core analysis developed in the context of this thesis, focusing on the study of the Higgs boson decay into a pair of $\tau$-leptons produced in association with top-quark pairs. The \ttHtt final state is of particular importance, both because of its experimental challenges and because it provides unique sensitivity to the top-Higgs Yukawa interaction. The following sections describe the motivation behind this measurement, the general and specific strategy pursued in ATLAS, the definition of physics objects and event selection, and the improvements introduced during this work with respect to earlier iterations of the analysis. Special emphasis is given to the implementation of multivariate techniques (MVA) for event categorization and to the transition from Run-2 to Run-3 datasets, which mark the evolution of the current measurement program.
+This chapter presents the core analysis developed in the context of this thesis, focusing on the study of the Higgs boson decay into a pair of $\tau$-leptons produced in association with top-quark pairs. The \ttHtt final state is of particular importance, both because of its experimental challenges and because it provides unique sensitivity to the top-Higgs Yukawa interaction. The following sections describe the motivation behind this measurement, the general and specific strategy pursued in ATLAS, the definition of physics objects and event selection, and the improvements introduced during this work with respect to earlier iterations of the analysis. Special emphasis is given to the implementation of multivariate techniques (MVA) for event categorization.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Motivation}
 \label{sec:analysis_motivation}
 
-The production of the Higgs boson in association with a top-quark pair provides a privileged way to probe the Yukawa coupling between the two particles, $y_{t}$, since the production cross-section of this process is proportional to the square of this coupling, as already discussed in Section~\ref{sec:ttH}. A direct measurement of this parameter is of particular importance both for confirming the properties of the Higgs boson within the SM and for exploring the nature of the electroweak symmetry breaking mechanism and potential effects beyond the Standard Model (BSM).
+The production of the Higgs boson in association with a top-quark pair provides a privileged way to probe the Yukawa coupling between the two particles, $y_{t}$, since the production cross-section of this process is proportional to the square of this coupling, as already discussed in Section~\ref{sec:ttH}. A direct measurement of this parameter is of particular importance both for confirming the properties of the Higgs boson within the SM and for exploring the nature of the EWSB mechanism and potential effects of BSM physics.
 
 As previously mentioned, the $t\bar{t}H$ production mode was first established by ATLAS and CMS in 2018, combining the Higgs boson decays $H \to VV^{*}$, $H \to \tau\tau$, $H \to b\bar{b}$, and $H \to \gamma\gamma$, as illustrated in Figure~\ref{fig:tth_obs}. The results were obtained in terms of the signal strength, $\mu_{t\bar{t}H}$, with an observed excess of $6.3\sigma$ above the SM expectation in ATLAS and $5.2\sigma$ in CMS.
 
@@ -43,18 +43,18 @@ As previously mentioned, the $t\bar{t}H$ production mode was first established b
   
   In this thesis, the \htautau decay channel is considered as it offers a balanced compromise between signal yield and background control. Moreover, the reconstruction of the di-$\tau$ system in \htautau events provides additional discrimination power against the dominant backgrounds. As already mentioned, the \ttH analysis with \htautau decays is not grouped together with other multilepton final states, but instead constitutes a dedicated category within the broader \htautau analysis, restricted to the case where both $\tau$-leptons decay hadronically. The remaining $\tau$-decay channels are covered by other ATLAS studies~\cite{PhysRevD.97.072003}.  
   
-  The first evidence for the \htautau decay channel was established during Run~1. ATLAS reported a significance of $4.5\sigma$~\cite{htau_2015}, and the combination of ATLAS and CMS confirmed the channel with a significance of $5.5\sigma$~\cite{htau_cms_atlas_2016}. Subsequently, Run-2 analyses concentrated on more precise measurements of the total cross-section as well as on the individual contributions of the main production modes. Differential measurements based on kinematic observables such as the transverse momentum of the Higgs boson (\pth) or the jet multiplicity were also performed, as described in Section~\ref{sec:stxs_yukawa}.  
+  The first evidence for the \htautau decay channel was established during Run-1. ATLAS reported a significance of $4.5\sigma$~\cite{htau_2015}, and the combination of ATLAS and CMS confirmed the channel with a significance of $5.5\sigma$~\cite{htau_cms_atlas_2016}. Subsequently, Run-2 analyses concentrated on more precise measurements of the total cross-section as well as on the individual contributions of the main production modes. Differential measurements based on kinematic observables such as the transverse momentum of the Higgs boson (\pth) or the jet multiplicity were also performed, as described in Section~\ref{sec:stxs_yukawa}.  
   
-  Among the four main Higgs boson production modes, \htautau has provided the most precise results for the $VBF$ production mode. The measurement obtained in the first study using the full Run-2 dataset yielded a cross-section of $0.90^{+0.20}_{-0.17}$ times the SM prediction~\cite{2022}, in good agreement with the CMS result of $0.81 \pm 0.17$ times the SM expectation~\cite{Tumasyan_2023}. For \ttH production, the precision was more limited, but still provided sensitivity, with an inclusive measured production cross-section of $1.06^{+1.28}_{-1.08}$ times the SM prediction. These results were originally derived within the STXS framework, with granularity adapted in \pth, the dijet invariant mass ($m_{\text{jj}}$), and jet multiplicity, resulting in a total of nine fiducial STXS bins: six targeting $ggF$ production and three devoted to $VBF$, $VH$, and \ttH, respectively, as shown in Figure~\ref{fig:atlas_htautau_stxs}.
+  Among the four main Higgs boson production modes, \htautau has provided the most precise results for the VBF production mode. The measurement obtained in the first study using the full Run-2 dataset yielded a cross-section of $0.90^{+0.20}_{-0.17}$ times the SM prediction~\cite{2022}, in good agreement with the CMS result of $0.81 \pm 0.17$ times the SM expectation~\cite{Tumasyan_2023}. For \ttH production, the precision was more limited, but still provided sensitivity, with an inclusive measured production cross-section of $1.06^{+1.28}_{-1.08}$ times the SM prediction. These results were originally derived within the STXS framework, with granularity adapted in \pth, the dijet invariant mass ($m_{\text{jj}}$), and jet multiplicity, resulting in a total of nine fiducial STXS bins: six targeting ggF production and three devoted to VBF, $VH$, and \ttH, respectively, as shown in Figure~\ref{fig:atlas_htautau_stxs}.
   
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{images/pois_9pois.png}
-    \caption{Measured values of $\sigma \times \mathcal{B}(H \to \tau\tau)$ in the nine fiducial regions defined by the STXS framework, from the first ATLAS analysis of $H \to \tau\tau$ using the full Run~2 dataset. Black (blue) error bars represent the total (statistical) uncertainties, while the continuous lines correspond to the SM predictions~\cite{2022}.}
+    \caption{Measured values of $\sigma \times \mathcal{B}(H \to \tau\tau)$ in the nine fiducial regions defined by the STXS framework, from the first ATLAS analysis of $H \to \tau\tau$ using the full Run-2 dataset. Black (blue) error bars represent the total (statistical) uncertainties, while the continuous lines correspond to the SM predictions~\cite{2022}.}
     \label{fig:atlas_htautau_stxs}
 \end{figure}
 
-This chapter presents the measurements obtained in the most recent published iteration of the \htautau analysis using the full Run-2 dataset. This new round extends the scope of the STXS results from the previous analysis, including additional STXS bins for the two Higgs boson production modes already mentioned.  
+This chapter presents the measurements obtained in the most recent published iteration of the \htautau analysis using the full Run-2 dataset. This new round extends the scope of the STXS results from the previous analysis, including additional STXS bins for both VBF and \ttH.  
 
 In particular, this thesis focuses on the extension of the \ttH analysis within this framework, moving from an inclusive measurement in the fully hadronic final state to the determination of the cross-section in three separate STXS bins in \pth. This strategy potentially increases the sensitivity to deviations from the SM in the high-\pt\ regions.  
 
@@ -69,19 +69,21 @@ The new measurements presented in this thesis are obtained from the analysis of 
 
 In addition, while the presence of $\tau$-leptons allows for a good reconstruction of the Higgs boson, it must be taken into account that $\tau$-leptons decay before reaching the detector. The resulting final states are therefore complex, containing neutrinos that escape detection. This complicates the reconstruction of the Higgs boson mass and \pt compared with other cleaner channels such as $H \to \gamma\gamma$.  
 
-Another difficulty arises from the fact that certain reconstructed objects can be misidentified as $\tau$-leptons, which must be carefully controlled. The following sections describe the strategy developed to address these issues in this analysis, focusing on the \ttH production mode. At the global level, within the \htautau analysis, events are first categorised according to the decay modes of the $\tau$-leptons into three channels: $\tau_{e}\tau_{\mu}$, $\tau_{\text{lep}}\tau_{\text{had}}$, and $\tau_{\text{had}}\tau_{\text{had}}$. Channels with two electrons or two muons are excluded from the analysis due to their much smaller branching ratios and sensitivity, as they are heavily contaminated by $Z \to \ell\ell$ decays.  
+Another difficulty arises from the fact that certain reconstructed objects can be misidentified as $\tau$-leptons, which must be carefully controlled. The following sections describe the strategy developed to address these issues in this analysis, focusing on the \ttH production mode. 
 
-As already mentioned, in \ttHtt only the $\tau_{\text{had}}\tau_{\text{had}}$ final state is considered. In this channel, the dominant background is \ztautau, followed by processes where hadronic $\tau$ decays are misidentified (referred to as ``Fakes''), in which jets are reconstructed as $\tau_{\text{had}}$ candidates. The $Z+$jets background is estimated with MC simulations and normalised to collision data, while the fake background is derived with data-driven techniques to reduce the dependence on simulations. The \ttH channel also suffers from large backgrounds originating from \ttbar events, which are considered in cases with zero, one, or two $\tau_{\text{had}}$, the latter being the dominant contribution. Additional smaller backgrounds include $t\bar{t}V$ and diboson production. These processes are estimated from MC simulations, with the \ttbar background normalised to data, as is the case for \Ztautau.  
+At the global level, within the \htautau analysis, events are first categorised according to the decay modes of the $\tau$-leptons into three channels: $\tau_{e}\tau_{\mu}$, $\tau_{\text{lep}}\tau_{\text{had}}$, and $\tau_{\text{had}}\tau_{\text{had}}$. Channels with two electrons or two muons are excluded from the analysis due to their much smaller branching ratios and sensitivity, as they are heavily contaminated by $Z \to \ell\ell$ decays.  
 
-The cross-section measurements are performed within the STXS framework, requiring the definition of signal regions targeting the different bins of Stage~1.2 of the STXS strategy. In this new round of the \htautau analysis, the six $ggF$ and the $VH$ bins measured in the previous iteration are retained. The $t\bar{t}H$ production mode is now probed in three $p_{\text{T}}^H$ bins, while VBF production is studied in eight kinematic regions defined by $p_{\text{T}}^H$ and $m_{jj}$. Multivariate analysis techniques are employed in the $VH$, $t\bar{t}H$, and VBF signal regions to enhance the sensitivity to the $H \to \tau\tau$ signal. In addition, inclusive measurements of the total cross-section times branching ratio for $H \to \tau\tau$, as well as of the production-mode cross-sections, are performed.  
+As already mentioned, in \ttHtt only the $\tau_{\text{had}}\tau_{\text{had}}$ final state is considered. In this channel, the dominant background is \ztautau, followed by processes where hadronic $\tau$ decays are misidentified (referred to as ``Fakes'' or fake background), in which jets are reconstructed as $\tau_{\text{had}}$ candidates. The $Z+$jets background is estimated with MC simulations and normalised to collision data, while the fake background is derived with data-driven techniques to reduce the dependence on simulations. The \ttH channel also suffers from large backgrounds originating from \ttbar events, which are considered in cases with zero, one, or two $\tau_{\text{had}}$, the latter being the dominant contribution. Additional smaller backgrounds include $t\bar{t}V$ and diboson production. These processes are estimated from MC simulations, with the \ttbar background normalised to data, as is the case for \ztautau.  
+
+The cross-section measurements are performed within the STXS framework, requiring the definition of signal regions targeting the different bins of Stage~1.2 of the STXS strategy. In this new round of the \htautau analysis, the six ggF and the $VH$ bins measured in the previous iteration are maintained. The $t\bar{t}H$ production mode is now probed in three $p_{\text{T}}^H$ bins, while VBF production is studied in eight kinematic regions defined by $p_{\text{T}}^H$ and $m_{jj}$. Multivariate analysis techniques are employed in the $VH$, $t\bar{t}H$, and VBF signal regions to enhance the sensitivity to the $H \to \tau\tau$ signal. In addition, inclusive measurements of the total cross-section times branching ratio for $H \to \tau\tau$, as well as of the production-mode cross-sections, are performed.  
 
 The following sections will therefore focus on the new strategy for event categorisation in the \ttH channel using MVA techniques, culminating with the presentation of the results obtained in this new round of the \ttHtt analysis. A general overview of the remaining measurements, including the other production modes in the \htautau analysis, will also be presented, summarising the legacy results of the ATLAS collaboration for this decay channel using the full Run-2 dataset. All results are published in Ref.~\cite{differential_htautau}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Object definition and trigger selection}
+\section{Trigger selection and object definition}
 \label{sec:object_definiton}
 
-As a standard procedure, the selection of candidate events in this analysis relies on the reconstruction and identification of the main physics objects in the detector: electrons, muons, hadronically decaying $\tau$-leptons, jets, and missing transverse momentum. Based on the number and type of these objects, events can be classified into different final states. The analysis presented here focuses exclusively on the $\tau_{\text{had}}\tau_{\text{had}}$ channel, where both $\tau$-leptons decay hadronically, producing narrow hadronic jets together with neutrinos.  
+As a standard procedure, the selection of candidate events in this analysis relies on the reconstruction and identification of the main physics objects in the detector: electrons, muons, hadronically decaying $\tau$-leptons, jets, and missing transverse momentum. Based on the number and type of these objects, events can be classified into different final states. The analysis presented here focuses exclusively on the channel where both $\tau$-leptons decay hadronically, producing narrow hadronic jets together with neutrinos.  
 
 In the following discussion, electrons and muons appearing in the final state will be collectively referred to as light leptons ($\ell$).
 
@@ -90,7 +92,7 @@ In the following discussion, electrons and muons appearing in the final state wi
 
 The first step in defining the events of interest for the analysis is the selection of the triggers to be applied. The corresponding trigger efficiencies in MC are corrected to match those observed in data using scale factors.  
 
-In the $\tau_{\text{had}}\tau_{\text{had}}$ channel, di-tau triggers are employed. The two $\tau_{\text{had-vis}}$ candidates reconstructed offline are required to match the corresponding legs of the online di-tau trigger objects, with $\Delta R > 0.6$. The transverse momentum thresholds are chosen to ensure that the selected $\tau_{\text{had}}$ candidates lie within the trigger efficiency plateau. Specifically, the leading $\tau_{\text{had}}$ candidate must satisfy an online (offline) requirement of $p_{\text{T}} > 35~(40)$~GeV, while the subleading one must exceed $p_{\text{T}} > 25~(30)$~GeV.  
+In the $\tau_{\text{had}}\tau_{\text{had}}$ channel, di-$\tau$ triggers are employed. The two $\tau_{\text{had-vis}}$ candidates reconstructed offline are required to match the corresponding legs of the online di-$\tau$ trigger objects, with $\Delta R > 0.6$. The transverse momentum thresholds are chosen to ensure that the selected $\tau_{\text{had}}$ candidates lie within the trigger efficiency plateau. Specifically, the leading $\tau_{\text{had}}$ candidate must satisfy an online (offline) requirement of $p_{\text{T}} > 35~(40)$~GeV, while the subleading one must exceed $p_{\text{T}} > 25~(30)$~GeV.  
 
 Due to the increased instantaneous luminosity during the 2016--2018 data-taking period, an additional Level-1 calorimeter jet trigger with $p_{\text{T}} > 25$~GeV and $|\eta| < 3.2$ was introduced. To guarantee that the trigger operates consistently within its efficiency plateau, the leading jet in the event is required to have $p_{\text{T}} > 70$~GeV and $|\eta| < 3.2$. The impact of this condition on the signal efficiency has been verified to be below $0.3\%$.
 
@@ -98,7 +100,7 @@ Due to the increased instantaneous luminosity during the 2016--2018 data-taking 
 \label{subsec:trigger_tth}
 
 The procedure followed for the reconstruction and identification of the physics objects used in this analysis closely follows what has already been described in Chapter~\ref{chap:object_rec}.  
-In the \ttHtt analysis, only jets with \pt$>20$~GeV are considered. The JVT is applied to jets with \pt$ > 60$~GeV and $|\eta| < 2.5$ in order to suppress those not associated with the primary vertex, while for jets with \pt$ > 60$~GeV in the forward region ($|\eta| > 2.5$) the fJVT is applied. In the $t\bar{t}H(\tau_{\text{had}}\tau_{\text{had}})$ process, the most relevant jets, such as $b$-jets from the top-quark decays and the $\tau_{\text{had}}$ candidates, are predominantly located in the central region of the detector. This is in contrast to processes such as VBF, where the characteristic signature involves forward jets, while in $t\bar{t}H$ the event topology is mainly central. Figure~\ref{fig:tth_topo} shows two examples of tree-level Feynman diagrams for the \ttHtt process.
+In the \ttHtt analysis, only jets with \pt$>20$~GeV are considered. The JVT is applied to jets with \pt$ < 60$~GeV and $|\eta| < 2.5$ in order to suppress those not associated with the primary vertex, while for jets with \pt$ < 60$~GeV in the forward region ($|\eta| > 2.5$) the fJVT is applied. In the $t\bar{t}H(\tau_{\text{had}}\tau_{\text{had}})$ process, the most relevant jets, such as $b$-jets from the top-quark decays and the $\tau_{\text{had}}$ candidates, are predominantly located in the central region of the detector. This is in contrast to processes such as VBF, where the characteristic signature involves forward jets. Figure~\ref{fig:tth_topo} shows two examples of tree-level Feynman diagrams for the \ttHtt process.
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
@@ -113,7 +115,7 @@ In the \ttHtt analysis, only jets with \pt$>20$~GeV are considered. The JVT is a
     \label{fig:tth_topo}
 \end{figure}
 \FloatBarrier
-The $b$-tagged jets are identified using the DL1r algorithm in this Run-2 release~21 analysis, with a working point corresponding to a fixed efficiency of $70\%$.  
+The $b$-tagged jets are identified using the DL1r algorithm in this rel.21 Run-2 analysis, with a working point corresponding to a fixed efficiency of $70\%$.  
 
 Referring to $\tau_{\text{had-vis}}$ as the detectable products of hadronic $\tau$ decays, the selected $\tau_{\text{had-vis}}$ candidates are required to have \pt$ > 20$~GeV and $|\eta| < 2.47$, excluding the transition region between the barrel and end-cap calorimeters. The charge of the $\tau_{\text{had-vis}}$ candidates is computed as the sum of the charges of the associated tracks, and is required to be $\pm 1$. Candidates are further classified as 1-prong or 3-prong, depending on the number of associated tracks. As discussed in Section~\ref{sec:tauhad}, the same RNN is employed to discriminate $\tau_{\text{had-vis}}$ from quark- or gluon-initiated jets, while the dedicated eBDT is used to suppress electrons misidentified as $\tau_{\text{had-vis}}$. For this analysis, the Medium identification working point is adopted, providing efficiencies of about $75\%$ and $60\%$ for 1-prong and 3-prong $\tau_{\text{had-vis}}$, respectively.  
 
@@ -123,7 +125,7 @@ Finally, the missing transverse momentum, \etmiss, in the events considered for 
 \section{Higgs boson reconstruction}
 \label{sec:higgs_reconstruction}
 
-A crucial ingredient of the \htautau analysis, and in particular for $t\bar{t}H(\tau_{\text{had}}\tau_{\text{had}})$, is the reconstruction of the Higgs boson system from the two $\tau$-leptons. In particular, the invariant mass and the transverse momentum of the di-$\tau$ system are the key observables exploited throughout the analysis. The invariant mass serves as the primary handle to discriminate the Higgs boson signal from the dominant irreducible background $Z\to\tau\tau$, as well as from reducible contributions such as $t\bar{t}$ events with misidentified $\tau_{\text{had}}$ candidates. 
+A crucial ingredient of the \htautau analysis, and in particular for $t\bar{t}H(\tau_{\text{had}}\tau_{\text{had}})$, is the reconstruction of the Higgs boson system from the two $\tau$-leptons. In particular, the invariant mass and the transverse momentum of the di-$\tau$ system are the key observables exploited throughout the analysis. The invariant mass constitutes the primary discriminating variable between the Higgs boson signal and the dominant irreducible background $Z\to\tau\tau$, as well as from reducible contributions such as $t\bar{t}$ events with misidentified $\tau_{\text{had}}$ candidates. 
 
 \subsection{Higgs boson mass reconstruction}
 \label{subsec:higgs_pt}
@@ -190,16 +192,15 @@ The improved reconstruction of $p_{\text{T}}^H$ reduces bin-to-bin migrations in
 The event selection in the \htautau\ analysis can be regarded as a two-stage procedure. 
 First, events are divided into three channels according to the decay mode of the $\tau$-leptons, as already defined. 
 Subsequently, each channel is further classified into event categories specifically designed to isolate a given Higgs boson production mode considered as signal. 
-The goal is to maximize the sensitivity to the Standard Model Higgs boson signal, while ensuring a robust estimation of the Higgs observables reconstructed from the $\tau$-leptons, and to match as closely as possible the phase-space binning defined by the STXS framework.
+The goal is to maximize the sensitivity to the Standard Model Higgs boson signal, while ensuring a robust estimation of the Higgs observables reconstructed from the $\tau$-leptons, and to match as closely as possible the phase space binning defined by the STXS framework.
 
-In the present work, the focus is on the \ttHtt\ process in the fully hadronic channel. 
-The selection therefore requires exactly two reconstructed $\tau_{\text{had-vis}}$ objects. 
-The transverse-momentum thresholds of these candidates are dictated by the ditau trigger used to collect the events entering the analysis, as explained in Section~\ref{sec:object_definiton}. 
+In \ttHtt, the selection therefore requires exactly two reconstructed $\tau_{\text{had-vis}}$ objects. 
+The transverse-momentum thresholds of these candidates are dictated by the di-$\tau$ trigger used to collect the events entering the analysis, as explained in Section~\ref{sec:object_definiton}. 
 Additional requirements are applied to reduce the trigger rate and to suppress background contributions, particularly at low-$p_{\text{T}}$. 
 In particular, the angular separation between the two $\tau_{\text{had-vis}}$ candidates is required to satisfy $\Delta R > 0.6$ in order to avoid overlaps, and at least one additional central jet ($|\eta| < 3.2$) with $p_{\text{T}} > 70$~GeV is required, which reduces the rate contribution from dijet background processes.
 
 Furthermore, the two $\tau_{\text{had-vis}}$ candidates are required to have opposite electric charge. 
-Unlike other production modes considered in the \htautau\ analysis, no $b$-jet veto is applied in this channel, since $b$-jets are expected from the top-quark decays accompanying the Higgs boson in \ttH\ production. 
+Unlike other production modes considered in the \htautau\ analysis, no $b$-jet veto is applied in this channel, since $b$-jets are expected from the top-quark decays produced together with the Higgs boson in \ttH\ production. 
 Finally, to enhance the reconstruction efficiency of the invariant mass of the system, additional requirements are imposed on the missing transverse momentum \etmiss and on the visible momentum fractions of the $\tau$-leptons ($x_0$ and $x_1$). 
 All selection requirements are summarised in Table~\ref{tab:tth_hadhad_selection}.
 
@@ -241,7 +242,7 @@ All selection requirements are summarised in Table~\ref{tab:tth_hadhad_selection
     \label{tab:tth_hadhad_selection}
     \end{table}
     
-The prerequisites described above apply mainly to the $\tauh\tauh$ channel. 
+The prerequisites described above apply mainly to the \tauhadhad channel. 
 For the \ttH\ production mode under study, the final state is further characterized by the presence of six jets, two of which are expected to be tagged as $b$-jets, as illustrated in Fig.~\ref{fig:tth_topo}. 
 
 To increase the signal acceptance, this selection is slightly relaxed. Events with four or fewer jets are dominated by background, while a significant fraction of the signal appears in events with at least five jets. 
@@ -271,9 +272,9 @@ Figure~\ref{reconstructed_preselection} shows the reconstructed Higgs boson cand
 From the invariant mass distribution in Fig.~\ref{reconstructed_preselection_a}, the main backgrounds affecting the analysis can be clearly identified. 
 Already with this single variable, a first signal-to-background discrimination can be achieved by defining appropriate cuts. 
 
-The dominant background arises from \ztautau$+$jets events, which peak below the Higgs boson signal, around the $Z$ mass of 90~GeV. 
+The dominant background arises from \ztautau$+$jets events, which peak below the Higgs boson signal, around the $Z$ boson mass of 90~GeV. 
 A flatter contribution comes from \ttbar production, since the $\tau$ leptons originate from different particles. 
-These events populate the high-mass tail, reflecting the higher energy scale of the process. In addition, a non-negligible contribution is given by QCD multijet events where one or two jets are misidentified as \tauhadvis candidates, referred to as \emph{fakes}. 
+These events populate the high-mass tail, reflecting the higher energy scale of the process. In addition, a non-negligible contribution is given by fakes backgrounds from QCD multijet events where one or two jets are misidentified as \tauhadvis candidates. 
 
 After applying the preselection, the expected yields are $309.0 \pm 5.6$ \ztautau events, $266.3 \pm 6.7$ \ttbar events, $184.5 \pm 8.6$ fakes, and $19.5 \pm 0.3$ \ttHtt signal events (all uncertainties statistical only). The \mmc variable therefore allows the definition of three regions with improved signal-to-background ratios:
 \begin{itemize}
@@ -294,7 +295,7 @@ Similarly, \ttbar production is modeled with MC and validated in data using dedi
 
 The third major background contribution comes from fakes, i.e.\ QCD multijet events in which one or two jets are misidentified as \tauhadvis candidates. 
 This background is estimated with a data-driven fake-factor (FF) method~\cite{fakes_paper}. 
-The contribution of fakes to the signal regions is derived from dedicated control regions, one of which is the anti-ID region, where one of the \tauhadvis candidates fails the Medium working point (WP) but passes the Loose WP, such that the event is still retained in the analysis. 
+The contribution of fakes to the signal regions is derived from dedicated control regions, one of which is the anti-ID region, where one of the \tauhadvis candidates fails the Medium identification WP but passes the Loose WP, such that the event is still retained in the analysis. 
 In this region, a template for the fake contribution is obtained by subtracting simulated prompt-\tauhadvis backgrounds from the data distribution. 
 This template is then scaled by a transfer factor, the fake factor (FF), correcting for the different selection efficiencies between pass- and anti-\tauhadvis candidates.  
 
@@ -319,7 +320,7 @@ Ultimately, the smaller the FFs, the better the performance of the \tauhad ident
 
 The estimation of the fake background is obtained by weighting the \tauhadhad anti-ID events with the corresponding FFs, which provides the predicted number of jets misidentified as \tauhadvis in the signal region. 
 The set of regions used for the application of FFs depends on the identification criteria adopted. 
-Further details on the FF application can be found in earlier rounds of the \Htautau analysis~\cite{couplings} and in Chapter~\ref{chap:run3_tth}, where a direct contribution was made to the re-estimation of fakes using the reprocessed Run-2 and Run-3 data, including the implementation of new $\tau$-lepton identification techniques.  
+Further details on the FF application can be found in earlier rounds of the \Htautau analysis~\cite{couplings} and in Chapter~\ref{chap:run3_tth}, where a direct contribution was made to the re-estimation of fakes using the rel.22 Run-2 and Run-3 data, including the implementation of new $\tau$-lepton identification techniques.  
 
 Although the full discussion of systematic uncertainties affecting this analysis is deferred to Section~\ref{sec:tth_systematics}, here the specific uncertainties associated with the estimation of this background are introduced, which are evaluated through three types of variations. 
 The differences observed with respect to the nominal procedure are taken as the systematic uncertainty assigned to the fake background estimate.  
@@ -352,14 +353,14 @@ This strategy follows the approach adopted in the previous round of this \htauta
 The BDT classifiers primarily exploit kinematic differences between signal and background processes, encoded in representative observables of the events used as training inputs. These observables are chosen to maximise the discriminating power between the targeted processes. 
 It is worth noting that correlations among input variables are not a priori problematic, since the BDT can take advantage of them, provided that the correlation patterns differ across the considered processes.
 
-In this work, the strategy of using two independent binary classifiers has been replaced by a multiclass BDT, trained to simultaneously distinguish between \ttH, \ztautau and \ttbar events. The output of this classifier consists of three scores, each associated with one event class, and normalised by construction to fulfil the condition $BDT_{\text{\ttH}} + BDT_{\text{Z}} + BDT_{\text{\ttbar}} = 1$.
+In this work, the strategy of using two independent binary classifiers has been replaced by a multiclass BDT, trained to simultaneously distinguish between \ttH, \ztautau and \ttbar events. The output of this classifier consists of three scores, each associated with one event class, and normalised to fulfil the condition $BDT_{\text{\ttH}} + BDT_{\text{Z}} + BDT_{\text{\ttbar}} = 1$.
 The training employs MC simulated events of the three processes, following the procedure described in Section~\ref{subsec:higgs_mc}. In addition, the available statistics of the \ttbar background are enhanced with fast-simulated samples, and alternative samples with modified top-quark mass are included, as introduced in Section~\ref{sec:tth_systematics}.
 
-The choice of a multiclass classifier suits particularly well when the classes to be separated are correlated and when the characteristic observables used as inputs are themselves related. This is indeed the case here, as the independent binary trainings were largely driven by jet-related features in the final state or by properties of the two \tauhadvis candidates. In such situations, where binary BDTs rely on similar and correlated input variables, the adoption of a multiclass approach provides a clear advantage.
+The choice of a multiclass classifier suits particularly well when the classes to be separated are correlated and when the characteristic observables used as inputs are themselves related. This is indeed the case here, as the independent binary trainings were largely driven by jet-related features in the final state or by properties of the two \tauhadvis candidates. In such situations, where binary BDTs rely on similar and correlated input variables, the adoption of a multiclass approach can provide an advantage.
 
 \subsection{Multiclass BDT setup}
 
-It is also worth noting, before introducing the details of the BDT setup, that the MC event selection employed for the training is based solely on the preselection described in Section~\ref{sec:event_selection_background}. The BDT is trained to handle three event classes, corresponding to the three considered processes. The structure of the decision trees, together with the hyperparameters and additional methods that define the algorithm, are presented in Section~\ref{sec:bdt_general} and are summarised below.
+Before introducing the details of the BDT setup it is also worth noting that the MC event selection employed for the training is based solely on the preselection described in Section~\ref{sec:event_selection_background}. The BDT is trained to handle three event classes, corresponding to the three considered processes. The structure of the decision trees, together with the hyperparameters and additional methods that define the algorithm, are presented in Section~\ref{sec:bdt_general} and are summarised below.
 \begin{itemize}
     \small
     \item Number of trees: 1000
@@ -391,7 +392,7 @@ Several possibilities were explored, such as jet multiplicities above various $p
 
 Alongside these, the rest of variables used in the training can be grouped into four main categories:  
 \begin{itemize}
-    \item Jet system properties: as already mentioned, variables such as the jet pseudorapidities are complemented with quantities related to their transverse momenta. These include $\sum_{\text{jets}}p_{\text{T}}$, defined as the scalar sum of the transverse momenta of all jets in the event (denoted $H^{\text{jets}}_{\text{T}}$), and $\sum_{b\text{-jets}}p_{\text{T}}$ for the case of $b$-tagged jets ($SumPtBjet$). Variables associated with the reconstruction of the top quark are also included in this category, since they involve particles present in the signal process. A $W$-boson candidate, $m^{\text{best}}_{W}$, is reconstructed from pairs of non-$b$-tagged jets by selecting the combination with invariant mass closest to the nominal $W$ mass. This $W$ candidate is then combined with a $b$-tagged jet to build top-quark candidates, with $m^{\text{top}}_{W_{\text{best}}}$ defined as the invariant mass of the candidate lying closest to the expected top-quark mass.
+    \item Jet system properties: as already mentioned, variables such as the jet pseudorapidities are complemented with quantities related to their transverse momenta. These include $\sum_{\text{jets}}p_{\text{T}}$, defined as the scalar sum of the transverse momenta of all jets in the event (denoted $H^{\text{jets}}_{\text{T}}$), and $\sum_{b\text{-jets}}p_{\text{T}}$ for the case of $b$-tagged jets (\texttt{SumPtBjet}). Variables associated with the reconstruction of the top quark are also included in this category, since they involve particles present in the signal process. A $W$-boson candidate, $m^{\text{best}}_{W}$, is reconstructed from pairs of non-$b$-tagged jets by selecting the combination with invariant mass closest to the nominal $W$ mass. This $W$ candidate is then combined with a $b$-tagged jet to build top-quark candidates, with $m^{\text{top}}_{W_{\text{best}}}$ defined as the invariant mass of the candidate lying closest to the expected top-quark mass.
     \item Properties of $\tau$-leptons: variables of both $\tau$ candidates in the final state are included, such as the transverse momentum of the sub-leading \tauhad, $p^{\tau_1}_{\text{T}}$, and the pseudorapidity of the leading one, $\eta_{\tau_0}$. The transverse momentum of the di-$\tau$ system is also considered, since its properties differ significantly across the three processes under study.
     \item Angular distances: a set of variables related to angular separations between objects in the event are included. These comprise the pseudorapidity difference of the two $\tau$ candidates, $\Delta\eta(\tau_0,\tau_1)$, as well as their angular distance $\Delta R(\tau_0,\tau_1)$. The previously introduced minimum angular distances between jets, and between a $b$-tagged jet and a \tauhad candidate, are also considered.
     \item \etmiss description: two additional variables are added to characterise the missing transverse energy, namely the total \etmiss itself and the minimum azimuthal angle between $\vec{E}^{\text{miss}}_{\text{T}}$ and a \tauhad.
@@ -483,7 +484,7 @@ Figures~\ref{tth_vars_tmva_1} and~\ref{tth_vars_tmva_2} show the distributions o
 
 \subsubsection*{Data-MC modelling}
 
-Beyond evaluating the discriminating power of the variables to justify their inclusion in the training, it is equally important to verify that they are accurately modelled in the MC simulations employed. This is not always trivial, particularly in such restricted and selective regions of phase space as those considered in this analysis. Since the discriminant trained on these simulations will ultimately be applied to real collision data, it is essential to guarantee a proper data/MC agreement from the outset.  
+Beyond evaluating the discriminating power of the variables to justify their inclusion in the training, it is equally important to verify that they are accurately modelled in the MC simulations employed. This is not always trivial, particularly in such restricted and selective regions of phase space as those considered in this analysis. Since the discriminant trained on these simulations will be applied to real collision data, it is essential to guarantee a proper data/MC agreement.  
 
 Figures~\ref{tth_vars_modelling_1} and~\ref{tth_vars_modelling_2} illustrate the good data/MC agreement observed for the input variables, by comparing their distributions across all relevant processes in the channel at the \ttH preselection level.
 
@@ -536,11 +537,11 @@ Figures~\ref{tth_vars_modelling_1} and~\ref{tth_vars_modelling_2} illustrate the
 
 \subsection{BDT training}
 
-In practice, and as already mentioned, in order to more precisely target the STXS phase-space bins for this \ttH production mode, two separate BDT trainings are performed with the setup described above. Taking advantage of the new, more accurate method for reconstructing \pth, a ``low-\pth'' training is carried out with events satisfying \pth$<200$~GeV, and a ``high-\pth'' training is implemented using events with \pth$>200$~GeV.  
+In practice, and as already mentioned, in order to more precisely target the STXS phase space bins for this \ttH production mode, two separate BDT trainings are performed with the setup described above. Taking advantage of the new, more accurate method for reconstructing \pth, a ``low-\pth'' training is carried out with events satisfying \pth$<200$~GeV, and a ``high-\pth'' training is implemented using events with \pth$>200$~GeV.  
 
 This strategy is further motivated by the fact that the relative contributions of the two dominant background sources vary as a function of \pth. For instance, most of the \ttbar events populate the region with \pth$<200$~GeV, while at higher values the \ztautau background becomes dominant, as illustrated in Figure~\ref{reconstructed_preselection_b}. It was verified that splitting the training in this way improves the discrimination against the \ttbar background in the low-\pth region, compared to an inclusive training in this variable.
 
-The highest ranked variables in both trainings do not vary significantly, nor do they across the different folds in the cross-validation, as expected. In all cases, the jet $p_{\text{T}}$ ratios and the angular distances between the $\tau$ candidates are among the most influential observables, together with the pseudorapidity of the leading jets and other jet-related properties. It is also important to monitor the correlation coefficients among the input variables for the three considered processes, which are shown in Figure~\ref{tth_vars_corr}.
+The highest ranked variables in both trainings do not vary significantly, nor do they across the different folds in the cross-validation, as expected. In all cases, the jet $p_{\text{T}}$ ratios and the angular distances between the \tauhadvis candidates are among the most influential observables, together with the pseudorapidity of the leading jets and other jet-related properties. It is also important to monitor the correlation coefficients among the input variables for the three considered processes, which are shown in Figure~\ref{tth_vars_corr}.
 \begin{figure}[htbp]
   \centering
   \setlength{\tabcolsep}{2pt}
@@ -556,7 +557,7 @@ The highest ranked variables in both trainings do not vary significantly, nor do
   \label{tth_vars_corr}
 \end{figure}
 
-As can be seen, the chosen variables are not excessively correlated with each other, and for some of them the correlation coefficients vary depending on the process. This is the case, for instance, for the transverse momentum and the angular distance of the two $\tau$ candidates, or for the pseudorapidity of the leading jets with respect to that of the leading \tauhad. Other variables display comparable correlations across the three processes, yet the selected set was found to provide the best performance in the final categorisation, rather than excluding any of them.
+As can be seen, the chosen variables are not excessively correlated with each other, and for some of them the correlation coefficients vary depending on the process. This is the case, for instance, for the transverse momentum and the angular distance of the two $\tau$ candidates, or for the pseudorapidity of the leading jets with respect to that of the leading \tauhad. Other variables show comparable correlations across the three processes, yet the selected set was found to provide the best performance in the final categorisation, rather than excluding any of them.
 
 As a result of the training, the expected distributions of the three BDT scores obtained for both trainings are shown in Figures~\ref{lowpt_scores} and~\ref{highpt_scores}, corresponding to the low- and high-\pth trainings, respectively. These distributions are evaluated on the training sample, represented by coloured markers, and on the testing sample, shown as boxes, allowing us to assess the level of overtraining. The effect is not particularly pronounced, although it is more visible in the low-\pth case due to the smaller statistics and the presence of larger fluctuations.  
 
@@ -637,9 +638,10 @@ This procedure is applied to events in both regions, above and below $200$~GeV i
 \begin{table}[htbp]
   \caption{Definition of the signal and control regions for the different \ttHtt categories as a function of the \pth. $\text{BDT}^{\text{low}}_{\text{\tth}}$ and $\text{BDT}^{\text{low}}_{Z}$ denote the \ttH and \ztautau scores from the low \pth training, while $\text{BDT}^{\text{high}}_{\text{\tth}}$ and $\text{BDT}^{\text{high}}_{Z}$ refer to the \tth and \ztautau scores from the high \pth training.}
   \centering
+  \small
   \renewcommand{\arraystretch}{1.2}
-  \setlength{\tabcolsep}{12pt}
-  \begin{tabular}{lccc}
+  \setlength{\tabcolsep}{8.5pt}
+  \begin{tabular}{l c|c c}
   \toprule
    & \multicolumn{3}{c}{\pth bins in GeV} \\
   \cmidrule(lr){2-4}
@@ -647,35 +649,45 @@ This procedure is applied to events in both regions, above and below $200$~GeV i
   \midrule
   Signal region &
   $ \text{BDT}^{\text{low}}_{t\bar{t}H} > 0.65 $ &
-  \multicolumn{2}{c}{$ \text{BDT}^{\text{high}}_{t\bar{t}H} > 0.65 $} \\
+  $ \text{BDT}^{\text{high}}_{t\bar{t}H} > 0.65 $ &
+  $ \text{BDT}^{\text{high}}_{t\bar{t}H} > 0.65 $ \\
   \midrule
   $Z(\to \tau\tau)$ control region &
   \begin{tabular}[c]{@{}c@{}} 
   $ \text{BDT}^{\text{low}}_{t\bar{t}H} < 0.65 $ \\
   $ \text{BDT}^{\text{low}}_{Z} > 0.2 $ 
   \end{tabular} &
-  \multicolumn{2}{c}{\begin{tabular}[c]{@{}c@{}} 
+  \begin{tabular}[c]{@{}c@{}} 
   $ \text{BDT}^{\text{high}}_{t\bar{t}H} < 0.65 $ \\
   $ \text{BDT}^{\text{high}}_{Z} > 0.2 $ 
-  \end{tabular}} \\
+  \end{tabular} &
+  \begin{tabular}[c]{@{}c@{}} 
+  $ \text{BDT}^{\text{high}}_{t\bar{t}H} < 0.65 $ \\
+  $ \text{BDT}^{\text{high}}_{Z} > 0.2 $ 
+  \end{tabular} \\
   \midrule
   $t\bar{t}$ control region &
   \begin{tabular}[c]{@{}c@{}} 
   $ \text{BDT}^{\text{low}}_{t\bar{t}H} < 0.65 $ \\
   $ \text{BDT}^{\text{low}}_{Z} < 0.2 $ 
   \end{tabular} &
-  \multicolumn{2}{c}{\begin{tabular}[c]{@{}c@{}} 
+  \begin{tabular}[c]{@{}c@{}} 
   $ \text{BDT}^{\text{high}}_{t\bar{t}H} < 0.65 $ \\
   $ \text{BDT}^{\text{high}}_{Z} < 0.2 $ 
-  \end{tabular}} \\
+  \end{tabular} &
+  \begin{tabular}[c]{@{}c@{}} 
+  $ \text{BDT}^{\text{high}}_{t\bar{t}H} < 0.65 $ \\
+  $ \text{BDT}^{\text{high}}_{Z} < 0.2 $ 
+  \end{tabular} \\
   \bottomrule
   \end{tabular}
   \label{tab:tth_cat}
-  \end{table}
+\end{table}
+
   
 Moreover, the events classified in the signal regions for each \pth bin are further divided into two categories: a sideband region and a window region in the Higgs boson mass. The window region contains events with a reconstructed Higgs boson mass within the interval $100 < m_{\tau\tau} < 150$~GeV, while the sideband region contains the remaining events. The window regions provide enhanced purity in signal events, whereas the sideband regions, despite their lower signal purity, can still be exploited to constrain the background processes in the signal regions of this analysis.
 
-Figures~\ref{fig:bdt_ztt} and~\ref{fig:bdt_ttbar} display the BDT score distributions in data and MC for the \ztautau and \ttbar control regions, respectively, showing good agreement with the background predictions in the corresponding regions of phase space that are used to validate the normalisation of these backgrounds. Figure~\ref{fig:bdt_signal} presents the distributions of the \ttH BDT scores and the invariant mass in data for the defined SRs. Most of the bins are blinded so that, prior to performing the statistical fit, no data are shown in bins where a signal contribution above $5\%$ is expected, unless explicitly stated otherwise, in order to avoid any potential bias.
+Figures~\ref{fig:bdt_ztt} and~\ref{fig:bdt_ttbar} show the BDT score distributions in data and MC for the \ztautau and \ttbar control regions, respectively, showing good agreement with the background predictions in the corresponding regions of phase space that are used to validate the normalisation of these backgrounds. Figure~\ref{fig:bdt_signal} presents the distributions of the \ttH BDT scores and the invariant mass in data for the defined SRs. Most of the bins are blinded so that, prior to performing the statistical fit, no data are shown in bins where a signal contribution above $5\%$ is expected, unless explicitly stated otherwise, in order to avoid any potential bias.
 
 \begin{figure}[htbp]
   \centering
@@ -752,7 +764,7 @@ A summary of the expected purity of \ttHtt events according to the SM in each of
 \section{Systematic Uncertainties}
 \label{sec:tth_systematics}
 
-Systematic uncertainties from multiple sources affect the measurement of the \ttH cross-section in the \tauhad \tauhad channel, both in the signal and in the background estimation. They can be grouped according to their origin into experimental uncertainties, arising from detector performance and object reconstruction; theoretical uncertainties related to the modelling of the dominant backgrounds (\ttbar and \ztautau); and theoretical uncertainties affecting the prediction of the \ttH signal itself. Each type of uncertainty requires a dedicated treatment to propagate its impact into the analysis. 
+Systematic uncertainties from multiple sources affect the measurement of the \ttH cross-section in the \tauhadhad channel, both in the signal and in the background estimation. They can be grouped according to their origin into experimental uncertainties, arising from detector performance and object reconstruction; theoretical uncertainties related to the modelling of the dominant backgrounds (\ttbar and \ztautau); and theoretical uncertainties affecting the prediction of the \ttH signal itself. Each type of uncertainty requires a dedicated treatment to propagate its impact into the analysis. 
 In practice, systematic variations are typically evaluated through $\pm 1\sigma$ shifts, which are then propagated to the final distributions employed in the statistical fit.  
 
 These uncertainties can also be distinguished by the way they impact our measurement. A first category is devoted to those affecting event weights, which modify how events are weighted within a given category. To account for these effects, alternative weight sets are applied on an event-by-event basis, and the resulting distributions are compared with the nominal case. Such variations can alter not only the overall normalization but also the shape and relative contribution of different processes. Since the event weights often depend on specific kinematic variables, these uncertainties propagate to both the normalization and the shape of the final distributions.  
@@ -808,29 +820,543 @@ Finally, background estimation methods introduce further experimental uncertaint
 \section{Statistical fit}
 \label{sec:statistical_tth}
 
+Statistical techniques play a central role in high-energy physics, as they provide the tools needed to interpret, quantify, and extract meaningful information out of the experimental results obtained from collision data recorded by ATLAS.
+In particular, the extraction of the Higgs boson signal strength and the measurement of production cross-sections rely on a solid statistical modelling of the data, which allows us to translate observed event yields into physics results. 
+The statistical framework used for building and implementing the models in this analysis is \textsc{TRExFitter}~\cite{trexfitter}, which relies on the \textsc{HistFactory}~\cite{histfactory} format and the \textsc{RooFit}~\cite{roofit} and \textsc{RooStats}~\cite{roostats} environments for model definition and statistical interpretation. 
+
+The analysis presented here focuses on the extraction of the signal strength for \ttHtt process in the fully hadronic decay channel, as mentioned before.
+It should be stressed again, however, that this measurement is embedded within the global \htautau analysis performed by ATLAS, which combines the contributions from the other three main Higgs production modes (ggF, VBF, and $VH$) and the complementary $\tau_{\ell}\tau_{\mathrm{had}}$ and $\tau_{\ell}\tau_{\ell}$ final states. 
+The global fit provides a consistent and simultaneous determination of the Higgs boson couplings to $\tau$ leptons, within which the $t\bar{t}H$ contribution is measured. 
+In the following, the strategy adopted for the statistical modelling is described, focusing first on the construction of the binned likelihood model and then on the specific setup for the STXS measurement targeting the $t\bar{t}H$ signal.
+
+\subsection{Binned likelihood model}
+\label{likelihood_fit}
+
+The global \htautau analysis is designed to measure several parameters of interest (POI) related to Higgs boson production. 
+Within the so-called STXS measurement, the goal is to determine the inclusive cross-section $\sigma(pp \to H \to \tau\tau)$ by combining all production modes and decay channels, 
+to measure separately the cross-sections for the four main production mechanisms ($\sigma^{\mathrm{ggF}}_{H\to\tau\tau}$, $\sigma^{\mathrm{VBF}}_{H\to\tau\tau}$, $\sigma^{VH}_{H\to\tau\tau}$, and $\sigma^{t\bar{t}H}_{H\to\tau\tau}$), 
+and finally to extract the cross-sections in each of the STXS bins targeted in this analysis.
+
+In all cases, a \textit{binned maximum-likelihood} fit is employed, using the distribution of the di-$\tau$ invariant mass, $m_{\tau\tau}$, 
+as reconstructed with the MMC algorithm in the different analysis regions.
+
+In the end, this procedure essentially relies on comparing the number of data events observed in each bin of the input distributions for every region with the bin content expected from the simulations. The data are assumed to follow a Poisson distribution in the bins of the input distributions. Consequently, the likelihood function used in this fit can be expressed as the product of the probability density functions of each bin, including both signal and control regions:
+
+\begin{equation}
+  \begin{aligned}
+  \mathcal{L}(\vec{n}|\mu, \vec{\theta}, \vec{\lambda}, \vec{\gamma}) 
+    &= \prod_{r } \prod_{i } 
+       \text{Pois}(n_{r,i}|\mu, \vec{\theta}, \vec{\lambda}, \vec{\gamma}) \,
+       \mathcal{L}_{\gamma}(\gamma_{r,i}) \\[0.4em]
+    &\quad \times \prod_{p} \text{Gauss}(\theta^{0}_{p}|\theta_{p}, \sigma^{0}_{p}) \, .
+  \end{aligned}
+  \end{equation}
+  Here, $r$ runs over all analysis regions and the index $i$ over all bins in each distribution. 
+  The vector $\vec{n}$ denotes the observed data events in each bin, while $n_{r,i}$ refers to the specific number of events in bin $i$ of region $r$. 
+  The signal yields are scaled by the signal strength modifiers, introduced earlier in this thesis and representing the parameters of interest of the fit, collected in the vector $\vec{\mu}$. 
+  
+  As discussed previously, MC simulations may correctly describe the shape of the distributions but not always their overall normalization. 
+  For this reason, the dominant \ztautau\ and \ttbar\ backgrounds are rescaled with normalization factors, treated as free-floating parameters in the fit in the same way as the signal strengths. 
+  These are represented by the vector $\vec{\lambda}$. 
+  
+  The systematic uncertainties described in Section~\ref{sec:tth_systematics} are incorporated into the likelihood function through nuisance parameters (NPs), 
+  which affect the predicted signal and background yields in the binned distributions. 
+  Auxiliary measurements provide constraints on the size of these effects, and the nuisance parameters are included via Gaussian constraint terms that multiply the Poisson likelihood components. 
+  The vector $\vec{\theta}$ denotes these NPs, constrained by Gaussian terms with mean values $\theta^{0}_{p}$_
+  
+  The probability of observing $n_{r,i}$ events in bin $i$ of region $r$, 
+  given the expected number of events in that bin, is described by the Poisson probability 
+  $\text{Pois}(n_{r,i}|\vec{\mu},\vec{\theta},\vec{\lambda},\vec{\gamma})$. 
+  This expectation depends on the signal strength modifiers, the normalization factors, and the nuisance parameters. 
+  The expected yield in bin $i$ of region $r$ is expressed as
+  \begin{equation}
+  \sum_{k} \mu_k \, s_{r,i,k}(\vec{\theta}) \;+\; \gamma_{r,i} \, b_{r,i}(\vec{\theta},\vec{\lambda}),
+  \end{equation}
+  where the sum runs over the different signal processes $k$, 
+  and $b_{r,i}(\vec{\theta},\vec{\lambda})$ denotes the expected background contribution in that bin. 
+  The parameter $\gamma_{r,i}$ is introduced to account for the statistical uncertainty in the size of the simulated background sample in each bin, 
+  and is treated as correlated across the different background processes. 
+The Poisson probability therefore takes the form:
+\begin{equation}
+  \begin{aligned}
+  \text{Pois}(n_{r,i}|\vec{\mu},\vec{\theta},\vec{\lambda},\vec{\gamma}) 
+  &= \frac{\Big(\sum_{k} \mu_k \, s_{r,i,k}(\vec{\theta}) + \gamma_{r,i} \, b_{r,i}(\vec{\theta},\vec{\lambda}) \Big)^{n_i}}{n_i!} \\
+  &\quad \times 
+  e^{\!\Big[-\Big(\sum_{k} \mu_k \, s_{r,i,k}(\vec{\theta}) + \gamma_{r,i} \, b_{r,i}(\vec{\theta},\vec{\lambda}) \Big)\Big]}.
+  \end{aligned}
+  \end{equation}
+  
+
+  The model is fitted to data by maximizing the likelihood function, 
+  from which the free parameters are extracted. 
+  These include the signal strength modifiers, which rescale the different Higgs boson production modes, 
+  and the normalization factors applied to the background contributions. 
+  The following section describes the likelihood model used for the STXS measurement, 
+  which is employed to extract the parameters of interest in this analysis.
+  
+\subsection{STXS measurement strategy}
+\label{stxs_setup}
 %aqui hay que meter el diagramita explicando cuantas SRs y CRs tenemos en total y tal, así como VR.
 
-%From the previous Statistical Methods Chapters, reduced to Machine Learning Techniques
+In the likelihood function constructed for the STXS measurement, several signal and control regions are taken into account, 
+covering the different phase space regions considered for \ttHtt\ and the related processes, as well as for the other production modes included in the global \htautau\ analysis. 
+Although a detailed description of the regions defined for processes other than \ttH\ is not provided here, 
+Figure~\ref{fig:stxs_all_regions} displays all categories used in the statistical fit of this analysis. 
+In addition, to complement this global overview, Figure~\ref{fig:stxs_srs_pois} shows all signal regions employed as inputs for the four production modes, 
+together with the corresponding STXS bins targeted by each of them.
 
-%\section{Statistical Modelling}
-%\label{sec:stat_modelling}
-% Aquí irán aspectos relacionados con la construcción de modelos estadísticos,
-% likelihoods, parámetros, modelado de fondo/señal, etc.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{stxs_all_regions.pdf}
+  \caption{Schematic summary of the fit model used in the analysis. All regions which are used directly in the combined fit are indicated. They are grouped by topology (Boosted or ggF (red), VBF (orange), $VH$ (green) and \ttH (blue)). The \ttH signal and control regions are only defined for the \tauhadhad channel. The \ztautau control regions are defined in each channel. The top-quark control regions in Boosted, VBF and VH are not defined for the \tauhadhad channel. The arrows indicate the free floating normalization factors which are acting on various regions~\cite{differential_htautau}.}
+  \label{fig:stxs_all_regions}
+\end{figure}
 
-%\section{Statistical Inference}
-%\label{sec:stat_inference}
-% Aquí se incluirán conceptos sobre estimadores, verosimilitud, p-valores, intervalos de confianza,
-% tests de hipótesis, profile likelihood, significancia, etc.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{stxs_srs_pois.png}
+  \caption{Schematic representation of the fit model, with the definition of the 18 parameters of interest (POIs) within the STXS framework shown on the left, and the signal categorization used to enhance the sensitivity to these POIs shown on the right.}
+  \label{fig:stxs_srs_pois}
+\end{figure}
 
+For the fit, a total of 38 analysis regions are considered for ggF in the Boost category, 
+including both control regions (CRs) and the 18 signal regions (SRs), corresponding to the same setup used in the previous round of the analysis~\cite{couplings}. 
+The $VH$ process follows the same strategy, with 14 categories in total, 6 of which are SRs. 
+For VBF, as mentioned earlier, the categorization strategy was updated in this new iteration of the analysis in order to improve its sensitivity, 
+in line with the approach adopted for \ttH. 
+As a result, the fit now includes 98 VBF categories targeting new STXS bins, with 16 SRs defined per channel.
 
-%Statistical techniques play a central role in high-energy physics, as they provide the tools needed to interpret, quantify, and extract meaningful information from the experimental results obtained at the LHC. This chapter outlines the different statistical methods employed throughout this thesis. A frequentist approach is adopted, in which the concept of probability refers to the relative frequency of an outcome in a repeatable experiment.
+Finally, for \ttH, the categorization procedure described in Section~\ref{sec:tth_categories} provides the statistical fit with a total of six SRs and two inclusive control regions in \pth\ for the measurement of the \tauhadhad\ channel. 
+The SRs are defined across three distinct phase space regions in \pth, and, as discussed earlier, are further split into two categories according to the \mmc: 
+a sideband region, covering bins with low signal purity, and a window region, corresponding to bins with high signal purity.
 
-%First, the statistical modelling of experimental data is introduced, including the construction of the likelihood function for binned data and the treatment of systematic uncertainties through nuisance parameters. This modelling stage provides the essential ingredients subsequently used for the statistical inference, which allow us to extract physics results from the data, including parameter estimation and hypothesis testing. The framework used for building and implementing these statistical models is \textsc{TRExFitter}~\cite{trexfitter}, which relies on the \textsc{HistFactory}~\cite{histfactory} format and the \textsc{RooFit}~\cite{roofit} and \textsc{RooStats}~\cite{roostats} environments for model definition and statistical interpretation.
+The CRs are used to improve the constraints on the background processes by exploiting multi-bin histograms in \mmc\ for the \ttHtt\ case, 
+where inclusive CRs were found to provide better performance and precision in the statistical fit compared to splitting them as a function of \pth. 
+In contrast, validation regions are defined in the low-\pt\ and high-\pt\ regimes for \ztautau\ and \ttbar, 
+serving only to test the robustness of the fit. 
 
+Using these inputs, and through the tools introduced at the beginning of this section, several measurements are performed. 
+As outlined at the start of this chapter, the total cross-section of $pp \to H \to \tau\tau$ is measured, 
+extracted from a single POI corresponding to the production cross-section times the Higgs boson branching ratio into $\tau\tau$ as predicted by the SM.
+
+The cross-section of each individual Higgs boson production mode discussed above is also measured, 
+using four POIs, one for each process.
+
+Finally, a global fit is performed in which a total of 18 POIs are measured, 
+corresponding to the cross-sections in the STXS stage~1.2 bins considered in this \htautau\ analysis. 
+Among them, three POIs are dedicated to the three \pth\ bins defined for \ttH. 
+As mentioned earlier, the original STXS granularity is not preserved, but instead the bins are merged to achieve a balance between maximizing sensitivity 
+and accounting for the limited size of the signal sample. 
+The 18 POIs defined within the STXS framework are illustrated with different colours in the central panel of Figure~\ref{fig:stxs_srs_pois}.
+
+Before presenting the results, it is worth highlighting some aspects of the likelihood fit that are crucial for ensuring its robustness and stability, while keeping the minimization time under control. 
+
+The model is inherently complex, due to the large number of signal and control regions together with the many normalization factors, nuisance parameters and parameters of interest. 
+This complexity is further increased by the STXS measurement, where separate templates must be produced for each signal process, which means for each STXS bin. 
+Moreover, the limited size of the available MC samples can induce significant statistical fluctuations in the systematic templates, sometimes exceeding the size of the systematic effect itself. 
+If left untreated, this noise can destabilize the fit and artificially inflate the impact of certain uncertainties. 
+To mitigate these issues, the analysis applies several techniques that simplify the likelihood model where possible and suppress spurious fluctuations, while preserving the meaningful shape variations relevant for the measurement. 
+
+In practice, these simplifications consist of pruning processes and systematic uncertainties with negligible impact, 
+as well as applying symmetrization and smoothing to reduce unphysical fluctuations in the templates. 
+Such treatments are particularly relevant in regions with low statistics, as can be \ttH, 
+where systematic effects are less dominant compared to the statistical uncertainty. 
+This ensures that the fit remains stable and unbiased, preventing spurious noise from inflating the uncertainties, 
+while preserving the sensitivity to the process of interest.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{STXS results}
 \label{sec:results_ttH}
 
-aquí hablamos fundamentalmente de ttH, pero también se muestran los resultados finales con el resto de modos de producción y canales y se cuenta que para mas detalles sobre el resto de modos de produccion, categorizacion y tal que se mire el differential paper y que 
-se detalla en dataset.tex como se produjeron los samples de estos main production modes del boson de Higgs.
+%aquí hablamos fundamentalmente de ttH, pero también se muestran los resultados finales con el resto de modos de producción y canales y se cuenta que para mas detalles sobre el resto de modos de produccion, categorizacion y tal que se mire el differential paper y que 
+%se detalla en dataset.tex como se produjeron los samples de estos main production modes del boson de Higgs.
+
+\subsection{Post-fit distributions}
+\label{post_fit}
+
+As already introduced, in the statistical fit the \mtt distributions are fitted to the data in order to extract the signal strength modifiers, which are defined to scale the signal yields under different parametrisations. Since we perform a binned likelihood fit, the choice of binning for the \mtt distributions plays an important role. It is therefore optimised to ensure stability of the fit and to minimise the dependence of the signal strength measurements on statistical fluctuations due to the finite size of the background samples. This optimisation is implemented through a rebinning procedure applied to all distributions, such that the relative statistical uncertainty of the background remains below 20\% in all bins.
+
+The \mtt distributions for the different analysis regions are presented below, with the binning already optimised to keep the background statistical uncertainties under control. In all cases, the number of signal events in each bin has been scaled using the signal strength obtained from the fit with a single POI dedicated to extracting the combined production cross-section.
+
+Figure~\ref{fig:postfit_cr_both} shows the \mtt distributions in both the \ztautau and \ttbar control regions. The shaded areas indicate bins that are blinded under the conditions mentioned above. In addition to the signal, the MC samples of these two backgrounds are also scaled with the normalisation factors (NFs) dedicated to each of them. These NFs, as well as the nuisance parameters (NPs) affecting the prediction of both background and signal, will be discussed in the following section. The modelling between data and prediction is found to be quite satisfactory, also in both the low- and high-\pth regions, as illustrated in the \mtt distributions in the validation regions shown in Figure~\ref{fig:postfit_vr_all}.
+
+For the signal regions, Figure~\ref{fig:summary_all} presents a summary of the post-fit yields of the different processes expected and observed in data for the \ttHtt signal categories included in the fit. One bin is shown for each of them, but this representation should not be misunderstood: due to the very limited statistics in these SRs, a single bin had to be employed in the input distributions for the fit, with the only exception being the SR at \pth$<200$~GeV in the mass window ($100<$\mmc$<150$~GeV).
+% =======================
+% Post-fit CRs (2 subfigs)
+% =======================
+\begin{figure}[htbp]
+  \centering
+
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fit_stxs/chan_hh__cat_tth_ttbar__cr_postFit.pdf}
+    \caption{\small \ttbar\ control region}
+    \label{fig:postfit_cr_ttbar}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fit_stxs/chan_hh__cat_tth_ztt__cr_postFit.pdf}
+    \caption{\small \ztautau\ control region}
+    \label{fig:postfit_cr_ztt}
+  \end{subfigure}
+
+  \caption{Post-fit distributions of \mmc\ in the \ttbar\ (a) and \ztautau\ (b) control regions (CRs) for the \ttH\ analysis.}
+  \label{fig:postfit_cr_both}
+\end{figure}
+
+% =======================
+% Post-fit VRs (4 subfigs)
+% =======================
+\begin{figure}[htbp]
+  \centering
+
+  % ttbar VRs
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fit_stxs/chan_hh__cat_tth_pth_lt200__vr_ttbar_postFit.pdf}
+    \caption{\small \ttbar\ VR, $p_{\text{T}}^{H}<200$~GeV}
+    \label{fig:postfit_vr_ttbar_lt200}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fit_stxs/chan_hh__cat_tth_pth_gt200__vr_ttbar_postFit.pdf}
+    \caption{\small \ttbar\ VR, $p_{\text{T}}^{H}>200$~GeV}
+    \label{fig:postfit_vr_ttbar_gt200}
+  \end{subfigure}
+
+  \vspace{0.45cm}
+
+  % Z->tautau VRs
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fit_stxs/chan_hh__cat_tth_pth_lt200__vr_ztt_postFit.pdf}
+    \caption{\small \ztautau\ VR, $p_{\text{T}}^{H}<200$~GeV}
+    \label{fig:postfit_vr_ztt_lt200}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{fit_stxs/chan_hh__cat_tth_pth_gt200__vr_ztt_postFit.pdf}
+    \caption{\small \ztautau\ VR, $p_{\text{T}}^{H}>200$~GeV}
+    \label{fig:postfit_vr_ztt_gt200}
+  \end{subfigure}
+
+  \caption{Post-fit distributions of \mmc\ in the validation regions (VRs) for \ttbar\ and \ztautau, shown in low- and high-$p_{\text{T}}^{H}$ regimes.}
+  \label{fig:postfit_vr_all}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\linewidth]{fit_stxs/summary_srs_tth.pdf}
+  \caption{Post-fit yields in the \ttH categories of the \tauhadhad channel. The
+  signal yields are scaled by the signal strength obtained from the 1-POI fit. The
+  window categories contains events with \mtt in the range $[100, 150]$~GeV, while
+  events outside of this mass region are included in the sideband region.}
+  \label{fig:summary_all}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Normalization factors and Nuisance parameters}
+\label{nfs_nps}
+
+Regarding the best-fit values obtained for the background normalization factors, encapsulated through free-floating parameters in the fit, the results for \ztautau\ and \ttbar\ in the \ttHtt\ \tauhadhad\ channel are presented below. 
+From the STXS fit including the 18 POIs corresponding to the different signal parametrizations (18-POI fit), the best-fit value for the \ztautau\ normalization factor is found to be 
+\(\text{NF}_{Z} = 1.20 \pm 0.16\), while for \ttbar\ the result is \(\text{NF}_{\ttbar} = 1.06 \pm 0.26\). 
+These values remain stable with respect to the signal parametrization or fit setup employed, as illustrated in Figure~\ref{fig:nfs_tth}, where the best-fit values of the \ttHtt\ normalization factors are shown for the three fit configurations considered. 
+
+It is worth emphasizing that the top-quark normalization factor is always consistent with unity within one standard deviation, 
+whereas the \ztautau\ normalization factor in the \ttH\ analysis lies above the nominal value. 
+This behaviour mainly reflects the need to correct mismodelling effects in the prediction of this background, largely driven by the sizeable contribution of jets originating from QCD processes.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\linewidth]{fit_stxs/nfs_tth.pdf}
+  \caption{Background normalization factors for \ttbar and \ztautau in \ttH
+  \tauhadhad channel for the different fit setups (1, 4 and 18-POI fits).}
+  \label{fig:nfs_tth}
+\end{figure}
+
+The NPs that affect he most the extraction of \ttH signal from the statistical analysis are presented in the following. 
+Although they are not the primary parameters of interest, they play a crucial role in shaping the fit outcome and in determining the overall uncertainty on the signal strength measurement. 
+Each NP is constrained by auxiliary information, such as dedicated calibration studies, theoretical calculations, or auxiliary measurements. 
+During the fit, the best-fit value of a nuisance parameter may deviate from its nominal expectation, in which case the parameter is said to be \emph{pulled}. 
+If the data provide sensitivity to the associated systematic uncertainty, the fit may also reduce its pre-fit uncertainty, leading to a \emph{constraint}. 
+
+Tables~\ref{tab:1_4_fit_uncert_summary} and~\ref{tab:tth_stxs_uncert_summary} show the grouped impact of the systematic uncertainties affecting our measurements. 
+Table~\ref{tab:1_4_fit_uncert_summary} presents the impact of these uncertainties, grouped by source, for both the combined fit (1-POI fit) and the per–production–mode fit. 
+The results obtained for the combined \htautau\ measurement and for \ttHtt\ are highlighted in bold. 
+
+As discussed, the measurement of the \ttH\ production cross-section is largely dominated by statistical uncertainties from the data, 
+which suggests that a significant improvement could be achieved with a larger dataset. 
+Concerning the systematic uncertainties, the dominant source also arises from the statistical uncertainty associated with the size of the background samples. 
+Of comparable relevance are the theoretical uncertainties in the modelling of the top-quark backgrounds, followed by those in the signal prediction. 
+A slightly larger contribution is also observed from uncertainties related to the jet energy scale and resolution, as expected given that the analysis focuses on regions of the phase space heavily populated with jets and $b$-jets. 
+
+In the case of the 1-POI fit, the measurement is instead dominated by systematic uncertainties, 
+since all \htautau\ regions are included in the analysis, many of them with large statistics such as the ggF categories. 
+Here, the leading systematic uncertainty is the theoretical uncertainty associated with the signal prediction.
+
+Table~\ref{tab:tth_stxs_uncert_summary} presents the breakdown of the uncertainties in the measurement of the \ttH\ signal strength across the STXS bins considered in the 18-POI fit, 
+providing a more detailed view of how the grouped systematics discussed above affect each region of the phase space. 
+Nevertheless, a consistent picture is observed with respect to the inclusive \ttH\ measurement obtained in the 4-POI fit.
+
+\begin{sidewaystable*}[htbp]
+  \centering
+  \footnotesize
+  \renewcommand{\arraystretch}{1.2}
+  \caption{Breakdown of the uncertainty contributions to \(\sigma_H \times \mathcal{B}(H\!\to\!\tau\tau)\), relative to the SM expectation, for each production mode and for the combined result. Experimental uncertainties for reconstructed objects include efficiency and energy/momentum scale and resolution effects. ``Background samples size'' includes bin-by-bin statistical uncertainties in simulated backgrounds as well as those in the misidentified background estimated from data. Entries with negligible impact are denoted by “--”.}
+  \label{tab:1_4_fit_uncert_summary}
+  \begin{tabular}{
+      l
+      >{\bfseries\boldmath}c  % Combined
+      c
+      >{\bfseries\boldmath}c  % ttH
+      c
+      c
+    }
+    \toprule
+    \textbf{Production mode} & \textbf{Combined} & \textbf{ggF} & \textbf{ttH} & \textbf{VBF} & \textbf{\(VH\)} \\
+    \midrule
+    Best-fit value                  & 0.99 & 0.92 & 0.77 & 1.04 & 0.98 \\
+    Total uncertainty               & $\pm$0.12 & $\pm$0.30 & $\pm$0.97 & $\pm$0.18 & $\pm$0.66 \\
+    \addlinespace[0.3em]
+    Statistical uncertainty         & $\pm$0.07 & $\pm$0.15 & $\pm$0.82 & $\pm$0.13 & $\pm$0.55 \\
+    Total systematic uncertainty    & $\pm$0.09 & $\pm$0.25 & $\pm$0.51 & $\pm$0.12 & $\pm$0.36 \\
+    \midrule
+    Background samples size         & $\pm$0.03 & $\pm$0.09 & $\pm$0.31 & $\pm$0.04 & $\pm$0.26 \\
+    Theoretical uncertainty in signal     & $\pm$0.08 & $\pm$0.18 & $\pm$0.12 & $\pm$0.11 & $\pm$0.14 \\
+    Jet and \(E_{\mathrm{T}}^{\mathrm{miss}}\)      & $\pm$0.03 & $\pm$0.12 & $\pm$0.15 & $\pm$0.03 & $\pm$0.12 \\
+    Hadronic \(\tau\)-lepton decays        & $\pm$0.02 & $\pm$0.04 & $\pm$0.09 & $\pm$0.01 & $\pm$0.04 \\
+    Misidentified background        & $\pm$0.02 & $\pm$0.04 & $\pm$0.05 & $\pm$0.02 & $\pm$0.11 \\
+    Luminosity                      & -- & $\pm$0.01 & $\pm$0.01 & $\pm$0.01 & $\pm$0.01 \\
+    Theoretical uncertainty in top-quark processes & -- & $\pm$0.01 & $\pm$0.31 & -- & $\pm$0.02 \\
+    Theoretical uncertainty in \(Z\!+\)jets & $\pm$0.01 & $\pm$0.02 & $\pm$0.08 & -- & $\pm$0.02 \\
+    Flavour tagging                 & $\pm$0.01 & $\pm$0.02 & $\pm$0.05 & $\pm$0.01 & $\pm$0.01 \\
+    Electrons and muons             & $\pm$0.01 & $\pm$0.02 & $\pm$0.02 & $\pm$0.01 & $\pm$0.02 \\
+    \bottomrule
+  \end{tabular}
+\end{sidewaystable*}
+
+\begin{sidewaystable*}[htbp]
+  \centering
+  \footnotesize
+  \renewcommand{\arraystretch}{1.2}
+  \caption{Breakdown of the uncertainties in the ratio of \(\sigma_{t\bar{t}H} \times \mathcal{B}(H\!\to\!\tau\tau)\) to the SM expectation, shown for each \ttH\ STXS bin in \pth. Experimental uncertainties for reconstructed objects include efficiency and energy/momentum scale and resolution effects. ``Samples size'' includes bin-by-bin statistical uncertainties in simulated backgrounds as well as those in the misidentified-\(\tau\) background estimated from data. Entries with negligible impact are denoted by “--”.}
+  \label{tab:tth_stxs_uncert_summary}
+  \begin{tabular}{
+      l
+      c
+      c
+      c
+    }
+    \toprule
+    \textbf{Production mode: \ttH} & \textbf{0--200 GeV} & \textbf{200--300 GeV} & \textbf{$>$300 GeV} \\
+    \midrule
+    Best-fit value                  & 2.1 & 2.2 & 3.6 \\
+    Total uncertainty               & $\pm$1.7 & $\pm$1.2 & $\pm$2.6 \\
+    \addlinespace[0.3em]
+    Statistical uncertainty         & $\pm$1.5 & $\pm$0.9 & $\pm$2.4 \\
+    Total systematic uncertainty    & $\pm$0.8 & $\pm$0.7 & $\pm$1.0 \\
+    \midrule
+    Samples size                    & $\pm$0.5 & $\pm$0.5 & $\pm$0.5 \\
+    Theoretical uncertainty in signal     & $\pm$0.3 & $\pm$0.2 & $\pm$0.5 \\
+    Jet and \(E_{\mathrm{T}}^{\mathrm{miss}}\)       & $\pm$0.5 & $\pm$0.2 & $\pm$0.2 \\
+    Hadronic \(\tau\)-lepton decays         & $\pm$0.1 & $\pm$0.1 & $\pm$0.2 \\
+    Misidentified background         & $\pm$0.1 & $\pm$0.1 & $\pm$0.1 \\
+    Luminosity                       & -- & -- & $\pm$0.1 \\
+    Theoretical uncertainty in top-quark processes & $\pm$0.4 & $\pm$0.4 & $\pm$0.6 \\
+    Theoretical uncertainty in \(Z\!+\)jets & $\pm$0.1 & -- & $\pm$0.2 \\
+    Flavour tagging                  & $\pm$0.1 & -- & $\pm$0.1 \\
+    Electrons and muons              & -- & -- & -- \\
+    \bottomrule
+  \end{tabular}
+\end{sidewaystable*}
+
+Regarding the constraints on the nuisance parameters (NPs) with the largest impact, 
+Figures~\ref{fig:constraint_theory_sig} and~\ref{fig:constraint_theory_top} show the best-fit values of those NPs related to the modeling of parton showers and hadronization in the signal, 
+as well as to the choice of matrix element generator and to the theoretical uncertainties in the prediction of top-quark background processes, respectively. 
+The presented values are obtained from the STXS fit. 
+
+Focusing first on the NPs associated with the theoretical signal uncertainties of \ttH, no significant pulls or constraints from the data are observed, 
+and the best-fit values remain consistent with the pre-fit expectations within one standard deviation. 
+On the other hand, for the NPs corresponding to top-quark background theoretical uncertainties related to \ttH (as indicated in the labels of Figure~\ref{fig:constraint_theory_top}), 
+stronger constraints are observed, particularly for the parameters linked to the choice of matrix element generator and to the modeling of parton showers. 
+These systematics induce large normalization effects in the top-quark background, and are ultimately constrained thanks to the high statistics and purity of the \ttbar\ control region defined in the analysis, shown in Figure~\ref{fig:postfit_cr_ttbar}.
+
+% ===========================
+% Constraint plot: theory uncertainties in signal
+% ===========================
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{images/fit_stxs/STXS_combine_all_xs_NP_theory_sig.pdf}
+  \caption{Nuisance parameters associated with signal theory uncertainties
+  related to the parton shower and hadronization modeling, and the choice of matrix
+  element generator. The bestfit values of the nuisance parameters are shown for the 18-POI fit.}
+  \label{fig:constraint_theory_sig}
+\end{figure}
+
+% ===========================
+% Constraint plot: theory uncertainties in top backgrounds
+% ===========================
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{images/fit_stxs/STXS_combine_all_xs_NP_theory_top.pdf}
+  \caption{Nuissance parameters associated with theoretical uncertainties in the top-quark background prediction. The best-fit values and the post-fit uncertainties
+  of the nuisance parameters are shown for the 18-POI fit.
+  setups.}
+  \label{fig:constraint_theory_top}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cross-section measurements}
+\label{xsect}
+
+The results obtained for the measurement of the signal strength extracted through the different POIs in the various fit parametrisations are presented below. 
+
+We begin with the 1-POI fit, which, as defined earlier, allows us to extract the inclusive cross-section of $pp \to H \to \tau \tau$. The best-fit value obtained for the signal strength, defined over the SM prediction, is 
+$\mu(pp \to H \to \tau \tau) = 0.99^+0.13_{0.11} = 0.99 \pm 0.07 (\text{stat.})^{+10}_{-0.09}(\text{syst.})$. 
+This measurement of the signal strength improves by $25\%$ with respect to the previous analysis, which yielded $\mu_{\ttH} = 1.06^{+1.28}_{-1.08}$. The inclusive cross-section extracted from this measurement is:
+\begin{equation}
+  \sigma(pp \to H \to \tau\tau) 
+  = 3.14 \pm 0.22 \, \text{(stat.)}^{+0.32}_{-0.29} \, \text{(syst.)} 
+  = 3.14^{+0.41}_{-0.35} \, \text{pb}.
+  \label{eq:htautau_xs}
+  \end{equation}
+  which is consistent with the SM prediction of $3.17 \pm 0.09$~pb~\cite{https://doi.org/10.23731/cyrm-2017-002}, within uncertainties, with a $p$-value for the compatibility test of 0.97, showing good agreement. 
+
+  The \ttHtt cross-section can also be extracted from the 4-POI fit, where the signal strengths of the four main production modes are targeted in a simultaneous fit. For the case of \ttH, the observed cross-section extracted from the data is:
+\begin{equation}
+  \sigma^{\ttH}_{H \to \tau \tau} 
+  = 0.02^{+0.03}_{0.02}(\text{stat.}) \pm 0.02(\text{syst.})~\text{pb} 
+  = 0.02^{0.03}_{-0.02}~\text{pb},
+\end{equation}
+which is also found to be in good agreement with the SM hypothesis of $0.031 \pm 0.003$~pb. The simultaneous 4-POI fit also yields satisfactory compatibility with the SM, with a measured $p$-value of 0.99. Figure~\ref{fig:permode_mu} summarises the signal strength measurements obtained for the four POIs in the simultaneous fit per production mode, as well as for the inclusive measurement of this parameter in the \htautau production process.
+
+% =========================
+% Plot 1: per-production-mode (1-POI y 4-POI)
+% =========================
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\linewidth]{images/fit_stxs/4_poi_stxs.pdf} % <-- sustituye ruta/nombre
+  \caption{Measured values of \(\sigma_H \times \mathcal{B}(H\!\to\!\tau\tau)\) relative to the SM expectation
+  in the single-parameter (``Combined'') and per–production–mode (4–POI) fits.
+  Error bars show the total uncertainty; the coloured band indicates the systematic component.}
+  \label{fig:permode_mu}
+\end{figure}
+
+
+Finally, regarding the so-called 18-POI fit, where a parameter of interest is assigned to each STXS bin parametrising the different signals considered in this \htautau analysis, Figure~\ref{fig:stxs_mu} shows the signal strengths obtained for the 18 STXS bins under study. The measurement for the three POIs parametrising the \ttH signal in the three \pth bins considered is reported together with the corresponding cross-section:
+\begin{itemize}
+  \small
+  \item $p_{T}^{H} < 200$~GeV:  
+  \[
+  \sigma \times B(H \to \tau\tau)=0.056^{+0.046}_{-0.044} 
+  = 0.056^{+0.023}_{-0.019}(\text{syst.})\pm 0.035(\text{stat.})\text{pb}
+  \]
+  \[
+  \mu \;=\; 2.2^{+1.8}_{-1.5}=2.2^{+0.84}_{-0.75}(\text{syst.})\pm 1.5(\text{stat.})
+  \]
+  \item $200 \leq p_{T}^{H} < 300$~GeV:  
+  \[
+  \sigma \times B(H \to \tau\tau) \;=\; -0.009^{+0.005}_{-0.005} 
+  = -0.009^{+0.003}_{-0.004}(\text{syst.})\pm 0.003(\text{stat.}) \text{pb}
+  \]
+  \[
+  \mu=-2.2^{+1.3}_{-1.1}=-2.2^{+0.58}_{-0.68}(\text{syst.})\pm 1.1(\text{stat.})
+  \]
+  \item $p_{T}^{H} \geq 300$~GeV:  
+  \[
+  \sigma \times B(H \to \tau\tau) \;=\; 0.029^{+0.023}_{-0.018} 
+  = 0.029^{+0.009}_{-0.008}(\text{syst.})^{+0.021}_{-0.017}(\text{stat.})\text{pb}
+  \]
+  \[
+  \mu=3.6^{+2.9}_{-2.3}=3.6^{+1.3}_{-0.9}(\text{syst.})^{+2.6}_{-2.1}(\text{stat.})
+  \]
+\end{itemize}
+
+% =========================
+% Plot 2: STXS (Stage 1.2) bin-by-bin
+% =========================
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\linewidth]{images/fit_stxs/fig_06.pdf} % <-- sustituye ruta/nombre
+  \caption{Results for \(\sigma_H \times \mathcal{B}(H\!\to\!\tau\tau)\) normalised to the SM prediction
+  in the simplified template cross-section (STXS, stage~1.2) measurement.
+  Each point corresponds to one STXS bin; error bars represent the total uncertainty and shaded bands the systematic component.}
+  \label{fig:stxs_mu}
+\end{figure}
+
+As already discussed in Table~\ref{tab:tth_stxs_uncert_summary}, the grouped systematic uncertainties with the largest impact on the measurement of the three \ttH\ POIs can be identified. 
+Figure~\ref{fig:ranking_tth_bins} provides a complementary representation of this information, showing both the impact and the pull of the nuisance parameters (NPs) associated with each source of uncertainty. 
+For each NP $\theta$, the impact $\Delta\mu$ is defined as the change in the best-fit value of the POI when the NP is shifted by its uncertainty. 
+Two cases are considered: the \textit{pre-fit} impact, obtained with a $\pm 1\sigma$ variation, and the \textit{post-fit} impact, where the variation can be reduced according to the constraints imposed by the fit. 
+The ranking plots highlight the NPs with the largest effect on each POI, displaying both pre-fit and post-fit impacts together with the corresponding pulls.
+
+As already anticipated, the dominant systematic uncertainties impacting the signal strength measurements are those associated with the theoretical modeling of the top-quark background. 
+These include uncertainties from the parton shower, the matrix element calculation, and the description of ISR and FSR. 
+In addition, the normalization factor of the top-quark background exhibits a sizeable uncertainty, particularly in the lowest $p_{\text{T}}^{H}$ bin (more populated by this type of background events). 
+Uncertainties in the matrix element calculation for the \ttH\ signal itself are also non-negligible across the three $p_{\text{T}}^{H}$ bins. 
+Further important contributions arise from the jet energy scale and resolution, as well as from the reconstruction and identification of $\tau$ leptons.
+
+% ===========================
+% Ranking plots for ttH pT^H bins (stacked layout)
+% ===========================
+\begin{figure}[htbp]
+  \centering
+
+  % Row 1
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{images/fit_stxs/Ranking_r_9_ttH_ptH_0_200.png}
+    \caption{\small $p_{\text{T}}^{H}<200$~GeV}
+    \label{fig:ranking_tth_ptH_0_200}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{images/fit_stxs/Ranking_r_10_ttH_ptH_200_300.png}
+    \caption{\small $200<p_{\text{T}}^{H}<300$~GeV}
+    \label{fig:ranking_tth_ptH_200_300}
+  \end{subfigure}
+
+  % Row 2
+  \vspace{0.4cm}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{images/fit_stxs/Ranking_r_11_ttH_ptH_gt300.png}
+    \caption{\small $p_{\text{T}}^{H}>300$~GeV}
+    \label{fig:ranking_tth_ptH_gt300}
+  \end{subfigure}
+
+  \caption{Ranking plots for the \ttH\ POIs in the three $p_{\text{T}}^{H}$ bins.
+  The 20 nuisance parameters (NPs) with the largest impact on the signal strengths are shown. 
+  Empty (filled) rectangles represent the pre-fit (post-fit) impact of the parameters. 
+  Black points and error bars represent the post-fit values and uncertainties of the NPs, 
+  while the markers of the background NFs show their pull with respect to the nominal value of 1.}
+  \label{fig:ranking_tth_bins}
+\end{figure}
+
+From all these results it can be concluded that, as already mentioned, the extraction of signal from the three STXS bins is largely limited by the statistical uncertainties associated with the small dataset available. Nevertheless, no significant deviations from the SM are observed in any of the bins, with the largest deviation occurring in the intermediate-$p_{T}^{H}$ region ($200 < p_{T}^{H} < 300$~GeV), at the level of about 1.5$\sigma$. Consequently, the sensitivity to this signal in the 18-POI STXS fit remains rather limited.
+
+To further quantify the constraints, 95\% confidence level (CL) upper exclusion limits are computed, using the $\text{CL}_{s}$ method~\cite{JUNK1999435,ALRead_2002}, for the $t\bar{t}H$ production mode, given the limited sensitivity of this process in the nominal 18-POI STXS fit due to the small statistics in this channel. The observed and expected limits are shown in Figure~\ref{fig:tth_cls_limits}, including the expected limits under both the background-only hypothesis ($\mu=0$) and when injecting SM signal ($\mu=1$). 
+
+These exclusion limits provide an important cross-check of the measurement, as they quantify the maximum signal strength still compatible with the observed data in the absence of a significant excess. In practice, they ensure that even in regions where the sensitivity is insufficient to obtain a precise signal strength measurement, the analysis still constrains the parameter space by setting meaningful upper bounds on the production rate. Specifically, the observed limits correspond to factors of about 5.4, 2.2, and 9.2 times the SM prediction in the low-, intermediate-, and high-$p_{T}^{H}$ bins, respectively. I need more discussion here.
+
+%Habría que explicar lo que son los limites.
+% =========================
+% Plot 3: ttH pT^H-bin CLs limits
+% =========================
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.70\linewidth]{images/fit_stxs/fig_08.pdf} % <-- sustituye ruta/nombre
+  \caption{Upper limits at 95\% CL on the \ttH\ simplified template cross-sections in the individual $p_{\mathrm{T}}^{H}$ bins, shown relative to their SM expectation and derived using the $CL_s$ method. The observed limits are indicated by solid black lines, while the expected limits under the background-only (SM) hypothesis are shown with dotted black (red) lines. For the background-only case, the $\pm 1\sigma$ and $\pm 2\sigma$ uncertainty bands are also displayed.}
+  \label{fig:tth_cls_limits}
+\end{figure}
+
+
+
+
+
+
+
+
+
