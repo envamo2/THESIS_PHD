@@ -1,4 +1,4 @@
-This chapter presents the experimental setup that has made possible the studies discussed throughout this thesis. It introduces the Large Hadron Collider (LHC), a proton--proton collider located at the research complex of the European Organization for Nuclear Research (CERN). The ATLAS (A Toroidal LHC ApparatuS) detector is also described, as it is the experiment that collected the data used in this thesis.
+This chapter presents the experimental setup that has made possible the studies discussed throughout this thesis. It introduces the Large Hadron Collider (LHC), a proton-proton collider located at the research complex of the European Organization for Nuclear Research (CERN). The ATLAS (A Toroidal LHC ApparatuS) detector is also described, as it is the experiment that collected the data used in this thesis.
 
 %++++++++++++++++++++++++++++++++++++++++++++++
 \section{The Large Hadron Collider}
@@ -25,11 +25,11 @@ but composed of eight arcs and eight straight sections between them, 520 meters 
     \label{LHC:chain}
 \end{figure}
 
-For reference, the operation of the LHC is divided into distinct data-taking periods, known as Runs, which are separated by long shutdowns (LS) dedicated to maintenance and upgrades. Run-1 (2010--2012) delivered collisions at centre-of-mass energies of 7 and 8~TeV, culminating in the discovery of the Higgs boson. After the first long shutdown (LS1), Run-2 (2015--2018) resumed at 13~TeV, providing nearly 200~fb$^{-1}$ of data and enabling precision Higgs measurements as well as a broad programme of new physics searches. Following LS2 (2019--2021), Run-3 started in 2022 at 13.6~TeV and is expected to deliver about 300--500~fb$^{-1}$ of integrated luminosity. Looking further ahead, the High-Luminosity LHC (HL-LHC), scheduled to begin after LS3 around 2029, will increase the dataset by an order of magnitude, aiming for a total integrated luminosity of 3000--4000~fb$^{-1}$ at up to 14~TeV, thereby opening the door to unprecedented precision in Higgs and electroweak physics. The LHC/HL-HLC schedule is summarized in Figure~\ref{fig:LHC-HL}.
+For reference, the operation of the LHC is divided into distinct data-taking periods, known as Runs, which are separated by long shutdowns (LS) dedicated to maintenance and upgrades. Run-1 (2010--2012) delivered collisions at centre-of-mass energies of 7 and 8~TeV, culminating in the discovery of the Higgs boson. After the first long shutdown (LS1), Run-2 (2015--2018) resumed at 13~TeV, providing nearly 200~fb$^{-1}$~\footnote{Luminosity and its units are explained in next Section~\ref{subsec:lumi}} of data and enabling precision Higgs measurements as well as a broad programme of new physics searches. Following LS2 (2019--2021), Run-3 started in 2022 at 13.6~TeV and is expected to deliver about 300--500~fb$^{-1}$ of integrated luminosity. Looking further ahead, the High-Luminosity LHC (HL-LHC), scheduled to begin after LS3 around 2029, will increase the dataset by an order of magnitude, aiming for a total integrated luminosity of 3000--4000~fb$^{-1}$ at up to 14~TeV, thereby opening the door to unprecedented precision in Higgs and electroweak physics. The LHC/HL-HLC schedule is summarized in Figure~\ref{fig:LHC-HL}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=1\linewidth]{images/HL-LHC_Plan_January2025}\\
+    \includegraphics[width=1\linewidth]{images/HL-LHC_Plan_January2025.pdf}\\
     \caption{Timeline of the LHC operational Runs and the HL-LHC upgrade plan~\cite{HL-LHC_plans}.}
     \label{fig:LHC-HL}
 \end{figure}
@@ -38,21 +38,21 @@ For reference, the operation of the LHC is divided into distinct data-taking per
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 \subsection{Beam conditions and luminosity}
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-Besides the energy that LHC can deliver to the colliding protons, another important performance characteristic of the accelerator is the number of events that it can produce. If one considers the instantaneous luminosity as a measure of the particle flux, then in a scattering process such as proton--proton collisions, the number of collisions can be expressed as:
+\label{subsec:lumi}
+Besides the energy that LHC can deliver to the colliding protons, another important performance characteristic of the accelerator is the number of collision events that it can produce. If one considers the instantaneous luminosity as a measure of the particle flux, then in a scattering process such as proton-proton collisions, the number of collisions can be expressed as:
 
 \begin{equation}
   N^{\text{proc}}_\text{{events}} = \sigma^{\text{proc}}_{\text{event}} \int L\text{d}t = \sigma^{\text{proc}}_{\text{event}}\mathcal{L},
 \end{equation}
-which is proportional to the cross-section representing the underlying physics of the process of interest, $\sigma^{\text{proc}}_{\text{event}}$, such as Higgs boson production. The time integral over the instantaneous luminosity is referred to as the integrated luminosity, $\mathcal{L}$. The instantaneous luminosity depends on the properties of the beams and can be expressed as follows~\cite{Aad_2023}:
+which is proportional to the cross-section representing the underlying physics of the process of interest, $\sigma^{\text{proc}}_{\text{event}}$, such as Higgs boson production. The time integral over the instantaneous luminosity is referred to as the integrated luminosity, $\mathcal{L}$. The instantaneous luminosity ($L$) depends on the properties of the beams and can be expressed as follows~\cite{Aad_2023}:
 \begin{equation}
     L = f_{\text{rev}}\frac{N_1 N_2 N_b}{4\pi \sigma_x \sigma_y},
 \end{equation}
 where $N_b$ is the number of bunches per beam, $N_1$ and $N_2$ are the number of protons per bunch and $f_{\text{rev}}$ is the beam revolution frequency. In practice not all bunches are filled with electrons, and moreover these proton packs have extensions in both two directions perpendicular to the beam propagation direction assuming an effective gaussian shape with area $4\pi\sigma_{x}\sigma_{y}$, being $\sigma_{x}$ and $\sigma_{y}$ the horizontal and vertical gaussian widths respectively.  
 
-The integrated luminosity is typically expressed in units of inverse femtobarns (fb$^{-1}$), where $1~\text{fb}^{-1} = 10^{39}~\text{cm}^{-2}$. Figure~\ref{figure:Run3lumi}(a) shows the integrated luminosity delivered to ATLAS for each year of data taking from 2011 to 2025. Figure~\ref{figure:Run3lumi}(b) displays a comparison between the cumulative luminosity delivered and recorded by the ATLAS detector during Run-2, the data-taking period from 2015 to 2018, which constitutes the main dataset analysed in this thesis, along with the early years of Run-3.
+The integrated luminosity is typically expressed in units of inverse femtobarns (fb$^{-1}$), where $1~\text{fb}^{-1} = 10^{39}~\text{cm}^{-2}$. Figure~\ref{figure:Run3lumi}(a) shows the integrated luminosity delivered to ATLAS for each year of data taking from 2011 to 2025. Figure~\ref{figure:Run3lumi}(b) displays a comparison between the cumulative luminosity delivered and recorded by the ATLAS detector during Run-2, which constitutes the main dataset analysed in this thesis, along with the early years of Run-3.
 
-ATLAS collected approximately 147~fb$^{-1}$ of proton--proton collision data at a center-of-mass energy of 13~TeV during Run-2. However, not all delivered data are suitable for physics analysis. The dataset certified for physics-quality analyses, i.e.\ the one included in the Good Run List (GRL)~\cite{Aad_2020}, is slightly smaller due to quality and detector performance criteria. Specifically, ATLAS recorded a total of $140 \pm 1.2$~fb$^{-1}$ of high-quality data during Run-2, and approximately 166~fb$^{-1}$ during the years 2022--2024 of Run-3.
+ATLAS collected approximately 147~fb$^{-1}$ of proton-proton collision data at a center-of-mass energy of 13~TeV during Run-2. However, not all delivered data are suitable for physics analysis. The dataset certified for physics-quality analyses, i.e.\ the one included in the Good Run List (GRL)~\cite{Aad_2020}, is slightly smaller due to quality and detector performance criteria. Specifically, ATLAS recorded a total of $140 \pm 1.2$~fb$^{-1}$ of high-quality data during Run-2, and approximately 166~fb$^{-1}$ during the years 2022--2024 of Run-3.
 
 \begin{figure}[htbp]
 \centering
@@ -72,15 +72,15 @@ during stable beams for $pp$ collisions at 13 TeV centre-of-mass energy in years
 \subsection{Pile-up and its challenges}
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-As previously mentioned, the proton bunches that collide at the various interaction points of the LHC contain a large number of protons. As a consequence, it is common for more than one hard proton--proton scattering to occur in a single bunch crossing. This phenomenon is known as pile-up.
+As previously mentioned, the proton bunches that collide at the various interaction points of the LHC contain a large number of protons. As a consequence, more than one hard proton-proton scattering commonly occur in a single bunch crossing. This phenomenon is known as pile-up.
 
-More precisely, we refer to the average number of proton--proton interactions per bunch crossing to quantify this effect, since the number of interactions can vary depending on the beam conditions. Pile-up can be classified into two categories: in-time pile-up, which refers to multiple interactions occurring within the same bunch crossing, and out-of-time pile-up, which originates from proton--proton interactions taking place in neighboring bunch crossings. The latter can affect the measurements when the readout times of the detector systems exceed the time interval between consecutive bunches, complicating the identification of the primary vertex and the correct association of final-state particles to it.
+More precisely, this effect is quantified with the average number of proton-proton interactions per bunch crossing to quantify this effect, since the number of interactions can vary depending on the beam conditions. Pile-up can be classified into two categories: in-time pile-up (which refers to multiple interactions occurring within the same bunch crossing) and out-of-time pile-up (which originates from proton-proton interactions taking place in neighboring bunch crossings). The latter can affect the measurements when the readout times of the detector systems exceed the time interval between consecutive bunches, complicating the identification of the primary vertex and the correct association of final-state particles to it.
 
-The number of interactions per bunch crossing follows a Poisson distribution, with a mean value $\mu$ proportional to the product of the total inelastic proton--proton cross-section $\sigma_{\text{inel}}$ and the instantaneous luminosity~\cite{pileup}
+The number of interactions per bunch crossing follows a Poisson distribution, with a mean value $\mu$ proportional to the product of the total inelastic proton-proton cross-section $\sigma_{\text{inel}}$ and the instantaneous luminosity~\cite{pileup}
 \begin{equation}
-    \mu = \frac{\text{L}_{\text{bunch}}\sigma_{\text{inel}}}{f_{\text{rev}}}.
+    \mu = \frac{\text{L}\sigma_{\text{inel}}}{f_{\text{rev}}}.
 \end{equation}
-Figure~\ref{fig:pileup} shows the distribution of the mean number of interactions per bunch crossing during both Run-2 and Run-3 data-taking periods of ATLAS.
+Figure~\ref{fig:pileup} shows the distribution of the mean number of interactions per bunch crossing in ATLAS during both Run-2 and Run-3.
 Increasingly efforts are being devoted to develop mitigation strategies for this effect, including advanced pile-up suppression techniques such as vertex association, pile-up subtraction in jets and missing energy, and the use of machine learning algorithms to distinguish primary vertices from pile-up vertices~\cite{ATL-PHYS-PUB-2023-011,ATLAS:2017pfq,Soyez_2019}.
 \begin{figure}[htbp]
     \centering
@@ -96,7 +96,7 @@ Increasingly efforts are being devoted to develop mitigation strategies for this
 \subsection{LHC upgrade plans}
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-To further push the frontiers of high-energy physics and enhance the physics reach of the LHC programme, a major upgrade of the collider and its experiments is underway. The High-Luminosity LHC (HL-LHC) project~\cite{HLLHC} aims to increase the integrated luminosity delivered to the experiments by more than an order of magnitude, targeting up to 3000~fb$^{-1}$ of proton--proton collision data by the end of the next decade.
+To further push the frontiers of high-energy physics and enhance the physics reach of the LHC programme, a major upgrade of the collider and its experiments is underway. The High-Luminosity LHC (HL-LHC) project~\cite{HLLHC} aims to increase the integrated luminosity delivered to the experiments by more than an order of magnitude, targeting up to 3000~fb$^{-1}$ of proton-proton collision data by the end of the next decade.
 
 This increase in data volume will significantly improve the statistical precision of measurements of rare processes and enable detailed studies of the Higgs boson properties, electroweak interactions, and potential signals of BSM physics. In particular, the HL-LHC will allow for precise measurements of Higgs boson couplings, self-interactions, and rare decays, as well as the potential observation of extremely suppressed processes such as flavour-violating decays or double Higgs production.
 
@@ -104,7 +104,7 @@ Achieving the HL-LHC goals requires a broad range of upgrades to the accelerator
 
 On the experiment side, all main LHC experiments, including ATLAS, are undergoing substantial upgrades to handle the harsher conditions of HL-LHC operation. These include the development of new inner trackers with extended radiation hardness and granularity, the replacement of calorimeter and muon chamber readout electronics to support higher data rates, and a completely redesigned trigger and data acquisition system. The upgraded detectors must be capable of maintaining excellent performance in the presence of average pile-up levels exceeding $\langle\mu\rangle \sim 140$, more than a factor of two higher than those typically encountered during Run-3.
 
-The HL-LHC project is expected to start operations by 2029, following the completion of the Long Shutdown 3 (LS3). It represents the next major milestone in the LHC physics programme, with the potential to open a new era of precision measurements and exploration of the unknown.
+As shown in Figure~\ref{fig:LHC-HL}, the HL-LHC project is expected to start operations by 2030, following the completion of the Long Shutdown 3 (LS3). It represents the next major milestone in the LHC physics programme, with the potential to open a new era of precision measurements and exploration of the unknown.
 
 
 %++++++++++++++++++++++++++++++++++++++++++++++
@@ -112,7 +112,7 @@ The HL-LHC project is expected to start operations by 2029, following the comple
 \label{sec:ATLAS}
 %++++++++++++++++++++++++++++++++++++++++++++++
 
-Having already outlined the design, physics programme and scientific goals of the LHC experiment, this section presents in detail each of the main components that make up the ATLAS detector.
+Having already outlined the LHC design, physics programme and scientific goals, this section presents in detail each of the main components of the ATLAS experiment.
 
 ATLAS~\cite{ATLAS:exp,ATLAS_run3} is a general-purpose detector designed to explore a wide spectrum of physics phenomena, ranging from precision tests of the SM to searches for new particles and interactions beyond it. It is the largest 
 detector ever constructed for a collider experiment, with a cylindrical geometry approximately 44~m long, 25~m diameter, and weighing over 7000~tons. Its conception, design and construction were carried out by a global collaboration of more than 5000 scientists and engineers from around 180 institutions in nearly 40 countries.
@@ -122,8 +122,8 @@ around the interaction point. The cylindrical structure is closed by two end-cap
 
 The different ATLAS subsystems are designed to measure the properties of different types of particles. In the innermost region, closest to the interaction point, the inner detector is built to record the properties of charged particles produced in the collisions. Their trajectories 
 are bent by a 2~T magnetic field produced by a superconducting solenoid. Then, the inner detector is surrounded by the calorimeter system, which measures the energy of particles producing electromagnetic and hadronic showers. This system consists of a liquid-argon electromagnetic calorimeter and a hadronic calorimeter with a scintillating barrel and liquid-argon end-caps.
-In the outermost region of the detector it is placed the muon spectrometer, devoted to the measurement of muons produced in the collision and which are bent by a 0.5-1~T magnetic field produced in this case by a toroidal magnet system.
-The following sections describe in detail the purpose and operating principles of these components, as well as the forward detectors and the trigger and data acquisition systems.
+In the outermost region of the detector it is placed the muon spectrometer, devoted to the measurement of muons produced in the collision and which are bent by a 0.5-1~T magnetic field produced by a toroidal magnet system.
+The following sections describenthe purpose and operating principles of these components, as well as the forward detectors, the trigger and data acquisition systems.
 
 \begin{figure}[htbp]
     \centering
@@ -133,31 +133,31 @@ The following sections describe in detail the purpose and operating principles o
 \end{figure}
 
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-\subsection{Reference frames and coordinate system}
+\subsection{Reference frame and coordinate system}
 \label{sec:coordinates}
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-The ATLAS experiment adopts a right-handed coordinate system, centered at the nominal interaction point where the proton--proton collisions take place, as seen in Figure~\ref{fig:coord}. The origin of the coordinate system lies at the geometrical center of the detector. The $z$-axis is defined along the beam pipe, pointing in the direction of the anti-clockwise beam. The $x$-axis points from the IP towards the center of the LHC ring, while the $y$-axis points upwards, 
-completing a right-handed coordinate system. The transverse plane defined by $x$ and $y$ directions locate important observables like the transverse momentum ($p_{\text{T}}$) and the so-called missing transverse momentum ($E^{\text{miss}}_{\text{T}}$).
+The ATLAS experiment adopts a right-handed coordinate system, centered at the nominal interaction point where the proton-proton collisions take place, as seen in Figure~\ref{fig:coord}. The origin of the coordinate system lies at the geometrical center of the detector. The $z$-axis is defined along the beam pipe, pointing in the direction of the anti-clockwise beam. The $x$-axis points from the IP towards the center of the LHC ring, while the $y$-axis points upwards, 
+completing a right-handed coordinate system. The transverse plane defined by $x$ and $y$ directions is used to define important observables like the transverse momentum ($p_{\text{T}}$) and the so-called missing transverse momentum ($E^{\text{miss}}_{\text{T}}$).
 
 In addition to the Cartesian coordinates $(x, y, z)$, a cylindrical coordinate system is often used due to the symmetry of the detector. In this system, the transverse plane is defined by the coordinates $(r, \phi)$, where $r$ is the radial distance from the $z$-axis and $\phi$ is the azimuthal angle measured around the beam pipe. The longitudinal direction remains aligned with the $z$-axis.
 
-To describe the polar angle of a particle’s trajectory, defining deviations from the beam direction, the rapidity $y$ is preferred over the polar angle $\theta$, as it is invariant under Lorentz boosts along the $z$-axis:
+To describe the polar angle of a particle’s trajectory, defining deviations from the beam direction, the rapidity ($y$) is preferred over the polar angle $\theta$, as it is invariant under Lorentz boosts along the $z$-axis:
 \begin{equation}
-    y = \frac{1}{2}\ln{\frac{E+p_{Z}}{E-{p_{Z}}}},
+    y = \frac{1}{2}\ln{\frac{E+p_{z}}{E-{p_{z}}}},
 \end{equation}
-where E is the particle's energy and $p_{Z}$ the longitudinal component of its momentum. In the ultra-relativistic limit, this variable can be approximated by the so-called pseudorapidity, $\eta$, since the mass of most of final-state particles is mostly negligible against their momenta:
+where $E$ is the particle's energy and $p_{z}$ the longitudinal component of its momentum. In the ultra-relativistic limit, this variable can be approximated by the so-called pseudorapidity ($\eta$), since the mass of most of final-state particles is mostly negligible against their momenta:
 \begin{equation}
 \eta = -\ln \tan \left( \frac{\theta}{2} \right).
 \end{equation}
 In this frame, if a particle is emmitted in the beam direction, $\theta \rightarrow 0º$, it would have assigned $\eta \rightarrow \infty$, while if it follows a direction perpendicular to the beam, $\theta = 90º$ corresponds to $\eta = 0$.
-The angular distance between two objects in the detector is typically measured using the $\Delta R$ metric in the $(\eta, \phi)$ plane:
+The angular separation between two objects in the detector is typically measured using the $\Delta R$ metric in the $(\eta, \phi)$ plane:
 \begin{equation}
 \Delta R = \sqrt{(\Delta \eta)^2 + (\Delta \phi)^2}.
 \end{equation}
 which can also be computed directly from the rapidity $y$.
 
-This coordinate convention is used throughout the analysis and the design of the detector subcomponents, as well as in reconstruction and identification algorithms for physics objects such as jets, leptons, and missing transverse energy. It is illustrated in Figure~\ref{fig:coord}.
+This coordinate convention is used throughout the analysis and the design of the detector subcomponents, as well as in reconstruction and identification algorithms for physics objects such as jets, leptons, and missing transverse energy.
 \begin{figure}[t]
     \centering
         \includegraphics[width=0.6\linewidth]{ATLAS_coordinates.png}
@@ -174,9 +174,10 @@ This coordinate convention is used throughout the analysis and the design of the
 The Inner Detector (ID)~\cite{2010_id,ATLAS:exp} is the central tracking system of the ATLAS experiment and plays a fundamental role in the reconstruction of charged particles emerging from proton-proton collisions. It is the innermost component of the detector, positioned directly around the interaction point. 
 
 The ID is composed of three complementary subdetectors arranged in layers from the innermost to the outermost radii: the Pixel Detector, the Semiconductor Tracker (SCT), and the Transition Radiation Tracker (TRT). An schematic view of the barrel section of the ID can be found in Figure~\ref{fig:id}.
-The Pixel and SCT systems are based on silicon technologies and are optimized for high spatial resolution and precision tracking, particularly near the primary vertex, which is the measured spatial location where the hard scattering of partons of interest in a given event took place. In contrast, the TRT is a gaseous detector made of straw tubes and is designed to extend the tracking capabilities at higher radii while also enhancing electron identification through the detection of transition radiation.
+The Pixel and SCT systems are based on silicon technologies and are optimized for high spatial resolution and precision tracking. In contrast, the TRT is a gaseous detector made of straw tubes and is designed to extend the tracking capabilities at higher radii while also enhancing electron identification through the detection of transition radiation.
 
-Together, these three subdetectors span a cylindrical volume of approximately 6.2~m in length and 2.1~m in diameter, and provide tracking coverage in the pseudorapidity range of $|\eta| < 2.5$. The layout of the ID is divided into a central barrel region ($|\eta| < 1.4$) and two symmetric endcap sections ($1.4 < |\eta| < 2.5$). As charged particles traverse the ID, they produce hits in the different layers, which are then used to reconstruct their trajectories with high efficiency and resolution. This track information is vital for identifying not only primary vertices, but other vertices that are displaced from the primary one and could originate from the decay of heavy-flavour hadrons that travels enough before decaying. This is clearly essential for tagging of these jets, and supporting particle identification algorithms throughout the ATLAS reconstruction chain, as will be explained in Chapter~\ref{chap:object_rec}.
+Together, these three subdetectors span a cylindrical volume of approximately 6.2~m in length and 2.1~m in diameter, and provide tracking coverage in the pseudorapidity range of $|\eta| < 2.5$. The layout of the ID is divided into a central barrel region ($|\eta| < 1.4$) and two symmetric endcap sections ($1.4 < |\eta| < 2.5$). As charged particles traverse the ID, they produce hits in the different layers, which are then used to reconstruct their trajectories with high efficiency and resolution. 
+These reconstructed trajectories, referred to as \textit{tracks}, represent the paths of charged particles through the detector and constitute the essential input for identifying not only primary vertices (which are the spatial locations where the hard scattering of partons of interest in a given event took place) but also from other vertices that are displaced from the primary one and could originate from the decay of heavy-flavour hadrons that travels enough before decaying. This is clearly essential for tagging of these jets, and supporting particle identification algorithms throughout the ATLAS reconstruction chain, as will be explained in Chapter~\ref{chap:object_rec}.
 \begin{figure}[htbp]
     \centering
         \includegraphics[width=0.7\linewidth]{ATLAS_id.png}
@@ -213,9 +214,8 @@ During Run-3, it has been used an argon-based gas mixture in the entire barrel a
 \subsection{Calorimeters}
 \label{sec:calo}
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-Moving outwards, beyond the solenoid magnet containing the Inner Detector, we find the ATLAS calorimeter system~\cite{2010_lar,2010_tile}, which fully encloses the previously described 
-components. Both types of calorimeters, electromagnetic and hadronic, cover a total range up to $|\eta| < 4.9$, allowing for the measurement of the energy of particles traversing them, 
-as they are nominally designed to completely absorb the energy of most particles except for muons and neutrinos. An schematic illustration of the ATLAS calorimeter system is shown in Figure~\ref{fig:cal}.
+The ATLAS calorimeter system~\cite{2010_lar,2010_tile} is located outside the solenoid magnet hosting the ID. Both types of calorimeters, electromagnetic and hadronic, cover a total range up to $|\eta| < 4.9$, allowing for the measurement of the energy of particles traversing them, 
+as they are designed to completely absorb the energy of most particles except for muons and neutrinos. An schematic illustration of the ATLAS calorimeter system is shown in Figure~\ref{fig:cal}.
 \begin{figure}[htbp]
     \centering
         \includegraphics[width=0.9\linewidth]{ATLAS_cal.png}
@@ -230,7 +230,7 @@ as they are nominally designed to completely absorb the energy of most particles
 
 The electromagnetic (EM) calorimeter in the ATLAS detector is designed to precisely measure the energy of electrons and photons. It is based on a sampling technology that uses LAr as the active medium and different metals (either tungsten, copper or lead) as the absorber material. This choice combines a high level of granularity with excellent linearity and radiation hardness, crucial for operation in the high-luminosity environment of the LHC.
 
-The EM calorimeter is divided into three main regions: a barrel section covering the pseudorapidity range $|\eta| < 1.475$ (EMB), and two end-cap sections (EMEC) that extend the coverage up to $|\eta| = 3.2$. Each region is segmented longitudinally into three layers (plus a presampler), as can be seen in Figure~\ref{fig:LAr_EM}, optimizing the reconstruction of electromagnetic showers. The presampler layer is used to correct for energy loss in the material upstream of the calorimeter. The first layer features fine granularity in the $\eta$ direction ($\Delta\eta = 0.0031$), allowing for precise discrimination between single photons and the two close-by photons resulting from neutral pion decays. The second layer collects most of the energy from electromagnetic showers and provides the primary energy measurement. The third layer corrects for energy leakage at high energies.
+The EM calorimeter is divided into three main regions: a barrel section covering the pseudorapidity range $|\eta| < 1.475$ (EMB), and two end-cap sections (EMEC) that extend the coverage up to $|\eta| = 3.2$. Each region is segmented longitudinally into three layers plus a presampler, as can be seen in Figure~\ref{fig:LAr_EM}, optimizing the reconstruction of electromagnetic showers. The presampler layer is used to correct for energy loss in the material upstream of the calorimeter. The first layer features fine granularity in the $\eta$ direction ($\Delta\eta = 0.0031$), allowing for precise discrimination between single photons and pairs of close-by photons resulting from neutral pion decays. The second layer collects most of the energy from electromagnetic showers and provides the primary energy measurement. The third layer corrects for energy leakage at high energies.
 
 \begin{figure}[htbp]
     \centering
@@ -239,9 +239,9 @@ The EM calorimeter is divided into three main regions: a barrel section covering
     \label{fig:LAr_EM}
 \end{figure}
 
-The LAr calorimeter employs an accordion-shaped geometry in both the barrel and end-cap regions. This design ensures full azimuthal coverage without projective cracks, while maintaining uniform response and mechanical stability. The calorimeter modules are housed in cryostats filled with liquid argon, operating at a temperature of approximately 87~K. The readout cells are segmented into towers of size $\Delta\eta \times \Delta\phi = 0.025 \times 0.025$ in the second layer, which defines the granularity for standard electromagnetic object reconstruction.
+The EM LAr calorimeter employs an accordion-shaped geometry in both the barrel and end-cap regions. This design ensures full azimuthal coverage without projective cracks, while maintaining uniform response and mechanical stability. The calorimeter modules are housed in cryostats filled with liquid argon, operating at a temperature of approximately 87~K. The readout cells are segmented into towers of size $\Delta\eta \times \Delta\phi = 0.025 \times 0.025$ in the second layer, which defines the granularity for standard electromagnetic object reconstruction.
 
-The signal is induced by the LAr ionization caused by charged particles in the shower. Ionization electrons drift under a high-voltage electric field, and the resulting current is read out with high precision using fast, low-noise electronics, allowing the determination of the energy deposited by the original particle that hit the detector. In calorimetry, the typical energy resolution is generally expressed as
+The signal is induced by the LAr ionization caused by charged particles in the shower. Ionization electrons drift under a high-voltage electric field, and the resulting current is read out with high precision using fast low-noise electronics, allowing the determination of the energy deposited by the original particle that hit the detector. In calorimetry, the typical energy resolution is generally expressed as
 \begin{equation}
 \frac{\sigma_E}{E} = \frac{a}{\sqrt{E}} \oplus b \oplus \frac{c}{E},
 \end{equation}
@@ -252,34 +252,34 @@ where $E$ denotes the particle energy measured in GeV, and $\sigma_E$ its associ
 \label{sec:elehad}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The hadronic calorimeter system complements the electromagnetic calorimeter by measuring the energy of hadrons. In the end-cap and forward regions, the hadronic calorimetry is provided by these LAr-based detectors: the Hadronic End-Cap Calorimeter (HEC) and the Forward Calorimeter (FCal). These systems are critical for reconstructing jets, missing transverse energy, and for identifying hadronically decaying $\tau$-leptons in the forward regions.
+The hadronic calorimeter system complements the electromagnetic calorimeter by measuring the energy of hadrons. In the end-cap and forward regions, the hadronic calorimetry is provided by these LAr-based detectors: the Hadronic End-Cap Calorimeter (HEC) and the Forward Calorimeter (FCal).
 
-The HEC is positioned directly behind the EMEC and covers the pseudorapidity range $1.5 < |\eta| < 3.2$. It consists of copper plates as absorbers and uses liquid argon as the active medium. The copper-LAr combination ensures a compact structure with good radiation hardness and linearity. The HEC is segmented longitudinally into four layers and provides a depth of about 10 interaction lengths ($\lambda_0$) when combined with the electromagnetic calorimeter, enabling efficient hadronic shower containment. Each end-cap consists of two wheels: a front wheel (HEC1) constituted of 24 copper plates, and a rear wheel (HEC2) made of 16 copper plates.
+The HEC is positioned directly behind the EMEC and covers the pseudorapidity range $1.5 < |\eta| < 3.2$. It consists of copper plates as absorbers and uses liquid argon as the active medium. The copper-LAr combination ensures a compact structure with good radiation hardness and linearity. The HEC is segmented longitudinally into four layers and, together with the electromagnetic calorimeter, provides sufficient depth to ensure efficient containment of hadronic showers. Each end-cap consists of two wheels: a front wheel (HEC1) constituted of 24 copper plates, and a rear wheel (HEC2) made of 16 copper plates.
 
-The Forward Calorimeter (FCal) extends the coverage to $|\eta| < 4.9$ and is composed of three longitudinal modules: the first is electromagnetic, featuring copper absorbers, and the second and third are hadronic, and uses tungsten absorbers in order to reduce the lateral spread of the hadronic showers. The high-density design of the FCal is necessary to withstand the high particle flux and radiation levels encountered in the forward region. Due to its crucial role in reconstructing the forward energy flow, the FCal is also essential for pile-up suppression and missing transverse energy reconstruction.
+The Forward Calorimeter (FCal) extends the coverage to $|\eta| < 4.9$ and is composed of three longitudinal modules: the first is electromagnetic, featuring copper absorbers, and the second and third modules are hadronic, and uses tungsten absorbers in order to reduce the lateral spread of the hadronic showers. The high-density design of the FCal is necessary to withstand the high particle flux and radiation levels encountered in the forward region. Due to its crucial role in reconstructing the forward energy flow, the FCal is also essential for pile-up suppression and missing transverse energy reconstruction.
 
 Both HEC and FCal calorimeters operate within the same LAr cryostats as the electromagnetic sections, benefitting from the same stability and fast response. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Tile hadronic calorimeter}
+\subsubsection{Hadronic Tile calorimeter}
 \label{sec:tilecal}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The Tile Calorimeter (TileCal) is ATLAS main hadronic calorimeter, constructed as a sampling calorimeter composed of alternating layers of plastic scintillator tiles (active material) and low-carbon steel absorber plates. Positioned around the LAr EM calorimeter, TileCal provides coverage in the pseudorapidity region $|\eta|<1.7$ and ensures containment of hadronic showers, limiting punch-through to the muon system with a total thickness of approximately $11\lambda_0$ at $\eta=0$.
+The Tile Calorimeter (TileCal) is ATLAS main hadronic calorimeter, constructed as a sampling calorimeter composed of alternating layers of plastic scintillator tiles (active material) and low-carbon steel absorber plates. Positioned around the LAr EM calorimeter, TileCal provides coverage in the pseudorapidity region $|\eta|<1.7$ and ensures containment of hadronic showers, limiting punch-through to the muon system.
 
 TileCal consists of a central long barrel (LB) section ($|\eta|<1.0$, length of 5.8 m) and two extended barrel (EB) sections (EBA and EBC), each covering $0.8<|\eta|<1.7$ with a length of 2.6 m.
 
 Each barrel segment is divided into 64 modules, featuring alternating 3 mm thick scintillator tiles and 14 mm thick steel absorbers along the beam axis. The scintillator tiles, arranged radially in 11 rows, generate scintillation light upon particle interaction. Wavelength-shifting fibers collect and shift this light to longer wavelengths, guiding it to photomultiplier tubes at the module's outer radius, enabling efficient and hermetic readout.
 
-The calorimeter modules are segmented into three longitudinal layers: layers A, BC, and D in the LB (1.5, 4.1, and 1.8 $\lambda_0$, respectively) and layers A, B, and D in the EB (1.5, 2.6, and 3.3 $\lambda_0$, respectively). Cells in these layers have granularity of $\Delta\eta \times \Delta\phi=0.1\times0.1$ for inner layers and $0.2\times0.1$ for outer layers.
+The calorimeter modules are segmented into three longitudinal layers: layers A, BC, and D in the LB, and layers A, B, and D in the EB. Cells in these layers have granularity of $\Delta\eta \times \Delta\phi=0.1\times0.1$ for inner layers and $0.2\times0.1$ for the D layers.
 
-Additionally, gap scintillator cells (E1-E4) were installed between TileCal and LAr to correct for energy losses and enhance performance. The Minimum-Bias Trigger Scintillators (MBTs), also read out by TileCal electronics, provide coverage in $2.08<|\eta|<3.86$ for triggering purposes. Overall, TileCal incorporates 9852 readout channels, covering 5182 cells.
+Additionally, gap scintillator cells were installed between TileCal and LAr to correct for energy losses and enhance performance. The Minimum-Bias Trigger Scintillators (MBTs), also read out by TileCal electronics, provide coverage in $2.08<|\eta|<3.86$ for triggering purposes. Overall, TileCal incorporates 9852 readout channels, covering 5182 cells.
 
 Figure~\ref{fig:cal_resum} shows an schematic view of the readout geometry of all the calorimeter systems in the $r$--$z$ space, showing the different $\eta$ ranges covered by them and their segmentation.
 \begin{figure}[htbp]
     \centering
-        \includegraphics[width=0.9\linewidth]{cal_readout_ATLAS.png}
-    \caption{Visualization of the ATLAS calorimeter readout geometry. The three subsystems, LAr EM, HEC, FCal and TileCal, are shown~\cite{Gessinger:2752944}.}
+        \includegraphics[width=0.95\linewidth]{cal_readout_ATLAS.png}
+    \caption{Visualization of the ATLAS calorimeter readout geometry. The four subsystems, LAr EM, HEC, FCal and TileCal, and the layers of their segmentation are shown~\cite{Gessinger:2752944}.}
     \label{fig:cal_resum}
 \end{figure}
 
@@ -293,9 +293,9 @@ Figure~\ref{fig:cal_resum} shows an schematic view of the readout geometry of al
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
-Figure~\ref{fig:ms_atlas} shows the outermost subsystem of ATLAS, known as the Muon Spectrometer (MS)~\cite{muon_com}. The MS is responsible for identifying muons, particles capable of traversing the calorimetric system with minimal energy loss. It comprises precision tracking chambers and fast-response trigger detectors embedded in a magnetic field of approximately 0.5~T in the barrel and 1.0~T in the end-cap regions, bending the trajectories of muons and enabling precise momentum measurement.
+Figure~\ref{fig:ms_atlas} shows the outermost subsystem of ATLAS, known as the Muon Spectrometer (MS)~\cite{muon_com}, which is responsible for identifying muons, particles capable of traversing the calorimetric system with minimal energy loss. The MS comprises precision tracking chambers and fast-response trigger detectors embedded in a magnetic field of approximately 0.5~T in the barrel and 1.0~T in the end-cap regions, bending the trajectories of muons and enabling precise momentum measurement.
 
-The MS includes four detector technologies totaling over one million readout channels. A schematic view of the subsystem is shown in Figure~\ref{fig:ms_atlas}, including the New Small Wheel sector, implemented for Run-3. Two separate detector systems facilitate initial trigger decisions. Resistive Plate Chambers (RPCs) are used in the barrel region ($|\eta| < 1.05$), providing measurements with a resolution of about 10~mm in both longitudinal and transverse directions. In the end-cap region ($1.05 < |\eta| < 2.4$), Thin Gap Chambers (TGCs) handle higher background rates with wire separation of 1.8~mm and positional resolution around 5~mm. The RPC and TGC detectors primarily function as triggering components due to their fast response times.
+Four detector technologies totaling over one million readout channels are included in the MS. Resistive Plate Chambers (RPCs) are used in the barrel region ($|\eta| < 1.05$), providing measurements with a resolution of about 10~mm in both longitudinal and transverse directions. In the end-cap region ($1.05 < |\eta| < 2.4$), Thin Gap Chambers (TGCs) handle higher background rates with wire separation of 1.8~mm and positional resolution around 5~mm. The RPC and TGC detectors primarily function as triggering components due to their fast response times.
 
 Precision muon tracking relies mainly on Monitored Drift Tubes (MDTs), installed in both barrel and end-cap regions, covering the range $|\eta| < 2.7$ and offering high positional accuracy (approximately 35~µm per chamber). Cathode Strip Chambers (CSCs), multi-wire proportional chambers providing high rate capability and excellent time resolution (4~ns), are employed in the forward region ($2.0 < |\eta| < 2.7$). MDTs and CSCs are critical for accurately reconstructing muon trajectories.
 
@@ -319,7 +319,7 @@ The upgraded configuration of the MS, particularly with the addition of the NSW,
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Beyond the main subsystems listed above, ATLAS employs four compact forward subsystems covering the remaining region of the detector $(|\eta| > 5)$.
-LUCID~\cite{Jenni:721908} (LUminosity Cherenkov Integrating Detector), situated $\pm17$ m from the interaction point, samples inelastic proton-proton interactions at very small angles and provides the experiment’s primary online and offline relative-luminosity measurement.  
+LUCID~\cite{Jenni:721908} (LUminosity Cherenkov Integrating Detector), situated $\pm17$~m away from the interaction point, samples inelastic proton-proton interactions at very small angles and provides the experiment’s primary online and offline relative-luminosity measurement.  
 LUCID is calibrated thanks to ALFA~\cite{Khalek_2016} (Absolute Luminosity For ATLAS), positioned inside Roman-pot stations $\pm240$ m from the IP, consists of scintillating-fibre tracking modules that can approach the beam to within $\sim\!1$ mm, enabling precise absolute-luminosity determinations and studies of elastic scattering.  
 The AFP~\cite{Adamczyk:2015cjy} (ATLAS Forward Proton detector) was the last addition, located at 204 and 217 meters from the interaction point of both sides of the detector and aiming to extend the ATLAS physics reach by trying to tag very forward protons and enabling the observation of different processes where one of the two protons remains untouched.
 Finally, the Zero Degree Calorimeter (ZDC)~\cite{Jenni:1009649}, installed $\pm140$ m from the IP, is built from alternating tungsten plates and quartz rods.  Covering $|\eta| > 8.3$, it detects neutral particles at zero degrees and is crucial for centrality measurements in heavy-ion collisions.
@@ -338,11 +338,11 @@ One of the most demanding challenges for an experiment such as ATLAS at the LHC 
 
 The Level-1 trigger is a hardware-based system that reduces the raw 40 MHz collision rate down to about 100 kHz, operating with an exceptionally short latency of roughly 2.5 µs thanks to purpose-built custom and commercial electronics. The front-end electronics of every sub-detector store data in on-chip pipeline memories at the full 40 MHz bunch-crossing frequency. These buffers keep the digitised samples for ∼25 µs, that is the fixed window within which the L1 decision must be issued. That decision relies exclusively on information from the calorimeters and the muon spectrometer.
 
-The L1 Calorimeter (L1Calo) trigger uses coarsened calorimeter read-outs (trigger towers) to locate regions of high energy deposition, i.e.\ regions of interest (RoIs). The L1 Muon (L1Muon) trigger exploits hits in the RPCs and TGCs to flag muon candidates, estimate their transverse momentum, and assign them to the correct bunch crossing. Outputs from L1Calo and L1Muon are merged in the Central Trigger Processor (CTP), which delivers the final verdict. If an event is accepted (an L1-Accept, or L1A), a signal is sent back to the front-end electronics so that the complete data corresponding to that bunch crossing can be read out from the pipeline memories. As noted above, the maximum L1A rate in ATLAS is 100 kHz.
+The L1 Calorimeter (L1Calo) trigger uses coarsened calorimeter read-outs (trigger towers) to locate regions of high energy deposition, i.e.\ regions of interest (RoIs). The L1 Muon (L1Muon) trigger exploits hits in the RPCs and TGCs to flag muon candidates, estimate their transverse momentum, and assign them to the correct bunch crossing. Outputs from L1Calo and L1Muon are merged in the Central Trigger Processor (CTP), which delivers the final verdict. If an event is accepted (an L1-Accept, or L1A), a signal is sent back to the front-end electronics so that the complete data corresponding to that bunch crossing can be read out from the pipeline memories.
 
-The events accepted at Level-1 are first formatted by the sub-detector Read-Out Drivers (RODs) and then forwarded to the software-based High-Level Trigger (HLT). Running on a large computer farm, the HLT performs a rapid, partial reconstruction-tracking, charged-particle and jet identification (including $b$-jets), and a first estimate of the missing transverse momentum, throttling the event stream from $100$kHz to roughly $1$kHz. Events that satisfy these online selections are written to permanent storage and transmitted to CERN’s Tier-0 centre for full offline reconstruction. While awaiting the HLT decision, the corresponding data fragments remain buffered in the Read-Out System (ROS).
+The events accepted at Level-1 are first formatted by the sub-detector Read-Out Drivers (RODs) and then forwarded to the software-based High-Level Trigger (HLT). Running on a large computer farm, the HLT performs a rapid, partial reconstruction-tracking, charged-particle and jet identification (including $b$-jets), and a first estimate of the missing transverse momentum, throttling the event stream from $100$~kHz to roughly $1$~kHz. Events that satisfy these online selections are written to permanent storage and transmitted to CERN’s Tier-0 centre for full offline reconstruction. While awaiting the HLT decision, the corresponding data fragments remain buffered in the Read-Out System (ROS).
 
-During Long Shutdown 2 (LS2, between Run-2 and Run-3) the Phase-I upgrade preserved the two-level architecture while introducing a suite of crucial improvements. A fully digital L1Calo trigger path now feeds three FPGA-based feature extractors: eFEX for electrons and photons, jFEX for jets and missing transverse energy, and gFEX for global event variables. It uses super-cell granularity as fine as $\Delta\eta\times\Delta\phi = 0.025\times0.025$. In the forward region $(1.3<|\eta|<2.4)$ the newly installed NSW provide high-resolution muon trigger primitives, tightening transverse-momentum thresholds and cutting fake rates. The refurbished Level-1 Topological Processor exploits the finer calorimeter and muon inputs to impose angular, invariant-mass and transverse-mass selections in hardware. At the second stage, the HLT farm now runs on expanded computing resources, maintaining an output of roughly 3 kHz at an average event size of about 2.1 MB.
+During LS2, the Phase-I upgrade preserved the two-level architecture while introducing a suite of crucial improvements. A fully digital L1Calo trigger path now feeds three FPGA-based feature extractors: eFEX for electrons and photons, jFEX for jets and missing transverse energy, and gFEX for global event variables. It uses super-cell granularity as fine as $\Delta\eta\times\Delta\phi = 0.025\times0.025$. In the forward region $(1.3<|\eta|<2.4)$ the newly installed NSW provide high-resolution muon trigger primitives, tightening transverse-momentum thresholds and cutting fake rates. The refurbished Level-1 Topological Processor exploits the finer calorimeter and muon inputs to impose angular, invariant-mass and transverse-mass selections in hardware. At the second stage, the HLT farm now runs on expanded computing resources, maintaining an output of roughly 3 kHz at an average event size of about 2.1 MB.
 
 %The Phase-II TDAQ upgrade, developed for the new conditions that will be delivered by HL-LHC, therefore foresees a two-stage hardware trigger in which an initial Level-0 decision accepts events at roughly \SI{1}{\mega\hertz}, followed by a refined Level-1 selection that throttles the rate to about \SI{400}{\kilo\hertz}. Both stages will exploit full-granularity calorimeter read-outs together with prompt track information from the new ITk. The latency budget will be stretched to $\sim!\SI{10}{\micro\second}$, and a trigger-less streaming DAQ is foreseen, capable of digesting data throughputs in excess of \SI{5}{\tera\byte\per\second}. An enlarged processing farm, augmented with hardware accelerators such as FPGAs and GPUs, will then filter the stream down to a sustainable output of \SIrange{10}{15}{\kilo\hertz} for permanent storage. Collectively, these upgrades will preserve and probably extend the experiment’s physics reach in the demanding high-pile-up environment of the HL-LHC.
 
@@ -351,11 +351,11 @@ During Long Shutdown 2 (LS2, between Run-2 and Run-3) the Phase-I upgrade preser
 \label{sec:athena}
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-It is worth clarifying at this point, for later references throughout the thesis, the role of the ATLAS software infrastructure. The ATLAS software is divided into two main branches, built and distributed in several packages or projects available on CERN \textsc{gitlab}. On one hand, \textsc{athena}~\cite{athena} constitutes the offline framework used for simulation, reconstruction and analysis of both real and simulated data. On the other hand, the Trigger and Data Acquisition (TDAQ)~\cite{tdaq} software is responsible for the online operation of the experiment, managing the trigger system and data flow during collisions. 
+It is worth clarifying at this point, for later reference throughout the thesis, the role of the ATLAS software infrastructure. The ATLAS software is divided into two main branches, built and distributed in several packages or projects available on CERN \textsc{gitlab}. On one hand, \textsc{athena}~\cite{athena} constitutes the offline framework used for simulation, reconstruction and analysis of both real and simulated data. On the other hand, the TDAQ~\cite{tdaq} software is responsible for the online operation of the experiment, managing the trigger system and data flow during collisions. 
 
-Different releases of the \textsc{athena} software are typically made available during the processing of the dataset of each data acquisition run. During Run-2, the principal release in use was release 21 (R.21), which supported the reconstruction of data collected as well as the associated simulation campaigns MC16a (2015--2016), MC16d (2017) and MC16e (2018). 
+Different releases of the \textsc{athena} software are typically made available during the processing of the dataset of each data acquisition run. During Run-2, the principal release in use was release 21 (rel.21), which supported the reconstruction of data collected as well as the associated simulation campaigns MC16a (corresponding to the 2015-2016 data taking years), MC16d (2017) and MC16e (2018). 
 
-Towards the end of Run-2, a new version of \textsc{athena} (release 22, R.22) was developed in order to reprocess the full Run-2 dataset. The new release introduced significant improvements with respect to R.21, such as more advanced reconstruction algorithms, enhanced Inner Detector tracking, updated MC simulation and improved memory efficiency. This ensured a uniform and higher-quality reconstruction of Run-2 data (campaigns MC20a, MC20d and MC20e), while at the same time establishing the framework to be employed for Run-3.
+Towards the end of Run-2, a new version of \textsc{athena} (release 22, rel.22) was developed in order to reprocess the full Run-2 dataset. The new release introduced significant improvements with respect to R.21, such as more advanced reconstruction algorithms, enhanced Inner Detector tracking, updated MC simulation and improved memory efficiency. This ensured a uniform and higher-quality reconstruction of Run-2 data (campaigns MC20a, MC20d and MC20e), while at the same time establishing the framework to be employed for Run-3.
 
 For Run-3, \textsc{athena} R.22 continues to be the basis for both data-taking and MC simulation. The corresponding campaigns are labelled MC23a (2022), MC23d (2023) and MC23e (2024). This naming convention is used consistently throughout the thesis when referring to Monte Carlo samples corresponding to different data-taking years. A summary of the relevant releases and their associated campaigns is provided in Table~\ref{tab:athena_mc_campaigns}.
 
@@ -364,7 +364,7 @@ For Run-3, \textsc{athena} R.22 continues to be the basis for both data-taking a
     \small
     \renewcommand{\arraystretch}{1.3} % aumenta el espacio vertical entre filas
     \setlength{\tabcolsep}{12pt}      % aumenta el espacio horizontal entre columnas
-    \caption{Summary of ATHENA releases and the corresponding Monte Carlo campaigns associated with each data-taking year in Run~2 and Run~3.}
+    \caption{Summary of ATHENA releases and the corresponding Monte Carlo campaigns associated with each data-taking year in Run-2 and Run-3.}
     \label{tab:athena_mc_campaigns}
     \begin{tabular}{lcc}
         \hline
@@ -393,5 +393,5 @@ A smooth dialogue between all ATLAS subsystems and the technical infrastructure 
 \subsection{The LHC computer grid}
 \label{sec:computer_grid}
 %xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-To explain how the events accepted by the trigger are eventually processed, one must introduce The Worldwide LHC Computing Grid (WLCG)~\cite{Bird:1695401}, which is a global, tiered infrastructure that stores, distributes and processes the multi-petabyte data stream produced by the LHC experiments.  Data first reach Tier-0 at CERN, where the raw 1kHz detector output is buffered, reconstructed and replicated; CERN then distributes this primary dataset to thirteen Tier-1 centres on three continents for large-scale reprocessing and long-term archival. Roughly 170 Tier-2 sites (university and regional clusters) supply the bulk of CPU for user analyses and Monte-Carlo production, while countless local Tier-3 farms serve individual groups.  
-Today the WLCG federates $\sim$1.4 million CPU cores and $\sim$1.5 EB of disk and tape across 42 countries, sustaining average data‐transfer rates above 260 GB s$^{-1}$ and executing in excess of two million grid jobs daily.  This distributed model enables more than 12 000 physicists to access ATLAS data quasi-real-time, making large-scale analysis feasible without centralised super-computing resources.
+To explain how the events accepted by the trigger are eventually processed, one must introduce The Worldwide LHC Computing Grid (WLCG)~\cite{Bird:1695401}, which is a global, tiered infrastructure that stores, distributes and processes the multi-petabyte data stream produced by the LHC experiments.  Data first reach Tier-0 at CERN, where the raw 1~kHz detector output is buffered, reconstructed and replicated; CERN then distributes this primary dataset to thirteen Tier-1 centres on three continents for large-scale reprocessing and long-term archival. Roughly 170 Tier-2 sites (university and regional clusters) supply the bulk of CPU for user analyses and Monte-Carlo production, while a large number local Tier-3 farms serve individual groups.  
+Today the WLCG federates $\sim$1.4 million CPU cores and $\sim$1.5 EB of disk and tape across 42 countries, sustaining average data‐transfer rates above 260 GB s$^{-1}$ and executing in excess of two million grid jobs daily.  This distributed model enables more than 1200 physicists to access ATLAS data quasi-real-time, making large-scale analysis feasible without centralised super-computing resources.
