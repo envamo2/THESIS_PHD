@@ -12,24 +12,24 @@ Electrons play a crucial role in the ATLAS physics programme, appearing in key f
 
 Although the basic workflow for constructing electron candidates mirrors the one already explained for other physics objects in Chapter~\ref{chap:object_rec}, the performance demands on electrons are particularly stringent, starting from the precision in which tracks and energy clusters are reconstructed to achieving the best possible agreement between recorded data and the Monte Carlo simulations.  
 
-In the following chapter we delve into how electrons are treated, defined and calibrated in ATLAS, especially because part of the work in this thesis has focused on the study and refinement of a DNN for electron identification and classification against other objects that can mimic their signature.  The architecture of this ML algorithm is going to be shown, as well as the electron features that are used as inputs, its performance, and how its output is handled. 
+In the following chapter, the treatment, definition, and calibration of electrons in ATLAS are discussed, especially because part of the work in this thesis has focused on the study and refinement of a DNN for electron identification and classification against other objects that can mimic their signature.  The architecture of this ML algorithm is going to be shown, as well as the electron features that are used as inputs, its performance, and how its output is handled. 
 
-This DNN is introduced as an improved method intended to replace the likelihood-based approach employed since the beginning of Run-2~\cite{Aad:2684552,Aaboud:2657964}, which is also discussed here.  Finally, efficiency measurements are compared for prompt electrons obtained with both techniques and derive scale factors to correct any mismatches between performance in data and in MC simulation.  These efficiencies are measured in data using tag-and-probe techniques on a pure and unbiased sample of electrons, typically drawn from well-known physics processes rich in prompt electrons such as the decay $Z\to e^+e^-$, an example of which is illustrated in the event display in Figure~\ref{fig:zee}.
+This DNN is introduced as an improved method intended to replace the likelihood-based approach employed since the beginning of Run-2~\cite{Aad:2684552,Aaboud:2657964}, which is also discussed here.  Finally, efficiency measurements are compared for prompt electrons obtained with both techniques and derive scale factors to correct any mismatches between the performance in data and MC simulation.  These efficiencies are measured in data using tag-and-probe techniques on a pure and unbiased sample of electrons, typically drawn from well-known physics processes rich in prompt electrons such as the $Z\to e^+e^-$ decay, an example of which is illustrated in the event display in Figure~\ref{fig:zee}.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{images/Zee.png}
-    \caption{ATLAS reconstructed event display of a candidate for a $Z\to e^+e^-$ decay, collected on 9 May 2010. The two electrons are well isolated and represented with yellow lines. Further event properties: $p_{\text{T}}(e^{+})$ = 40~GeV, $p_{\text{T}}(e^{-})$ = 45~GeV, $\eta(e^{+}) = -0.38$, $\eta(e^{-}) = 0.21$, $m_{e^{+}e^{-}}=89$~GeV~\cite{atlas:eventdisplay}. }
+    \caption{ATLAS reconstructed event display, collected on 9 May 2010, of a candidate for a $Z\to e^+e^-$ decay. The two electrons are well isolated and represented with yellow lines. Further event properties: $p_{\text{T}}(e^{+})$ = 40~GeV, $p_{\text{T}}(e^{-})$ = 45~GeV, $\eta(e^{+}) = -0.38$, $\eta(e^{-}) = 0.21$, $m_{e^{+}e^{-}}=89$~GeV~\cite{atlas:eventdisplay}. }
     \label{fig:zee}
 \end{figure}
 
-The rest of this chapter covers the reconstruction inputs and calibration steps that define ATLAS electrons, the architecture and training of the new DNN identification algorithm, the tag-and-probe procedures used to extract data-driven efficiencies, and, finally, a direct comparison of DNN identification performance against the Run-2 likelihood benchmark. Together, these studies quantify the improvements in signal efficiency and background rejection achieved by the neural-network approach and lay the groundwork for its deployment in Run-3 analyses.  
+The rest of this chapter covers the reconstruction inputs and calibration steps that define electrons in ATLAS, the architecture and training of the new DNN identification algorithm, the tag-and-probe procedures used to extract data-driven efficiencies. Finally, a direct comparison of DNN identification performance against the Run-2 likelihood benchmark is presented. Together, these studies quantify the improvements in signal efficiency and background rejection achieved by the neural-network approach and lay the groundwork for its deployment in Run-3 analyses.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Electron Reconstruction}
 \label{sec:electron_reconstruction}
 
-In the ATLAS detector, an electron can be reconstructed when its electromagnetic energy deposits in the calorimeter system can be matched to a charged-particle track in the Inner Detector. Figure~\ref{electron_journey} illustrates the typical journey of an electron traversing the various layers of ATLAS, from the interaction point outwards.
+In the ATLAS detector, an electron can be reconstructed when its electromagnetic energy deposits in the calorimeter system can be matched to a charged-particle track in the ID. Figure~\ref{electron_journey} illustrates the typical journey of an electron traversing the various layers of ATLAS, from the interaction point outwards.
 
 \begin{figure}[htbp]
   \centering
@@ -37,7 +37,7 @@ In the ATLAS detector, an electron can be reconstructed when its electromagnetic
   \caption{Illustration of the typical journey of an electron passing through ATLAS. In red it is represented its expected path, first going through the tracking system. Afterwards it leaves mostly all its energy in the electromagnetic calorimeter. It can be also found the possible path (dashed red) of photon radiated by bremsstrahlung when the electron interacts with the material~\cite{Aaboud:2657964}.}
   \label{electron_journey}
 \end{figure}
-One can say that there are three stages in reconstructing an electron: although it first traverses the various pixel and silicon layers of the ID plus the network of TRT straw tubes before depositing most of its energy in the electromagnetic calorimeter through bremsstrahlung radiation, the reconstruction of an electron candidate actually begins with the identification of clusters of calorimeter cells containing this electromagnetic energy. After the clustering step, 
+Although the electron first traverses the ID before depositing most of its energy in the electromagnetic calorimeter, the reconstruction of an electron candidate actually begins with the identification of energy clusters in the EM calorimeter. After the clustering step, 
 the tracks in the ID are reconstructed and classified, as detailed in Section~\ref{sec:tracks}. The final step is to efficiently match these tracks to the electromagnetic clusters to form electron candidates, being able to distinguish them from other objects such as charged pions.
 
 \subsection{Cluster Building}
@@ -53,22 +53,22 @@ being \(E_{\text{cell}}^{\text{EM}}\) the energy of the given cell and \(\sigma^
 
 The significance of all cells neighboring the seed cell is then evaluated, and any cell with $\epsilon_{\text{cell}}^{\text{EM}} \geq 2$ is added to the cluster. This procedure iterates, treating each newly added cell as the seed for the next step, forming a growing protocluster. Protoclusters sharing a cell are merged together, and once no further high-significance cells can be included, a final growth step adds all adjacent cells regardless of their significance. If the resulting topocluster contains more than one local maximum, it is split into separate clusters, each centered on one maximum cell. A local maximum is defined as a cell with \(E_{\text{cell}}^{\text{EM}}>500\)~MeV that has at least four neighbors of lower energy.
 
-Contributions from the presampler and the first EM layer are also added when computing the cluster’s electromagnetic energy. The electromagnetic fraction, \(f_{\text{EM}}\), is defined as the ratio of this EM energy to the cluster’s total energy. To suppress clusters from pile-up or hadronic activity, only those with \(f_{\text{EM}}>0.5\), \(E_{\text{EM}}>400\)\,MeV, and at least half of their energy in the ECAL are retained as electron candidates.  
+Contributions from the presampler and the first EM layer are also added when computing the cluster’s electromagnetic energy. The electromagnetic fraction, \(f_{\text{EM}}\), is defined as the ratio of this EM energy to the cluster’s total energy. To suppress clusters from pile-up or hadronic activity, only those with \(f_{\text{EM}}>0.5\), \(E_{\text{EM}}>400\)\,MeV, and at least half of their energy in the EM calorimeter are retained as electron candidates.  
 
 \subsection{Track-to-Cluster Matching}
 
-For electron candidates, the standard tracking algorithm explained in Section~\ref{sec:tracks} is extended to account for electrons losing energy via bremsstrahlung as they traverse the ID detector materials. 
+For electron candidates, the standard tracking algorithm explained in Section~\ref{sec:tracks} is extended to account for electrons losing energy via bremsstrahlung as they traverse the ID material. 
 
 Initially, tracks are fitted under a pion hypothesis assuming an ideal helical trajectory~\cite{tracks}. If this fit fails for a given track seed within the region of interest defined by the EM topocluster (i.e., small pseudorapidity separation between track and cluster), the fit is retried with a modified pattern-recognition algorithm based on the Kalman filter formalism~\cite{FRUHWIRTH1987444}, which allows for energy losses at each material intersection due to photon radiation and thus deviations from a perfect helix.
 
-This formalism, called Gaussian Sum Filter (GSF), represents the track state as a weighted sum of Gaussian components, each propagated in parallel via a Kalman filter, modelling the sudden curvature changes induced by discrete photon emissions. After GSF refitting, the tracks are extrapolated to the ECAL and matched to EM topoclusters using asymmetric $\phi$ windows (wider on the side corresponding to expected energy loss) and tight $\eta$ proximity. When multiple tracks match a single cluster, candidates are ranked first by fit quality and then by distance to the cluster barycentre in the second EM layer; the highest-ranked track is chosen to define the electron $\eta$ and $\phi$ coordinates.
+This formalism, called Gaussian Sum Filter (GSF), represents the track state as a weighted sum of Gaussian components, each propagated in parallel via a Kalman filter, modelling the sudden curvature changes induced by discrete photon emissions. After GSF refitting, the tracks are extrapolated to the EM calorimeter and matched to EM topoclusters using asymmetric $\phi$ windows (wider on the side corresponding to expected energy loss) and tight $\eta$ proximity. When multiple tracks match a single cluster, candidates are ranked first by fit quality and then by distance to the cluster barycentre in the second EM layer; the highest-ranked track is chosen to define the electron $\eta$ and $\phi$ coordinates.
 
 
 \subsection{Superclusters and calibration}
 
 In order to capture the full energy deposited by these bremsstrahlung photons from the electron candidate, adjacent EM topoclusters are merged into superclusters, which gather all significant energy deposits along the electron’s radiative path, as represented in Figure~\ref{fig:superclust}~\cite{Aad:2684552}.
 \FloatBarrier
-Reconstruction of an electron supercluster begins by ordering all electromagnetic topoclusters by their transverse energy and selecting the highest-$E_{\text{T}}$ cluster as the seed. This seed must not already be assigned to another supercluster, and the reconstructed track matched to it must carry at least four hits in either the Pixel detector or the SCT~\cite{Aad:2684552}. Once a valid seed is identified, additional “satellite” topoclusters are incorporated within a sliding window of \(\Delta\eta\times\Delta\phi = 0.075\times0.125\) and \(0.125\times0.300\), centered on the seed’s energy-weighted barycenter. The smaller window captures nearby secondary electromagnetic showers, while the larger one recovers energy radiated via bremsstrahlung. Finally, the assembled supercluster is matched to its track using the same \(\eta\)-\(\phi\) proximity criteria described before, yielding the fully reconstructed electron object used in subsequent physics analyses.  
+Reconstruction of an electron supercluster begins by ordering all electromagnetic topoclusters by their transverse energy and selecting the highest-$E_{\text{T}}$ cluster as the seed. This seed must not already be assigned to another supercluster, and the reconstructed track matched to it must carry at least four hits in either the Pixel or the SCT detectors~\cite{Aad:2684552}. Once a valid seed is identified, additional “satellite” topoclusters are incorporated within a sliding window of \(\Delta\eta\times\Delta\phi = 0.075\times0.125\) and \(0.125\times0.300\), centered on the seed’s energy-weighted barycenter. The smaller window captures nearby secondary electromagnetic showers, while the larger one recovers energy radiated via bremsstrahlung. Finally, the assembled supercluster is matched to its track using the same \(\eta\)-\(\phi\) proximity criteria described before, yielding the fully reconstructed electron object used in subsequent physics analyses.  
 
 \begin{figure}[htbp]
   \centering
@@ -77,35 +77,35 @@ Reconstruction of an electron supercluster begins by ordering all electromagneti
   \label{fig:superclust}
 \end{figure}
 
-However, this reconstruction procedure is based on the raw energy measurements of both electrons and photons, derived from the sum of cell energies. To achieve the highest possible precision, these energy measurements must be calibrated and are therefore firstly optimized via a BDT regression trained on Monte Carlo simulation, which combines the energy deposits across the three longitudinal calorimeter layers. Subsequently, the response of each individual layer is calibrated separately to correct for its \et-dependent behavior, and the same corrections are applied identically to both data and simulation samples.
+However, this reconstruction procedure is based on the raw energy measurements of both electrons and photons, derived from the sum of cell energies. To achieve the highest possible precision, these energy measurements must be calibrated. First, a BDT regression is trained on Monte Carlo simulation, combining the energy deposits across the three longitudinal calorimeter layers. Subsequently, the response of each individual layer is calibrated separately to correct for its \et-dependent behavior, and the same corrections are applied identically to both data and simulation samples.
 
-After layer-by-layer corrections, residual discrepancies between data and simulation, arising from effects such as azimuthal non-uniformities in the calorimeter's granularity, are removed by applying additional region-dependent corrections to the data. Finally, the absolute energy scale and resolution are tuned using large samples of \(Z\to e^+e^-\) events, ensuring that the reconstructed \(Z\) peak in data aligns with the simulation. Any remaining resolution differences are corrected by smearing the energy in MC simulations, and the overall procedure is validated and its uncertainties quantified using \(J/\psi\to e^+e^-\) events.  
+After the layer-by-layer corrections, residual discrepancies between data and simulation (arising from effects such as azimuthal non-uniformities in the calorimeter's granularity) are removed by applying additional region-dependent corrections to the data. Finally, the absolute energy scale and resolution are tuned using large samples of \(Z\to e^+e^-\) events, ensuring that the reconstructed \(Z\) peak in data aligns with the simulation. Any remaining resolution differences are corrected by smearing the energy in MC simulations. The overall procedure is validated and its uncertainties quantified using \(J/\psi\to e^+e^-\) events.  
 
 Finally, it is worth noting that the reconstructed electron four-momentum is obtained by combining the calibrated energy of the matched supercluster with the direction provided by the associated track at the interaction point, yielding a precise description of the candidate’s kinematics.
 
-For efficiency measurements and scale-factor computations, which will be discussed in Section~\ref{sec:electron_efficiency_measurements}, we employ the so-called ``detector'' pseudorapidity, defined as the pseudorapidity of the energy barycentre in the second layer of the EM calorimeter of the primary cluster. Since this layer contains the bulk of the electron or photon energy deposition, this observable provides a robust proxy for the cluster location in the calorimeter and is therefore used to parameterise efficiencies and data-to-MC corrections.
+For efficiency measurements and scale-factor computations, which will be discussed in Section~\ref{sec:electron_efficiency_measurements}, the so-called ``detector'' pseudorapidity is employed, defined as the pseudorapidity of the energy barycentre in the second layer of the EM calorimeter of the primary cluster. Since this layer contains the bulk of the electron energy deposition, this observable provides a robust proxy for the cluster location in the calorimeter and is therefore used to parameterise efficiencies and data-to-MC corrections.
 
-This section is concluded by noting that the concept of transverse energy does not have a direct physical meaning, but is conventionally defined as $E_{\text{T}} = E \cdot \sin\theta$. For electrons, whose mass is negligible compared to their energy, this definition leads to values that are essentially identical to the transverse momentum $p_{\text{T}}$. Consequently, both notations are used interchangeably throughout the following sections of this work.
+This section is concluded by noting that the concept of transverse energy does not have a direct physical meaning, but is conventionally defined as $E_{\text{T}} = E \cdot \sin\theta$. For electrons, whose mass is negligible compared to their energy, this definition leads to values that are identical to the transverse momentum $p_{\text{T}}$. Consequently, both notations are used interchangeably throughout the following sections of this work.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Electron Identification}
 
 As already mentioned, there are other types of physics objects that can mimic the characteristic signature left by electrons in the ATLAS detector, and can therefore end up being reconstructed as electron candidates. 
 
-In the physics analyses carried out within the collaboration, the background coming from these objects needs to be reduced as much as possible. Moreover, not all real electrons are to be considered as signal in many cases. Only prompt isolated electrons originating from the decay of heavy bosons such as the W, Z, and Higgs bosons are of interest, while those coming from the decay of charged quarks or photon conversions are generally considered as background.
+In the physics analyses carried out within the collaboration, the background coming from these objects needs to be reduced as much as possible. Moreover, not all real electrons are to be considered as signal in many cases. Only prompt isolated electrons originating from the decay of heavy bosons such as the $W$, $Z$, and Higgs bosons are of interest, while those coming from the decay of charged quarks or photon conversions are generally considered as background.
 
-Therefore, in order to efficiently classify the electron candidates of interest, a set of selections must be applied to the candidates after the reconstruction step, which is what is known as identification. To identify the types of electrons, discriminants are typically defined based on observables or features of the physical objects that allow for a discrimination between prompt and background electrons, for instance, since it is a generic procedure adopted for other types of physical objects as well, both in ATLAS and in other experiments such as CMS.
+Therefore, in order to efficiently classify the electron candidates, a set of selections must be applied after reconstruction, which is what is known as identification. To identify the types of electrons, discriminants are typically defined based on observables or features of the physical objects that allow for a discrimination between prompt and background electrons, for instance.
 
-These discriminants can be defined in various ways, and the following describes the Likelihood-based approach, used since the beginning of the Run-2 period, and the novel identification algorithm based on a DNN.
+These discriminants can be defined in various ways, and Section~\ref{LH_identification} describes the Likelihood-based approach, used since the beginning of the Run-2 period, and the novel identification algorithm based on a DNN is described in Section~\ref{subsec:dnn_id}.
 
-Finally, the identification process is completed by using the output of that discriminant, on which certain thresholds are defined targeting specific values of signal identification efficiency and background rejection. Since the behaviour of electrons generally varies as a function of their energy and of the detector region under consideration, these thresholds are typically defined in bins of the electron’s \et and $\eta$, and are encapsulated in what are known as identification Working Points (WPs). These WPs generally also include requirements on additional variables, as described below, and finally different WPs obtained from the same discriminant or approach are grouped into identification menus, which are ultimately what is provided for physics analysis to use.
+Finally, the identification process is completed by using the output of that discriminant, on which certain thresholds are defined targeting specific values of signal identification efficiency and background rejection. Since the behaviour of electrons generally varies as a function of their energy and of the detector region under consideration, these thresholds are typically defined in bins of the electron’s \et and $\eta$, and are encapsulated in what are known as identification Working Points (WPs). These WPs generally also include requirements on additional variables, as described below. The different WPs obtained from the same discriminant are grouped into identification menus, which are ultimately provided for general physics analysis use.
 
 \subsection{Likelihood-based identification}
-
+\label{LH_identification}
 So far, electron identification in ATLAS has been based on a Likelihood (LH) approach~\cite{Aad:2684552,Aaboud:2657964}, which relies on a wide range of information from different detector subsystems. This algorithm uses high-level input variables defined from the properties of electrons and the information they leave as they pass through the detector. These variables will be detailed later, since they are largely shared with the DNN, and further information can be found in Ref.~\cite{Aaboud:2657964}.
 
-A central aspect in the construction of the LH discriminant is the definition of one-dimensional Probability Density Functions (PDFs) for each input variable. It is done separately for signal and background electrons, based either on real data or on the simulations previously described.
-The discriminant is then constructed from these PDFs, which reveals one of the limitations of this method: the correlations between variables are lost when creating these density functions, which are obtained by applying a Kernel Density Estimator (KDE) to the histograms of each variable separately, using the TMVA toolkit~\cite{tmvatoolkit}. 
+A central aspect in the construction of the LH discriminant is the definition of one-dimensional Probability Density Functions (PDFs) for each input variable. It is done separately for signal and background electrons, based either on real data or on simulations.
+The discriminant is constructed from these PDFs, which reveals one of the limitations of this method: the correlations between variables are lost when creating these density functions, which are obtained by applying a Kernel Density Estimator (KDE) to the histograms of each variable separately, using the TMVA toolkit~\cite{tmvatoolkit}. 
 
 Therefore, the likelihood of an electron candidate being signal ($L_{\text{S}}$) or background ($L_{\text{B}}$) is given by:
 
@@ -121,20 +121,20 @@ which achieves the goal of clearly separating the signal and background distribu
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{images/lhdis.png}
-  \caption{Likelihood discriminant distributions obtained in a particular \et and $\eta$ bin, for signal and background computed for simulated electrons corresponding to R.21 Run-2 period~\cite{Aaboud:2657964}. An additional monotonic transformation is applied to the discriminants which does not change its classification power.}
+  \caption{Likelihood discriminant distributions obtained in a particular \et and $\eta$ bin, for signal and background computed for simulated electrons corresponding to rel.21 Run-2~\cite{Aaboud:2657964}.}
   \label{fig:lhdis}
 \end{figure}
 
 As previously mentioned, the PDFs of the variables are parametrised in different bins of \et and $\eta$, and the same applies when building the discriminant and defining the thresholds that form the WPs.
 
 The additional requirements to these cuts on the discriminant, and applied to determine whether an electron candidate passes a given WP, include a certain number of hits in different parts of the tracking detectors and also requirements on the ambiguity type. This ambiguity type is a flag assigned to the candidate during reconstruction, providing information on whether the topocluster associated with the electron was also reconstructed as a photon.
-Each WP encapsulates different requirements, and in this thesis $LHLoose$, $LHMedium$, and $LHTight$ are used, ordered from highest to lowest signal identification efficiency, and the reverse in terms of background rejection. They are subsets of each other, meaning that if an electron passes the $LHTight$ WP, it also passes the other two.
+Each WP encapsulates different requirements, and in this thesis $LHLoose$, $LHMedium$, and $LHTight$ are used, ordered from highest to lowest signal identification efficiency, and the reverse in terms of background rejection. They are subsets of each other, meaning that if an electron passes $LHTight$, it also passes the other two WPs.
 
-Regarding the LH menu used later in this thesis in the efficiency and scale factor calculations, to be compared with the novel DNN approach presented in this work, the probability density functions (PDFs) were derived directly from collision data. Signal PDFs are taken from data to guarantee the best possible performance when applied to real events. Background PDFs are also extracted from data, since they lead to distributions that are less signal-like than those obtained from Monte Carlo. This behaviour is precisely what is desired for the likelihood method to achieve an efficient discrimination.
+Regarding the LH menu used later in this thesis in the efficiency and scale factor calculations, the probability density functions (PDFs) were derived directly from collision data. Signal PDFs are taken from data to guarantee the best possible performance when applied to real events. Background PDFs are also extracted from data, since they lead to distributions that are less signal-like than those obtained from Monte Carlo. This behaviour is precisely what is desired for the likelihood method to achieve an efficient discrimination.
 
 The selection used to obtain the purest possible sample of candidates for both types is fully detailed in Ref.~\cite{lucas_thesis}. In summary, in order to construct the PDFs, a tag-and-probe method is applied. Signal electrons are selected from $Z \rightarrow e^{+}e^{-}$ or $J/\psi \rightarrow e^{+}e^{-}$ decays. Events with $E_{\text{T}} > 15$~GeV are taken from $Z$ decays, while lower-$E_{\text{T}}$ electrons ($E_{\text{T}} \leq 15$~GeV) come from $J/\psi$ decays. A tightly identified and isolated “tag” electron is required, and a “probe” electron is selected if the invariant mass of the pair matches the $Z$ or $J/\psi$ boson mass. No further identification or isolation requirements are applied to the probe, ensuring unbiased selections.
 
-Background PDFs are obtained from multi-jet events in data. Due to their large cross-section, loose selection of reconstructed electrons yields mostly background. To improve purity, $Z \rightarrow e^{+}e^{-}$ and $W \rightarrow e\nu$ decays are vetoed. The $Z$ veto removes events with a second electron forming a mass near the $Z$ boson. The $W$ veto applies a cut on it transverse mass, which also removes electrons from top-quark decays.
+Background PDFs are obtained from multi-jet events in data. Due to their large cross-section, loose selection of reconstructed electrons yields mostly background. To improve purity, $Z \rightarrow e^{+}e^{-}$ and $W \rightarrow e\nu$ decays are vetoed. The $Z$ veto removes events with a second electron forming a mass near the $Z$ boson. The $W$ veto applies a cut on the transverse mass, which also removes electrons from top-quark decays.
 
 
 \subsection{Deep neural network for electron identification}
@@ -154,24 +154,24 @@ Here, the focus is placed on the specific application to electron identification
 \subsubsection{Samples and electron selection}
 %Mention that samples used here were already presented in Section~\ref{subsec:electron_mc}. Define which selection is applied to electrons used in the training, and also introduce
 %how the different classes are defined. Talk about how input n-tuples are produced a bit.
-The first step to prepare the DNN for electron identification is to define the training, validation, and test datasets that will feed the algorithm. As previously mentioned, simulated electron candidates are used for this purpose, extracted from different processes generated as described in Section~\ref{subsec:electron_mc}, corresponding to the Run-2 R.22 period.
+The first step to prepare the DNN for electron identification is to define the training, validation, and test datasets that will feed the algorithm. As previously mentioned, simulated electron candidates are used for this purpose, extracted from different processes generated as described in Section~\ref{subsec:electron_mc}, corresponding to the Run-2 rel.22 period.
 
-Signal electrons are selected from $Z \rightarrow e^{+}e^{-}$ decays, complemented with $J/\psi \rightarrow e^{+}e^{-}$ resonances to increase statistics in the low-\et region. As sources of the main background processes that mimic electron-like signatures, we use the $\text{JF}17$ sample, complemented with a sample of simulated \ttbar events, from which only events containing at least one lepton in the final state are considered.
+Signal electrons are selected from $Z \rightarrow e^{+}e^{-}$ decays, complemented with $J/\psi \rightarrow e^{+}e^{-}$ at low-\et. As sources of the main background processes that mimic electron-like signatures, a $\text{JF}17$ sample is used, complemented with a sample of simulated \ttbar events, from which only events containing at least one lepton in the final state are considered.
 
 These samples are processed through the \textsc{TagAndProbe} analysis software, a \textsc{GitLab}~\cite{tagandprobe} project maintained by the $e/\gamma$ Combined Performance group, focused on the treatment and performance measurements of electrons and photons in ATLAS. This framework provides a convenient format for storing and classifying the electron candidates, allowing for the application of certain quality requisites.
 
-In our case, a minimal preselection is applied, consisting of all reconstructed electrons to have a transverse energy of at least $4.5$~GeV, a minimum of one hit in the pixel subdetector, and at least seven hits in the silicon detector systems. Additionally, only electrons within the region $|\eta| < 2.47$ are considered. The electron candidates are corrected for energy scale and resolution using the \textsc{TagAndProbe} framework, and further selection criteria are applied to reject candidates associated with problematic detector regions or poorly reconstructed calorimeter clusters.
+In our case, a minimal preselection is applied, consisting of all reconstructed electrons to have \et$>4.5$~GeV, a minimum of one hit in the pixel subdetector, and at least seven hits in the silicon detector systems. Additionally, only electrons within the region $|\eta| < 2.47$ are considered. The electron candidates are corrected for energy scale and resolution, and further selection criteria are applied to reject candidates in problematic detector regions or with poorly reconstructed calorimeter clusters.
 
-Finally, it is important to note that, from $Z$-boson decays, only electron candidates with \et$>15$~GeV are used, since lower-energy regions suffer from an increased population of background electrons. For \et below this threshold, electrons from $J/\psi$ decays are used instead. Further requirements on the origin of the electrons are applied to ensure that different types of candidates are selected from each sample, resulting in six distinct classes, which will be defined in the following.
+Finally, it should be stressed that, also in these studies, only electron candidates from $Z$-boson decays with \et $>15$~GeV are used, while $J/\psi$ decays are considered for candidates below this threshold. Further requirements on the origin of the electrons are applied to ensure that different types of candidates are selected from each sample, resulting in six distinct classes, which will be defined in the following.
 
 \subsubsection{Classes}
 
 One of the most important steps when training a supervised classifier like a DNN is the definition of the target classes. In our case, this translates into deciding which electron candidates are to be considered signal, and which ones are background. It is also important to note that different types of background electrons will have different properties similar to those of prompt electrons,
-so any identification approach will exhibit a different separation power depending on the type of object that fakes prompt electrons.
+so any identification approach will exhibit a different separation power depending on the type of object that fakes the signature of prompt electrons.
 
-This classification is far from trivial, since borderline or grey cases naturally arise in many physics contexts, and a good classification scheme should be general enough to work for a wide range of analyses.
+This classification is far from trivial, since borderline or grey cases naturally arise in many physics contexts, and a good classification scheme should work for a wide range of analyses.
 The class labels used in this study are based on a MC \textit{truth} classification, which uses information such as the origin and type of the electron, as well as those of its mother particles. 
-This information is provided by the \texttt{MCTruthClassifierTool}~\cite{atlas:MCTruthClassifierTool} and can be uniquely accessed in our produced MC simulations.
+This information is provided by the \texttt{MCTruthClassifierTool}~\cite{atlas:MCTruthClassifierTool}.
 
 \begin{table}[h!]
   \centering
@@ -200,12 +200,12 @@ This information is provided by the \texttt{MCTruthClassifierTool}~\cite{atlas:M
 
 The defined classes are shown in Table~\ref{tab:electron_classes}, as well as the corresponding simulated samples from which candidates are selected. The two signal-like classes, namely \texttt{El} (prompt electrons) and \texttt{CF} (charge-flip electrons), are extracted from $Z \rightarrow e^{+}e^{-}$ and $J/\psi \rightarrow e^{+}e^{-}$ events.
 
-The remaining four background-like classes are primarily obtained from the $\text{JF}17$ sample. As explained, the \ttbar\ sample is used to increase the statistics for electrons originating from Heavy-Flavour decays and photon conversion electrons.
+The remaining four background-like classes are primarily obtained from the $\text{JF}17$ sample, with the addition of the \ttbar\ sample to increase statistics for certain electron classes.
 
-Prompt electrons are consistently treated as signal throughout this work. Conversely, electrons from photon conversions, Heavy-Flavour decays, Light-Flavour hadron decays, as well as hadrons misidentified as electrons, are always considered background. However, the classification of charge-flip electrons is less straightforward, since even if they originate from prompt processes, their charge is incorrectly reconstructed. Therefore, whether they are considered as signal or background depends on the specific physics analysis.
+Prompt electrons are consistently treated as signal throughout this work. Conversely, electrons from photon conversions (PC), Heavy-Flavour (HF) decays, Light-Flavour hadron decays (LFEg), as well as hadrons misidentified as electrons (LFH), are always considered background. However, the classification of charge-flip electrons is less straightforward, since even if they originate from prompt processes, their charge is incorrectly reconstructed. Therefore, whether they are considered as signal or background depends on the specific physics analysis.
 In single-lepton analyses, the reconstructed charge is typically irrelevant, allowing charge-flip electrons to be included as signal to increase statistics. Even in charge-sensitive analyses their impact is often small due to the low misidentification rate. However, in final states with two same-sign leptons, charge-flip electrons are treated as background, as they can mimic the signal while originating from more common SM processes.
 
-It is interesting to dedicate a few more words to the ambiguity in the definition of electron classes. As discussed at the beginning of this section, not all electrons can be assigned to signal or background categories in a straightforward way. For example, in analyses targeting $H \rightarrow \tau^+\tau^-$ decays, electrons originating from $\tau$-lepton~\footnote{Electrons produced from in $\tau \to e \nu$ decays are denoted as $\tau_{e}$} decays, despite being slightly displaced due to the lifetime of the $\tau$-lepton, exhibit some calorimeter-based variables nearly identical to those from $Z \rightarrow e^{+}e^{-}$, except for impact parameter-related ones as can be seen in Figure~\ref{fig:compare} and~\ref{fig:compare2}. Relying too heavily on displacement for classification could thus reduce the efficiency for $\tau_e$ electrons. 
+It is interesting to dedicate a few more words to the ambiguity in the definition of electron classes. As discussed at the beginning of this section, not all electrons can be assigned to signal or background categories in a straightforward way. For example, in analyses targeting $H \rightarrow \tau^+\tau^-$ decays, electrons originating from $\tau$-lepton~\footnote{Electrons produced from in $\tau \to e \nu$ decays are denoted as $\tau_{e}$} decays, despite being slightly displaced due to the lifetime of the $\tau$-lepton, exhibit some calorimeter-based variables nearly identical to those from $Z \rightarrow e^{+}e^{-}$, except for impact parameter-related ones as shown in Figures~\ref{fig:compare} and~\ref{fig:compare2}. Relying too heavily on displacement for classification could thus reduce the efficiency for $\tau_e$. 
 %METER AQUÍ UNOS PLOTS COMPARATIVOS ENTRE ZTAUTAU Y ZEE DE shower-shapeS E IMPACT PARAMETER??? O NO VALE LA PENA AHONDAR TANTO
 \begin{figure}[htbp]
   \centering
@@ -239,16 +239,10 @@ In Table~\ref{table:inputs}, all the variables used are listed, along with a bri
 
 As specified, there are some variables that are not used as input features for training the DNN, but are instead applied as simple rectangular cuts afterwards, in the optimisation step that will be detailed in the next section, since in some specific cases they could provide additional discrimination power. There are also other variables that, in addition to being used for training, are also employed for these rectangular cuts, such as $n_{\text{Si}}$ and $n_{\text{Pixel}}$.
 
-As previously mentioned, the choice of input variables is not exactly the same as the one used to construct the LH discriminant~\cite{Aaboud:2657964}. First of all, the \et and $\eta$ of the electron candidates appear indirectly in the LH construction, since the PDFs are provided in different bins of these variables in order to account for the differences in the kinematic features of the candidates across the various regions of the phase space. Since replicating this binning strategy for the DNN would be computationally expensive, these variables have been instead included as inputs to provide the model with information about the phase space, although, as will be discussed, they are treated with special care.
+As previously mentioned, the choice of input variables is not exactly the same as the one used to construct the LH discriminant~\cite{Aaboud:2657964}. First of all, the \et and $\eta$ of the electron candidates appear indirectly in the LH construction, since the PDFs are provided in different bins of these variables in order to account for the differences in the kinematic features of the candidates across the various regions of the phase space. Since replicating this binning strategy for the DNN would be computationally expensive, these variables have been instead included as inputs to provide the model with information about the phase space, although, as will be discussed, they are treated with special care. \clearpage
 
-Moreover, it has been already mentioned that the number of hits in the main track of our electron candidates is not only used for rectangular cuts, as done in the LH approach, but also as input variables in the training together with other variables like $E/p$ and $w_{\text{stot}}$. 
-
-Most importantly, this strategy allows the usage of highly correlated variables, such as $R_{\text{had1}}$ and $R_{\text{had}}$, which capture at different levels the fraction of energy from the EM cluster that leaks into the hadronic calorimeter. In the LH construction, by definition, only one of these variables can be used, depending on the detector geometry region. In contrast, ML algorithms such as DNNs can greatly benefit from input feature correlations, especially in classification tasks where correlations differ across the various classes.
-
-%\renewcommand{\arraystretch}{0.95}
-\clearpage
 {\scriptsize
-\begin{longtable}{p{2.3cm}p{6.5cm}p{1.8cm}p{1.8cm}}
+\begin{longtable}{p{2.3cm}p{7cm}p{1.5cm}p{1.5cm}}
   \caption{Input variables for electron identification DNN. Variables with ``C'' in usage are used to perform additional rectangular cuts when defining the DNN WPs. In the variables constructed using the second layer of the calorimeter, $3\times3$, $3\times5$, $3\times7$ and $7\times7$ cells refer to areas of $\Delta \eta \times \Delta \phi$ space in units of $0.025\times0.0245$. Description based on Ref.~\cite{dnn_paper}.}\\
   \toprule
   \textbf{Type} & \textbf{Description} & \textbf{Name} & \textbf{Usage} \\
@@ -291,17 +285,21 @@ Most importantly, this strategy allows the usage of highly correlated variables,
 \end{longtable}
 }
 
+Moreover, it has been already mentioned that the number of hits in the main track of our electron candidates is not only used for rectangular cuts, as done in the LH approach, but also as input variables in the training together with other variables like $E/p$ and $w_{\text{stot}}$. 
+
+Most importantly, this strategy allows the usage of highly correlated variables, such as $R_{\text{had1}}$ and $R_{\text{had}}$, which capture at different levels the fraction of energy from the EM cluster that leaks into the hadronic calorimeter. In the LH construction, by definition, only one of these variables can be used, depending on the detector geometry region. In contrast, ML algorithms such as DNNs can greatly benefit from input feature correlations, especially in classification tasks where correlations differ across the various classes.
+
 It is also important to highlight that two variables included in the list are not used in the LH approach nor in the previous version of this DNN~\cite{dnn_paper}. 
 
 The first of these variables is the so-called \texttt{SCTWeightedCharge}, also denoted as $q_{\text{SCT}}$, which is defined as:
 \begin{equation}
-  \texttt{SCTWeightedCharge} = q^{e}\sum_{\text{trk}}\left( q^{\text{trk}}N^{\text{trk}}_{\text{SCT}} \right)/\sum_{\text{trk}} N^{\text{trk}}_{\text{SCT}}
+  q_{\text{SCT}} = q^{e}\sum_{\text{trk}}\left( q^{\text{trk}}N^{\text{trk}}_{\text{SCT}} \right)/\sum_{\text{trk}} N^{\text{trk}}_{\text{SCT}}
 \end{equation}
 where $q^{e}$ is the charge of the electron (as given by its primary track), $N^{\text{trk}}_{\text{SCT}}$ is the number of hits in the SCT for a given track associated to the electron, and $q^{\text{trk}}$ is the charge associated to that track. This variable can be interpreted as the electron charge weighted over all tracks associated with the electron, beyond the primary one. By construction, it takes a value of one if the electron has only one associated track. However, in cases where multiple tracks are associated to the same electron candidate, the value may differ from one, which is typically more likely when the candidate corresponds to a charge-flip electron.
 
 The second variable is the so-called charged impact parameter, $q \times d_{0}$, which replaces the $d_{0}$ variable used previously.
 
-The main interest of these two variables lies in their discriminating power for rejecting charge-flip electrons against prompt electrons candidates with correctly identified charge~\cite{carnelli}, property that can be observed in the the plots shown in Figure~\ref{fig:cf_plots}. This provides the DNN with an additional potential to identify this specific class of electrons. This feature will be discussed in more detail in a later section.
+The main interest of these two variables lies in their discriminating power for rejecting charge-flip electrons against prompt electrons candidates with correctly identified charge~\cite{carnelli}, property that can be observed in the the plots shown in Figure~\ref{fig:cf_plots}. This provides the DNN with an additional potential to identify this specific class of electrons. This feature will be discussed in more detail in Section~\ref{dnn:tuning}.
 
 \begin{figure}[htbp]
   \centering
@@ -313,17 +311,17 @@ The main interest of these two variables lies in their discriminating power for 
       \includegraphics[width=\textwidth]{images/selection_MultiClass_sctweightedcharge_train.pdf}
       \caption{}
   \end{subfigure}
-  \caption{Distributions of the new variables, (a) $q \times d_{0}$ and (b) \texttt{SCTWeightedCharge}, considered to improve the rejection of CF electrons from prompt electrons.}
+  \caption{Distributions of the new variables, (a) $q \times d_{0}$ and (b) $q_{\text{SCT}}$, considered to improve the rejection of CF electrons from prompt electrons.}
   \label{fig:cf_plots}
 \end{figure}
 
 \paragraph{Shower-shape variables corrections} \mbox{}\\
 \\
-It is worth starting by defining what a shower-shape variable is in this context. As the name suggests, these are the variables already described in Table~\ref{table:inputs} that characterise the shape of the electromagnetic shower produced by the electron candidates in the calorimeter system.
+Shower-shape variables characterize the development of the EM shower produced by the electron candidates in the calorimeter.
 
-The main issue that arises here is that, in order for the DNN to be trained and to perform well when applied to real data, the distributions of the input variables for simulated electrons should ideally resemble those of real electrons observed in data. However, due to imperfections in the detector modelling, the disagreement between MC simulations and data can be too large especially for those variables involving calorimeter signal readouts. % (such as energy leakage due to undesired connections between LAr cells, commonly referred to as \textit{cross-talk}).
+In order for the DNN to be trained and to perform well when applied to real data, the distributions of the input variables for simulated electrons should resemble those of real electrons observed in data. However, due to imperfections in the detector modelling, the disagreement between MC simulations and data can be too large. % (especially for those variables involving calorimeter signal readouts. such as energy leakage due to undesired connections between LAr cells, commonly referred to as \textit{cross-talk}).
 
-Corrections are therefore derived for these shower-shape variables in cases where the differences between data and MC are too significant. These corrections are based on individual affine transformations applied in bins of $E_{\text{T}}$ and $\eta$, such that the mean of the distribution being stretched and/or its width shifted, depending on the severity of the discrepancy.
+Corrections are applied to these shower-shape variables in order to improve their modelling of the real data. These corrections are based on individual affine transformations applied in bins of $E_{\text{T}}$ and $\eta$, such that the mean of the distribution being stretched and/or its width shifted, depending on the severity of the discrepancy.
 
 The corrections are derived by comparing the distributions evaluated for \zee electron candidates extracted from data and MC simulations using the tag-and-probe technique. The transformation parameters are obtained by minimising the $\chi^2$ between the two distributions. More details can be found in Ref.~\cite{Aaboud:2657964}, but an example of the application of these corrections can be seen in Figure~\ref{fig:corrected} for the variables $f_{3}$ and $R_{\text{had}}$.
 
@@ -350,11 +348,11 @@ For $R_{\text{had}}$, however, it is also evident that in order to match the dat
 %SHIFT&STRETCH Y QUE HAY OTRO QUE SE USO QUE NO VALE PARA DNN POR LAS CORRELACIONES Y PONER PLOTS DE CORRELACIONES Y DECIR QUE SE CONSERVAN GUAY ;)
 This correction method, often referred to as \textit{fudging} in this context, is known as the \textit{Shift}$\&$\textit{Stretch} approach. Other strategies exist to address discrepancies between data and MC simulations, such as the \textit{Gaussian Smearing} approach, which assumes that the noise-like imperfections introduced by the calorimeter can be incorporated into MC simulations through Gaussian approximations~\cite{Puddefoot:2797826}.
 
-This \textit{Gaussian Smearing} approach was used to correct the PDFs employed in the construction of the LH discriminant using R.22 Run-2 data. However, it cannot be applied to the DNN input variables. Since these Gaussian corrections introduce artificial correlations in the input distributions, which ultimately degrade the performance of the DNN. Unlike the LH method, which is designed to be robust against such effects, DNNs rely on the preservation of meaningful correlations between features.
+This \textit{Gaussian Smearing} approach was used to correct the PDFs employed in the construction of the LH discriminant using rel.22 Run-2 datasets. However, it cannot be applied to the DNN input variables, since these Gaussian corrections introduce artificial correlations in the input distributions, which degrade the performance of the DNN. Unlike the LH method, which is designed to be robust against such effects, DNNs rely on the preservation of meaningful correlations between features.
 
 The \textit{Shift}$\&$\textit{Stretch} method, on the other hand, applies simple affine transformations that better preserve these correlations. This can be seen in Figure~\ref{fig:correlations}, where the correlation matrices between input variables are shown for MC simulations before and after corrections, and for collision data.
 
-\begin{figure}[htbp]
+\begin{figure}[h]
   \centering
   \begin{subfigure}[b]{0.49\textwidth}
       \centering
@@ -369,6 +367,7 @@ The \textit{Shift}$\&$\textit{Stretch} method, on the other hand, applies simple
       \caption{Data}
       \label{fig:corr_data}
   \end{subfigure}
+  \\
   \vspace{0.4cm}
   \begin{subfigure}[b]{0.49\textwidth}
       \centering
@@ -389,19 +388,18 @@ The \textit{Shift}$\&$\textit{Stretch} method, on the other hand, applies simple
 
 \paragraph{Preprocessing} \mbox{}\\
 \\
-Before proceeding to the training of our DNN, it is important to remember that different physical processes have been used to populate the various electron candidate classes. Consequently, the $E_{\text{T}}$ distribution can vary significantly among classes. For instance, most prompt electrons from $Z \to e^{+}e^{-}$ decays will have $E_{\text{T}} \approx 45$~GeV, corresponding to half of the $Z$-boson mass, as can be seen in Figure~\ref{fig:et_eta_selection}. This could introduce significant biases and degrade the DNN’s performance, as discussed in Section~\ref{dnn:preprocessing}.
+As different physical processes have been used to populate the various electron candidate classes, the $E_{\text{T}}$ distribution can vary significantly among them. For instance, most prompt electrons from $Z \to e^{+}e^{-}$ decays will have $E_{\text{T}} \approx 45$~GeV, corresponding to half of the $Z$-boson mass, as can be seen in Figure~\ref{fig:et_eta_selection}. This could introduce significant biases and degrade the DNN’s performance, as discussed in Section~\ref{dnn:preprocessing}.
 To prevent the network from distinguishing classes based solely on $E_{\text{T}}$ and $\eta$, these input distributions need to be harmonised across all six classes. This is achieved through a combination of downsampling and reweighting.
 
-\begin{figure}[htbp]
+\begin{figure}[h]
   \centering
-  \begin{subfigure}[b]{0.49\textwidth}
+  \begin{subfigure}[b]{0.6\textwidth}
       \centering
       \includegraphics[width=\textwidth]{selection_MultiClass_Et_train.pdf}
       \caption{}
       \label{fig:et_selection}
   \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.49\textwidth}
+  \begin{subfigure}[b]{0.6\textwidth}
       \centering
       \includegraphics[width=\textwidth]{selection_MultiClass_Eta_train.pdf}
       \caption{}
@@ -413,27 +411,26 @@ To prevent the network from distinguishing classes based solely on $E_{\text{T}}
 
 First, to limit the statistical imbalance, the prompt electron sample is downsampled. Prompt candidates are randomly removed in $E_{\text{T}}$ bins so that, within each bin, their number does not exceed five times the number of background candidates. This effectively reduces the prominent peak at 45~GeV, as illustrated in Figure~\ref{fig:et_downsampled}. Due to limited statistics, no downsampling is applied to the charge-flip class, even though a similar peak is present.
 
-\begin{figure}[htbp]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.6\textwidth]{downsampled_MultiClass_Et_train.pdf}
   \caption{Distribution of $E_{\text{T}}$ after applying downsampling.}
   \label{fig:et_downsampled}
 \end{figure}
 
-Once downsampling is applied, weights are derived to reweight the $E_{\text{T}}$ and $\eta$ distributions independently for each class. These weights are then combined by multiplying the two, assuming no strong correlation between $E_{\text{T}}$ and $\eta$. After reweighting, all distributions are normalised so that the total weight per class remains constant. The resulting harmonised distributions for $E_{\text{T}}$ and $\eta$ are shown in Figures~\ref{fig:et_eta_reweighted}.
+Once downsampling is applied, weights are derived to reweight the $E_{\text{T}}$ and $\eta$ distributions independently for each class. These weights are then combined by multiplying the two, assuming no strong correlation between $E_{\text{T}}$ and $\eta$. After reweighting, all distributions are normalised so that the sum of weight per class remains constant. The resulting harmonised distributions for $E_{\text{T}}$ and $\eta$ are shown in Figure~\ref{fig:et_eta_reweighted}.
 
-The $\eta$ reweighting aims for a flat distribution, while for $E_{\text{T}}$, a shape resembling the Light-Flavour hadron class from the \ttbar sample is targeted, featuring a flat region up to 15~GeV followed by a falling slope. This approach reduces the bias efficiently while preserving classification performance. Some residual discrepancies may remain due to small final correlations between $E_{\text{T}}$ and $\eta$, especially for the charge-flip class. While a 2D reweighting could mitigate this, it is avoided due to limited statistics at high $E_{\text{T}}$.
+The $\eta$ reweighting aims for a flat distribution, while for $E_{\text{T}}$, a flat region until 15~GeV is targeted, followed by falling slope resembling the shape of the Light-Falvour hadron class. This approach reduces the bias efficiently while preserving classification performance. Some residual discrepancies may remain due to small final correlations between $E_{\text{T}}$ and $\eta$, especially for the charge-flip class. While a 2D reweighting could mitigate this, it is avoided due to limited statistics at high $E_{\text{T}}$.
 
 \begin{figure}[htbp]
   \centering
-  \begin{subfigure}[b]{0.49\textwidth}
+  \begin{subfigure}[b]{0.6\textwidth}
       \centering
       \includegraphics[width=\textwidth]{weighted_MultiClass_Et_train.pdf}
       \caption{}
       \label{fig:et_reweighted}
   \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.49\textwidth}
+  \begin{subfigure}[b]{0.6\textwidth}
       \centering
       \includegraphics[width=\textwidth]{weighted_MultiClass_Eta_train.pdf}
       \caption{}
@@ -599,7 +596,7 @@ Finally, to equalise the total statistical weight across classes, an additional 
   \label{fig:dnn_inputs_distributions_C}
 \end{figure}
 
-The distributions of all input variables after the application of these modifications (except the class-reweighting) can be found in Figures~\ref{fig:dnn_inputs_distributions_A},~\ref{fig:dnn_inputs_distributions_B} and~\ref{fig:dnn_inputs_distributions_C}. However, there is still one last step before passing all the inputs distributions through the DNN, which is the transformation of all of them to uniform distributions between zero and one, using empirical quantiles as explained in Section~\ref{dnn:preprocessing}. This action facilitates the training of the neural network and speeds up the different steps in the optimization.
+The distributions of all input variables after the application of these modifications (except the class-reweighting) can be found in Figures~\ref{fig:dnn_inputs_distributions_A}-\ref{fig:dnn_inputs_distributions_C}. However, there is still one last step before passing all the inputs distributions through the DNN training, which is the transformation to uniform distributions between zero and one, using empirical quantiles as explained in Section~\ref{dnn:preprocessing}. This action facilitates the training of the neural network and speeds up the different steps in the optimization.
 Figure~\ref{fig:transformed} illustrates the impact of this transformation on the $R_{\text{had}}$ variable, taken from Ref.~\cite{dnn_paper}. The plot displays the full distribution together with the individual contributions from prompt electrons and Light-Flavour hadrons. After applying the transformation, the overall distribution becomes uniform within the $[0,1]$ interval.
 
 \begin{figure}[htbp]
@@ -620,8 +617,8 @@ Figure~\ref{fig:transformed} illustrates the impact of this transformation on th
 
 \subsubsection{Training procedure}
 
-In this work, a Deep Neural Network with a total of five hidden layers has been employed, each containing 256 nodes. In these hidden layers, the Leaky ReLU activation function is applied to introduce non-linearity, as detailed in Sec.~\ref{sec:dnn_general}, and batch normalization is also implemented.  
-This algorithm performs a multinomial classification, producing as output a total of six scores, one for prompt electrons and five for each of the background classes. In the final output layer, the Softmax activation function is applied.  
+In this work, a DNN with a total of five hidden layers has been employed, each containing 256 nodes. In these hidden layers, the Leaky ReLU activation function is applied to introduce non-linearity, as detailed in Section~\ref{sec:dnn_general}, and batch normalization is also implemented.  
+This algorithm performs a multinomial classification, producing as output a total of six scores, one for prompt electrons ($p_{El}$) and five for each of the background classes ($p_{CF}$, $p_{HF}$, $p_{PC}$, $p_{LFEg}$ and $p_{LFH}$). In the final output layer, the Softmax activation function is applied.  
 A schematic diagram of our DNN architecture is shown in Figure~\ref{dnn_sketch}.
 
 \begin{figure}[htbp]
@@ -636,7 +633,7 @@ The final training is performed over a total of 100 epochs, retaining as the fin
 
 \subsubsection{Electron classification}
 
-The decision to employ a multinomial classification as the output of our DNN allows for distinguishing between the different background classes that typically populate our real collision data. Beyond kinematics, the most relevant input variables also differ across classes, reflecting, for example, the distinct characteristics of the calorimeter showers they produce in the detector. As an illustration, electron candidates originating from $b$- or $c$-hadrons tend to deposit more energy in the innermost layers than prompt electrons, as can be seen in Figure~\ref{fig:input2}.
+The decision to employ a multinomial classification as the output of our DNN allows for distinguishing between the different background classes that typically populate our real collision data. Beyond kinematics, the most relevant input variables also differ across classes, for instance reflecting the distinct characteristics of the calorimeter showers that they produce in the detector. As an illustration, electron candidates originating from $b$- or $c$-hadrons tend to deposit more energy in the innermost layers than prompt electrons, as can be seen in Figure~\ref{fig:input2}.
 
 Nevertheless, for the purpose of identifying signal electrons over the rest of the background candidates, a binomial discrimination must ultimately be performed when defining our working points as a function of efficiencies.  
 For this, the following binomial discriminant is defined, simply combining the output given by the DNN:
@@ -645,12 +642,12 @@ For this, the following binomial discriminant is defined, simply combining the o
   \small
   %\footnotesize
   \mathcal{D}_{el} = \frac{f_{El}p_{El} + (1-f_{El})p_{CF}}{f_{PC}p_{PC}+f_{HF}p_{HF}+f_{LFEg}p_{LFEg}+(1-f_{PC}-f_{HF}-f_{LFEg})p_{LFH}}
-\label{dnn_discriminant}
+\label{eq:dnn_discriminant}
 \end{equation}
 where $p_{X}$ are the scores provided by the DNN for each class, and $f_{X}$ are tunable parameters or weights, referred to as \textit{fractions}, which control the relative importance of the different classes in the discriminant.  
 This discriminant separates electron candidates considered as signal, in a generic electron identification problem, which in this case are prompt and Charge-Flip electrons (therefore placed in the numerator), from the remaining background electrons in the denominator.
 
-As mentioned, the fractions $f_{X}$ are tunable, and to simplify the procedure it is imposed that their sum equals unity in both numerator and denominator. Depending on the physics analysis under study and the composition of its final states, one background class may be more relevant than another, and this is fully configurable here.
+As mentioned, the fractions $f_{X}$ are tunable, and to simplify the procedure it is imposed that their sum equals unity in both numerator and denominator. Depending on the physics analysis under study and the composition of its final states, one background class may be more relevant than another, and this is fully configurable.
 
 Ideally, the determination of these fractions would be performed directly from real data, just as is done for the LH during training. However, obtaining sufficiently pure and unbiased control regions from data is a highly challenging task.
 For this reason, in generic electron identification studies presented in this thesis, the fractions are tuned and the performance of the DNN is evaluated using the test dataset obtained from the simulated input samples. 
@@ -659,7 +656,7 @@ The tuning of these fractions, the evaluation of the algorithm’s performance, 
 As a figure of merit for estimating the performance of our algorithm and comparing it to the LH, ROC curves are used, already described in Chapter~\ref{chap:machine_learning}.
 
 The calculation of the $f_{X}$ is parametrized only in different $|\eta|$ bins. The same fractions are applied across the full $E_{\text{T}}$ range to obtain a smooth and continuous discriminant over the entire energy spectrum.
-The optimal $f_{X}$ values are obtained by maximising the Area Under the Curve (AUC) of the ROC associated with the $\mathcal{D}_{el}$ discriminant, allowing all fractions to float. The optimisation is performed in the range between $70\%$ and $95\%$ signal efficiency, which corresponds to the typical operating window of electron identification working points. The $|\eta|$ bins employed here are broader than those used later when defining the DNN working points, which apply cuts on the discriminant as explained in Sec.~\ref{dnn:tuning}.
+The optimal $f_{X}$ values are obtained by maximising the Area Under the Curve (AUC) of the ROC associated with the $\mathcal{D}_{el}$ discriminant, allowing all fractions to float. The optimisation is performed in the range between $70\%$ and $95\%$ signal efficiency, which corresponds to the typical operating window of electron identification working points. The $|\eta|$ bins employed here are broader than those used later when defining the DNN working points, which apply cuts on the discriminant as explained in Section~\ref{dnn:tuning}.
 Table~\ref{tune:binning} lists the $|\eta|$ and $E_{\text{T}}$ bin boundaries used in each case.
 
 \begin{table}[htbp]
@@ -706,47 +703,7 @@ Table~\ref{tune:binning} lists the $|\eta|$ and $E_{\text{T}}$ bin boundaries us
 \end{table}
 
 As previously mentioned, the $f_{X}$ values obtained in these bins from the test sample are considered optimal for this study. However, since the dataset composition may differ in other analyses, these values can be adjusted accordingly.
-
-With the $ \mathcal{D}_{el} $ discriminant now completely determined by the fractions, Figure~\ref{fig:dnn_final_disc_ab} shows its distribution evaluated for the different electron candidate classes, for a specific $|\eta|$ and $E_{\text{T}}$ bin.
-% Figura 1: paneles (a) y (b)
-\begin{figure}[htbp]
-  \centering
-  \begin{subfigure}[t]{0.48\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{discriminant_plots/panel_a.pdf}
-    \caption{}
-    \label{fig:dnnDisc_a}
-  \end{subfigure}\hfill
-  \begin{subfigure}[t]{0.48\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{discriminant_plots/panel_b.pdf}
-    \caption{}
-    \label{fig:dnnDisc_b}
-  \end{subfigure}
-
-  \caption{Signal discriminant $D_{\mathrm{el}}$ of the DNN shown for (a) prompt electrons,
-  Charge-Flip electrons, photon conversions, and electrons from Heavy-Flavour decays; and
-  (b) prompt electrons, $e/\gamma$ objects from Light-Flavour decays, and Light-Flavour hadrons.
-  Electron candidates satisfy $15<E_{T}\leq 20~\mathrm{GeV}$ and $0.0<|\eta|\leq 0.8$.}
-  \label{fig:dnn_final_disc_ab}
-\end{figure}
-
-% Figura 2: panel (c)
-\begin{figure}[htbp]
-  \centering
-  \begin{subfigure}[t]{0.60\linewidth}
-    \centering
-    \includegraphics[width=\linewidth]{discriminant_plots/panel_c.pdf}
-    \label{fig:dnnDisc_c}
-  \end{subfigure}
-
-  \caption{Signal discriminant $D_{\mathrm{el}}$ of the DNN shown for prompt electrons versus
-  the combined background (all classes except prompt and Charge-Flip).
-  Electron candidates satisfy $15<E_{T}\leq 20~\mathrm{GeV}$ and $0.0<|\eta|\leq 0.8$.}
-  \label{fig:dnn_final_disc_c}
-\end{figure}
 The relative contribution of each background electron class in the test sample used for the fractions optimization can be found in Table~\ref{tab:relative_contribution}, both inclusively and for the specific kinematic bin under study $(E_{\text{T}},|\eta|)$.
-
 \begin{table}[htbp]
   \centering
   \caption{Fractions and statistical errors for all candidates and for the selected kinematic bin.}
@@ -803,6 +760,45 @@ The relative contribution of each background electron class in the test sample u
   \endgroup
 \end{table}
 
+With the $ \mathcal{D}_{el} $ discriminant now completely determined by the fractions, Figure~\ref{fig:dnn_final_disc_ab} shows its distribution evaluated for the different electron candidate classes, for a specific $|\eta|$ and $E_{\text{T}}$ bin.
+% Figura 1: paneles (a) y (b)
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{discriminant_plots/panel_a.pdf}
+    \caption{}
+    \label{fig:dnnDisc_a}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.48\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{discriminant_plots/panel_b.pdf}
+    \caption{}
+    \label{fig:dnnDisc_b}
+  \end{subfigure}
+
+  \caption{Signal discriminant $D_{\mathrm{el}}$ of the DNN shown for (a) prompt electrons,
+  Charge-Flip electrons, photon conversions, and electrons from Heavy-Flavour decays; and
+  (b) prompt electrons, $e/\gamma$ objects from Light-Flavour decays, and Light-Flavour hadrons.
+  Electron candidates satisfy $15<E_{T}\leq 20~\mathrm{GeV}$ and $0.0<|\eta|\leq 0.8$.}
+  \label{fig:dnn_final_disc_ab}
+\end{figure}
+
+% Figura 2: panel (c)
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[t]{0.60\linewidth}
+    \centering
+    \includegraphics[width=\linewidth]{discriminant_plots/panel_c.pdf}
+    \label{fig:dnnDisc_c}
+  \end{subfigure}
+
+  \caption{Signal discriminant $D_{\mathrm{el}}$ of the DNN shown for prompt electrons versus
+  the combined background (all classes except prompt and Charge-Flip).
+  Electron candidates satisfy $15<E_{T}\leq 20~\mathrm{GeV}$ and $0.0<|\eta|\leq 0.8$.}
+  \label{fig:dnn_final_disc_c}
+\end{figure}
+
 
 
 In Figures~\ref{fig:dnn_final_disc_ab} and~\ref{fig:dnn_final_disc_c}, it can be observed that both signal electron classes, prompt and Charge-Flip, reach higher discriminant values, showing a more or less pronounced peak compared to the other background classes. Prompt electrons present a more distinctive distribution than Charge-Flip electrons, although in both cases there is a considerable population of Heavy-Flavour and Photon-Conversion background candidates toward the higher end of the range. However, these background distributions also tend to peak at lower discriminant values, which is equally important for achieving high identification efficiencies when defining thresholds.
@@ -815,28 +811,34 @@ In contrast, as seen in Figure~\ref{fig:dnnDisc_b}, the distributions of the Lig
 
 Since the rejection power is expected to vary substantially across the different background classes, Receiver Operating Characteristic (ROC) curves are presented both individually for each background class and inclusively for all backgrounds combined. Due to their special status, charge-flip electrons are excluded from both signal and background definitions in the main performance evaluation.
 
-Figure~\ref{fig:roc_mainbkg} shows the ROC curves obtained with MC data for prompt electrons against the combined background and each background class individually. The signal definition always includes only prompt electrons, while the LH working points (Loose, Medium, Tight) are represented by single points, located at progressively lower signal efficiencies: Loose around $\varepsilon_{\rm sig} = 0.85$, Medium around $0.75$, and Tight around $0.65$.
+Figure~\ref{fig:roc_allblkg} shows the ROC curves obtained with MC data for prompt electrons against electrons from all background classes, and in Figure~\ref{fig:roc_mainbkg} the ROCs curves against each background class individually are also shown. The signal definition always includes only prompt electrons, while the LH working points (Loose, Medium, Tight) are represented by single points, located at progressively lower signal efficiencies: Loose around $\varepsilon_{\rm sig} = 0.85$, Medium around $\varepsilon_{\rm sig} =0.75$, and Tight around $\varepsilon_{\rm sig} =0.65$.
 
-Unlike the LH, the DNN curves shown do not include the additional rectangular cuts listed in Table~\ref{tab:wp_rectangular_cuts}, and therefore correspond to a slightly more relaxed selection, as the one used in the DNN training (at least 7 hits in the silicon detector and one pixel hit).
+Unlike the LH, the DNN curves shown do not include any additional rectangular cuts~\footnote{These rectangular cuts comprise the requirements on the number of hits in the pixel and silicon detectors, as well as an additional cut on the insertable B-Layer or a requirement on the ambiguity type, which are listed in Table~\ref{tab:wp_rectangular_cuts}.}, and therefore correspond to a slightly more relaxed selection, as the one used in the DNN training (at least 7 hits in the silicon detector and one pixel hit).
 
 Quantitatively, at the LH~Loose WP, the DNN achieves a background rejection about two times higher than LH when considering all background classes combined. For Heavy-Flavour decays, the improvement at this efficiency is more evident, with a factor close to $2.2$, whereas for Light-Flavour $e/\gamma$ and undecayed hadrons the rejection also increases, by factors of about $4$ and $5$, respectively. Photon conversions show a moderate enhancement, with the DNN reaching a rejection about two times larger than LH. For Charge-Flip electrons, the improvement is striking, with the DNN achieving a rejection almost $8$ times higher than LH in this $\eta$ region.
 
-Figure~\ref{fig:roc_cf} includes the ROC curve calculated for the rejection of Charge-Flip versus prompt electrons, shown here merely to illustrate the capability of the DNN to separate both signal electron classes. In this case, a modified discriminant is used, where the Charge-Flip term is moved to the denominator, as presented in Eq.~\ref{cf_disc}. In any case, since the number of prompt electrons largely exceeds that of Charge-Flip electrons in any realistic selection, including Charge-Flip candidates within the signal definition would have a negligible impact on the overall signal efficiency.
+Figure~\ref{fig:roc_cf} includes the ROC curve calculated for the rejection of Charge-Flip versus prompt electrons, shown merely to illustrate the capability of the DNN to separate both signal electron classes. In this case, a modified discriminant is used, where the Charge-Flip term is moved to the denominator in Eq.~\ref{eq:dnn_discriminant}:
+\begin{equation}
+  %\small
+  \footnotesize
+  \mathcal{D}_{el} = \frac{p_{El}}{f_{CF}p_{CF} + f_{PC}p_{PC}+f_{HF}p_{HF}+f_{LFEg}p_{LFEg}+(1-f_{CF}_f_{PC}-f_{HF}-f_{LFEg})p_{LFH}}
+\end{equation}
+In any case, since the number of prompt electrons largely exceeds that of Charge-Flip electrons in any realistic selection, including Charge-Flip candidates within the signal definition would have a negligible impact on the overall signal efficiency.
 
 In summary, the DNN consistently outperforms the LH in all background categories, with the most substantial benefits in rejecting backgrounds that exhibit distinctive calorimeter and tracking signatures, and smaller but still relevant gains for more signal-like sources such as Heavy-Flavour decays.
 
 The most notable gains are expected for Light-Flavour hadrons, Light-Flavour $e/\gamma$, and Charge-Flip electrons, the latter benefiting greatly from the new variables added to the DNN, providing a significantly enhanced rejection across the full efficiency range. For Heavy-Flavour electrons, the smaller improvement reflects their closer resemblance to prompt electrons. Photon conversions also benefit moderately from the DNN, as their rejection is already relatively high with LH.
 
 
-\begin{figure}[htbp]
+\begin{figure}[h]
   \centering
-  \includegraphics[width=0.6\linewidth]{ROC/15_20_0p0_0p8/binnedROCCurve_et15_20_eta0.0_0.8.pdf}
+  \includegraphics[width=0.7\linewidth]{ROC/15_20_0p0_0p8/binnedROCCurve_et15_20_eta0.0_0.8.pdf}
   \caption{Background rejection versus signal efficiency (ROC curves) for prompt electrons against all background classes combined in a representative $(E_{T}, |\eta|)$ bin, and the statistical uncertainty of the background rejection is shown as a band.}
   \label{fig:roc_allblkg}
 \end{figure}
 
 % --- Primera figura ---
-\begin{figure}[htbp]
+\begin{figure}[h]
   \centering
   % ---- Fila 1 ----
   \begin{subfigure}[t]{0.5\linewidth}
@@ -880,9 +882,9 @@ The most notable gains are expected for Light-Flavour hadrons, Light-Flavour $e/
 
 
 % --- Segunda figura ---
-\begin{figure}[htbp]
+\begin{figure}[h]
   \centering
-  \includegraphics[width=0.6\linewidth]{ROC/15_20_0p0_0p8/binnedROCCurveChargeFlip_et15_20_eta0.0_0.8.pdf}
+  \includegraphics[width=0.7\linewidth]{ROC/15_20_0p0_0p8/binnedROCCurveChargeFlip_et15_20_eta0.0_0.8.pdf}
   \caption{Background rejection versus signal efficiency (ROC curve) for prompt electrons against Charge-Flip electrons in a representative $(E_{T}, |\eta|)$ bin, and the statistical uncertainty of the background rejection is shown as a band.}
   \label{fig:roc_cf}
 \end{figure}
@@ -891,28 +893,28 @@ The most notable gains are expected for Light-Flavour hadrons, Light-Flavour $e/
 \subsubsection{Tuning and working points definition}
 \label{dnn:tuning}
 
-As a final step, the identification menu is constructed on the basis of the DNN decision. This menu encapsulates the set of thresholds applied to the DNN discriminant, together with the additional rectangular cuts associated with each defined working point.
+As a final step, the electron identification menu is constructed on the basis of the DNN decision. This menu encapsulates the set of thresholds applied to the DNN discriminant, together with the additional rectangular cuts associated with each defined working point.
 
-In this specific case, two discriminants are combined: $\mathcal{D}_{el}$, defined in Eq.~\ref{dnn_discriminant}, and $\mathcal{D}_{CF}$, defined as the simple ratio:
+In this specific case, two discriminants are combined: $\mathcal{D}_{el}$, defined in Eq.~\ref{eq:dnn_discriminant}, and $\mathcal{D}_{CF}$, defined as the simple ratio:
 \begin{equation}
   \mathcal{D}_{CF} = p_{El}/p_{CF}.
 \label{cf_disc}
 \end{equation}
-The first discriminant is used to separate both signal electron classes from the main background sources. For analyses sensitive to the electron charge in the final state, this can be complemented with the additional discriminant $\mathcal{D}_{CF}$, which exhibits strong separation power, as illustrated in Figure~\ref{fig:cf_discriminant}. Charge-Flip electrons are more likely to appear at higher $|\eta|$, where they traverse a larger amount of detector material, increasing the probability of processes such as bremsstrahlung; for this reason, the $2.01 < |\eta| < 2.37$ bin is chosen for the plot.
+The first discriminant is used to separate both signal electron classes from the main background sources. For analyses sensitive to the electron charge in the final state, this can be complemented with the additional discriminant $\mathcal{D}_{CF}$, which exhibits strong separation power, as illustrated in Figure~\ref{fig:cf_discriminant}. Charge-Flip electrons are more likely to appear at higher $|\eta|$, where they traverse a larger amount of detector material, as shown in Figure~\ref{fig:eta_selection}, increasing the probability of processes such as bremsstrahlung; for this reason, the $2.01 < |\eta| < 2.37$ bin is chosen for the plot.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.6\linewidth]{discriminant_plots/panel_d.pdf}
   \caption{Charge-Flip discriminant $D_{\mathrm{CF}}$ of the DNN shown for prompt electrons and
-  Charge-Flip electrons. Electron candidates satisfy $15<E_{T}\leq 20~\mathrm{GeV}$ and $0.0<|\eta|\leq 0.8$.}
+  Charge-Flip electrons. Electron candidates satisfy $15<E_{T}\leq 20~\mathrm{GeV}$ and $2.01<|\eta|\leq 2.37$.}
   \label{fig:cf_discriminant}
 \end{figure}
 
-To obtain the identification menus, we first determine thresholds on the $\mathcal{D}_{el}$ discriminant, targeting specific signal identification efficiencies. These efficiencies, summarized in the Table~\ref{tab:target_effs} for the Medium WP, are the same as those used to tune the LH discriminant, so we expect a similar signal identification performance. The procedure is carried out in the previously defined $\eta$ and $E_{\text{T}}$ bins, setting the discriminant threshold such that the fraction of signal electrons to the right of the cut matches the desired target efficiency.
+To obtain the identification menus, thresholds on the $\mathcal{D}_{el}$ discriminant are determined targeting specific signal identification efficiencies. These efficiencies, summarized in the Table~\ref{tab:target_effs} for the Medium WP, are the same as those used to tune the LH discriminant, so a similar signal identification performance is expected. The procedure is carried out in the previously defined $\eta$ and $E_{\text{T}}$ bins, setting the discriminant threshold such that the fraction of signal electrons to the right of the cut matches the desired target efficiency.
 
 \begin{table}[htbp]
   \centering
-  \caption{Target signal efficiencies per $(E_T, |\eta|)$ bin used for the DNN tuning.}
+  \caption{Target signal efficiencies per $(E_T, |\eta|)$ bin used for the DNN tuning of the Medium WP.}
   \renewcommand{\arraystretch}{1.2}
   \setlength{\tabcolsep}{0.8pt}
   \scriptsize
@@ -934,12 +936,15 @@ To obtain the identification menus, we first determine thresholds on the $\mathc
   \end{table}
   
 
-Subsequently, for the resulting signal electron sample, the same procedure is applied to the $\mathcal{D}_{CF}$ discriminant. In this case, the target efficiencies correspond to those obtained with the Charge-Flip Electron Identifier (ECID)~\footnote{This tool, based on a BDT model, was employed in the studies based on the previous ATLAS software release, R.21 Run-2, for the dedicated discrimination of prompt electrons with their charge correctly identified against CF electrons.}~\cite{Aaboud:2657964}, a complementary algorithm to LH used for this task. One of the advantages of the DNN is that it naturally incorporates both functionalities into a single output, and is potentially extendable to other definitions of electron candidates.
+Subsequently, for the resulting signal electron sample, the same procedure is applied to the $\mathcal{D}_{CF}$ discriminant. In this case, the target efficiencies correspond to those obtained with the Charge-Flip Electron Identifier (ECID)~\footnote{This tool, based on a BDT model, was employed in the studies based on the previous ATLAS software release (rel.21) for the dedicated discrimination of prompt electrons with their charge correctly identified against CF electrons.}~\cite{Aaboud:2657964}, a complementary algorithm to LH used for this task. One of the advantages of the DNN is that it naturally incorporates both functionalities into a single output, and is potentially extendable to other definitions of electron candidates.
 
 In addition, further requirements, similar to the LH case, are imposed depending on the working point in the test electron dataset where these thresholds are defined. These rectangular cuts are listed in Table~\ref{tab:wp_rectangular_cuts},
-\begin{table}[htbp]
+where the ambiguity bitmask~\footnote{The ambiguity bit mask encodes in individual bits the different ambiguity types. Each of them corresponds to a specific bit position, as defined in the enumeration of the ATLAS \texttt{AmbiguityTool}~\cite{atlas:AmbiguityTool}. A mask value of \texttt{0x3F} (\(63\)) requires that none of the first six ambiguity bits are set, thereby rejecting all candidates flagged with any of those ambiguity types, while a mask of \texttt{0x23} (\(35\)) only vetoes a subset of them.} is used to reject electron candidates with specific ambiguity types, ensuring that only candidates with reliable track-cluster associations are retained, while $\texttt{BLayer}$ enforces the requirement of an additional hit in the insertable BLayer. In this way, the final menu is represented by two bidimensional matrices in terms of $\eta$ and $E_{\text{T}}$ encoding the cuts applied on the DNN discriminants, together with the corresponding additional cuts.
+\begin{table}[h]
   \centering
   \footnotesize
+  \caption{Additional selection on top of the discriminant for the different WPs.}
+  \label{tab:wp_rectangular_cuts}
   \begin{tabular}{lcccc}
   \hline
   WP & $\texttt{BLayer}$ & $\texttt{Amb-bit}$ & $n_{\mathrm{pixel}}$ & $n_{\mathrm{Si}}$ \\
@@ -949,16 +954,14 @@ In addition, further requirements, similar to the LH case, are imposed depending
   Tight  & $1$ & $35$ & $\geq 2$ & $\geq 8$ \\
   \hline
   \end{tabular}
-  \caption{Additional selection on top of the discriminant for the different WPs.}
-  \label{tab:wp_rectangular_cuts}
 \end{table}
-where the ambiguity bitmask~\footnote{The ambiguity bit mask encodes in individual bits the different ambiguity types. Each of them corresponds to a specific bit position in the mask, as defined in the enumeration of the ATLAS \texttt{AmbiguityTool}~\cite{atlas:AmbiguityTool}. A mask value of \texttt{0x3F} (\(63\)) requires that none of the first six ambiguity bits are set, thereby rejecting all candidates flagged with any of those ambiguity types, while a mask of \texttt{0x23} (\(35\)) only vetoes a subset of them.} is used to reject electron candidates with specific ambiguity types, ensuring that only candidates with reliable track-cluster associations are retained, and $\texttt{BLayer}$ enforces the requirement of an additional hit in the insertable BLayer. In this way, the final menu is represented by two bidimensional matrices in terms of $\eta$ and $E_{\text{T}}$ encoding the cuts applied on the DNN discriminants, together with the corresponding additional cuts.
 
+It should be clarified here that, throughout this chapter, the DNN identification menus will be referred to as ID-only and ID+CF, depending on whether the cuts are defined solely on $\mathcal{D}_{el}$, or combined with $\mathcal{D}_{CF}$, respectively. Comparisons will accordingly be made respect to the LH or LH+ECIDs menus, obtained using the likelihood-based approach.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Electron Isolation}
 \label{electron_iso}
 
-Following the same strategy adopted in the full reconstruction chain of other physics objects, such as muons, it is common to apply additional isolation requirements after the electron identification stage in order to suppress objects other than signal electrons. In processes such as \zee, signal electrons are typically isolated, meaning that no significant activity is observed around them. In contrast, electrons originating from the decay of heavy-flavour hadrons, such as $b$-hadrons, may be accompanied by additional activity both in the calorimeter and in the tracking system. To reduce such contamination, isolation WPs are defined, based on thresholds applied to calorimeter and track isolation variables.
+Following the same strategy adopted in the full reconstruction chain of other physics objects, such as muons, it is common to apply additional isolation requirements after the electron identification stage in order to suppress objects other than signal electrons. In processes such as \zee, signal electrons are typically isolated, meaning that no significant activity is observed around them. In contrast, electrons originating from the decay of heavy-flavour hadrons may be accompanied by additional activity both in the calorimeter and in the tracking system. To reduce such contamination, isolation WPs are defined, based on thresholds applied to calorimeter and track isolation variables.
 
 For track isolation, two main types of variables are used: $p_{\mathrm{T}}^{\mathrm{cone}XX}$ and $p_{\mathrm{T}}^{\mathrm{varcone}XX}$, where $XX$ can take values such as 20, 30, or 40. Both variables sum the total transverse momentum of all tracks surrounding the electron that are not associated with it. In the case of $p_{\mathrm{T}}^{\mathrm{cone}XX}$, all tracks within a fixed-radius cone of $\Delta R = 0.XX$ are considered. For $p_{\mathrm{T}}^{\mathrm{varcone}XX}$, the cone size is defined as $\Delta R = \min(10/p_{\mathrm{T}}[\text{GeV}], 0.XX)$. For example, $p_{\mathrm{T}}^{\mathrm{cone20}}$ sums the $p_{\mathrm{T}}$ of all tracks within a cone of $\Delta R = 0.2$. For these isolation WPs, tracks must satisfy a vertex-association requirement and have $p_{\mathrm{T}}$ greater than 1~GeV.
 
@@ -979,7 +982,7 @@ For track isolation, two main types of variables are used: $p_{\mathrm{T}}^{\mat
   \label{tab:electron_isolation_vars}
   \end{table}
 
-Similarly, calorimeter isolation is defined through the variable $E_{\mathrm{T}}^{\mathrm{topocone}XX}$, which corresponds to the sum of the transverse energy of topoclusters within a cone of radius $\Delta R = 0.XX$ around the electron. Additional corrections are applied to account for energy leakage and pile-up effects.
+Similarly, calorimeter isolation is defined through the variable $E_{\mathrm{T}}^{\mathrm{topocone}XX}$, which corresponds to the sum of the transverse energy of topoclusters within a cone of radius $\Delta R = 0.XX$ around the electron. Additional corrections are applied to account for energy leakage and pile-up effects~\cite{Aaboud:2657964}.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Electron efficiency measurements}
 \label{sec:electron_efficiency_measurements}
@@ -988,29 +991,29 @@ Similarly, calorimeter isolation is defined through the variable $E_{\mathrm{T}}
 %Maybe break it in 2 subsections.
 %When we talk about Zmass, include a few figures about the the mass distributions and so on.
 
-Ultimately, the performance of any electron identification method must be evaluated on real data. This is particularly important in the context of specific physics analyses, where it is essential to determine with the highest possible precision the efficiency with which final-state electrons satisfy the chosen identification criteria.
+Ultimately, the performance of any electron identification method must be evaluated on real data. This is particularly important in the context of specific physics analyses, where electron identification uncertainties could limit their sensitivity.
 
-It is not only important to measure the identification efficiency in real collision data, but also to evaluate it on MC simulated samples, ensuring that simulated electrons are identified with an efficiency as close as possible to that observed in data. Since mismodellings inevitably exist between simulation and real data, the determination of the so-called MC-to-data \emph{Scale Factors} (SFs) becomes crucial. SFs are simply defined as the ratio between the identification efficiency measured in data and that obtained in MC events. Their use is a common practice in ATLAS, systematically applied not only for electron identification but also for other corrections such as lepton reconstruction and trigger efficiencies, jet energy scale and resolution, or $b$-tagging calibrations.
+It is not only important to measure the identification efficiency in real collision data, but also to evaluate it on MC simulated samples, ensuring that simulated electrons are identified with an efficiency as close as possible to that observed in data. Since mismodellings inevitably exist, the determination of the so-called MC-to-data \emph{Scale Factors} (SFs) becomes crucial. SFs are defined as the ratio between the identification efficiency measured in data and that obtained in MC. Their use is common practice in ATLAS, systematically applied not only for electron identification but also for other corrections such as lepton reconstruction and trigger efficiencies, jet energy scale and resolution, or $b$-tagging calibrations.
 
-In general, the total efficiency for selecting a true electron can be expressed as the product of the efficiencies associated with each selection step applied to the electron candidate:
+In general, the total efficiency for selecting a true electron, $\epsilon_{\text{tot}}$ can be expressed as the product of the efficiencies associated with each selection step applied to the electron candidate:
 \begin{equation}
   \epsilon_{\text{tot}} = \epsilon_{\text{reco}} \times \epsilon_{\text{ID}} \times \epsilon_{\text{iso}} \times \epsilon_{\text{trig}},
 \end{equation}
-where the reconstruction efficiency, $\epsilon_{\text{reco}}$, is computed independently of the others, as it quantifies the probability of correctly associating a reconstructed topological energy cluster to a true electron (as presented in Section~\ref{sec:electron_reconstruction}). The remaining efficiencies are measured with respect to the previous step. This is the case for the identification efficiency, which is defined as:
+where the reconstruction efficiency, $\epsilon_{\text{reco}}$, is computed independently of the others, as it quantifies the probability of correctly associating a reconstructed topological energy cluster to a true electron (as presented in Section~\ref{sec:electron_reconstruction}). The remaining efficiencies are measured with respect to the previous step. This is the case for the identification efficiency, $\epsilon_{\text{ID}}$, which is defined as:
 \begin{equation}
   \epsilon_{\text{ID}} = \frac{N^{\text{WP}}_{\text{ID}}}{N_{\text{reco}}},
 \label{eq:id_eff}  
 \end{equation}
 where $N^{\text{WP}}_{\text{ID}}$ is the number of reconstructed electron candidates passing the identification working point under study, in our case defined using the DNN output, and $N_{\text{reco}}$ is the total number of electrons correctly reconstructed in the previous step.
 
-Depending on the requirements imposed by the identification working point, the number of accepted electrons, and therefore the efficiency, will vary. Efficiencies are thus measured in bins of $E_{\text{T}}$ and $\eta$ for the different working points. This approach provides a significant advantage: although efficiency measurements and SFs are derived using a specific physics process, their parametrisation makes them largely analysis-independent and suitable for use in any study involving electrons.
+Depending on the requirements imposed by the identification WP, the number of accepted electrons, and therefore the efficiency, will vary. Efficiencies are measured in bins of $E_{\text{T}}$ and $\eta$ to ensure their general applicability: although efficiency measurements and SFs are derived using a specific physics process, their parametrisation makes them largely analysis-independent and suitable for use in any study involving electrons.
 
 \subsection{Identification efficiency computation}
 To determine the identification efficiency of the different WPs in data, an appropriate selection and treatment of the electron candidates is required in order to correctly handle the presence of backgrounds. The methods employed for this purpose are described in detail in Ref.~\cite{latest_electron_paper_2024}, while here they will be introduced briefly.
 
-To obtain the purest possible dataset of signal electrons from collision data, it is essential to have the best possible control over the background. Since MC simulations are not fully accurate in modelling this contribution, we focus on the extraction of background templates from dedicated control regions, defined as regions of the phase space where specific selections enhance the background electron population. In our case, we concentrate on the measurement of SFs and signal identification efficiencies for electrons with $E_{\mathrm{T}} > 15$~GeV. Two methods are used to obtain a pure dataset of signal electrons and to model the background templates: the \zmass and \ziso methods.
+To obtain the purest possible dataset of signal electrons from collision data, it is essential to have the best possible control over the background. Since MC simulations are not fully accurate in modelling this contribution, it is performed the extraction of background templates from dedicated data control regions, defined as regions of the phase space where specific selections enhance the background electron population. In this study, the measurement of SFs and signal identification efficiencies for electrons with $E_{\mathrm{T}} > 15$~GeV is addressed. Two methods are used to obtain a pure dataset of signal electrons and to model the background templates: the \zmass and \ziso methods.
 
-Both approaches are based on events from the \zee resonance, initially selected using the tag-and-probe technique (referred to as \tp in the following), already introduced earlier, to obtain an unbiased set of electrons satisfying the ID WPs. In the \zmass method, background templates are obtained from the invariant mass distribution of the di-electron pair, while in the \ziso method they are derived from the distribution of a calorimeter isolation variable.
+Both approaches are based on events from the \zee resonance, initially selected using the tag-and-probe technique (referred to as \tp in the following), already introduced earlier, to obtain an unbiased set of electrons satisfying the identification WPs. In the \zmass method, background templates are obtained from the invariant mass distribution of the di-electron pair, while in the \ziso method they are derived from the distribution of a calorimeter isolation variable.
 
 The \ziso method will not be further discussed, as it is not used in this thesis. However, it is worth noting that the official ATLAS efficiency and SF results provided to physics analyses are obtained by statistically combining both methods, leading to reduced uncertainties. 
 
@@ -1020,7 +1023,7 @@ The binning used for these measurements is the same as that employed in the tuni
 
 \subsubsection{Tag and probe selections}
 
-The \zmass method for measuring identification efficiencies in data also requires MC simulations. Unless otherwise stated, the results presented here use only Run-2 data from 2018, together with a single simulated \zee\ sample as described in Sec.~\ref{subsec:electron_mc}, both using release 22. An identical baseline selection is applied to both collision data and MC, also identical for both the LH and DNN identification menus.
+The \zmass method for measuring identification efficiencies in data also requires MC simulations. Unless otherwise stated, the results presented here use only Run-2 data from 2018, together with a single simulated \zee\ sample as described in Section~\ref{subsec:electron_mc}, both using release 22. An identical baseline selection is applied to both collision data and MC, also identical for both the LH and DNN identification menus.
 
 Events are required to pass at least one of the single-electron triggers defined during 2018 data-taking period~\footnote{The electron trigger chains used for 2018 were \texttt{HLT\_e26\_lhtight\_nod0\_ivarloose, HLT\_e60\_lhmedium\_nod0, HLT\_e140\_lhloose\_nod0 and HLT\_e300\_etcut}.}. For the \tp\ pair, 
 in order to ensure the tag is a genuine electron, it is required to have transverse energy \et$>27$~GeV, lie within the ID acceptance $|\eta|<2.47$, and be outside the calorimeter crack region ($1.37<|\eta|<1.52$). 
@@ -1029,14 +1032,15 @@ The tag must also satisfy the Tight WP of the corresponding algorithm (DNN or LH
 Finally, the tag is required to match the object that fired the trigger.
 
 The probe electron is required to fulfil looser requirements, without applying impact-parameter or track-isolation cuts as in the tag selection.
-Instead, only a jet veto is imposed to ensure the electron candidate is isolated from any jet in the event.
+Instead, only a jet veto is imposed to ensure the electron candidate is isolated from any jet in the event, requiring there to be fewer than 2 jets with \pt$>20$~GeV within $\Delta R < 0.4$ of the electron. The first close-by jet is interpreted as corresponding to the electron itself.
 Minimum track-quality requirements are enforced ($n_{\mathrm{Si}} \ge 8$ and $n_{\mathrm{Pixel}} \ge 1$), together with \et$>15$~GeV.
-This \textit{preselected probe} is then tested against the identification working point (DNN or LH) under study.
+This \textit{preselected probe} is then tested against the identification working point (DNN or LH) under study. Tag and probe electron requirements are summarized in Table~\ref{tab:tag_probe_reqs}.
 
 \begin{table}[htbp]
   \centering
   \small
   \caption{Summary of the preselection requirements for tag and probe electrons in the \zmass method.}
+  \label{tab:tag_probe_reqs}
   \renewcommand{\arraystretch}{1.3}
   \setlength{\tabcolsep}{10pt}
   \begin{tabular}{p{5cm}cc}
@@ -1083,7 +1087,7 @@ The method proceeds iteratively through the following main steps, separately for
   \label{fig:zmass_algo}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[h]
   \centering
   \includegraphics[width=0.6\linewidth]{plot_bkg_template_cleaning.png}
   \caption{Background cleaning procedure in the \zmass method for a representative $(E_{\mathrm{T}},\,\eta)$ bin. The data in the background-enriched control region is fitted with a polynomial function (red curve) describing the background component, together with a MC signal template representing the residual signal contamination. The cleaned background template, obtained after subtracting the signal contribution, is shown in blue.}
@@ -1102,7 +1106,7 @@ The method proceeds iteratively through the following main steps, separately for
     \item \textbf{Efficiency and scale factor extraction:} the identification efficiency in data is computed as in Eq.~\ref{eq:id_eff}, replacing $N_{bkg}$ by the background yields estimated from the fit. For the MC efficiency, Eq.~\ref{eq:id_eff} reduces to the simple initial ratio of identified probes to all preselected probes, since no background subtraction is required and the measurement can be performed using signal-only events. Scale factors are then obtained from the ratio of data to MC efficiencies for each $(E_{\mathrm{T}},\eta)$ bin.
 \end{enumerate}
 
-The plots in Figure~\ref{fig:zmass_fit_dnn_medium} show examples of the signal-plus-background template fits obtained with the \zmass method for the DNN efficiencies measurement, in the invariant mass distribution of the di-electron pairs. Figure~\ref{fig:zmass_fit_dnn_medium_a} corresponds to the reconstructed probes, which form the denominator in the efficiency calculation, while Figure~\ref{fig:zmass_fit_dnn_medium_b} shows the fits for the numerator probes passing the Medium DNN identification working point. These results are extracted from the case of the DNN identification menu, where the two discriminants defined in the previous sections are combined to build the selection. 
+The plots in Figure~\ref{fig:zmass_fit_dnn_medium} show examples of the signal-plus-background template fits obtained with the \zmass method for the DNN efficiencies measurement, in the invariant mass distribution of the di-electron pairs. Figure~\ref{fig:zmass_fit_dnn_medium_a} corresponds to the reconstructed probes, which form the denominator in the efficiency calculation, while Figure~\ref{fig:zmass_fit_dnn_medium_b} shows the fits for the numerator probes passing the Medium DNN identification working point. These results are extracted from the case of the DNN ID+CF identification menu, where the two discriminants defined in the previous sections are combined to build the selection. 
 In both cases, the orange line represents the MC signal template, the blue line the estimated background, and the red line the sum of both contributions. The background level is significantly reduced when moving from the inclusive probe selection to the numerator probes passing the Medium DNN identifiction, illustrating the increased purity of the sample as the identification requirements become stricter. 
 The lower panels display the Data-to-Expectation ratio, highlighting the good agreement between data and the fit model in the mass range considered for the efficiency extraction. A slight degradation of the agreement is observed at very high invariant masses due to the limited statistics in that region. A small percent-level discrepancy is also visible for the denominator case around the $Z$-boson peak, which is precisely the type of effect that the calculation of scale factors aims to correct.
 
@@ -1123,10 +1127,10 @@ The lower panels display the Data-to-Expectation ratio, highlighting the good ag
   \label{fig:zmass_fit_dnn_medium}
 \end{figure}
 
-Before concluding this section, where the construction of the \zmass method and the calculation of the identification efficiencies presented in Section~\ref{eff_meas} have been described, it is important to emphasise that, each step of the method introduces potential systematic uncertainties. These are evaluated by varying key aspects of the procedure, such as the definition of the background control region, the fit range of the $m_{e^+e^-}$ distribution, the polynomial order used in the signal contamination fit, or the tag-electron isolation requirement. 
-Each variation is applied individually, and the difference in efficiency with respect to the nominal choice is taken as the systematic variation. The total systematic uncertainty of the efficiency measurement is then obtained as the sum in quadrature of all individual contributions. The main systematic variations considered in the \zmass method are the following:
+Before concluding this section it is important to emphasise that, each step of the method introduces potential systematic uncertainties. These are evaluated by varying key aspects of the procedure, such as the definition of the background control region, the fit range of the $m_{e^+e^-}$ distribution, the polynomial order used in the signal contamination fit, or the tag-electron isolation requirement. 
+Each variation is applied individually, and the difference in the resulting efficiency with respect to the nominal choice is taken as a systematic variation. The total systematic uncertainty of the efficiency measurement is then obtained as the sum in quadrature of all individual sources of systematic uncertainties. The main systematic variations considered in the \zmass method are the following:
 \begin{itemize}
-  \item Background control region: obtained by modifying the requirement that probe candidates must fail a very loose likelihood identification, either by replacing it with an ultra-loose requirement or by changing the isolation condition to $p_{\mathrm{T}}^{\mathrm{cone40}}/p_{\mathrm{T}} > 0.07$. This ensures that no bias is introduced in the background shape.
+  \item Background control region: obtained by modifying the requirement on probe candidates failing a very loose likelihood identification, either by replacing it with an ultra-loose requirement or by changing the isolation condition to $p_{\mathrm{T}}^{\mathrm{cone40}}/p_{\mathrm{T}} > 0.07$. This allows us to estimate the impact of the background shape on the efficiency calculation.
   \item Background fit range: recomputing the background fit only in restricted regions of the di-electron mass, namely $65 < m_{e^+e^-} < 120$~GeV for the low range and $80 < m_{e^+e^-} < 250$~GeV for the high range.
   \item Signal contamination fit: varying the polynomial order used to describe the signal contamination in the background fit.
   \item Tag-electron isolation: tightening the tag isolation requirement by imposing the additional condition $p_{\mathrm{T}}^{\mathrm{cone40}} < 5$~GeV. This minimises the possibility of background objects passing the tag selection.
@@ -1145,7 +1149,7 @@ Each variation is applied individually, and the difference in efficiency with re
 
 The results presented in this section summarise the measured identification efficiencies and SFs for the DNN identification menu, as well as comparisons with the LH-based menu. Unless otherwise stated, all efficiencies are evaluated for $E_{\mathrm{T}}>15$~GeV and are shown for the three defined DNN WPs, both in data and MC. All MC efficiency measurements include shower-shape corrections discussed in Section~\ref{inputs_preproc}.
 
-Figure~\ref{fig:eff_sfs_dnn_inclusive} shows the inclusive signal identification efficiency in data and MC, together with the corresponding SFs, for the three DNN working points without applying the charge-flip discriminant. The same selection is repeated in Figure~\ref{fig:eff_sfs_dnn_vs_lh_bins} using the LH identification menu, enabling a direct performance comparison in the case of the Medium WP. This comparison is shown separately in selected $(E_{\mathrm{T}},\eta)$ bins in order to highlight differences in specific kinematic regions. 
+Figure~\ref{fig:eff_sfs_dnn_inclusive} shows the inclusive signal identification efficiency in data and MC, together with the corresponding SFs, for the three DNN ID-only WPs. These measurements are also shown in different $(E_{\mathrm{T}},\eta)$ bins in Figures~\ref{fig:eff_sfs_dnn_eta_4ptbins} and~\ref{fig:eff_sfs_dnn_pt_4etabins}. The same selection is repeated in Figures~\ref{fig:eff_sfs_dnn_vs_lh_eta_4ptbins} and~\ref{fig:eff_sfs_dnn_vs_lh_pt_4etabins} using the LH identification menu, enabling a direct performance comparison in the case of the Medium WP. This comparison is also shown separately in selected $(E_{\mathrm{T}},\eta)$ bins in order to highlight differences in specific kinematic regions. 
 
 \begin{figure}[htbp]
   \centering
@@ -1163,22 +1167,20 @@ Figure~\ref{fig:eff_sfs_dnn_inclusive} shows the inclusive signal identification
     \caption{Inclusive in $\eta$}
     \label{fig:eff_inclusive_eta_dnn_id}
   \end{subfigure}
-  \caption{Signal identification efficiencies in data and MC, together with SFs, for the three DNN WPs without CF cuts. The identification efficiencies were performed inclusively in \et (a) and $\eta$ (b), respectively.}
+  \caption{Signal identification efficiencies in data and MC, together with SFs, for the three DNN ID-only WPs. The identification efficiencies were performed inclusively in \et (a) and $\eta$ (b), respectively. The error bars include all statistical and systematic uncertainties.}
   \label{fig:eff_sfs_dnn_inclusive}
 \end{figure}
 
-As illustrated in Figures~\ref{fig:eff_inclusive_pt_dnn_id}, the efficiency is typically reduced in the central barrel region ($|\eta|\sim0$) and in the transition region between barrel and end-cap ($1.37 < |\eta| < 1.52$). A general decrease in efficiency is also observed towards the end-cap, at large $|\eta|$ values. When studied as a function of $E_{\mathrm{T}}$, the identification efficiency is lower at small transverse energies. This behaviour originates from a larger background contamination in this regime, where the estimation of efficiencies with the \zmass method becomes more challenging, unlike at higher energies.
+As illustrated in Figures~\ref{fig:eff_inclusive_pt_dnn_id}, the efficiency is typically reduced in the central barrel region ($|\eta|\sim0$) and in the transition region between barrel and end-cap ($1.37 < |\eta| < 1.52$). A general decrease in efficiency is also observed towards the end-cap, at large $|\eta|$ values. When studied as a function of $E_{\mathrm{T}}$, the identification efficiency is lower at small transverse energies. This behaviour originates from a larger background contamination in this regime, which is attempted to be mitigated by reducing the identification efficiency targeted.
 
 Apart from the fact that the level of uncertainty associated with the SF measurements is observed to be very low, 
 the values for the three DNN working points remain close to unity, 
-as expected given the corrections applied to the MC samples. The largest deviations are found for the Tight WP, which is reasonable since the stricter thresholds applied on the discriminant amplify potential mismodellings with respect to data and therefore affect the efficiency calculation more strongly. In general, the SFs tend to be closer to unity in the barrel region. A small asymmetry is also observed as a function of $\eta$, affecting all DNN and also LH WPs, as can be seen in Figure~\ref{fig:eff_sfs_dnn_vs_lh_bins}.
+as expected given the corrections applied to the MC samples. The largest deviations are found for the Tight WP, which is reasonable since the stricter thresholds applied on the discriminant amplify potential mismodellings with respect to data and therefore affect the efficiency calculation more strongly. In general, the SFs tend to be closer to unity in the barrel region. A small asymmetry is also observed as a function of $\eta$, affecting all DNN and also LH WPs, as can be seen in Figure~\ref{fig:eff_sfs_dnn_vs_lh_eta_4ptbins}.
 
-For completeness, Figure~\ref{fig:eff_sfs_dnn_4bins} also shows the efficiencies and SFs measured for the three DNN WPs in selected \et and $\eta$ bins.
-
+% ================= Figura 1: eficiencias vs eta en 4 bins de pT =================
 \begin{figure}[htbp]
   \centering
 
-  % --- Subfiguras: bins en pT (vs eta) ---
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_primary_cluster_be2_eta_for_pt_15p0_20p0.pdf}
@@ -1188,14 +1190,40 @@ For completeness, Figure~\ref{fig:eff_sfs_dnn_4bins} also shows the efficiencies
   \hfill
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_primary_cluster_be2_eta_for_pt_40p0_45p0.pdf}
-    \caption{$40 < p_{\text{T}} < 45$~GeV}
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_primary_cluster_be2_eta_for_pt_30p0_35p0.pdf}
+    \caption{$30 < p_{\text{T}} < 35$~GeV}
     \label{fig:eff_sfs_dnn_ptbin2}
   \end{subfigure}
 
   \vspace{0.5cm}
 
-  % --- Subfiguras: bins en eta (vs pT) ---
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_primary_cluster_be2_eta_for_pt_40p0_45p0.pdf}
+    \caption{$40 < p_{\text{T}} < 45$~GeV}
+    \label{fig:eff_sfs_dnn_ptbin3}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_primary_cluster_be2_eta_for_pt_50p0_60p0.pdf}
+    \caption{$50 < p_{\text{T}} < 60$~GeV}
+    \label{fig:eff_sfs_dnn_ptbin4}
+  \end{subfigure}
+
+  \caption{
+    Signal identification efficiencies in data and MC, together with scale factors, 
+    for the three DNN ID-only WPs. 
+    Efficiencies are shown as a function of $\eta$ in four representative $p_{\text{T}}$ bins. 
+    The error bars include all statistical and systematic uncertainties.}
+  \label{fig:eff_sfs_dnn_eta_4ptbins}
+\end{figure}
+
+
+% ================= Figura 2: eficiencias vs pT en 4 bins de eta =================
+\begin{figure}[htbp]
+  \centering
+
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_pt_for_primary_cluster_be2_eta_0p1_0p6.pdf}
@@ -1205,99 +1233,166 @@ For completeness, Figure~\ref{fig:eff_sfs_dnn_4bins} also shows the efficiencies
   \hfill
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_pt_for_primary_cluster_be2_eta_1p52_1p81.pdf}
-    \caption{$1.52 < \eta < 1.81$}
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_pt_for_primary_cluster_be2_eta_0p8_1p15.pdf}
+    \caption{$0.8 < \eta < 1.15$}
     \label{fig:eff_sfs_dnn_etabin2}
-  \end{subfigure}
-
-  \caption{
-    Signal identification efficiencies in data and MC, together with scale factors, 
-    for the three DNN WPs without CF cuts. 
-    The top row shows efficiencies as a function of $\eta$ in two representative $p_{\text{T}}$ bins, 
-    while the bottom row shows efficiencies as a function of $p_{\text{T}}$ in two representative $\eta$ bins.}
-  \label{fig:eff_sfs_dnn_4bins}
-\end{figure}
-
-As mentioned, a direct comparison of the signal identification efficiencies measured with both the DNN and LH algorithms is presented in Figure~\ref{fig:eff_sfs_dnn_vs_lh_bins}. 
-The top row shows the efficiencies as a function of $\eta$ in two representative $E_{\mathrm{T}}$ bins ($15 < E_{\mathrm{T}} < 20$~GeV and $40 < E_{\mathrm{T}} < 45$~GeV), 
-while the bottom row displays the efficiencies as a function of $E_{\mathrm{T}}$ in two representative $\eta$ bins ($0.1 < \eta < 0.6$ and $1.52 < \eta < 1.81$). 
-In all cases, the obtained values are very similar, as expected since both menus were tuned to match the same target identification efficiencies, as described in Section~\ref{dnn:tuning}.
-
-\begin{figure}[htbp]
-  \centering
-
-  % --- Subfiguras: bins en ET (vs eta) ---
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_15p0_20p0.png}
-    \caption{$15 < p_{\mathrm{T}} < 20$~GeV}
-    \label{fig:eff_dnn_lh_15_20}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_40p0_45p0.png}
-    \caption{$40 < p_{\mathrm{T}} < 45$~GeV}
-    \label{fig:eff_dnn_lh_40_45}
   \end{subfigure}
 
   \vspace{0.5cm}
 
-  % --- Subfiguras: bins en eta (vs ET) ---
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_pt_for_primary_cluster_be2_eta_1p52_1p81.pdf}
+    \caption{$1.52 < \eta < 1.81$}
+    \label{fig:eff_sfs_dnn_etabin3}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_eff_vs_pt_for_primary_cluster_be2_eta_2p37_2p47.pdf}
+    \caption{$2.37 < \eta < 2.47$}
+    \label{fig:eff_sfs_dnn_etabin4}
+  \end{subfigure}
+
+  \caption{
+    Signal identification efficiencies in data and MC, together with scale factors, 
+    for the three DNN ID-only WPs. 
+    Efficiencies are shown as a function of $p_{\text{T}}$ in four representative $\eta$ bins. 
+    The error bars include all statistical and systematic uncertainties.}
+  \label{fig:eff_sfs_dnn_pt_4etabins}
+\end{figure}
+
+
+A direct comparison of the signal identification efficiencies measured with both the DNN and LH algorithms is presented in Figures~\ref{fig:eff_sfs_dnn_vs_lh_eta_4ptbins} and~\ref{fig:eff_sfs_dnn_vs_lh_pt_4etabins}. 
+Figure~\ref{fig:eff_sfs_dnn_vs_lh_eta_4ptbins} shows the efficiencies as a function of $\eta$ in four representative $E_{\mathrm{T}}$ bins ($15 < E_{\mathrm{T}} < 20$~GeV, $30 < E_{\mathrm{T}} < 35$~GeV, $40 < E_{\mathrm{T}} < 45$~GeV and $50 < E_{\mathrm{T}} < 60$~GeV), 
+while Figure~\ref{fig:eff_sfs_dnn_vs_lh_pt_4etabins} shows the efficiencies as a function of $E_{\mathrm{T}}$ in also four representative $\eta$ bins ($0.1 < \eta < 0.6$, $0.8 < \eta < 1.15$, $1.52 < \eta < 1.81$ and $2.37 < \eta < 2.47$). 
+In all cases, the obtained values are very similar, as expected since both menus were tuned to match the same target identification efficiencies, as described in Section~\ref{dnn:tuning}.
+
+% ================= Figura 1: eficiencias vs eta en 4 bins de pT =================
+\begin{figure}[htbp]
+  \centering
+
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_15p0_20p0.png}
+    \caption{$15 < p_{\mathrm{T}} < 20$~GeV}
+    \label{fig:eff_dnn_lh_ptbin1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_30p0_35p0.png}
+    \caption{$20 < p_{\mathrm{T}} < 30$~GeV}
+    \label{fig:eff_dnn_lh_ptbin2}
+  \end{subfigure}
+
+  \vspace{0.5cm}
+
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_40p0_45p0.png}
+    \caption{$30 < p_{\mathrm{T}} < 40$~GeV}
+    \label{fig:eff_dnn_lh_ptbin3}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_50p0_60p0.png}
+    \caption{$40 < p_{\mathrm{T}} < 45$~GeV}
+    \label{fig:eff_dnn_lh_ptbin4}
+  \end{subfigure}
+
+  \caption{
+    Comparison between DNN and LH signal identification efficiencies measured using the Medium WP in data and MC, 
+    together with scale factors, for the DNN ID-only menu. 
+    Efficiencies are shown as a function of $\eta$ in four representative $p_{\mathrm{T}}$ bins. 
+    The error bars include all statistical and systematic uncertainties.}
+  \label{fig:eff_sfs_dnn_vs_lh_eta_4ptbins}
+\end{figure}
+
+
+% ================= Figura 2: eficiencias vs pT en 4 bins de eta =================
+\begin{figure}[htbp]
+  \centering
+
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_0p1_0p6.png}
     \caption{$0.1 < \eta < 0.6$}
-    \label{fig:eff_dnn_lh_0p1_0p6}
+    \label{fig:eff_dnn_lh_etabin1}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_0p8_1p15.png}
+    \caption{$0.6 < \eta < 1.0$}
+    \label{fig:eff_dnn_lh_etabin2}
+  \end{subfigure}
+
+  \vspace{0.5cm}
+
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_1p52_1p81.png}
+    \caption{$1.0 < \eta < 1.37$}
+    \label{fig:eff_dnn_lh_etabin3}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_2p37_2p47.png}
     \caption{$1.52 < \eta < 1.81$}
-    \label{fig:eff_dnn_lh_1p52_1p81}
+    \label{fig:eff_dnn_lh_etabin4}
   \end{subfigure}
 
   \caption{
-    Comparison between DNN and LH signal identification efficiencies measured using the Medium WP in data and MC, together with scale factors, 
-    for the DNN menu without CF cuts. The top row shows the efficiencies as a function of $\eta$ in two representative $E_{\mathrm{T}}$ bins, 
-    while the bottom row shows the efficiencies as a function of $E_{\mathrm{T}}$ in two representative $\eta$ bins.}
-  \label{fig:eff_sfs_dnn_vs_lh_bins}
+    Comparison between DNN and LH signal identification efficiencies measured using the Medium WP in data and MC, 
+    together with scale factors, for the DNN ID-only menu. 
+    Efficiencies are shown as a function of $p_{\mathrm{T}}$ in four representative $\eta$ bins. 
+    The error bars include all statistical and systematic uncertainties.}
+  \label{fig:eff_sfs_dnn_vs_lh_pt_4etabins}
 \end{figure}
 
 
-In addition, Figure~\ref{fig:eff_sfs_dnn_vs_lh_mu} presents the efficiency as a function of the average number of interactions per bunch crossing, $\mu$, for all three DNN working points, along with a direct comparison between DNN and LH for the Medium and Loose ones. For the three DNN working points, a decreasing trend is observed as pile-up increases, with the Tight WP being the most sensitive to these variations. Nevertheless, the comparison with LH in Figures~\ref{fig:eff_sfs_dnn_vs_lh_loose_mu} and~\ref{fig:eff_sfs_dnn_vs_lh_medium_mu} shows a similar trend, with the LH algorithm exhibiting slightly more stability. This behaviour can be explained by the fact that the LH menu applies explicit pile-up dependent corrections, whereas the DNN, by construction, has no direct notion of pile-up.
+
+In addition, Figure~\ref{fig:eff_sfs_dnn_mu} presents the efficiency as a function of the average number of interactions per bunch crossing, $\mu$, for all three DNN working points, together with a direct comparison between DNN and LH for the Medium and Loose ones in Figure~\ref{fig:eff_sfs_dnn_vs_lh_mu}. For the three DNN working points, a decreasing trend is observed as pile-up increases, with the Tight WP being the most sensitive to these variations. Nevertheless, the comparison with LH in Figures~\ref{fig:eff_sfs_dnn_vs_lh_loose_mu} and~\ref{fig:eff_sfs_dnn_vs_lh_medium_mu} shows a similar trend, with the LH algorithm exhibiting slightly more stability. This behaviour can be explained by the fact that the LH menu applies explicit pile-up dependent corrections, whereas the DNN, by construction, has no direct notion of pile-up.
 It is worth noting that the corresponding scale factors show no significant dependence on $\mu$ and remain stable across the pile-up spectrum.
+% ================= Figura 1: Inclusive =================
 \begin{figure}[htbp]
   \centering
-  % Inclusivo grande arriba
-  \begin{subfigure}{0.70\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_mu_effs/DNNID_eff_vs_average_mu.pdf}
-    \caption{Inclusive signal identification efficiency in data and MC, together with SFs, for the three DNN working points without CF cuts.}
-    \label{fig:eff_sfs_dnn_mu}
-  \end{subfigure}
+  \includegraphics[width=0.70\textwidth]{electron_eff_plots/DNN_ID_mu_effs/DNNID_eff_vs_average_mu.pdf}
+  \caption{
+    Inclusive signal identification efficiency as a function of $\mu$ in data and MC, together with SFs, 
+    for the three DNN ID-only WPs. 
+    The error bars include all statistical and systematic uncertainties.}
+  \label{fig:eff_sfs_dnn_mu}
+\end{figure}
 
-  \vspace{0.6cm}
 
-  % Dos subfiguras debajo
-  \begin{subfigure}{0.48\textwidth}
+% ================= Figura 2: Comparación DNN vs LH =================
+\begin{figure}[htbp]
+  \centering
+
+  \begin{subfigure}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_mu_effs/loose_DNN_LH_eff_vs_average_mu.pdf}
-    \caption{Comparison between DNN and LH in a representative $(E_{\mathrm{T}},\eta)$ bin.}
+    \caption{}
     \label{fig:eff_sfs_dnn_vs_lh_loose_mu}
   \end{subfigure}
   \hfill
-  \begin{subfigure}{0.48\textwidth}
+  \begin{subfigure}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_mu_effs/medium_DNN_LH_eff_vs_average_mu.pdf}
-    \caption{Comparison between DNN and LH in another $(E_{\mathrm{T}},\eta)$ bin.}
+    \caption{}
     \label{fig:eff_sfs_dnn_vs_lh_medium_mu}
   \end{subfigure}
 
-  \caption{Signal identification efficiency as a function of $\mu$ for the three DNN working points without CF cuts. A comparison between DNN and LH is also shown for the Medium working point.}
+  \caption{
+    Comparison between DNN ID-only and LH signal identification efficiencies measured as a function of $\mu$, together with SFS, using the Loose (a) and Medium (b) WPs. 
+    The error bars include all statistical and systematic uncertainties.}
   \label{fig:eff_sfs_dnn_vs_lh_mu}
 \end{figure}
+
 
 \subsubsection{Background rejection measurements}
 
@@ -1327,7 +1422,7 @@ At higher $E_{\mathrm{T}}$, the performance of LH is particularly degraded in th
     \caption{}
     \label{fig:bkg_acceptance_jf17_40_45}
   \end{subfigure}
-\caption{Comparison between DNN and LH in a representative $(E_{\mathrm{T}},\eta)$ bins.}
+\caption{Comparison between DNN and LH in representative bins at $20<E_{\mathrm{T}}<25$~GeV (a) and $40<E_{\mathrm{T}}<45$~GeV (b). The vertical axis shows the counts, that is, the number of background electron candidates passing each working point. Error bars include statistical uncertainties.}
 \label{fig:bkg_acceptance_mc}
 \end{figure}
 
@@ -1338,22 +1433,22 @@ At higher $E_{\mathrm{T}}$, the performance of LH is particularly degraded in th
 
 However, final decisions on the background performance cannot be extracted by looking at a single MC sample alone, it is necessary to also examine real collision data. A complementary validation is performed on same-sign $Z\to e^{+}e^{-}$ events in data, which are largely populated by CF electrons. Figure~\ref{fig:cf_bkg_data} shows the invariant mass distribution around the $Z$-boson peak, requiring a tag and a probe electron passing the Medium WP of the identification menus displayed in different coloured lines. The identification menu providing the best rejection of CF electrons is the one yielding the lowest curve. 
 
-It can be observed that the DNN menu, when only applying ID cuts (black), allows more CF electrons to pass, which is expected since in the original $\mathcal{D}_{el}$ (defined in Eq.~\ref{dnn_discriminant}), this class is treated as signal. However, when comparing the LH menu with the dedicated ECIDS method, and the DNN combined with cuts on both $\mathcal{D}_{el}$ and $\mathcal{D}_{CF}$, not only is the same rejection recovered but it is surpassed, without the need to train a dedicated algorithm. This improvement is mainly due to the inclusion of new variables in the DNN training. A reduction of about $16\%$ in CF electrons is achieved within the $[75,105]$~GeV interval around the $Z$-boson mass.
+It can be observed that the DNN menu, when only applying ID cuts (black), allows more CF electrons to pass, which is expected since in the original $\mathcal{D}_{el}$ (defined in Eq.~\ref{eq:dnn_discriminant}), this class is treated as signal. However, when comparing the LH+ECIDs menu and the DNN ID+CF, not only the same rejection is recovered but it is surpassed, without the need to train a dedicated algorithm. This improvement is mainly due to the inclusion of new variables in the DNN training. A reduction of about $16\%$ in CF electrons is achieved within the $[75,105]$~GeV interval around the $Z$-boson mass.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.7\textwidth]{electron_eff_plots/bkg_rejection/InvariantMassComparison_points_with_ratio.pdf}
-  \caption{Inclusive background efficiency in same-sign $Z\to e^{+}e^{-}$ events for DNN, LH, DNN+CF, and LH+ECIDs. Lower curves indicate better charge-misidentification rejection.}
+  \caption{Inclusive background efficiency in same-sign $Z\to e^{+}e^{-}$ events for DNN ID-only, LH, DNN ID+CF, and LH+ECIDs. Lower curves indicate better charge-misidentification rejection.}
   \label{fig:cf_bkg_data}
 \end{figure}
 
 Finally, background rejection values can also be computed directly in collision data. 
 For this purpose it can be empoyed the \zmass method introduced before in Section~\ref{method_itself}, but the event selection in this case starts from those events that have fired one of the prescaled triggers listed in Table~\ref{tab:electron_triggers_prescaled_2018}.  
-In this case, none of these trigger strings include associated identification requirements, unlike in the signal case, in order to avoid introducing a selection bias.
+In this case, none of these trigger items include associated identification requirements, unlike in the signal case, in order to avoid introducing a selection bias.
 
 \begin{table}[htbp]
   \centering
-  \caption{Prescaled \textit{etcuts} single-electron triggers used for background-electron selection in 2018, including Level-1 seeds where applicable.}
+  \caption{Prescaled single-electron triggers used for background-electron selection in 2018, including Level-1 seeds where applicable.}
   \scriptsize
   \begin{tabular}{l}
     \toprule
@@ -1374,17 +1469,17 @@ In this case, none of these trigger strings include associated identification re
 \end{table}
 
 In this way, a data sample with high purity of background electrons is obtained, allowing the treatment to follow the same approach as for the MC signal efficiency measurements, without the need to derive templates or subtract signal contamination.  
-To further reduce potential signal contamination, no tag electron is required, so that the only remaining signal comes from $W \to e\nu$ decays, which is negligible compared to the large contribution from QCD multijet production with fake electrons.  
-For the probes, we apply exactly the same requirements as in the previous case, varying only the identification WP.  
-Since no tag electron is required and the invariant mass loses its purpose, the electron counting for estimating the efficiency (or, in this case, the rejection $1/\epsilon$) is performed directly in $(E_{\text{T}},\eta)$ bins.
+To further reduce potential signal contamination, no tag electron is required.%, so that the only remaining signal comes from $W \to e\nu$ decays, which is negligible compared to the large contribution from QCD multijet production with fake electrons.  
+For the probes, the same requirements listed in Table~\ref{tab:tag_probe_reqs} are applied, varying only the identification WP.  
+Since no tag electron is required, no invariant mass requirements are applied and electron counting is used for estimating the efficiency (or, in this case, the rejection $1/\epsilon$) is performed directly in $(E_{\text{T}},\eta)$ bins.
 
 In the following, instead of presenting direct background rejection measurements on data, 
 the combination of signal identification and background rejection is shown, 
 as it provides a more representative picture of the improvement. 
-The signal identification efficiencies obtained with DNN and LH are essentially identical 
+The signal identification efficiencies obtained with DNN and LH are practically identical 
 (as already discussed, since both menus were tuned to the same target efficiencies), 
-while differences arise in the background rejection. 
-For this reason, an estimation of the significance for the DNN (ID-only) and LH menus is presented in Figures~\ref{fig:significance_inclusive} and~\ref{fig:significance_bins}, computed in data as
+while larger differences arise in the background rejection. 
+For this reason, an estimation of the significance for the DNN ID-only and LH menus is presented in Figures~\ref{fig:significance_inclusive} (inclusively) and~\ref{fig:significance_bins} (in selected \et and $\eta$ bins), computed in data as
 \begin{equation}
 \hat{\sigma} = S_{\mathrm{eff}} \times \sqrt{\mathrm{Bkg}_{\mathrm{rej}}},
 \end{equation}
@@ -1439,11 +1534,9 @@ for each working point of the DNN and LH menus. This metric, derived from the co
 \end{figure}
 
 
-From these plots, both for the inclusive case in the top row and for the selected $\eta$ and $E_{\mathrm{T}}$ bins, 
-the overall improvement of the DNN menu over the LH approach is clearly established. 
+The overall improvement of the DNN menu over the LH approach is clearly established. 
 The gain is particularly visible in the crack region, where the LH algorithm shows a marked degradation while the DNN remains stable. 
-In this region, the background acceptance is reduced by factors of three to four with respect to the LH, as already discussed, 
-thanks to the dedicated treatments applied during the DNN training, such as masking problematic variables to avoid mis-modelling effects. 
+In this region, the background acceptance is reduced by factors of three to four with respect to the LH, as already discussed. However, this region is commonly vetoed in physics analyses due to poorer performance in this region.
 
 From the bottom ratio panels it can be seen that the relative improvement follows a consistent trend across the full kinematic range. 
 For intermediate to low transverse energies, the DNN exhibits its strongest relative performance, with significance gains of up to 40-50\% around $E_{\mathrm{T}} \sim 30$~GeV. 
@@ -1451,6 +1544,6 @@ At higher $E_{\mathrm{T}}$, the difference between the two algorithms becomes le
 
 Overall, these results demonstrate that the DNN menu provides a more robust and reliable performance than the traditional LH approach, 
 particularly in regions where background contributions are dominant. 
-This confirms the possible advantages of adopting modern machine learning techniques for electron identification in ATLAS and 
-highlights the DNN algorithm as the new baseline for Run-3 and beyond.
+This confirms the advantages of adopting modern machine learning techniques for electron identification in ATLAS and 
+highlights the DNN algorithm as the new baseline for Run~3 and beyond.
 
