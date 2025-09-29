@@ -1058,7 +1058,7 @@ together with the corresponding STXS bins targeted by each of them.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.9\textwidth]{stxs_srs_pois.png}
+  \includegraphics[width=0.99\textwidth]{stxs_srs_pois.png}
   \caption{Schematic representation of the fit model, with the definition of the 18 parameters of interest (POIs) within the STXS framework shown on the left, and the signal categorization used to enhance the sensitivity to these POIs shown on the right.}
   \label{fig:stxs_srs_pois}
 \end{figure}
@@ -1101,7 +1101,7 @@ Such treatments are particularly relevant in regions with low statistics, as can
 where systematic effects are less dominant compared to the statistical uncertainty. 
 This ensures that the fit remains stable and unbiased, preventing spurious noise from inflating the uncertainties, 
 while preserving the sensitivity to the process of interest.
-
+\clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{STXS results}
 \label{sec:results_ttH}
@@ -1117,8 +1117,6 @@ Since a binned likelihood fit is performed, the choice of binning for the \mtt d
 The \mtt distributions for the different analysis regions are presented below, with the binning already optimised to keep the background statistical uncertainties under control. In all cases, the number of signal events in each bin has been scaled using the signal strength obtained from the fit with a single POI dedicated to extracting the combined production cross-section.
 
 Figure~\ref{fig:postfit_cr_both} shows the \mtt distributions in both the \ztautau and \ttbar control regions. The shaded areas indicate bins that are blinded under the conditions mentioned above. In addition to the signal, the MC samples of these two backgrounds are also scaled with NFs dedicated to each of them. These NFs, as well as the NPs affecting the prediction of both background and signal, will be discussed in the following section. The modelling between data and prediction is found to be satisfactory, also in both the low- and high-\pth regions, as illustrated in the \mtt distributions in the validation regions shown in Figure~\ref{fig:postfit_vr_all}.
-
-For the signal regions, Figure~\ref{fig:summary_all} presents a summary of the post-fit yields of the different processes expected and observed in data for the \ttHtt signal categories included in the fit. One bin is shown for each of them, but this representation should not be misunderstood: due to the very limited statistics in these SRs, a single bin had to be employed in the input distributions for the fit, with the only exception being the SR at \pth$<200$~GeV in the mass window ($100<$\mmc$<150$~GeV), with two bins.
 % =======================
 % Post-fit CRs (2 subfigs)
 % =======================
@@ -1182,6 +1180,8 @@ For the signal regions, Figure~\ref{fig:summary_all} presents a summary of the p
   \label{fig:postfit_vr_all}
 \end{figure}
 
+For the signal regions, Figure~\ref{fig:summary_all} presents a summary of the post-fit yields of the different processes expected and observed in data for the \ttHtt signal categories included in the fit. One bin is shown for each of them, but this representation should not be misunderstood: due to the very limited statistics in these SRs, a single bin had to be employed in the input distributions for the fit, with the only exception being the SR at \pth$<200$~GeV in the mass window ($100<$\mmc$<150$~GeV), with two bins.
+
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.7\linewidth]{fit_stxs/summary_srs_tth.pdf}
@@ -1192,165 +1192,13 @@ For the signal regions, Figure~\ref{fig:summary_all} presents a summary of the p
   \label{fig:summary_all}
 \end{figure}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Normalization factors and Nuisance parameters}
-\label{nfs_nps}
-
-Regarding the best-fit values obtained for the background normalization factors, encapsulated through free-floating parameters in the fit, the results for \ztautau\ and \ttbar\ in the \ttHtt\ \tauhadhad\ channel are presented below. 
-From the STXS 18-POI fit, the best-fit value for the \ztautau\ normalization factor is found to be 
-\(\text{NF}_{Z} = 1.20 \pm 0.16\), while for \ttbar\ the result is \(\text{NF}_{\ttbar} = 1.06 \pm 0.26\). 
-%These values remain stable with respect to the signal parametrization or fit setup employed, as illustrated in Figure~\ref{fig:nfs_tth}, where the best-fit values of the \ttHtt\ normalization factors are shown for the three fit configurations considered. 
-
-It is worth emphasizing that the top-quark normalization factor consistent with unity within one standard deviation, 
-whereas the \ztautau\ normalization factor lies above the nominal value. 
-This behaviour mainly reflects the need to correct mismodelling effects in the prediction of this background, largely driven by the sizeable contribution of jets originating from QCD processes.
-
-%\begin{figure}[htbp]
-%  \centering
-%  \includegraphics[width=0.7\linewidth]{fit_stxs/nfs_tth.pdf}
-%  \caption{Background normalization factors for \ttbar and \ztautau in \ttH
-%  \tauhadhad channel for the different fit setups (1, 4 and 18-POI fits).}
-%  \label{fig:nfs_tth}
-%\end{figure}
-
-The NPs that affect the most the extraction of \ttH signal from the statistical analysis are presented in the following. 
-Although they are not the primary parameters of interest, they shape the fit outcome and in determining the overall uncertainty on the signal strength measurement. 
-%Each NP is constrained by auxiliary information, such as dedicated calibration studies, theoretical calculations, or auxiliary measurements. 
-During the fit, the best-fit value of a nuisance parameter may deviate from its nominal expectation, in which case the parameter is said to be \emph{pulled}. 
-If the data provide sensitivity to the associated systematic uncertainty, the fit may also reduce its pre-fit uncertainty, leading to a \emph{constraint}. 
-
-Tables~\ref{tab:1_4_fit_uncert_summary} and~\ref{tab:tth_stxs_uncert_summary} show the grouped impact of the systematic uncertainties affecting our measurements. 
-Table~\ref{tab:1_4_fit_uncert_summary} presents the impact of these uncertainties, grouped by source, for both the combined fit (1-POI fit) and the per–production–mode fit. 
-The results obtained for the combined \htautau\ measurement and for \ttHtt\ are highlighted in bold. 
-
-As discussed, the measurement of the \ttH\ production cross-section is largely dominated by statistical uncertainties from the data, 
-which suggests that a significant improvement could be achieved with a larger dataset. 
-Concerning the systematic uncertainties, the dominant source also arises from the statistical uncertainty associated with the size of the background samples. 
-Of comparable relevance are the theoretical uncertainties in the modelling of the top-quark backgrounds, followed by those in the signal prediction. 
-A slightly larger contribution is also observed from uncertainties related to the jet energy scale and resolution, as expected given that the analysis focuses on regions of the phase space heavily populated with jets and $b$-jets. 
-
-In the case of the 1-POI fit, the measurement is instead dominated by systematic uncertainties, 
-since all \htautau\ regions are included in the analysis, many of them with large statistics such as the ggF categories. 
-Here, the leading systematic uncertainty is the theoretical uncertainty associated with the signal prediction.
-
-Table~\ref{tab:tth_stxs_uncert_summary} presents the breakdown of the uncertainties in the measurement of the \ttH\ signal strength across the STXS bins considered in the 18-POI fit, 
-providing a more detailed view of how the grouped systematics discussed above affect each region of the phase space. 
-Nevertheless, a consistent picture is observed with respect to the inclusive \ttH\ measurement obtained in the 4-POI fit.
-
-\begin{sidewaystable*}[htbp]
-  \centering
-  \footnotesize
-  \renewcommand{\arraystretch}{1.2}
-  \caption{Breakdown of the uncertainty contributions to \(\sigma_H \times \mathcal{B}(H\!\to\!\tau\tau)\), relative to the SM expectation, for each production mode and for the combined result. Experimental uncertainties for reconstructed objects include efficiency and energy/momentum scale and resolution effects. ``Background samples size'' includes bin-by-bin statistical uncertainties in simulated backgrounds as well as those in the misidentified background estimated from data. Entries with negligible impact are denoted by “--”.}
-  \label{tab:1_4_fit_uncert_summary}
-  \begin{tabular}{
-      l
-      >{\bfseries\boldmath}c  % Combined
-      c
-      >{\bfseries\boldmath}c  % ttH
-      c
-      c
-    }
-    \toprule
-    \textbf{Production mode} & \textbf{Combined} & \textbf{ggF} & \textbf{ttH} & \textbf{VBF} & \textbf{\(VH\)} \\
-    \midrule
-    Best-fit value                  & 0.99 & 0.92 & 0.77 & 1.04 & 0.98 \\
-    Total uncertainty               & $\pm$0.12 & $\pm$0.30 & $\pm$0.97 & $\pm$0.18 & $\pm$0.66 \\
-    \addlinespace[0.3em]
-    Statistical uncertainty         & $\pm$0.07 & $\pm$0.15 & $\pm$0.82 & $\pm$0.13 & $\pm$0.55 \\
-    Total systematic uncertainty    & $\pm$0.09 & $\pm$0.25 & $\pm$0.51 & $\pm$0.12 & $\pm$0.36 \\
-    \midrule
-    Background samples size         & $\pm$0.03 & $\pm$0.09 & $\pm$0.31 & $\pm$0.04 & $\pm$0.26 \\
-    Theoretical uncertainty in signal     & $\pm$0.08 & $\pm$0.18 & $\pm$0.12 & $\pm$0.11 & $\pm$0.14 \\
-    Jet and \(E_{\mathrm{T}}^{\mathrm{miss}}\)      & $\pm$0.03 & $\pm$0.12 & $\pm$0.15 & $\pm$0.03 & $\pm$0.12 \\
-    Hadronic \(\tau\)-lepton decays        & $\pm$0.02 & $\pm$0.04 & $\pm$0.09 & $\pm$0.01 & $\pm$0.04 \\
-    Misidentified background        & $\pm$0.02 & $\pm$0.04 & $\pm$0.05 & $\pm$0.02 & $\pm$0.11 \\
-    Luminosity                      & -- & $\pm$0.01 & $\pm$0.01 & $\pm$0.01 & $\pm$0.01 \\
-    Theoretical uncertainty in top-quark processes & -- & $\pm$0.01 & $\pm$0.31 & -- & $\pm$0.02 \\
-    Theoretical uncertainty in \(Z\!+\)jets & $\pm$0.01 & $\pm$0.02 & $\pm$0.08 & -- & $\pm$0.02 \\
-    Flavour tagging                 & $\pm$0.01 & $\pm$0.02 & $\pm$0.05 & $\pm$0.01 & $\pm$0.01 \\
-    Electrons and muons             & $\pm$0.01 & $\pm$0.02 & $\pm$0.02 & $\pm$0.01 & $\pm$0.02 \\
-    \bottomrule
-  \end{tabular}
-\end{sidewaystable*}
-
-\begin{sidewaystable*}[htbp]
-  \centering
-  \footnotesize
-  \renewcommand{\arraystretch}{1.2}
-  \caption{Breakdown of the uncertainties in the ratio of \(\sigma_{t\bar{t}H} \times \mathcal{B}(H\!\to\!\tau\tau)\) to the SM expectation, shown for each \ttH\ STXS bin in \pth. Experimental uncertainties for reconstructed objects include efficiency and energy/momentum scale and resolution effects. ``Samples size'' includes bin-by-bin statistical uncertainties in simulated backgrounds as well as those in the misidentified-\(\tau\) background estimated from data. Entries with negligible impact are denoted by “--”.}
-  \label{tab:tth_stxs_uncert_summary}
-  \begin{tabular}{
-      l
-      c
-      c
-      c
-    }
-    \toprule
-    \textbf{Production mode: \ttH} & \textbf{0--200 GeV} & \textbf{200--300 GeV} & \textbf{$>$300 GeV} \\
-    \midrule
-    Best-fit value                  & 2.1 & 2.2 & 3.6 \\
-    Total uncertainty               & $\pm$1.7 & $\pm$1.2 & $\pm$2.6 \\
-    \addlinespace[0.3em]
-    Statistical uncertainty         & $\pm$1.5 & $\pm$0.9 & $\pm$2.4 \\
-    Total systematic uncertainty    & $\pm$0.8 & $\pm$0.7 & $\pm$1.0 \\
-    \midrule
-    Samples size                    & $\pm$0.5 & $\pm$0.5 & $\pm$0.5 \\
-    Theoretical uncertainty in signal     & $\pm$0.3 & $\pm$0.2 & $\pm$0.5 \\
-    Jet and \(E_{\mathrm{T}}^{\mathrm{miss}}\)       & $\pm$0.5 & $\pm$0.2 & $\pm$0.2 \\
-    Hadronic \(\tau\)-lepton decays         & $\pm$0.1 & $\pm$0.1 & $\pm$0.2 \\
-    Misidentified background         & $\pm$0.1 & $\pm$0.1 & $\pm$0.1 \\
-    Luminosity                       & -- & -- & $\pm$0.1 \\
-    Theoretical uncertainty in top-quark processes & $\pm$0.4 & $\pm$0.4 & $\pm$0.6 \\
-    Theoretical uncertainty in \(Z\!+\)jets & $\pm$0.1 & -- & $\pm$0.2 \\
-    Flavour tagging                  & $\pm$0.1 & -- & $\pm$0.1 \\
-    Electrons and muons              & -- & -- & -- \\
-    \bottomrule
-  \end{tabular}
-\end{sidewaystable*}
-
-Regarding the constraints on the nuisance parameters (NPs) with the largest impact, 
-Figures~\ref{fig:constraint_theory_sig} and~\ref{fig:constraint_theory_top} show the best-fit values of those NPs related to the modeling of parton showers and hadronization in the signal, 
-as well as to the choice of matrix element generator and to the theoretical uncertainties in the prediction of top-quark background processes, respectively. 
-The presented values are obtained from the STXS fit. 
-
-Focusing first on the NPs associated with the theoretical signal uncertainties of \ttH, no significant pulls or constraints from the data are observed, 
-and the best-fit values remain consistent with the pre-fit expectations within one standard deviation. 
-On the other hand, for the NPs corresponding to top-quark background theoretical uncertainties related to \ttH (as indicated in the labels of Figure~\ref{fig:constraint_theory_top}), 
-stronger constraints are observed, particularly for the parameters linked to the choice of matrix element generator and to the modeling of parton showers. 
-These systematics induce large normalization effects in the top-quark background, and are ultimately constrained thanks to the high statistics and purity of the \ttbar\ control region defined in the analysis, shown in Figure~\ref{fig:postfit_cr_ttbar}.
-
-% ===========================
-% Constraint plot: theory uncertainties in signal
-% ===========================
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.75\textwidth]{images/fit_stxs/STXS_combine_all_xs_NP_theory_sig.pdf}
-  \caption{Nuisance parameters associated with signal theory uncertainties
-  related to the parton shower and hadronization modeling, and the choice of matrix
-  element generator. The bestfit values of the nuisance parameters are shown for the 18-POI fit.}
-  \label{fig:constraint_theory_sig}
-\end{figure}
-
-% ===========================
-% Constraint plot: theory uncertainties in top backgrounds
-% ===========================
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.75\textwidth]{images/fit_stxs/STXS_combine_all_xs_NP_theory_top.pdf}
-  \caption{Nuissance parameters associated with theoretical uncertainties in the top-quark background prediction. The best-fit values and the post-fit uncertainties
-  of the nuisance parameters are shown for the 18-POI fit.}
-  \label{fig:constraint_theory_top}
-\end{figure}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Cross-section measurements}
 \label{xsect}
 
 The results obtained for the measurement of the signal strength extracted through the different POIs in the various fit parametrisations are presented below. 
-
-We begin with the 1-POI fit, which, as defined earlier, allows us to extract the inclusive cross-section of $pp \to H \to \tau \tau$. The best-fit value obtained for the signal strength, defined over the SM prediction, is 
+For completeness, the 1-POI and 4-POI fits are firstly introduced. The 1-POI fit allows us to extract the inclusive cross-section of $pp \to H \to \tau \tau$. The best-fit value obtained for the signal strength, defined over the SM prediction, is 
 $\mu(pp \to H \to \tau \tau) = 0.99^{+0.13}_{-0.11} = 0.99 \pm 0.07 (\text{stat.})^{+0.10}_{-0.09}(\text{syst.})$. 
 This measurement of the signal strength improves by $25\%$ with respect to the previous analysis, which yielded $\mu_{\ttH} = 1.06^{+1.28}_{-1.08}$. The inclusive cross-section extracted from this measurement is:
 \begin{equation}
@@ -1363,9 +1211,9 @@ This measurement of the signal strength improves by $25\%$ with respect to the p
 
   The \ttHtt cross-section can also be extracted from the 4-POI fit, where the signal strengths of the four main production modes are targeted in a simultaneous fit. For the case of \ttH, the observed cross-section extracted from the data is:
 \begin{equation}
-  \sigma^{\ttH}_{H \to \tau \tau} 
-  = 0.02^{+0.03}_{0.02}(\text{stat.}) \pm 0.02(\text{syst.})~\text{pb} 
-  = 0.02^{0.03}_{-0.02}~\text{pb},
+  \sigma(t\bar{t}H(\tau\tau))
+  = 0.02^{+0.03}_{-0.02}(\text{stat.}) \pm 0.02(\text{syst.})~\text{pb} 
+  = 0.02^{+0.03}_{-0.02}~\text{pb},
 \end{equation}
 which is also found to be in good agreement with the SM hypothesis of $0.031 \pm 0.003$~pb. The simultaneous 4-POI fit also yields satisfactory compatibility with the SM, with a measured $p$-value of 0.99. Figure~\ref{fig:permode_mu} summarises the signal strength measurements obtained for the four POIs in the simultaneous fit per production mode, as well as for the inclusive measurement of this parameter in the \htautau production process.
 
@@ -1381,8 +1229,12 @@ which is also found to be in good agreement with the SM hypothesis of $0.031 \pm
   \label{fig:permode_mu}
 \end{figure}
 
+%=========%=========%=========%=========
+%         STXS RESULTS
+%=========%=========%=========%=========
 
-Finally, regarding the so-called 18-POI fit, where a parameter of interest is assigned to each STXS bin parametrising the different signals considered in this \htautau analysis, Figure~\ref{fig:stxs_mu} shows the signal strengths obtained for the 18 STXS bins under study. The measurement for the three POIs parametrising the \ttH signal in the three \pth bins considered is reported together with the corresponding cross-section:
+Finally, focus is placed on the so-called 18-POI fit, which constitutes the main measurement of this analysis. In this fit, a parameter of interest is assigned to each STXS bin parametrising the different signals considered in this \htautau analysis, and the resulting signal strengths for the 18 STXS bins under study are shown in Figure~\ref{fig:stxs_mu}.
+The measurement for the three POIs parametrising the \ttH signal in the three \pth bins considered is reported together with the corresponding cross-section:
 \begin{itemize}
   \small
   \item $p_{\text{T}}^{H} < 200$~GeV:  
@@ -1423,18 +1275,117 @@ Finally, regarding the so-called 18-POI fit, where a parameter of interest is as
   \label{fig:stxs_mu}
 \end{figure}
 
-As already discussed in Table~\ref{tab:tth_stxs_uncert_summary}, the grouped systematic uncertainties with the largest impact on the measurement of the three \ttH\ POIs can be identified. 
+% =========================
+\subsubsection*{Normalization factors}
+\label{nfs}
+% =========================
+
+Regarding the best-fit values obtained for the background normalization factors, encapsulated through free-floating parameters in the fit, the results for \ztautau\ and \ttbar\ in the \ttHtt\ channel are presented below. 
+From the 18-POI fit, the best-fit value for the \ztautau\ normalization factor is found to be 
+\(\text{NF}_{Z} = 1.20 \pm 0.16\), while for \ttbar\ the result is \(\text{NF}_{\ttbar} = 1.06 \pm 0.26\). 
+%These values remain stable with respect to the signal parametrization or fit setup employed, as illustrated in Figure~\ref{fig:nfs_tth}, where the best-fit values of the \ttHtt\ normalization factors are shown for the three fit configurations considered. 
+
+It is worth emphasizing that the top-quark normalization factor consistent with unity within one standard deviation, 
+whereas the \ztautau\ normalization factor lies above the nominal value. 
+This behaviour mainly reflects the need to correct mismodelling effects in the prediction of this background, largely driven by the sizeable contribution of jets originating from QCD processes.
+
+%\begin{figure}[htbp]
+%  \centering
+%  \includegraphics[width=0.7\linewidth]{fit_stxs/nfs_tth.pdf}
+%  \caption{Background normalization factors for \ttbar and \ztautau in \ttH
+%  \tauhadhad channel for the different fit setups (1, 4 and 18-POI fits).}
+%  \label{fig:nfs_tth}
+%\end{figure}
+
+% =========================
+\subsubsection*{Nuisance parameters}
+\label{nps}
+% =========================
+
+Concerning the nuisance parameters (NPs) associated with the various sources of systematic uncertainty affecting the analysis, those with the largest impact or relevance are presented below.
+Although they are not the primary parameters of interest, they shape the fit outcome and in determining the overall uncertainty on the signal strength measurement. 
+
+During the fit, the best-fit value of a nuisance parameter may deviate from its nominal expectation, in which case the parameter is said to be \emph{pulled}. 
+If the data provide sensitivity to the associated systematic uncertainty, the fit may also reduce its pre-fit uncertainty, leading to a \emph{constraint}. 
+
+Table~\ref{tab:combined_tth_uncert_summary} shows the grouped impact of systematic uncertainties affecting the measurements previously presented. The impact is grouped by source of systematic uncertainties, and it is shown for the 
+combined fit (1-POI) and for the \ttH measurements in both the per-production-mode fit and in the 18-POI fit, showing the impact in the three \ttH POIs.
+
+\begin{sidewaystable*}[htbp]
+  \centering
+  \footnotesize
+  \renewcommand{\arraystretch}{1.2}
+  \caption{Breakdown of the uncertainty contributions to the measured \(\sigma \times \mathcal{B}(H\!\to\!\tau\tau)\), relative to the SM expectation, for the combined (1-POI) fit, for \ttH\ in the 4-POI fit, and for the three \ttH\ STXS bins in the 18-POI fit. Experimental uncertainties for reconstructed objects include efficiency and energy/momentum scale and resolution effects. ``Samples size'' includes bin-by-bin statistical uncertainties in simulated backgrounds as well as those in the misidentified-\(\tau\) background estimated from data. Entries with negligible impact are denoted by “--”.}
+  \label{tab:combined_tth_uncert_summary}
+  \begin{tabular}{
+      l
+      c  % Combined
+      c  % ttH (4POI)
+      c
+      c
+      c
+    }
+    \toprule
+    \textbf{Uncertainty source} & \textbf{Combined} & \textbf{\ttH} & \textbf{\ttH\ 0--200 GeV} & \textbf{\ttH\ 200--300 GeV} & \textbf{\ttH\ $>$300 GeV} \\
+    \midrule
+    Best-fit value                  & 0.99 & 0.77 & 2.1 & 2.2 & 3.6 \\
+    Total uncertainty               & $\pm$0.12 & $\pm$0.97 & $\pm$1.7 & $\pm$1.2 & $\pm$2.6 \\
+    \addlinespace[0.3em]
+    Statistical uncertainty         & $\pm$0.07 & $\pm$0.82 & $\pm$1.5 & $\pm$0.9 & $\pm$2.4 \\
+    Total systematic uncertainty    & $\pm$0.09 & $\pm$0.51 & $\pm$0.8 & $\pm$0.7 & $\pm$1.0 \\
+    \midrule
+    Background samples size                    & $\pm$0.03 & $\pm$0.31 & $\pm$0.5 & $\pm$0.5 & $\pm$0.5 \\
+    Theoretical uncertainty in signal     & $\pm$0.08 & $\pm$0.12 & $\pm$0.3 & $\pm$0.2 & $\pm$0.5 \\
+    Jet and \(E_{\mathrm{T}}^{\mathrm{miss}}\) & $\pm$0.03 & $\pm$0.15 & $\pm$0.5 & $\pm$0.2 & $\pm$0.2 \\
+    Hadronic \(\tau\)-lepton decays        & $\pm$0.02 & $\pm$0.09 & $\pm$0.1 & $\pm$0.1 & $\pm$0.2 \\
+    Misidentified background         & $\pm$0.02 & $\pm$0.05 & $\pm$0.1 & $\pm$0.1 & $\pm$0.1 \\
+    Luminosity                       & -- & $\pm$0.01 & -- & -- & $\pm$0.1 \\
+    Theoretical uncertainty in top-quark processes & -- & $\pm$0.31 & $\pm$0.4 & $\pm$0.4 & $\pm$0.6 \\
+    Theoretical uncertainty in \(Z\!+\)jets & $\pm$0.01 & $\pm$0.08 & $\pm$0.1 & -- & $\pm$0.2 \\
+    Flavour tagging                  & $\pm$0.01 & $\pm$0.05 & $\pm$0.1 & -- & $\pm$0.1 \\
+    Electrons and muons              & $\pm$0.01 & $\pm$0.02 & -- & -- & -- \\
+    \bottomrule
+  \end{tabular}
+\end{sidewaystable*}
+
+As discussed, the measurement of the \ttH\ production cross-sections is largely dominated by statistical uncertainties from the data, 
+which suggests that a significant improvement could be achieved with a larger dataset. 
+Focusing on the impact of the grouped systematic uncertainties in the measurement of the \ttH\ signal strength across the three STXS bins in \pth considered in the 18-POI fit provides a more detailed view of how the different sources discussed previously affect each phase-space region. 
+The dominant contribution generally arises from the statistical uncertainty associated with the limited size of the background samples. Uncertainties in the modelling of the top-quark backgrounds are of comparable importance, followed by those in the signal prediction. 
+A slightly larger impact is also observed from the jet energy scale and resolution, as expected given that the analysis targets regions of the phase space with a high jet and $b$-jet multiplicity.
+
+When examining the impact on the inclusive \ttH\ measurement from the 4-POI fit, a picture consistent with that discussed in the 18-POI fit is observed, with a comparatively larger impact from the systematic uncertainties related to the modelling of top-quark background.
+
+In the case of the 1-POI fit, the measurement is instead dominated by systematic uncertainties, 
+since all \htautau\ regions are included in the analysis, many of them with large statistics such as the ggF categories. 
+Here, the leading systematic uncertainty is the theoretical uncertainty associated with the signal prediction.
+
+Now concerning the constraints on NPs with the largest impact, 
+Figures~\ref{fig:constraint_ttH} show the best-fit values of those NPs related to the modeling of parton showers and hadronization in the signal, 
+as well as to the choice of matrix element generator and to the theoretical uncertainties in the prediction of top-quark background processes. 
+The presented values are obtained from the STXS fit. 
+
+Focusing first on the NPs associated with the theoretical signal uncertainties of \ttH, no significant pulls or constraints from the data are observed, 
+and the best-fit values remain consistent with the pre-fit expectations within one standard deviation. 
+On the other hand, for the NPs corresponding to top-quark background theoretical uncertainties,
+stronger constraints are observed, particularly for the parameters linked to the choice of matrix element generator and to the modeling of parton showers. 
+These systematics induce large normalization effects in the top-quark background, and are ultimately constrained thanks to the high statistics and purity of the \ttbar\ control region defined in the analysis, shown in Figure~\ref{fig:postfit_cr_ttbar}.
+
+% ===========================================================
+% Most important NPs Constraint plot for ttH
+% ===========================================================
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.75\textwidth]{images/fit_stxs/STXS_combine_all_xs_NP_theory_top_signal.pdf}
+  \caption{Nuisance parameters associated with theoretical uncertainties related to the signal and top-quark background modellings. The bestfit values of the nuisance parameters are shown for the 18-POI fit.}
+  \label{fig:constraint_theory_sig}
+\end{figure}
+
+As already discussed in Table~\ref{tab:combined_tth_uncert_summary}, the grouped systematic uncertainties with the largest impact on the measurement of the three \ttH\ POIs can be identified. 
 Figure~\ref{fig:ranking_tth_bins} provides a complementary representation of this information, showing both the impact and the pull of the nuisance parameters (NPs) associated with each source of uncertainty. 
 For each NP $\theta$, the impact $\Delta\mu$ is defined as the change in the best-fit value of the POI when the NP is shifted by its uncertainty. 
 Two cases are considered: the \textit{pre-fit} impact, obtained with a $\pm 1\sigma$ variation, and the \textit{post-fit} impact, where the variation can be reduced according to the constraints imposed by the fit. 
 The ranking plots highlight the NPs with the largest effect on each POI, displaying both pre-fit and post-fit impacts together with the corresponding pulls.
-
-As already anticipated, the dominant systematic uncertainties impacting the signal strength measurements are those associated with the theoretical modeling of the top-quark background. 
-These include uncertainties from the parton shower, the matrix element calculation, and the description of ISR and FSR. 
-In addition, the normalization factor of the top-quark background exhibits a sizeable uncertainty, particularly in the lowest $p_{\text{T}}^{H}$ bin (more populated by this type of background events). 
-Uncertainties in the matrix element calculation for the \ttH\ signal itself are also non-negligible across the three $p_{\text{T}}^{H}$ bins. 
-Further important contributions arise from the jet energy scale and resolution, as well as from the reconstruction and identification of $\tau$ leptons.
-
 % ===========================
 % Ranking plots for ttH pT^H bins (stacked layout)
 % ===========================
@@ -1472,11 +1423,20 @@ Further important contributions arise from the jet energy scale and resolution, 
   \label{fig:ranking_tth_bins}
 \end{figure}
 
+As already anticipated, the dominant systematic uncertainties impacting the signal strength measurements are those associated with the theoretical modeling of the top-quark background. 
+These include uncertainties from the parton shower, the matrix element calculation, and the description of ISR and FSR. 
+In addition, the normalization factor of the top-quark background exhibits a sizeable uncertainty, particularly in the lowest $p_{\text{T}}^{H}$ bin (more populated by this type of background events). 
+Uncertainties in the matrix element calculation for the \ttH\ signal itself are also non-negligible across the three $p_{\text{T}}^{H}$ bins. 
+Further important contributions arise from the jet energy scale and resolution, as well as from the reconstruction and identification of $\tau$-leptons.
+% =========================
+\subsubsection*{Upper exclusion limits on \ttH}
+\label{limits}
+% =========================
 From all these results it can be concluded that, as already mentioned, the extraction of signal from the three STXS bins is largely limited by the statistical uncertainties associated with the small dataset available. Nevertheless, no significant deviations from the SM are observed in any of the bins, with the largest deviation occurring in the intermediate-$p_{\text{T}}^{H}$ region ($200 < p_{\text{T}}^{H} < 300$~GeV), at the level of about 1.5$\sigma$. Consequently, the sensitivity to this signal in the 18-POI STXS fit remains rather limited.
 
 To further quantify the constraints, 95\% confidence level (CL) upper exclusion limits are computed, using the $\text{CL}_{s}$ method~\cite{JUNK1999435,ALRead_2002}, for the $t\bar{t}H$ production mode, given the limited sensitivity of this process in the nominal 18-POI STXS fit due to the small statistics in this channel. The observed and expected limits are shown in Figure~\ref{fig:tth_cls_limits}, including the expected limits under both the background-only hypothesis ($\mu=0$) and when injecting SM signal ($\mu=1$). 
 
-These exclusion limits provide an important cross-check of the measurement, as they quantify the maximum signal strength still compatible with the observed data in the absence of a significant excess. In practice, they ensure that even in regions where the sensitivity is insufficient to obtain a precise signal strength measurement, the analysis still constrains the parameter space by setting meaningful upper bounds on the production rate. Specifically, the observed limits correspond to factors of about 5.4, 2.2, and 9.2 times the SM prediction in the low-, intermediate-, and high-$p_{\text{T}}^{H}$ bins, respectively. I need more discussion here.
+These exclusion limits provide an important cross-check of the measurement, as they quantify the maximum signal strength still compatible with the observed data in the absence of a significant excess. In practice, they ensure that even in regions where the sensitivity is insufficient to obtain a precise signal strength measurement, the analysis still constrains the parameter space by setting meaningful upper bounds on the production rate. Specifically, the observed limits correspond to factors of about 5.4, 2.2, and 9.2 times the SM prediction in the low-, intermediate-, and high-$p_{\text{T}}^{H}$ bins, respectively. 
 
 %Habría que explicar lo que son los limites.
 % =========================
@@ -1488,7 +1448,6 @@ These exclusion limits provide an important cross-check of the measurement, as t
   \caption{Upper limits at 95\% CL on the \ttH\ simplified template cross-sections in the individual $p_{\mathrm{T}}^{H}$ bins, shown relative to their SM expectation and derived using the $CL_s$ method. The observed limits are indicated by solid black lines, while the expected limits under the background-only (SM) hypothesis are shown with dotted black (red) lines. For the background-only case, the $\pm 1\sigma$ and $\pm 2\sigma$ uncertainty bands are also displayed.}
   \label{fig:tth_cls_limits}
 \end{figure}
-
 
 
 
