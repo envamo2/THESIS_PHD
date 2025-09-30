@@ -371,7 +371,7 @@ The training employs MC simulated events of the three processes, following the p
 The choice of a multiclass classifier suits particularly well when the classes to be separated are correlated and when the characteristic observables used as inputs are themselves related. This is indeed the case here, as the previous independent binary trainings were largely driven by jet-related features in the final state or by properties of the two \tauhadvis candidates. In such situations, where binary BDTs rely on similar and correlated input variables, the adoption of a multiclass approach can provide an advantage.
 
 \subsection{Multiclass BDT setup}
-
+\label{setup_bdt}
 Before presenting the details of the BDT setup, it should be noted that the MC event selection used for the training relies solely on the preselection described in Section~\ref{sec:event_selection_background}. The BDT is trained to distinguish among three event classes, corresponding to the three processes under study. The algorithm is defined and trained using the \textsc{tmva} package of the \textsc{root} framework, as mentioned in Section~\ref{sec:bdt_general}. In that section it is also described the decision tree structure, the choice of hyperparameters, and the additional methods defining the training procedure. The settings that were used are briefly summarised below.
 \begin{itemize}
     \small
@@ -593,12 +593,12 @@ The highest ranked variables in both trainings do not vary significantly, nor do
   \scriptsize
   \caption{Ranking of input variables by their importance in the BDT training, shown separately for the (a) high-$p_{\mathrm{T}}^{H}$ and (b) low-$p_{\mathrm{T}}^{H}$ categories. The variable importance, as computed in TMVA, reflects the average separation power of each variable across the ensemble of decision trees.}
   \renewcommand{\arraystretch}{1.05}
-  \setlength{\tabcolsep}{4pt} % controla el espacio horizontal entre columnas
+  \setlength{\tabcolsep}{2.5pt} % controla el espacio horizontal entre columnas
   \begin{subtable}[t]{0.48\textwidth}
     \centering
     \begin{tabular}{r l c}
       \toprule
-      \textbf{Rank} & \textbf{Variable} & \textbf{Importance} ($10^{-2}$) \\
+      \textbf{Rank} & \textbf{Variable} & \textbf{Importance} \tiny{($10^{-2}$)} \\
       \midrule
        1 & ditau\_dr               & 6.26 \\
        2 & ditau\_pt               & 5.82 \\
@@ -630,7 +630,7 @@ The highest ranked variables in both trainings do not vary significantly, nor do
     \centering
     \begin{tabular}{r l c}
       \toprule
-      \textbf{Rank} & \textbf{Variable} & \textbf{Importance} ($10^{-2}$) \\
+      \textbf{Rank} & \textbf{Variable} & \textbf{Importance} \tiny{($10^{-2}$)} \\
       \midrule
        1 & ditau\_dr             & 6.14 \\
        2 & ratio13               & 5.64 \\
