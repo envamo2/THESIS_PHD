@@ -1,82 +1,104 @@
 \section{Motivation}
-As introduced earlier, the most direct probes of the top-quark Yukawa coupling, $y_{t}$, are provided by the associated production of a Higgs boson with either a top–antitop quark pair ($t\bar{t}H$) or a single top quark ($tH$). While the $t\bar{t}H$ process, discussed in detail in Chapter~\ref{chap:htautau}, is primarily sensitive to the absolute magnitude of $y_{t}$, the $tH$ process is unique in that it also probes the relative sign of the coupling~\cite{Tait_2000,Barger_2010,Biswas_2013,Farina_2013,Chang_2014}.
 
-This difference originates from the interplay between diagrams in which the Higgs boson couples directly to the top quark and those in which it couples to the $W$ boson. In $tH$ production, these two contributions interfere, such that the overall cross section depends not only on $|y_{t}|$ but also on its sign relative to the Higgs–$W$ coupling. The nature of the interference, however, depends strongly on the production mode.
+Building upon the discussion of $t\bar{t}H$ production in the previous chapter, an essential question concerns the $CP$ structure of the Higgs boson couplings. 
+In the Standard Model (SM) the Higgs is a scalar particle and its interactions with fermions and vector bosons are purely $CP$-even. 
+The hypothesis of a purely pseudoscalar state with $CP$-odd interactions has already been excluded by existing measurements~\cite{ATLAS:2015yey,CMS:2014quz,ATLAS:2022ers,CMS:2022dbx}. 
+Nevertheless, it remains experimentally viable that the Higgs boson is a $CP$-mixed state, arising naturally in extended Higgs sectors. 
+Such a scenario would provide a new source of $CP$ violation beyond the SM, which is of particular interest since additional $CP$-violating effects are required to explain the observed baryon asymmetry of the Universe (explained in Section~\ref{sec:BSM}). 
 
-In the $t$-channel ($tHqb$), the interference is strongly destructive, which suppresses the cross section well below the sum of the individual contributions and makes this channel particularly sensitive to deviations from the SM prediction. In contrast, in the $s$-channel the interference is constructive, leading to a total cross section larger than that of the individual diagrams, although its absolute rate remains very small. For the $tWH$ process the interference is also destructive, but its impact is less pronounced than in the $t$-channel. As a result, each of these channels probes the top–Higgs interaction in a different way, with the $t$-channel providing the highest sensitivity to the sign of $y_t$.
+The associated production of a Higgs boson with top quarks plays a central role in testing this possibility~\cite{Gunion:1996xu, Ellis:2013yxa, He:2015spx, Boudjema:2015nda}. 
+While the inclusive cross-section of $t\bar{t}H$ is primarily sensitive to the absolute strength of the top-quark Yukawa coupling, the $tH$ process is directly affected by the relative phase between the Higgs couplings to the top quark and to the $W$ boson. 
+A simultaneous study of $t\bar{t}H$ and $tH$ therefore provides unique sensitivity to potential $CP$ violation in the top-Higgs interaction. 
 
-The corresponding Feynman diagrams, illustrating the contributions from the Higgs–top and Higgs–$W$ couplings and their interference in the different modes, are shown in Figures~\ref{fig:feynman_tH_t}-\ref{fig:feynman_tWH}.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.4\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{thqb_t}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.4\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{thqb_t_2}
-    \end{subfigure}
-    \caption{Representative leading-order Feynman diagrams for $tHqb$ in the $t$-channel~\cite{Barger_2010}.}
-    \label{fig:feynman_tH_t}
-  \end{figure}
-
-
-  \begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.4\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{thqb_s}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.4\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{thqb_s_2}
-    \end{subfigure}
-    \caption{Representative leading-order Feynman diagrams for $tHqb$ in the $s$-channel~\cite{Barger_2010}.}
-    \label{fig:feynman_tH_s}
-  \end{figure}
+This can be expressed in a convenient and model-independent way by extending the SM Lagrangian of the top-Higgs interaction to include a $CP$-mixing angle $\alpha$~\cite{Demartin_2014}:
+\begin{equation}
+{\cal L}_{\ttH}=-\kappa' \, y_t \, \phi \, \bar{\psi_t}(\cos{\alpha} + i\gamma_5\sin{\alpha})\psi_t\,,
+\end{equation}
+where $\kappa'$ is a coupling modifier and $\alpha$ interpolates between a pure scalar ($\alpha=0$) and a pure pseudoscalar interaction ($\alpha=\pi/2$). 
+In this framework, both $t\bar{t}H$ and $tH$ cross sections depend on $\alpha$, as shown in Fig.~\ref{fig:th_cp_dependence}. 
 
 \begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.6\textwidth]{twh.png}
-    \caption{Representative leading-order Feynman diagrams for $tWH$~\cite{twh}.}
-    \label{fig:feynman_tWH}
-  \end{figure}
+  \centering
+  \includegraphics[width=0.65\textwidth]{cp_higgs.pdf}
+  \caption{NLO cross sections for $t\bar{t}H$ and $tH$ production at $\sqrt{s}=13$~TeV as a function of the $CP$-mixing angle $\alpha$, with scale uncertainties included~\cite{demartin2015}.}
+  \label{fig:th_cp_dependence}
+\end{figure}
 
-If the sign of $y_{t}$ were opposite to the SM prediction, the destructive interference in the $t$-channel would turn constructive, enhancing the cross section by up to an order of magnitude and potentially resulting in an observable excess of events. 
-This makes $tH$ production a powerful and complementary probe to $t\bar{t}H$. 
-Whereas $t\bar{t}H$ establishes the presence of the Yukawa interaction and constrains its absolute strength, $tH$ is directly sensitive to its relative phase, providing access to possible deviations such as a flipped sign or $CP$-mixed structures. 
+With the current precision of about 20\% in the \ttH\ measurement, phases up to $\alpha \sim 20^{\circ}$ are still compatible with data. 
+Such values would naturally imply observable deviations from the SM prediction in $tH$ production, providing a strong motivation for a combined measurement of $tH$ and \ttH\ to test the $CP$ structure of the top-Higgs interaction.
+
+The production of a Higgs boson with a single top quark proceeds through the electroweak interaction, with three contributing modes: the $t$-channel ($tHqb$), the $s$-channel ($tHb$), and the associated production with a $W$ boson ($tWH$)~\cite{demartin2015,Demartin_2017}. These processes are distinguished by the way the Higgs boson couples either to the top quark or to the $W$ boson, leading to characteristic interference patterns that are sensitive to the value of $\alpha$. 
+
+Among these, the $t$-channel dominates, with a predicted cross-section of about $74$~fb at $\sqrt{s}=13$~TeV, compared to $15$~fb for $tHW$ and less than $3$~fb for the $s$-channel. The $s$-channel remains negligible due to its very small rate, while the $tHW$ process, although larger, is experimentally treated as a background in most of searches for \thqb because of its different topology, given the presence of the additional $W$ boson. Consequently, the $tHqb$ process provides the cleanest handle on the $CP$ structure of the top-Higgs interaction, especially when studied in conjunction with $t\bar{t}H$ production in the fully hadronic $H \to \tau \tau$ final state.
+
+The corresponding Feynman diagrams for the different $tH$ modes are shown in Figures~\ref{fig:feynman_tH_t}-\ref{fig:feynman_tWH}.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{thqb_t.pdf}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{thqb_t_2.pdf}
+  \end{subfigure}
+  \caption{Representative leading-order Feynman diagrams for $tHqb$ in the $t$-channel~\cite{Barger_2010}.}
+  \label{fig:feynman_tH_t}
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{thqb_s.pdf}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{thqb_s_2.pdf}
+  \end{subfigure}
+  \caption{Representative leading-order Feynman diagrams for $tHqb$ in the $s$-channel~\cite{Barger_2010}.}
+  \label{fig:feynman_tH_s}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{twh.png}
+  \caption{Representative leading-order Feynman diagrams for $tWH$~\cite{twh}.}
+  \label{fig:feynman_tWH}
+\end{figure}
+
   
-  
-  The production of a Higgs boson in association with a single top quark proceeds via the electroweak interaction, with three main modes contributing at the LHC: the $t$-channel ($tHqb$), the $s$-channel ($tHb$), and the associated production with a $W$ boson ($tHW$)~\cite{demartin2015higgsproductionassociationsingle,Demartin_2017}. 
-  As has been discussed, the $t$-channel is by far the most relevant, with a predicted cross-section of about $74$~fb at $\sqrt{s}=13$~TeV, compared to $15$~fb for $tHW$ and less than $3$~fb for the $s$-channel. 
-  Experimentally, the $tHW$ process is characterised by a distinct topology due to the additional $W$ boson in the final state, and is therefore treated as a background in searches for $tHqb$. 
-  For this reason, the present work focuses on the $tHqb$ process in the hadronic $H\to\tau_{\mathrm{had}}\tau_{\mathrm{had}}$ final state, which is directly comparable to the $t\bar{t}H$ topology. 
-  
-  The $tHqb$ event topology is characterised by two heavy objects, namely a top quark and a Higgs boson radiated from the former, accompanied by an energetic light-flavour quark (predominantly a $u$- or $\bar{d}$-quark) and an additional soft $b$-quark originating from gluon splitting. 
+The $tHqb$ event topology is characterised by two heavy objects, a top quark and a Higgs boson, accompanied by an energetic forward light-flavour quark and, typically, an additional low-$p_{T}$ (\textit{soft}) $b$-quark arising from gluon splitting.\footnote{In this context, ``soft'' refers to the comparatively low transverse momentum of the extra $b$-quark, which is often below the jet selection thresholds or reconstructed as a central, less-energetic jet. As a consequence, the $tHqb$ topology usually contains only one $b$-jet from the top-quark decay, in contrast to the $t\bar{t}H$ process which features two energetic $b$-jets.}
   The top-quark and Higgs-boson systems are typically produced in the central region of the detector, recoiling against each other. 
-  In contrast, $tWH$ production features three heavy objects in the final state: the top quark, a $W$ boson, and a Higgs boson radiated from either of these particles, together with a soft $b$-quark from gluon splitting. 
+  In contrast, $tWH$ production features three heavy objects in the final state: the top quark, a $W$ boson, and a Higgs boson, together with a typically soft $b$-quark from gluon splitting. 
   This topology closely resembles $t\bar{t}H$ production and results in an identical final state, making it difficult to disentangle from the $t\bar{t}H$ contribution and therefore justifying its treatment as a background in this analysis. 
   
-  So far, single-top Higgs production has not been observed. 
+  Single-top Higgs production has not been observed yet.
   The CMS Collaboration has reported upper limits on the $tH$ rate in both multi-lepton and $b\bar{b}$ final states. 
   In the multi-lepton channel, the measured signal strength was found to be 
   \[
   \mu_{tHqb+tWH} = 5.1 \pm 2.7~(\text{stat.}) \pm 3.0~(\text{syst.})~\cite{Sirunyan_2021},
   \] 
   while in the $b\bar{b}$ channel cross-sections up to 14.6 times the SM prediction were excluded at 95\% confidence level~\cite{2025}. 
-  The most recent ATLAS search, based on the full Run-2 dataset and targeting $H\to b\bar{b}$, $H\to WW^*$, $H\to ZZ^*$, and $H\to\tau\tau$ decays in events with an isolated lepton from the top quark, reports a measured signal strength of
+  The most recent ATLAS search, targeting $H\to b\bar{b}$, $H\to WW^*$, $H\to ZZ^*$, and $H\to\tau\tau$ decays in events with an isolated lepton from the top quark, reports a measured signal strength of
   \[
-  \mu_{tH} = 8.1 \pm 2.6~(\text{stat.}) \pm 2.0~(\text{syst.}),
+  \mu_{tHqb+tWH} = 8.1 \pm 2.6~(\text{stat.}) \pm 2.0~(\text{syst.}),
   \] 
   corresponding to a 2.8\,$\sigma$ observed (0.4\,$\sigma$ expected) significance above the background only hypothesis. 
   The observed (expected) 95\% confidence level upper limit on the $tH$ cross-section was $13.9$ ($6.1$) times the SM prediction~\cite{ATLAS:2025irr}. 
-  This represents the most stringent constraint on $tH$ production to date, while still allowing for possible deviations from the SM. 
+  This represents the most stringent constraint on $tH$ production to date, while still allowing for possible deviations from the SM.  
   
+  In addition, ATLAS has performed searches in the $H \to \gamma\gamma$ final state in top-associated Higgs production~\cite{thgammagamma}, which provide complementary sensitivity due to the excellent diphoton mass resolution and clean signal signature. 
+  In that analysis, the measured signal strength for $tH$ production was found to be
+  \[
+  \mu_{tH} = 3^{+4}_{-3}~(\text{stat.}) \pm 1~(\text{syst.}).
+  \]    
   In this context, the hadronic di-$\tau$ final state provides an attractive and complementary probe of both $t\bar{t}H$ and $tHqb$ production. 
-  In particular, no ATLAS analysis has yet targeted the $tHqb$ channel in the absence of electrons or muons. 
+  In particular, no ATLAS analysis has yet targeted the $tHqb$ channel in the fully hadronic $\tau\tau$ mode. 
   Moreover, a combined measurement is especially well motivated given that, due to their similar topology, $t\bar{t}H$ and $tHqb$ share the same dominant backgrounds, namely $Z\to\tau\tau$+jets and $t\bar{t}$. 
-  Such a joint analysis becomes feasible for the first time thanks to the larger dataset now available: by combining the full Run-2 dataset with the new Run-3 data, the statistical power of the search can be significantly enhanced. 
+  Such a joint analysis becomes feasible for the first time thanks to the larger dataset now available combining the full Run-2 dataset with the new Run-3 data.
   This increase in luminosity, together with the adoption of improved object reconstruction and identification techniques, opens the possibility to explore $tHqb$ production in the $H\to\tau_{\mathrm{had}}\tau_{\mathrm{had}}$ final state with unprecedented sensitivity while simultaneously refining the measurement of $t\bar{t}H$.
   
 
@@ -86,101 +108,13 @@ Whereas $t\bar{t}H$ establishes the presence of the Yukawa interaction and const
 
 In this new study, the full Run-2 dataset is employed, corresponding to an integrated luminosity of $140$~fb$^{-1}$ at a centre-of-mass energy of $\sqrt{s}=13$~TeV, reprocessed with ATLAS software release 22. 
 This dataset has been complemented with the Run-3 data collected to date, corresponding to an additional $166$~fb$^{-1}$ of luminosity from the years 2022-2024 of data taking, at a centre-of-mass energy of $\sqrt{s}=13.6$~TeV.
-The increased statistical power provided by this combined dataset is one of the main motivations for exploring the $tHqb$ process together with $t\bar{t}H$ in the hadronic di-$\tau$ final state. 
 
 Nevertheless, single-top Higgs production still suffers from low acceptance, particularly within the restricted phase space targeted in the previous $t\bar{t}H(\tau\tau)$ analysis presented in Chapter~\ref{chap:htautau}. 
-In that context, the nominal signal topology involved six jets, with at least two $b$-tagged jets. 
-The baseline selection was relaxed to 5 jets with at least two $b$-tags, or alternatively 6 jets with at least one $b$-jet, in order to recover acceptance lost due to $b$-tagging inefficiencies, with the expectation that the sensitivity would be recovered using MVA techniques. 
 
-For $tHqb$, the selection must be relaxed even further. 
-Nominally, this process yields 5 jets, of which two are expected to be $b$-tagged. 
-With the release 22 of ATLAS software, however, novel identification algorithms have been introduced, including \textsc{gntau} for $\tau$-lepton reconstruction and \textsc{gnv02} for flavour tagging of jets. 
+For \thtt, the jet and $b$-jet selection must be relaxed as this process yields 5 jets, of which two are expected to be $b$-tagged. 
+Furthermore, with the release 22 of ATLAS software, novel identification algorithms have been introduced, including \textsc{gntau} for $\tau$-lepton reconstruction and \textsc{gn2} for flavour tagging of jets. 
 These improvements, together with a refined MVA strategy, allow the analysis to maintain a good balance between efficiency and background rejection, even under looser jet requirements. 
 The updated BDT strategy now targets two signal processes, $t\bar{t}H$ and $tHqb$, against the dominant backgrounds, $Z\to\tau\tau$+jets and $t\bar{t}$. 
-This constitutes the first attempt within ATLAS to perform a simultaneous measurement of both processes in the fully hadronic $\tau\tau$ final state. 
-
-This chapter does not primarily aim at refining the $t\bar{t}H$ cross-section measurement, but to study and quantify the sensitivity that can be achieved for $tHqb$ production using the additional Run-3 data. 
-For this reason, no STXS interpretation is attempted here, in contrast to the previous $t\bar{t}H$ analysis. 
-Instead, the final result presented in this chapter is the expected sensitivity derived from a statistical fit to pseudo-data samples, combined with real collision data in dedicated control regions used to validate the modelling of the dominant background processes. 
-As in the previous analysis, the main backgrounds are modelled with Monte Carlo simulation and normalised to data through the fit, while fake-$\tau$ contributions are estimated with a fully data-driven fake-factor method. 
-Overall, the same challenges and limitations encountered in the $t\bar{t}H(\tau\tau)$ analysis, such as the accurate modelling of $Z\to\tau\tau$+jets, the treatment of $t\bar{t}$ backgrounds, and the control of systematic uncertainties, are inherited here.
-
-It is worth noting that, for the Run-3 MC simulations of \ttbar and \ztautau, significant mismodellings with respect to data are observed, particularly in the latter due to the change of generator version, as already discussed in Section~\ref{subsec:higgs_mc}. 
-Following the same strategy as in the previous section, these discrepancies are ultimately corrected by dedicated normalization factors (NFs) that constrain and adjust the normalization of these backgrounds using data in the statistical fit. 
-Nevertheless, in order to demonstrate that the overall agreement of the various observables between MC and data is under control, the \ttbar and \ztautau MC samples are rescaled by global factors of 1.2 and 1.4, respectively, in all distributions (unless otherwise stated). 
-As will be shown later in Section~\ref{statistical_th_tth}, the normalization factors extracted from the statistical fit are consistent with these estimates. 
-Figure~\ref{mmc_scaled} shows the distribution of \mmc in Run-3, before and after applying these scalings.
-
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{noscaled_plot_ditau_mmc_mlm_m_fix_hh_tth_22_23_24.pdf}
-      \caption{}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.49\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{scaled_plot_ditau_mmc_mlm_m_fix_hh_tth_22_23_24.pdf}
-      \caption{}
-    \end{subfigure}
-    \caption{
-      Distribution of \mmc at preselection level in Run-3. 
-      The comparison between data and MC is shown (a) without applying the global rescaling and (b) after rescaling the \ttbar and \ztautau MC samples by factors of 1.2 and 1.4, respectively.
-    }
-    \label{mmc_scaled}
-  \end{figure}
-  
-The following sections describe in detail the key aspects of the new analysis: updated object reconstruction techniques and phase space definitions, revisited MVA methods incorporating the $tHqb$ signal, the estimation of fake-$\tau$ backgrounds, and finally the new event categorisation and statistical fit strategy.
-
-
-\section{Events and object definition}
-
-In this new analysis there are no major updates regarding the trigger requirements used to select events of interest. For the reconstruction of physics objects, which form the basis of both the event selection and categorisation, we follow the same techniques and procedures as previously described in Section~\ref{subsec:object_def} and Chapter~\ref{chap:object_rec}. Electrons, muons, hadronically decaying $\tau$-leptons, jets, and missing transverse momentum are reconstructed and identified according to the standard ATLAS prescriptions.
-
-A key difference with respect to the Run-2 analysis presented in Chapter~\ref{chap:htautau} is that the present study uses data reprocessed with \textsc{Athena} release 22. This introduces several improvements in object identification that are particularly relevant for this analysis. The most important ones concern the identification of hadronically decaying $\tau$-leptons and the flavour tagging of jets initiated by $b$-quarks. In the case of $b$-tagging, the algorithm used in release~21 has been replaced in release~22 by \textsc{gn2v01}, a graph-based neural network employing a Transformer architecture to predict jet flavour. The model takes as inputs individual track parameters, their uncertainties, and the jet kinematics ($p_{\mathrm{T}}$ and $\eta$). Two auxiliary tasks are included during training: the first predicts track-pair vertex compatibility, i.e.\ whether two tracks originate from a common spatial point, which removes the need for a dedicated secondary-vertex algorithm, while the second assigns each track to an underlying physics process, distinguishing whether it originates from a $b$-hadron, a $c$-hadron, a light-flavour quark, pile-up, or is a fake track. In this analysis the working point corresponding to a 70\% $b$-jet tagging efficiency is employed, providing a good balance between signal acceptance and background rejection. Jets are required to have $p_{\mathrm{T}}>20$~GeV and $|\eta|<2.5$.
-
-For hadronic $\tau$-lepton identification, the RNN-based method used during Run-2 (trained separately for 1-prong and 3-prong decays) has been replaced by a new algorithm referred to as \textsc{gntau}. Following the same philosophy as for the new $b$-tagging approach, this method relies on a graph neural network infrastructure with similar inputs, and provides improved discrimination of \tauhadvis candidates from quark- and gluon-initiated jets. As will be discussed in Section~\ref{fakes_run3}, this new algorithm significantly reduces the contribution from fake-$\tau$ backgrounds, which represented an important source of contamination in the previous analysis due to the large jet multiplicities required.
-
-The preselection for the $tHqb$ and $t\bar{t}H$ analyses largely follows that defined in the previous study and summarised in Table~\ref{tab:tth_hadhad_selection}, with the updates described above. In particular, the jet requirements are relaxed: at least five jets are required in the final state, of which at least one must be $b$-tagged at the 70\% working point. This configuration provides the most efficient balance between signal acceptance and background contamination for both $tHqb$ and $t\bar{t}H$. Although requiring only four jets with at least one $b$-tag would increase acceptance for $tHqb$, the gain would be offset by a substantial increase in the $t\bar{t}$ background, as illustrated in Figure~\ref{jets_selection}. 
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{jets_selection/Ztt}
-      \caption{}
-      \label{fig:jetsel_ztt}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{jets_selection/ttbar}
-      \caption{}
-      \label{fig:jetsel_ttbar}
-    \end{subfigure}
-    \\[0.3cm]
-    \begin{subfigure}[b]{0.45\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{jets_selection/tH}
-      \caption{}
-      \label{fig:jetsel_th}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{jets_selection/ttH}
-      \caption{}
-      \label{fig:jetsel_tth}
-    \end{subfigure}
-    \caption{
-      Fraction of events passing different requirements on the jet and $b$-jet multiplicities
-      for the main signal and background processes. 
-      The heatmaps show the fraction of selected events for (a) $Z\to\tau\tau$, (b) $t\bar{t}$, (c) $tHqb$, and (d) $t\bar{t}H$, 
-      as a function of the number of reconstructed jets and the number of $b$-tagged jets.
-    }
-    \label{jets_selection}
-  \end{figure}
-  
 It is also important to highlight that, for process discrimination, the topology of $tHqb$ exhibits a distinctive feature: the spectator jet from the hard scatter tends to be very forward, as it carries a large fraction of the longitudinal momentum of the initial-state valence quark. This provides a clear signature of $tHqb$, which is absent in $t\bar{t}H$, where the leading jets originate from the two top quarks and therefore populate the more central region of the detector, as shown in Figure~\ref{fig:feynman_tH_ttH}.
 \begin{figure}[htbp]
     \centering
@@ -198,55 +132,168 @@ It is also important to highlight that, for process discrimination, the topology
     \label{fig:feynman_tH_ttH}
   \end{figure}
 
+The study presented here constitutes the first attempt within ATLAS to perform a simultaneous measurement of both processes in the fully hadronic $\tau\tau$ final state. 
+This chapter does not primarily aim at refining the $t\bar{t}H$ cross-section measurement, but to study and quantify the sensitivity that can be achieved for $tHqb$ production using the additional Run-3 data. 
+For this reason, no STXS interpretation is attempted here and the results are expressed as expected sensitivity derived from a statistical fit to pseudo-data samples, combined with real collision data in background-enriched control regions. 
+As in the previous analysis, the main backgrounds are modelled with MC simulation and normalised to data through the fit, while fake-$\tau$ contributions are estimated with a fully data-driven fake-factor method. 
+
+It is worth noting that, for the Run-3 MC simulations of \ttbar and \ztautau, significant mismodellings with respect to data are observed, particularly in the latter due to the change of generator version, as already discussed in Section~\ref{subsec:higgs_mc}. 
+Following the same strategy, these discrepancies are ultimately corrected by dedicated normalization factors (NFs) that constrain and adjust the normalization of these backgrounds using data in the statistical fit. 
+Nevertheless, in order to demonstrate that the overall agreement of the various observables between MC and data is under control, the \ttbar and \ztautau MC samples are rescaled by global factors of 1.2 and 1.4, respectively, in all prefit distributions (unless otherwise stated). 
+As will be shown later in Section~\ref{statistical_th_tth}, the normalization factors extracted from the statistical fit are consistent with these estimates. 
+For illustration, in Figure~\ref{mmc_scaled} it is shown the distribution of \mmc in Run-3, before and after applying these scalings.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{noscaled_plot_ditau_mmc_mlm_m_fix_hh_tth_22_23_24.pdf}
+      \caption{}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.49\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{scaled_plot_ditau_mmc_mlm_m_fix_hh_tth_22_23_24.pdf}
+      \caption{}
+    \end{subfigure}
+    \caption{
+      Distribution of \mmc at preselection level in Run~3, with the region $100<$\mmc$<150$~GeV blinded in data. 
+      The comparison between data and MC is shown (a) without applying any rescaling and (b) after rescaling the \ttbar and \ztautau MC samples by factors of 1.2 and 1.4, respectively. Only statistical uncertainties are included.
+    }
+    \label{mmc_scaled}
+  \end{figure}
+  
+The following sections describe in detail the key aspects of the new analysis: updated object reconstruction techniques and phase space definitions, revisited MVA methods incorporating the $tHqb$ signal, the estimation of fake-$\tau$ backgrounds, and finally the new event categorisation and statistical fit strategy.
 
 
-\section{Fakes background estimation}
+\section{Event and object definition}
+
+In this new analysis there are no major updates regarding the trigger requirements used to select events of interest. For the reconstruction of physics objects, the same techniques and procedures as previously described in Section~\ref{subsec:object_def} and Chapter~\ref{chap:object_rec} are followed. Electrons, muons, \tauhadvis, jets, and missing transverse momentum are reconstructed and identified according to the standard ATLAS prescriptions.
+
+A key difference with respect to the Run-2 analysis presented in Chapter~\ref{chap:htautau} is that the present study uses data reprocessed with \textsc{Athena} release 22. This introduces several improvements in object identification. The most important ones concern the identification of hadronically decaying $\tau$-leptons and jet flavour taggings. In the case of $b$-tagging, the algorithm used in release~21 has been replaced in release~22 by \textsc{gn2v01}, a graph-based neural network employing a Transformer architecture to predict jet flavour~\cite{new_tagging}. The model takes as inputs individual track parameters, their uncertainties, and the jet kinematics ($p_{\mathrm{T}}$ and $\eta$). Two auxiliary tasks are included during training: the first predicts track-pair vertex compatibility, i.e.\ whether two tracks originate from a common spatial point (which removes the need for a dedicated secondary-vertex algorithm) while the second assigns each track to an underlying physics process, distinguishing whether it originates from a $b$-hadron, a $c$-hadron, a light-flavour quark, pile-up, or is a fake track. In this analysis the working point corresponding to a 70\% $b$-jet tagging efficiency is employed, providing a good balance between signal acceptance and background rejection. 
+
+For hadronic $\tau$-lepton identification, the RNN-based method used during Run-2 has been been replaced by a new algorithm referred to as \textsc{gntau}. Following the same philosophy as for the new $b$-tagging approach, this method relies on a graph neural network infrastructure with similar inputs, and provides improved discrimination of \tauhadvis candidates from quark- and gluon-initiated jets. As will be discussed in Section~\ref{fakes_run3}, this new algorithm significantly reduces the contribution from fake-\tauhad backgrounds.
+
+The preselection for the $tHqb$ and $t\bar{t}H$ analysis largely follows that defined in the previous study and summarised in Table~\ref{tab:hadhad_selection}, with the updates described above.
+\begin{table}[htbp]
+  \centering
+  \caption{Summary of the event selection for the $\tau_{\text{had}}\tau_{\text{had}}$ channel and the dedicated $t(0\ell)qbH \to \tau_{\text{had}}\tau_{\text{had}}$ + $t\bar{t}(0\ell)H \to \tau_{\text{had}}\tau_{\text{had}}$ category.}
+  \renewcommand{\arraystretch}{1.6} % más espacio vertical
+  \scriptsize % letra un poco más pequeña
+  \begin{tabular}{l c}
+  \hline
+  \textbf{Preselection} & $\tau_{\text{had}}\tau_{\text{had}}$ \\
+  \hline
+  Object counting & \# of $e/\mu = 0$, \# of $\tau_{\text{had-vis}} = 2$ \\
+  $p_{\text{T}}$ cut & $\tau_{\text{had-vis}}$: $p_{\text{T}} > 40, 30$~GeV \\
+  \textbf{Identification} & $\tau_{\text{had-vis}}$: \textsc{gntau} Medium \\
+  Charge product & Opposite charge \\
+  \textbf{$b$-tagging} & \textsc{gn2v01} 70\% \\
+  \etmiss & \etmiss $> 20$~GeV \\
+  Leading jet & $p_{\text{T}} > 70$~GeV, $|\eta| < 3.2$ \\
+  Angular & $0.6 < \Delta R_{\tau_{\text{had-vis}}\tau_{\text{had-vis}}} < 2.5$, 
+             $|\Delta\eta_{\tau_{\text{had-vis}}\tau_{\text{had-vis}}}| < 1.5$ \\
+  Coll. app. $x_1, x_2$ & $0.1 < x_1 < 1.4$, $0.1 < x_2 < 1.4$ \\
+  \hline
+  \end{tabular}
+  
+  \vspace{0.6cm}
+  
+  \begin{tabular}{l c}
+  \hline
+  \textbf{Category} & $\tau_{\text{had}}\tau_{\text{had}}$ \\
+  \hline
+  $(t(0\ell)qb + t\bar{t}(0\ell))H \to \tau_{\text{had}}\tau_{\text{had}}$ &
+  \textbf{\# of jets $\geq 5$ and \# of $b$-jets $\geq 1$ }\\
+  \hline
+  \end{tabular}
+  
+  \label{tab:hadhad_selection}
+  \end{table}
+In particular, the jet requirements are relaxed: at least five jets are required in the final state, of which at least one must be $b$-tagged at the 70\% working point. This configuration provides the most efficient balance between signal acceptance and background contamination for both $tHqb$ and $t\bar{t}H$. Although requiring only four jets with at least one $b$-tag would increase acceptance for $tHqb$, the gain would be offset by a substantial increase in the $t\bar{t}$ background, as illustrated in Figure~\ref{jets_selection}. 
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{jets_selection/Ztt}
+      \caption{$Z\to\tau\tau$}
+      \label{fig:jetsel_ztt}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{jets_selection/ttbar}
+      \caption{$t\bar{t}$}
+      \label{fig:jetsel_ttbar}
+    \end{subfigure}
+    \\[0.3cm]
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{jets_selection/tH}
+      \caption{$tHqb$}
+      \label{fig:jetsel_th}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{jets_selection/ttH}
+      \caption{$t\bar{t}H$}
+      \label{fig:jetsel_tth}
+    \end{subfigure}
+    \caption{
+      Fraction of events passing different requirements on the jet and $b$-jet multiplicities
+      for the main signal and background processes. 
+      The heatmaps show the fraction of selected events for the different processes, 
+      as a function of the number of reconstructed jets and the number of $b$-tagged jets.
+    }
+    \label{jets_selection}
+  \end{figure}
+  
+\section{Misidentified-$\tau$ background estimation}
 \label{fakes_run3}
 
-In the previous analysis it was noted that, when estimating the contribution from fake backgrounds, the dedicated control regions were derived by inverting the identification criteria applied to the $\tau$-lepton candidates in the signal regions. From these control regions, templates enriched in fake objects were obtained and subsequently used both to derive the fake factors (FFs) and to apply them in the analysis signal regions. An important detail was that one could not simply invert the Medium working point: at least one of the $\tau_{\mathrm{had}}$ candidates still had to satisfy a loose identification requirement, since events without any loosely identified $\tau_{\mathrm{had}}$ were not kept in the derivations. This limitation is no longer present in the samples processed with release 22, which simplifies the estimation procedure in the current study.
+In the previous analysis it was noted that, when estimating the contribution from fake \tauhad backgrounds, the dedicated CRs were derived by inverting the identification criteria applied to the \tauhad candidates in the signal regions. From these CRs, templates enriched in fake \tauhad objects were obtained and subsequently used both to derive the fake factors (FFs) and to apply them in the analysis signal regions. An important detail was that one could not simply invert the Medium working point: at least one of the $\tau_{\mathrm{had}}$ candidates still had to satisfy a loose identification requirement, since events without any loosely identified $\tau_{\mathrm{had}}$ were not kept in the derivations. This limitation is no longer present in the samples processed with release 22, which simplifies the estimation procedure in the current study.
 
 
 \subsection{Nominal FF estimation}
 
-In the present analysis, the fake background is re-estimated by defining a single control region in which the $\tau_{\mathrm{had}}$ candidates fail the Medium working point, without imposing any additional Loose requirement. A single set of fake factors, $FF_{nm}$ following Eq.~\ref{eq_fakes}, is therefore enough to describe the background contribution. 
+In the present analysis, the fake \tauhad background is re-estimated by defining a single control region in which the $\tau_{\mathrm{had}}$ candidates fail the Medium working point, without imposing any additional Loose requirement. A single set of fake factors, $FF_{nm}$ following Eq.~\ref{eq_fakes}, is therefore enough to describe the background contribution. 
 
-The fake factors are derived in bins of \pt and $|\eta|$ of the $\tau$-lepton, using dedicated \taulephad control regions. Separate determinations are performed depending on whether the hadronic $\tau$-lepton decay is classified as 1-prong or 3-prong. Different sets of fake factors are also derived and subsequently applied for the Run-2 and Run-3 datasets. Figure~\ref{fig:ff_run2_run3} shows the resulting fake factors for both data-taking periods, displayed as a function of \pt in the two $|\eta|$ regions considered: the ``Barrel'' region ($0<|\eta|<1.37$) and the ``Endcap'' region, which covers the remaining acceptance.
+The FFs are derived in bins of \pt and $|\eta|$ of the $\tau$-lepton, using dedicated \taulephad control regions. Separate determinations are performed for Run-2 and Run-3 data, and depending on whether the hadronic $\tau$-lepton decay is classified as 1-prong or 3-prong. Figure~\ref{fig:ff_run2_run3} shows the resulting FFs for both data-taking periods, displayed as a function of \pt in the two $|\eta|$ regions considered: the ``Barrel'' region ($0<|\eta|<1.37$) and the ``Endcap'' region, which covers the remaining acceptance.
 \begin{figure}[htbp]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
       \centering
       \includegraphics[width=\textwidth]{new_FFs_trigger_corrected_ATLAS_run2.pdf}
-      \caption{}
+      \caption{Run~2}
       \label{fig:ff_run2}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.49\textwidth}
       \centering
       \includegraphics[width=\textwidth]{new_FFs_trigger_corrected_ATLAS_run3.pdf}
-      \caption{}
+      \caption{Run~3}
       \label{fig:ff_run3}
     \end{subfigure}
     \caption{
-      Fake factors in the \tauhadhad channel as a function of the leading $p_{\mathrm{T}}$,
-      shown separately for BARREL and ENDCAP and for 1-prong and 3-prong candidates.
-      Panels (a) and (b) correspond to Run-2
-      and Run-3, respectively.
+      FFs in the \tauhadhad channel as a function of the leading $p_{\mathrm{T}}$,
+      shown separately for BARREL and ENDCAP and for 1-prong and 3-prong candidates. Only statistical uncertainties are included.
     }
     \label{fig:ff_run2_run3}
   \end{figure}
-From these plots it can be concluded that the fake factors required to scale the background from misidentified \tauhad are significantly larger for Run-3 data compared to Run-2, particularly at low \pt, with the effect being especially pronounced in the 1-prong category. More importantly, however, the new fake factors derived with release~22 Run-2 samples using the updated \textsc{gntau} identification algorithm are noticeably smaller than those obtained in the previous round of the analysis presented in the preceding chapter, which relied on the RNN-based approach for \tauhad identification~\cite{serhat_tesis}, as illustrated in Figure~\ref{fig:ffs_run2_rnn}.  
+From these plots it can be concluded that the FFs required to scale the background from misidentified \tauhad are significantly larger for Run-3 data compared to Run-2, particularly at low \pt, with the effect being especially pronounced in the 1-prong category. 
   \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.55\textwidth]{ffs_run2_legacy}
-    \caption{Fake factors derived in Run-2 using the RNN-based \tauhad identification, 
+    \caption{FFs derived in Run-2 using the RNN-based \tauhad identification, 
     shown as a function of the $\tau$-lepton transverse momentum for the same two $|\eta|$ regions considered: Barrel and Endcap~\cite{serhat_tesis}.}
     \label{fig:ffs_run2_rnn}
   \end{figure}
-This difference is observed across all \pt and $|\eta|$ bins, as well as as a function of the prongness. At first sight, it could suggest that the new \textsc{gntau} algorithm achieves a better performance in rejecting jets faking \tauhad. In practice, however, this effect originates primarily from the way the templates are constructed when defining the anti-ID regions in the two approaches. 
 
-In the following, the closure or validation of this new fake background estimate is presented, together with a comparison to the results obtained in the previous round, in order to quantify the extent to which this background has been reduced.
+More importantly, however, the new FFs derived with release~22 Run-2 samples using the updated \textsc{gntau} identification algorithm are noticeably smaller than those obtained in the previous round of the analysis presented in the preceding chapter, which relied on the RNN-based approach for \tauhad identification~\cite{serhat_tesis}, as illustrated in Figure~\ref{fig:ffs_run2_rnn}.  
+This difference is observed across all \pt and $|\eta|$ bins, both for 1- and 3-prong. At first sight, it could suggest that the new \textsc{gntau} algorithm achieves a better performance in rejecting jets faking \tauhad. In the following, the closure or validation of this new fake \tauhad background estimate is presented, together with a comparison to the results obtained in the previous round, in order to quantify the extent to which this background has been reduced.
 
-In this simplified scenario, the application of the FFs follows a straightforward event-by-event reweighting: events in which only one $\tau_{\mathrm{had}}$ candidate fails the Medium ID are scaled by $FF_{nm}$ of the failing $\tau$, while events where both candidates fail are scaled by the product of the two fake factors. The full prediction in the signal region is thus given by
+In this simplified scenario, the application of the FFs follows a straightforward event-by-event reweighting: events in which only one $\tau_{\mathrm{had}}$ candidate fails the Medium ID are scaled by $FF_{nm}$ of the failing $\tau$, while events where both candidates fail are scaled by the product of the two FFs, in order to prevent double-counting. The full prediction in the signal region is thus given by
 \begin{align}
     \tau_1^{P}\,\tau_2^{P} \;=\;&\;
     \tau_1^{T}\,\tau_2^{T}\;(\text{MC}) \nonumber \\[0.2cm]
@@ -255,8 +302,8 @@ In this simplified scenario, the application of the FFs follows a straightforwar
     &-\, FF_{nm}(\tau_1)\,FF_{nm}(\tau_2)\;\tau_1^{F}\,\tau_2^{F}\,,
     \label{eq_fakes}
     \end{align}
-where $P$ and $F$ denote whether a $\tau_{\mathrm{had}}$ candidate passes or fails the Medium ID, respectively, and $\tau^T$ refers to genuine $\tau$-leptons taken from simulation.  
-To validate the estimation of this background contribution, the distributions of representative observables such as the transverse momentum and pseudorapidity of the leading and subleading \tauhad candidates are shown at preselection level, but inclusive in jet multiplicity to allow for a clearer visualization.  
+where $P$ and $F$ denote whether a $\tau_{\mathrm{had}}$ candidate passes or fails the Medium ID, respectively, and $\tau^T$ refers to genuine $\tau$-leptons taken from simulation in order to estimate the contribution from genuine \tauhad in the SR.  
+To validate the estimation of this background contribution, the distributions of representative observables such as the transverse momentum and pseudorapidity of the leading and subleading \tauhad candidates are shown in Figures~\ref{fig:closure_validation_run2} and\ref{fig:closure_validation_run3} at preselection level, inclusive in jet multiplicity to allow for a clearer visualization.  
 These plots are evaluated in a same-sign region, which is enriched in events with misidentified \tauhad candidates. In these events, the large jet multiplicity and the random charge assignment of tracks increase the probability of jets mimicking the signature of hadronic $\tau$ decays. Good agreement between data and the background estimation is expected. 
     
   \begin{figure}[htbp]
@@ -281,14 +328,14 @@ These plots are evaluated in a same-sign region, which is enriched in events wit
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{images/fakes_run3/plot_tau_1_pt_hh_tth_22_23_24_same_sign.pdf}
+      \includegraphics[width=\textwidth]{images/fakes_run3/plot_tau_1_eta_hh_tth_22_23_24_same_sign.pdf}
       \caption{}
     \end{subfigure}
   
     \caption{
-      Closure and validation of the fake background estimation in Run-3 dataset, evaluated in the same-sign region at preselection level.
+      Closure and validation of the fake \tauhad background estimation in Run-3 dataset, evaluated in the same-sign region at preselection level.
       The comparison is shown as a function of the \pt and $\eta$ of the leading (a), (b), and subleading (c), (d), \tauhad candidates. 
-      Data are compared to the estimated fake background. Scaling factors on \ztautau and \ttbar are applied.
+      Data are compared to the estimated fake \tauhad background. Scaling factors on \ztautau and \ttbar are applied. Only statistical uncertainties are included.
     }
     \label{fig:closure_validation_run3}
   \end{figure}
@@ -320,17 +367,17 @@ These plots are evaluated in a same-sign region, which is enriched in events wit
     \end{subfigure}
   
     \caption{
-      Closure and validation of the fake background estimation in Run-2 dataset, evaluated in the same-sign region at preselection level.
+      Closure and validation of the fake \tauhad background estimation in Run-2 dataset, evaluated in the same-sign region at preselection level.
       The comparison is shown as a function of the \pt and $\eta$ of the leading (a), (b), and subleading (c), (d), \tauhad candidates. 
-      Data are compared to the estimated fake background.
+      Data are compared to the estimated fake \tauhad background. Only statistical uncertainties are included.
     }
     \label{fig:closure_validation_run2}
   \end{figure}
 
   In Figure~\ref{run2_fakes_comparison}, the effect of switching from the RNN-based to the new \textsc{gntau} identification algorithm is illustrated using a dataset corresponding to 2022 data-taking period.  
   The distributions of the jet multiplicity, as well as the transverse momentum and pseudorapidity of the leading \tauhad candidate, are shown for the preselection requiring at least one $b$-tagged jet.  
-  This choice provides a more inclusive selection, ensuring sufficient statistical precision to clearly illustrate the effect, while the requirement of at least one $b$-tagged jet enhances the visibility of the \ttbar contribution, yielding a representative picture of the phase space relevant for the analysis.  
-  A marked reduction in the contribution from misidentified \tauhad backgrounds is observed when employing the \textsc{gntau} algorithm, highlighting its superior performance in suppressing jets misidentified as hadronic $\tau$ decays, with overall reductions of about 60-70\% compared to the previous RNN-based approach.
+  This choice provides a more inclusive selection, ensuring sufficient statistics to clearly illustrate the effect, while the requirement of at least one $b$-tagged jet enhances the visibility of the \ttbar contribution, yielding a representative picture of the phase space relevant for the analysis.  
+  A large reduction in the contribution from misidentified \tauhad backgrounds is observed when employing the \textsc{gntau} algorithm, highlighting its superior performance in suppressing jets misidentified as hadronic $\tau$ decays, with overall reductions of about 60-70\% compared to the previous RNN-based approach.
   
   \begin{figure}[htbp]
     \centering
@@ -338,40 +385,40 @@ These plots are evaluated in a same-sign region, which is enriched in events wit
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/leading_pt_gntau.png}
-        \caption{}
+        \caption{\textsc{gntau}}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/leading_eta_gntau.png}
-        \caption{}
+        \caption{\textsc{gntau}}
     \end{subfigure}
 
     % Bottom row: RNN
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/leading_pt_rnn.png}
-        \caption{}
+        \caption{RNN-ID}
     \end{subfigure}
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/leading_eta_rnn.png}
-        \caption{}
+        \caption{RNN-ID}
     \end{subfigure}
 
     \caption{Distributions of the leading \tauhad candidate transverse momentum and pseudorapidity at the \ttH preselection with at least one $b$-tagged jet. 
-    The upper row shows the results obtained with the new \textsc{GNTau} identification algorithm (a) and (b), while the lower row shows the corresponding distributions with the previously used RNN-based approach (c) and (d). These distributions are evaluated on data and simulations from 2022 data-taking periond.}
+    The upper row shows the results obtained with the new \textsc{GNTau} identification algorithm (a) and (b), while the lower row shows the corresponding distributions with the previously used RNN-based approach (c) and (d). These distributions are evaluated on data and simulations from 2022 data-taking periond. Scaling factors on \ztautau and \ttbar are applied. Only statistical uncertainties are included.}
     \label{run2_fakes_comparison}
 \end{figure}
 
 \subsection{Systematic variations}
 
-For this new round, the main variations contributing to the systematic uncertainties in the fake background estimation were recalculated accordingly. In addition to the statistical uncertainties, the composition and parametrization uncertainty sources, already discussed in Section~\ref{sec:event_selection_background}, are also considered.  
-To account for differences in background composition as a function of the control region (CR) used to derive the fake factors, two alternative CRs were defined directly in the \tauhadhad final state.  
+The variations contributing to the systematic uncertainties in the fake \tauhad background estimation have been reevaluated (suh as the composition and parametrization uncertainty sources,  discussed in Section~\ref{sec:event_selection_background}).
+To account for differences in background composition, two alternative CRs were defined in the \tauhadhad final state.  
 
-The first corresponds to the selection of same-sign events, which are naturally enriched in jets misidentified as \tauhad, predominantly originating from QCD multi-jet processes, as mentioned before.
+The first corresponds to the selection of same-sign events, which are naturally enriched in jets misidentified as \tauhad, predominantly originating from QCD multi-jet production, as mentioned before.
 The second alternative is the high-$\Delta\eta(\tau_0,\tau_1)$ region, $1.5 < \Delta\eta < 2.0$, which is more sensitive to dijet-like topologies. In this case, the presence of forward jets with low track multiplicity enhances the probability of jets being misidentified as \tauhad candidates, thus providing an additional validation of the robustness of the method. The closure obtained when estimating this background contribution with these alternative CRs is shown in Figures~\ref{fig:closure_validation_same_sign_run3} and~\ref{fig:closure_validation_same_sign_run2} for the same-sign composition uncertainties, evaluated in the same-sign \tauhadhad signal phase-space, and in Figures~\ref{fig:closure_validation_highdeta_run3} and~\ref{fig:closure_validation_highdeta_run2} it is shown the analogous representation in the high-$\Delta \eta (\tau_0,\tau_1)$ case.
 
-From these results just presented, it can be concluded that there is a considerable impact when changing the fake background source region from which the FFs are derived. When using the high-$\Delta\eta(\tau_0,\tau_1)$ control region, we obtain a strongly increased predicted overall yield for the Fake contribution, which does not occur when instead using the same-sign regions.
+From these results just presented, it can be concluded that there is a considerable impact when changing the fake \tauhad background source region from which the FFs are derived. When using the high-$\Delta\eta(\tau_0,\tau_1)$ control region, we obtain a strongly increased predicted overall yield for the Fake contribution, which does not occur when instead using the same-sign regions.
 %Run_3 same_sign closure
 \begin{figure}[htbp]
   \centering
@@ -396,13 +443,13 @@ From these results just presented, it can be concluded that there is a considera
   \hfill
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{images/same_sign_same_sign_run3/plot_tau_1_pt_hh_tth_22_23_24_same_sign.pdf}
+    \includegraphics[width=\textwidth]{images/same_sign_same_sign_run3/plot_tau_1_eta_hh_tth_22_23_24_same_sign.pdf}
     \caption{}
   \end{subfigure}
   \caption{
-    Closure and validation of the fake background estimated in Run-3 dataset with the alternative same-sign \tauhadhad CR, evaluated in the same-sign region at preselection level.
+    Closure and validation of the fake \tauhad background estimated in Run-3 dataset with the alternative same-sign \tauhadhad CR, evaluated in the same-sign region at preselection level.
     The comparison is shown as a function of the \pt and $\eta$ of the leading (a), (b), and subleading (c), (d), \tauhad candidates. 
-    Data are compared to the estimated fake background. Scaling factors on \ztautau and \ttbar are applied.
+    Data are compared to the estimated fake \tauhad background. Scaling factors on \ztautau and \ttbar are applied. Only statistical uncertainties are included.
   }
   \label{fig:closure_validation_same_sign_run3}
 \end{figure}
@@ -431,14 +478,14 @@ From these results just presented, it can be concluded that there is a considera
     \hfill
     \begin{subfigure}[b]{0.45\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{images/same_sign_same_sign_run2/plot_tau_1_pt_hh_tth_15_16_17_18_same_sign.pdf}
+      \includegraphics[width=\textwidth]{images/same_sign_same_sign_run2/plot_tau_1_eta_hh_tth_15_16_17_18_same_sign.pdf}
       \caption{}
     \end{subfigure}
 
     \caption{
-    Closure and validation of the fake background estimated in Run-2 dataset with the alternative same-sign \tauhadhad CR, evaluated in the same-sign region at preselection level.
-    The comparison is shown as a function of the \pt and $\eta$ of the leading (a), (b), and subleading (c), (d), \tauhad candidates. 
-    Data are compared to the estimated fake background.
+    Closure and validation of the fake \tauhad background estimated in Run-2 dataset with the alternative same-sign \tauhadhad CR, evaluated in the same-sign region at preselection level.
+    The comparison is shown as a function of the \pt and $\eta$ of the leading (a), (b), and subleading (c), (d), \tauhad candidates. Only statistical uncertainties are included.
+    Data are compared to the estimated fake \tauhad background.
   }
   \label{fig:closure_validation_same_sign_run2}
 \end{figure}
@@ -466,13 +513,13 @@ From these results just presented, it can be concluded that there is a considera
       \hfill
       \begin{subfigure}[b]{0.45\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/highdeta_highdeta_run3/plot_tau_1_pt_hh_tth_22_23_24_high_deta.pdf}
+        \includegraphics[width=\textwidth]{images/highdeta_highdeta_run3/plot_tau_1_eta_hh_tth_22_23_24_high_deta.pdf}
         \caption{}
       \end{subfigure}
       \caption{
-    Closure and validation of the fake background estimated in Run-3 dataset with the alternative high-$\Delta \eta (\tau_0, \tau_1)$ \tauhadhad CR, evaluated in the high-$\Delta \eta (\tau_0, \tau_1)$ region at preselection level.
+    Closure and validation of the fake \tauhad background estimated in Run-3 dataset with the alternative high-$\Delta \eta (\tau_0, \tau_1)$ \tauhadhad CR, evaluated in the high-$\Delta \eta (\tau_0, \tau_1)$ region at preselection level.
     The comparison is shown as a function of the \pt and $\eta$ of the leading (a), (b), and subleading (c), (d), \tauhad candidates. 
-    Data are compared to the estimated fake background. Scaling factors on \ztautau and \ttbar are applied.
+    Data are compared to the estimated fake \tauhad background. Scaling factors on \ztautau and \ttbar are applied. Only statistical uncertainties are included.
   }
   \label{fig:closure_validation_highdeta_run3}
 \end{figure}
@@ -501,48 +548,51 @@ From these results just presented, it can be concluded that there is a considera
         \hfill
         \begin{subfigure}[b]{0.45\textwidth}
           \centering
-          \includegraphics[width=\textwidth]{images/highdeta_highdeta_run2/plot_tau_1_pt_hh_tth_15_16_17_18_high_deta.pdf}
+          \includegraphics[width=\textwidth]{images/highdeta_highdeta_run2/plot_tau_1_eta_hh_tth_15_16_17_18_high_deta.pdf}
           \caption{}
         \end{subfigure}
         \caption{
-    Closure and validation of the fake background estimated in Run-2 dataset with the alternative high-$\Delta \eta (\tau_0, \tau_1)$ \tauhadhad CR, evaluated in the high-$\Delta \eta (\tau_0, \tau_1)$ region at preselection level.
-    The comparison is shown as a function of the \pt and $\eta$ of the leading (a), (b), and subleading (c), (d), \tauhad candidates. 
-    Data are compared to the estimated fake background.
+    Closure and validation of the fake \tauhad background estimated in Run-2 dataset with the alternative high-$\Delta \eta (\tau_0, \tau_1)$ \tauhadhad CR, evaluated in the high-$\Delta \eta (\tau_0, \tau_1)$ region at preselection level.
+    The comparison is shown as a function of the \pt and $\eta$ of the leading (a), (b), and subleading (c), (d), \tauhad candidates. Only statistical uncertainties are included.
+    Data are compared to the estimated fake \tauhad background.
   }
   \label{fig:closure_validation_highdeta_run2}
 \end{figure}
 
-The remaining source of uncertainty in the estimation of this background can be referred to as the parametrization uncertainty. This is re-derived, although it has only a minor impact on the analysis, by evaluating the effect of estimating the background contribution using fake factors calculated separately for the leading and subleading \tauhad candidates in the \tauhadhad same-sign region, which then need to be combined, instead of relying on a single nominal fake factor calculated in the \taulephad W+jets CR. The procedure followed to estimate these variations is described in Ref.~\cite{serhat_tesis}.
+The remaining source of uncertainty in the estimation of this background is referred to as the parametrization uncertainty. Although it has only a minor impact on the analysis, it is re-derived by evaluating the effect of estimating the background contribution using FFs calculated separately for the leading and subleading \tauhad candidates in the \tauhadhad same-sign region, which then need to be combined, instead of relying on a single nominal fake factor extracted in the \taulephad $W$+jets control region.  
+
+In this case, rather than considering the variation as the difference in the fake-\tauhad background contribution obtained with FFs derived either in the same-sign region or in the nominal control region, the approach is based on computing the Data/MC ratio from the distribution of the \mmc. The fake-\tauhad contribution in this distribution is estimated using the FFs derived in the \tauhadhad same-sign control region. This Data/MC ratio is then applied as a weight to the nominal fake-\tauhad background estimate in the analysis regions. The variation is taken as the difference between this weighted contribution, obtained in bins of \mmc, and the nominal prediction. More details about this procedure can be found in Ref.~\cite{serhat_tesis}.
+
   
 
 
-
+\FloatBarrier
 \section{New MVA strategy for event categorization}
 
-The strategy adopted in this new analysis for the further classification of events of interest within the defined phase space closely follows the approach discussed in Section~\ref{sec:tth_mva}. The same multiclass BDT algorithm is employed, but in this case it is extended to a total of four classes, including an additional one for the \thtt signal.
+The classification of events of interest within the defined phase space closely follows the approach discussed in Section~\ref{sec:tth_mva}. The same multiclass BDT algorithm is employed, but in this case it is extended to a total of four classes, including an additional one for the \thtt signal.
 
-It should be emphasised that an inclusive training in \pth is carried out at this stage. The objective is not to perform a statistical fit targeting different STXS phase space bins in order to refine the precision of the measurements, but rather to obtain a combined study of \ttH and \thqb, with the aim of assessing the potential sensitivity achievable for this newly incorporated production mode.
+It should be emphasised that an inclusive training in \pth is carried out at this stage. The objective is not to perform a statistical fit targeting different STXS phase space bins in order to refine the precision of the measurements, but rather to obtain a combined study of \ttH and \thqb, with the aim of assessing the sensitivity for this newly incorporated production mode.
 
-For this new analysis, the BDT has been trained using together the available MC simulations for both signals, \ztautau and \ttbar, corresponding to the whole Run~2 data-taking period (using rel.22 as previously explained), and Run~3 to date (2022-2024).
+The BDT has been trained using together the available MC simulations for both signals, \ztautau and \ttbar, corresponding to the whole Run~2 data-taking period (at $\sqrt{s}=13$~TeV), and Run~3 to date (2022-2024, at $\sqrt{s} = 13.6$~TeV).
+Despite the $\sqrt{s}$ difference, the statistical power of combining both sets of MC samples improves the overall BDT performance.
 
 \subsection{New 4-class BDT}
-Originally, the strategy would rely on employing as input variables the same list that had previously been used to separate \ttH from \ztautau and from \ttbar, since the features exploited to distinguish these final states are also expected to provide separation power for a second signal process, \thqb.
-Nevertheless, as already discussed, the topologies of \ttHtt and \thtt are very similar, and their separation must be maximised. This is particularly relevant given that in both cases two \tauhad originate from the Higgs boson decay, the final state contains multiple jets, and $b$-jets emerge from the top-quark decay.
-
-To enhance the separation of the two signal processes, a set of additional variables is therefore incorporated. These new observables are primarily defined based on the properties of light jets and $b$-jets in the final state, or on features describing the $b$-jet pairs. Specifically, the added variables are the following:
+The same input variables previously used to separate \ttH from \ztautau and from \ttbar are also employed, since the features exploited to distinguish these processes are also expected to provide separation power for \thqb.
+Nevertheless, in order to maximize the separation of \ttHtt and \thtt, a set of additional variables is incorporated. These new observables are primarily defined based on the properties of $b$-tagged jets ($b$-jets) and non-$b$-tagged jets (light jets) in the final state, or on features describing the $b$-jet pairs. Specifically, the added variables are the following:
 
 \begin{itemize}
-  \item \texttt{n\_ljets}: number of light jets,
+  \small
+  \item \texttt{n\_ljets}: number of light (i.e., non-$b$-tagged) jets,
   \item \texttt{n\_ljets\_maxSameEta}: number of light jets with the same $\eta$ sign,
   \item \texttt{bjet\_0\_eta}: $\eta$ of the leading $b$-jet,
   \item \texttt{bjet\_0\_pt}: $p_{\mathrm{T}}$ of the leading $b$-jet,
   \item \texttt{dEta\_bH\_max}: maximum $\Delta \eta$ between the visible decay products of the Higgs boson and any $b$-jet,
-  \item \texttt{n\_bjets\_GN2v01\_FixedCutBEff\_70}: multiplicity in the number of $b$-jets,
-  \item \texttt{dEta\_lb\_max}: largest $\Delta \eta$ between any light jet and $b$-jet,
+  \item \texttt{n\_bjets\_GN2v01\_FixedCutBEff\_70}: $b$-jets multiplicity,
+  \item \texttt{dEta\_lb\_max}: largest $\Delta \eta$ between any light jet and $b$-jet pair,
   \item \texttt{m\_ll\_max}: largest invariant mass of any pair of light jets in the final state.
 \end{itemize}
 
-As can be observed, most of these variables are designed to exploit differences in the origin of jets and $b$-jets in the considered processes.
+These variables are designed to exploit differences in the origin of jets and $b$-jets in the considered processes.
 For instance, the leading jet in \thqb is often significantly more forward compared to the remaining jets in its final state or to those in \ttH. In addition, in \thqb there exists a leading $b$-jet produced directly from one of the initial-state partons, rather than from the decay of a top quark, either the singly produced one in \thqb or one of the top quarks in \ttH.
 
 This feature is exploited through the study of the $\eta$ and $p_{\mathrm{T}}$ of the leading $b$-jet, as well as its relation to the Higgs boson or to other light jets. The additional $b$-jet in \thqb is typically less energetic and exhibits a broader $\eta$ distribution, and it is not correlated with either the Higgs boson or the top quark. In contrast, the $b$-jets in \ttH are generally more central and have larger transverse momentum, similarly to the $b$-jet produced from the top quark in \thqb.
@@ -636,7 +686,64 @@ In Figures~\ref{fig:th_vs_tth_1} and~\ref{fig:th_vs_tth_2}, the distributions of
   \label{fig:th_vs_tth_2}
 \end{figure}
 
-Finally, Figures~\ref{th_tth_vars_tmva_1}-\ref{th_tth_vars_tmva_3} show, analogously to what was presented in Section~\ref{sec:tth_mva}, the distributions of all variables employed in this new training for the four event classes under consideration.
+Finally, in Table~\ref{tab:all_vars} the complete list of 29 input variables is presented and Figures~\ref{th_tth_vars_tmva_1}-\ref{th_tth_vars_tmva_3} show, analogously to what was presented in Section~\ref{sec:tth_mva}, the distributions of all of them employed in this new training for the four event classes under consideration.
+
+\begin{table}[htbp]
+  \small
+  \centering
+  \caption{Variables used in the multivariate tagger. The list includes additional variables introduced in the current training for discriminating between $t\bar{t}H$ and $tHqb$.}
+  \renewcommand{\arraystretch}{1.3}
+  \setlength{\tabcolsep}{10pt}
+  \begin{tabular}{p{2.2cm} p{10.5cm}}
+    \toprule
+    \textbf{Group} & \textbf{Variable} \\
+    \midrule
+
+    \multirow{9}{*}{\rotatebox{90}{Jet properties}} 
+    & Invariant mass of the two leading jets $p_{\text{T}}(jj)$ \\
+    & Product of $\eta$ of the two leading jets \\
+    & Sub-leading jet $p_{\text{T}}$ \\
+    & $\eta$ of the 5 leading jets \\
+    & Scalar sum of all jets $p_{\text{T}}$ \\
+    & Scalar sum of all $b$-tagged jets $p_{\text{T}}$ \\
+    & Best $W$-candidate dijet invariant mass \\
+    & Best top-quark-candidate three-jet invariant mass \\
+    & Ratio of the $p_{\text{T}}$ of jet pairs \\
+    \midrule
+
+    \multirow{6}{*}{\rotatebox{90}{Angular distances}} 
+    & $\Delta\phi$ between the two leading jets \\
+    & $\Delta\eta$ between the two leading jets \\
+    & Minimum $\Delta R$ between two jets \\
+    & Minimum $\Delta R$ between a $b$-tagged jet and a $\tau$ \\
+    & $|\Delta\eta(\tau,\tau)|$ \\
+    & $\Delta R(\tau,\tau)$ \\
+    \midrule
+
+    \multirow{3}{*}{\rotatebox{90}{$\tau$-lepton}} 
+    & $p_{\text{T}}(\tau)$ \\
+    & Sub-leading $\tau$ $p_{\text{T}}$ \\
+    & Leading $\tau$ $\eta$ \\
+    \midrule
+
+    \multirow{2}{*}{\rotatebox{90}{\etmiss}} 
+    & Missing transverse momentum $E_{T}^{\text{miss}}$ \\
+    & Smallest $\Delta\phi(\tau, \vec{E}_{T}^{\text{miss}})$ \\
+    \midrule
+
+    \multirow{8}{*}{\rotatebox{90}{$t\bar{t}H$ vs.\ $tHqb$}} 
+    & \textbf{Number of light (non-$b$-tagged) jets} \\
+    & \textbf{Number of light jets with the same $\eta$ sign} \\
+    & \textbf{$b$-jets multiplicity} \\
+    & \textbf{$\eta$ of the leading $b$-jet} \\
+    & \textbf{$p_{\text{T}}$ of the leading $b$-jet}  \\
+    & \textbf{Largest $\Delta \eta$ between any light-jet and $b$-jet pair}  \\
+    & \textbf{Maximum $\Delta \eta$ between the visible Higgs decay products and any $b$-jet}  \\
+    & \textbf{Largest invariant mass of any pair of light jets}  \\
+    \bottomrule
+  \end{tabular}
+  \label{tab:all_vars}
+\end{table}
 
 \begin{figure}[htbp]
   \centering
@@ -681,15 +788,15 @@ Finally, Figures~\ref{th_tth_vars_tmva_1}-\ref{th_tth_vars_tmva_3} show, analogo
     \label{th_tth_vars_tmva_3}
 \end{figure}
 
-It is worth noting that in this case the \mmc is indeed included as an input variable in the BDT training. The reasons behind this choice will be discussed later in Section~\ref{new_categorization}.
+It is worth noting that in this case the \mmc is included as an input variable in the BDT training. The reasons behind this choice will be discussed later in Section~\ref{new_categorization}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection*{Data-MC modelling}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this new case, we must also verify again that a good balance is achieved between the MC modeling of the variables used in the training and the corresponding distributions in real collision data, especially now that we have modified the selection of our phase space and are working both with some different Run-2 simulations and with the newly added Run-3 samples.
+The MC modelling of the BDT input variables is checked with real collision data, especially after the modification in the event selection, MC samples and the addition of Run-3 data.
 
-Figures~\ref{tth_vars_modelling_run3_1}–\ref{tth_vars_modelling_run3_3} show the good data/MC agreement in Run-3 datasets observed for the input variables, by comparing their distributions across all relevant processes in the channel at the preselection level. Analogously, Figures~\ref{tth_vars_modelling_run2_1}-\ref{tth_vars_modelling_run2_3} present also a correct data/MC agreement for Run-2 datasets.
+Figures~\ref{tth_vars_modelling_run3_1}–\ref{tth_vars_modelling_run3_3} show the agreement between data and MC in Run-3 datasets observed for the input variables, by comparing their distributions across all relevant processes at the preselection level. Analogously, Figures~\ref{tth_vars_modelling_run2_1}-\ref{tth_vars_modelling_run2_3} present also a correct agreement between data and MC for Run-2 datasets.
 
 \begin{figure}[htbp]
   \centering
@@ -712,7 +819,7 @@ Figures~\ref{tth_vars_modelling_run3_1}–\ref{tth_vars_modelling_run3_3} show t
     \includegraphics[width=0.33\textwidth]{images/plots_modelling_run2_run3_variables/run_3_tth/plot_eta4_hh_tth_22_23_24.pdf}
   \end{tabular}
 
-  \caption{Run-3 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level.}
+  \caption{Run-3 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level. Scaling factors on \ztautau and \ttbar are applied. Only statistical uncertainties are included.}
   \label{tth_vars_modelling_run3_1}
 \end{figure}
 
@@ -737,7 +844,7 @@ Figures~\ref{tth_vars_modelling_run3_1}–\ref{tth_vars_modelling_run3_3} show t
     \includegraphics[width=0.33\textwidth]{images/plots_modelling_run2_run3_variables/run_3_tth/plot_bjet_0_eta_hh_tth_22_23_24.pdf}
   \end{tabular}
 
-  \caption{Run-3 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level.}
+  \caption{Run-3 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level. Scaling factors on \ztautau and \ttbar are applied. Only statistical uncertainties are included.}
   \label{tth_vars_modelling_run3_2}
 \end{figure}
 
@@ -759,7 +866,7 @@ Figures~\ref{tth_vars_modelling_run3_1}–\ref{tth_vars_modelling_run3_3} show t
     }\\
   \end{tabular}
 
-  \caption{Run-3 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level.}
+  \caption{Run-3 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level. Scaling factors on \ztautau and \ttbar are applied. Only statistical uncertainties are included.}
   \label{tth_vars_modelling_run3_3}
 \end{figure}
 
@@ -788,7 +895,7 @@ Figures~\ref{tth_vars_modelling_run3_1}–\ref{tth_vars_modelling_run3_3} show t
     \includegraphics[width=0.33\textwidth]{images/plots_modelling_run2_run3_variables/run_2_tth/plot_eta4_hh_tth_15_16_17_18.pdf}
   \end{tabular}
 
-  \caption{Run-2 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level.}
+  \caption{Run-2 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level. Only statistical uncertainties are included.}
   \label{tth_vars_modelling_run2_1}
 \end{figure}
 
@@ -813,7 +920,7 @@ Figures~\ref{tth_vars_modelling_run3_1}–\ref{tth_vars_modelling_run3_3} show t
     \includegraphics[width=0.33\textwidth]{images/plots_modelling_run2_run3_variables/run_2_tth/plot_bjet_0_eta_hh_tth_15_16_17_18.pdf}
   \end{tabular}
 
-  \caption{Run-2 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level.}
+  \caption{Run-2 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level. Only statistical uncertainties are included.}
   \label{tth_vars_modelling_run2_2}
 \end{figure}
 
@@ -835,7 +942,7 @@ Figures~\ref{tth_vars_modelling_run3_1}–\ref{tth_vars_modelling_run3_3} show t
     }\\
   \end{tabular}
 
-  \caption{Run-2 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level.}
+  \caption{Run-2 Data/MC modelling for the \thqb + \ttH BDT input variables at preselection level. Only statistical uncertainties are included.}
   \label{tth_vars_modelling_run2_3}
 \end{figure}
 
@@ -844,9 +951,11 @@ Figures~\ref{tth_vars_modelling_run3_1}–\ref{tth_vars_modelling_run3_3} show t
 \subsubsection*{BDT Training }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-The same setup is used to train the BDT, with the \textsc{TMVA} package employed, to discriminate among four event classes. The BDT is built with the same hyperparameters introduced in Section~\ref{setup_bdt}, and in this case a five-fold cross-validation procedure is also applied.
+The BDT is trained with \textsc{TMVA} using the same hyperparameters described in Section~\ref{setup_bdt} and a five-fold cross-validation.
 
-In Table~\ref{ranking_tH_ttH} the ranking list for this new training is presented, from which several conclusions had already been anticipated. The \mmc variable is found to top the list due to its strong discriminating power between the signals, containing two \tauhad originating from the Higgs boson decay, and the backgrounds. 
+For the training, a total of $88\times10^{3}$ events for \ttH, $62\times10^{3}$  events for \thqb, $154\times10^{3}$  events for \ztautau, and $20\times10^{3}$  events for the \ttbar background are available, combining Run-2 and Run-3 datasets. These correspond to the numer of events prior to applying the MC weights associated with the production cross-sections of each process. It should be noted that the MC samples include events with negative weights, arising from destructive interference among different production modes. This further reduces the effective statistics of the process, with a potentially negative impact on the training. In most cases, the fraction of negative-weight events amounts to only a few percent, whereas for \thqb it reaches about 40\% due to the strong interference effects. To preserve the statistical power of the \thqb simulations, the absolute value of the event weights are adopted for the BDT training. The negative weights are nevertheless retained in the BDT testing sample and throughout the rest of the studies presented in this Chapter.
+
+Table~\ref{ranking_tH_ttH} shows the ranking list for this new training. The \mmc variable is found to top the list due to its strong discriminating power between the signals, containing two \tauhad originating from the Higgs boson decay, and the backgrounds. 
 It is followed by kinematic properties of the \tauhad and leading jets, while the jet \pt ratios are observed to gain notable importance with the inclusion of the \thtt signal. As expected, the newly added variables also occupy high positions, such as \texttt{dEta\_lb\_max} and \texttt{n\_ljets}, thereby demonstrating their potential not only for distinguishing between the two signals.
 
 \begin{table}[h]
@@ -930,9 +1039,7 @@ The expected distributions obtained as a result of the BDT training for the four
   \caption{Multiclass \thqb + \ttH BDT score distributions.}
   \label{tH_ttH_BDT_scores}
 \end{figure}
-Again, to provide an indication of the possible overtraining of this model, the distributions evaluated on the training sample (colored markers) and on the test sample (boxes) are presented. As can be observed, no significant overtraining is apparent, except perhaps in the \thqb distributions, which suffer from limited statistics. In fact, the observed differences between their training and test distributions are mainly due to an issue described below.
-
-For the training, a total of 88k events for \ttH, 62k events for \thqb, 154k events for \ztautau, and 20k events for the \ttbar background are available, combining Run-2 and Run-3 datasets. These correspond to the raw event yields prior to applying the MC weights associated with the production cross-sections of each process. It should be noted that the \thqb process includes events with negative weights, arising from destructive interference among different production modes. This further reduces the effective statistics of the process, with a potentially negative impact on the training. In most cases, the fraction of negative-weight events amounts to only a few percent, whereas for \thqb it reaches about 40\% due to the strong interference effects. To preserve the statistical power of the \thqb simulations, the absolute values of the event weights are adopted for the BDT training. The negative weights are nevertheless retained in the BDT testing sample and throughout the rest of the studies presented in this chapter.
+Again, to provide an indication of the possible overtraining of this model, the distributions evaluated on the training sample (colored markers) and on the test sample (boxes) are presented. No significant overtraining is apparent, except perhaps in the \thqb distributions, which suffer from limited statistics.
 
 From the four scores displayed in Figure~\ref{tH_ttH_BDT_scores}, it can be observed that the $BDT_{tHqb}$ distribution for \thqb does not exhibit a pronounced peak at high score values, as might have been expected. However, it is clear that the other processes concentrate at low score values, peaking at zero. This separation is particularly useful for discriminating the \thqb signal, which dominates at high values of the corresponding score. A similar, yet more pronounced, behaviour is seen for \tth. In this case, the clustering of the other processes at low $BDT_{t\bar{t}H}$ values is very strong, while \ttH events peak near one. This improvement compared to the previous analysis is most likely due to the increased statistics provided by the inclusion of Run-3 samples and the adoption of an inclusive training strategy.
 
@@ -952,11 +1059,11 @@ The comparatively lower performance for \ttbar relative to the other classes is 
 
 As a final step before moving on to the statistical analysis, the event categorization performed with the four scores obtained for the different processes considered in the multiclass BDT training is introduced.
 
-As in the previous analysis, the objective is to measure the signal strength of the two signal processes under consideration, \thtt and \ttHtt, with the highest possible sensitivity and precision, while simultaneously constraining the normalization of the main background processes in the restricted phase space. To this end, new SRs and CRs are defined, enriched in either signal or background events.
+As in the previous analysis, the objective is to measure the signal strength of the two signal processes under consideration, \thtt and \ttHtt, with the highest possible sensitivity and precision, while simultaneously constraining the normalization of the main background processes. To this end, new SRs and CRs are defined, enriched in either signal or background events.
 
-These regions are constructed by applying selections on the BDT scores. Although the scores are derived from the joint training on Run-2 and partial Run-3 datasets, the analysis regions are now defined separately for the two Runs. This choice is motivated, among other reasons, by the expectation of more pronounced mismodeling in \ztautau for Run-3 data compared to Run-2, which would require dedicated normalization factors.
+These regions are constructed by applying selections on the BDT scores. Although the scores are derived from the joint BDT training on Run-2 and partial Run-3 datasets, the analysis regions are now defined separately for the two Runs. This choice is motivated mainly by the fact that data obtained at different $\sqrt{s}$ cannot be mixed in the same region.
 
-At this stage of the analysis, the binned likelihood fit is anticipated to be performed directly on the BDT score distributions rather than on the \mmc observable. This approach provides several advantages, since the BDT output combines information from a large set of kinematic and topological variables, exploiting their correlations in an optimized manner and thereby achieving stronger separation between signal and background than a single reconstructed mass estimator. Moreover, the use of distinct score distributions in each analysis region allows the fit to adapt more effectively to the dominant signal–background composition, improving statistical sensitivity and mitigating the impact of systematic effects related to the modeling of individual observables. It should be emphasized that, once the fit is carried out on the BDT scores, the \mmc has been explicitly included as one of the input variables to the training, ensuring that its discriminating power is retained and incorporated into the multivariate construction of the classifier.
+At this stage of the analysis, the binned likelihood fit is anticipated to be performed directly on the BDT score distributions rather than on the \mmc observable. This approach provides several advantages, since the BDT output combines information from a large set of kinematic and topological variables, exploiting their correlations and thereby achieving stronger separation between signal and background than a single reconstructed mass estimator. Moreover, the use of distinct score distributions in each analysis region allows the fit to adapt more effectively to the dominant signal–background composition, improving statistical sensitivity and mitigating the impact of systematic effects related to the modeling of individual observables. It should be emphasized that, once the fit is carried out on the BDT scores, the \mmc has been explicitly included as one of the input variables to the training, ensuring that its discriminating power is retained and incorporated into the multivariate construction of the classifier.
 
 With this strategy, the definition of the analysis regions becomes much simpler than in Section~\ref{sec:tth_categories}. The regions for each process are defined by selecting events in which the score corresponding to that class has the highest value among the four. For example, the \ztautau CR consists of all events passing the preselection in which the $BDT_{Z}$ score is the largest of the four.
 
@@ -967,14 +1074,14 @@ Figures~\ref{scores_modelling_3} and~\ref{scores_modelling_2} display the distri
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/plots_modelling_run2_run3_variables/run_3_tth/plot_tth_th_multiclass_th_hh_tth_run3_sr_th_22_23_24.pdf}
-    \caption{}
+    \caption{\thqb SR}
 
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/plots_modelling_run2_run3_variables/run_3_tth/plot_tth_th_multiclass_tth_hh_tth_run3_sr_tth_22_23_24.pdf}
-    \caption{}
+    \caption{\ttH SR}
 
   \end{subfigure}
 
@@ -983,18 +1090,18 @@ Figures~\ref{scores_modelling_3} and~\ref{scores_modelling_2} display the distri
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/plots_modelling_run2_run3_variables/run_3_tth/plot_tth_th_multiclass_Z_hh_tth_run3_cr_Ztt_22_23_24.pdf}
-    \caption{}
+    \caption{\ztautau CR}
 
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/plots_modelling_run2_run3_variables/run_3_tth/plot_tth_th_multiclass_ttbar_hh_tth_run3_cr_ttbar_22_23_24.pdf}
-    \caption{}
+    \caption{\ttbar CR}
 
   \end{subfigure}
 
-  \caption{Run-3 Data/MC comparison for the Multiclass BDT scores.}
+  \caption{Run-3 Data/MC comparison for the Multiclass BDT scores. Scaling factors on \ztautau and \ttbar are applied. Data are blinded for bins with a signal-over-background ratio above 5\%. Only statistical uncertainties are included.}
   \label{scores_modelling_3}
 \end{figure}
 
@@ -1031,11 +1138,11 @@ Figures~\ref{scores_modelling_3} and~\ref{scores_modelling_2} display the distri
 
   \end{subfigure}
 
-  \caption{Run-2 Data/MC comparison for the Multiclass BDT scores.}
+  \caption{Run-2 Data/MC comparison for the Multiclass BDT scores. Data are blinded for bins with a signal-over-background ratio above 5\%. Only statistical uncertainties are included.}
   \label{scores_modelling_2}
 \end{figure}
 
-It is worth emphasizing once more in this section the usefulness of including the \mmc within the BDT training, which can be directly appreciated by examining the distributions of this variable in the SRs defined for \ttH and for \thqb. Figures~\ref{mmc_distributions_tth} and~\ref{mmc_distributions_th} show these plots for data and MC in the \ttH SR and \thqb SR, respectively, both with and without the inclusion of the \mmc in the training.\begin{figure}[htbp]
+It is worth emphasizing once more in this section the usefulness of including the \mmc within the BDT training, which can be directly appreciated by examining the distributions of this variable in the SRs defined for \ttH and for \thqb. Figures~\ref{mmc_distributions_tth} and~\ref{mmc_distributions_th} show the \mmc distributions for data and MC in the \ttH SR and \thqb SR, respectively, both with and without the inclusion of the \mmc in the training.\begin{figure}[htbp]
   \centering
   % Primera fila: MMC not included
   \begin{subfigure}[t]{0.45\textwidth}
@@ -1051,7 +1158,7 @@ It is worth emphasizing once more in this section the usefulness of including th
   \vspace{0.2cm}
   \begin{minipage}{\textwidth}
     \centering
-    \small {\textbf{MMC not in the BDT}}
+    \small {(a) \textbf{MMC not in the BDT}}
   \end{minipage}
 
   \vspace{0.5cm}
@@ -1070,10 +1177,10 @@ It is worth emphasizing once more in this section the usefulness of including th
   \vspace{0.2cm}
   \begin{minipage}{\textwidth}
     \centering
-    \small{\textbf{MMC included in the BDT}}
+    \small{(b) \textbf{MMC included in the BDT}}
   \end{minipage}
   \vspace{0.35cm}
-  \caption{Comparison of the \mmc distributions in the \ttH SRs with and without its inclusion in the BDT training.}
+  \caption{Comparison of the \mmc distributions in the \ttH SRs with and without its inclusion in the BDT training. Data are blinded for bins with a signal-over-background ratio above 5\%. Scaling factors on \ztautau and \ttbar are applied in Run-3 samples. Only statistical uncertainties are included.}
   \label{mmc_distributions_tth}
 \end{figure}
 
@@ -1094,7 +1201,7 @@ It is worth emphasizing once more in this section the usefulness of including th
   \vspace{0.2cm}
   \begin{minipage}{\textwidth}
     \centering
-    \small {\textbf{MMC not in the BDT}}
+    \small {(a) \textbf{MMC not in the BDT}}
   \end{minipage}
 
   \vspace{0.5cm}
@@ -1113,10 +1220,10 @@ It is worth emphasizing once more in this section the usefulness of including th
   \vspace{0.2cm}
   \begin{minipage}{\textwidth}
     \centering
-    \small {\textbf{MMC included in the BDT}}
+    \small {(b) \textbf{MMC included in the BDT}}
   \end{minipage}
   \vspace{0.35cm}
-  \caption{Comparison of the \mmc distributions in the \thqb SRs with and without its inclusion in the BDT training.}
+  \caption{Comparison of the \mmc distributions in the \thqb SRs with and without its inclusion in the BDT training. Data are blinded for bins with a signal-over-background ratio above 5\%. Scaling factors on \ztautau and \ttbar are applied in Run-3 samples. Only statistical uncertainties are included.}
   \label{mmc_distributions_th}
 \end{figure}
 From both figures it can be observed that including the \mmc in the BDT training leads to a reduction of the event tail outside the Higgs boson mass window of the \mmc ($100 < \mmc < 150$~GeV) in both the \thqb and \ttH SRs. However, the tail does not disappear completely, and in particular not all of the \ttbar background events are removed. Therefore, as detailed in Section~\ref{statistical_th_tth}, the same strategy as in the previous analysis is kept.
@@ -1124,11 +1231,11 @@ From both figures it can be observed that including the \mmc in the BDT training
 \section{Statistical fit}
 \label{statistical_th_tth}
 
-The statistical interpretation of the \thqb + \ttH analysis presented in this chapter follows a strategy fully analogous to that described in Section~\ref{sec:statistical_tth}. In this case, however, the fit is performed in a standalone framework, without embedding the measurement into a broader $H \to \tau \tau$ combination. The present stage of the analysis is focused on extracting the signal strength parameters for both \thqb and \ttH, in order to evaluate the improvement achieved for \ttH with the inclusion of the partial Run-3 dataset, and to estimate the expected sensitivity to the \thqb process when combined with \ttH. A future global analysis including the other Higgs production modes is foreseen, but has not yet been undertaken. The methodology adopted here therefore represents the first dedicated step towards a joint statistical analysis of both signal channels.
+The statistical interpretation of the \thqb + \ttH analysis presented in this chapter follows a strategy analogous to that described in Section~\ref{sec:statistical_tth}. In this case, however, the fit is performed in a standalone framework, without embedding the measurement into a broader $H \to \tau \tau$ combination. The present stage of the analysis is focused on extracting the signal strength parameters for both \thqb and \ttH, in order to evaluate the improvement achieved for \ttH with the inclusion of the partial Run-3 dataset, and to estimate the expected sensitivity to the \thqb process when combined with \ttH. A future global analysis including the other Higgs production modes is foreseen, but has not yet been undertaken.
 
-As in the previous analysis, the statistical interpretation relies on the same tools and frameworks, namely \textsc{TRExFitter}~\cite{TRExFitter}, which makes use of the \textsc{HistFactory}~\cite{HistFactory} format and the \textsc{RooFit}~\cite{RooFit} and \textsc{RooStats}~\cite{RooStats} environments for model definition and implementation. The same likelihood model structure is employed, adapted to the regions and discriminants of the present analysis.
+As in the previous analysis, the statistical interpretation relies on the same tools and frameworks, namely \textsc{TRExFitter}~\cite{trexfitter}, which makes use of the \textsc{HistFactory}~\cite{histfactory} format and the \textsc{roofit}~\cite{roofit} and \textsc{RooStats}~\cite{roostats} environments for model definition and implementation. The same likelihood model structure is employed, adapted to the regions and discriminants of the present analysis.
 
-The analysis regions used as input to the binned profile likelihood fit are those defined in the previous section, with the only modification that the SRs are further split, as was done in the earlier study. To account for the residual contamination from \ttbar events in the tails of the \mmc distribution, even though this variable is no longer used as input to the fit, the \ttH and \thqb SRs are divided into the Higgs boson mass window ($100 < \mmc < 150$~GeV) and the sidebands, comprising the remaining events. In this way, an additional degree of purity is ensured in the SRs for signal events, while the sideband regions provide further constraints on the background contributions in the SRs.
+The analysis regions used as input to the binned profile likelihood fit are those defined in the previous section, with the only modification that the SRs are further split on \mmc, as was done in the earlier study. To account for the residual contamination from \ttbar events in the tails of the \mmc distribution, even though this variable is no longer used as input to the fit, the \ttH and \thqb SRs are divided into the Higgs boson mass window ($100 < \mmc < 150$~GeV) and the sidebands, comprising the remaining events. In this way, an additional degree of purity is ensured in the SRs for signal events, while the sideband regions provide further constraints on the background contributions in the SRs.
 
 The complete categorization of the events used for the statistical fit is summarized in the diagram shown in Figure~\ref{analysis_diagram}.
 \begin{figure}[htbp]
@@ -1174,7 +1281,7 @@ Figures~\ref{fig:srs_tth} and~\ref{fig:srs_th} show the SRs for \ttH and \thqb, 
     \caption{Run-3, $t\bar{t}H$ window SR}
   \end{subfigure}
 
-  \caption{Prefit SRs for $t\bar{t}H$, shown separately for Run-2 and Run-3.}
+  \caption{Prefit SRs for $t\bar{t}H$, shown separately for Run-2 and Run-3. No scaling factors are applied to \ztautau or \ttbar.}
   \label{fig:srs_tth}
 \end{figure}
 
@@ -1208,7 +1315,7 @@ Figures~\ref{fig:srs_tth} and~\ref{fig:srs_th} show the SRs for \ttH and \thqb, 
     \caption{Run-3, $tHqb$ window SR}
   \end{subfigure}
 
-  \caption{Prefit SRs for $tHqb$, shown separately for Run-2 and Run-3.}
+  \caption{Prefit SRs for $tHqb$, shown separately for Run-2 and Run-3. No scaling factors are applied to \ztautau or \ttbar.}
   \label{fig:srs_th}
 \end{figure}
 
@@ -1241,7 +1348,7 @@ Figures~\ref{fig:srs_tth} and~\ref{fig:srs_th} show the SRs for \ttH and \thqb, 
     \caption{Run-3, $Z\to\tau\tau$ CR}
   \end{subfigure}
 
-  \caption{Prefit CRs for the $t\bar{t}$ and $Z\to\tau\tau$ backgrounds, shown separately for Run-2 and Run-3.}
+  \caption{Prefit CRs for the $t\bar{t}$ and $Z\to\tau\tau$ backgrounds, shown separately for Run-2 and Run-3. No scaling factors are applied to \ztautau or \ttbar.}
   \label{fig:crs}
 \end{figure}
 From these plots it can be noted that, in the SR for \ttH within the mass window, the $BDT_{t\bar{t}H}$ distribution tends to peak at high values for \ttH events, a feature that is exploited in the fit, providing high signal purity in those bins. A similar behavior is observed in the corresponding regions for \thqb, although with lower available statistics in this case. It is also worth highlighting the high purity of \ttbar and \ztautau background events in their respective CRs, where the scores of these processes peak at large values.
@@ -1265,26 +1372,36 @@ The results obtained from the Asimov fit described above are presented in the fo
     \caption*{(b)}
   \end{minipage}
 
-  \caption{Results obtained from the simultaneous fit to the $m_{\tau\tau}$ distribution. 
+  \caption{Results obtained from the simultaneous fit to the BDT scores distributions. 
   (a) Best-fit values and uncertainties for the signal strength parameters $\mu_{t\bar{t}H}$ and $\mu_{tHqb}$, 
-  together with the normalization factors (NFs) for the $Z(\tau\tau)$ and $t\bar{t}$ backgrounds. 
+  together with NFs for the $Z(\tau\tau)$ and $t\bar{t}$ backgrounds. 
   (b) Correlation matrix between these parameters as obtained from the fit.}
-  \label{fig:mu_nf_results_mtautau}
+  \label{fig:nfs_th_tth}
 \end{figure}
 
-In this new measurement, an expected precision of 6–8\% is obtained for the normalization factors of \ztautau and \ttbar, which already represents an anticipated improvement of about 60–70\% compared to the results presented in Section~\ref{nfs}, although systematic uncertainties are still not included and could particularly affect $NF_{t\bar{t}}$. On the other hand, another expected achievement of this round is the sensitivity reached for \ttH, with $\Delta \mu_{t\bar{t}H} = +0.54 / -0.51$, which is very similar to the sensitivity obtained from the inclusive \ttH measurement in the previous analysis. For \thqb, the expected sensitivity is found to be $\Delta \mu_{tHqb} = +4.72 / -4.20$, significantly weaker than that of \ttH, as expected given the substantially lower yields of this process. Nevertheless, it is worth noting that this sensitivity does not deviate strongly from that obtained in recent results for $\mu_{tHqb}$, discussed at the beginning of this chapter, which were derived from the combination of different channels and production modes.
+An expected precision of 6–8\% is obtained for the normalization factors of \ztautau and \ttbar, which already represents an anticipated improvement of about 60–70\% compared to the results presented in Section~\ref{nfs}, although systematic uncertainties are still not included and could particularly affect $NF_{t\bar{t}}$. On the other hand, another expected achievement of this round is the sensitivity reached for \ttH, with $\Delta \mu_{t\bar{t}H} = +0.54 / -0.51$, which is significantly better than the sensitivity obtained from the inclusive \ttH measurement in the previous analysis. For \thqb, the expected sensitivity is found to be $\Delta \mu_{tHqb} = +4.72 / -4.20$, significantly weaker than that of \ttH, as expected given the substantially lower yields of this process. Nevertheless, it is worth noting that this sensitivity does not deviate strongly from that obtained in recent results for \thqb measurement, discussed at the beginning of this chapter, which were derived from the combination of different channels and production modes.
 The two signal strengths for the considered processes are highly anti-correlated (-39\%), as the model does not appear to fully disentangle them. As already seen in the confusion matrix in Figure~\ref{confusion}, a misclassification rate of about 20\% was observed when distinguishing between these processes, which translates into contamination in the SRs defined from the scores. This effect is particularly relevant for \thqb, where the limited statistics further intensify this issue.
 
-To conclude this chapter, and to justify the use of normalization factors in the Data/MC comparison plots in Run-3 for testing the modeling throughout the chapter, the results of the statistical fit are shown when data are injected in the CRs, in order to assess how well the statistical model is able to constrain the backgrounds, while keeping the SRs blinded.
+To conclude this chapter, and to justify the use of normalization factors in the Data/MC comparison plots in Run-3 for testing the modeling throughout the chapter, the results of the statistical fit are shown when data are used in the CRs, in order to assess how well the statistical model is able to constrain the backgrounds, while keeping the SRs blinded.
 
-Figures~\ref{fig:ttbar_crs} and~\ref{fig:ztt_crs} present the comparison between pre-fit and post-fit distributions of the BDT scores in the \ttbar and \ztautau CRs, respectively, including both data and MC. It should be noted that in the post-fit distributions the background contributions are rescaled according to the corresponding NFs obtained from the fit, which in this case are:
-\begin{itemize}
+Figures~\ref{fig:ttbar_crs} and~\ref{fig:ztt_crs} present the comparison between prefit and postfit distributions of the BDT scores in the \ttbar and \ztautau CRs, respectively, including both data and MC. It should be noted that in the postfit distributions the background contributions are rescaled according to the corresponding NFs obtained from the fit, which in this case are shown in Table~\ref{nfs_data}
+\begin{table}[h]
   \small
-  \item Run-3 $NF_{Z} = 1.47^{+0.08}_{-0.08}$,
-  \item Run-3 $NF_{t\bar{t}} = 1.22^{+0.08}_{-0.08}$,
-  \item Run-2 $NF_{Z} = 1.12^{+0.07}_{-0.07}$,
-  \item Run-2 $NF_{t\bar{t}} = 1.10^{+0.09}_{-0.08}$.
-\end{itemize}
+  \centering
+  \caption{NFs for $Z$ and $t\bar{t}$ in Run-3 and Run-2 using data in the CRs.}
+  \renewcommand{\arraystretch}{1.25}
+  \setlength{\tabcolsep}{10pt}
+  \begin{tabular}{lcc}
+    \toprule
+    \textbf{Process} & \textbf{Run-3 $NF$} & \textbf{Run-2 $NF$} \\
+    \midrule
+    \ztautau              & $1.47^{+0.08}_{-0.08}$ & $1.12^{+0.07}_{-0.07}$ \\
+    \ttbar       & $1.22^{+0.08}_{-0.08}$ & $1.10^{+0.09}_{-0.08}$ \\
+    \bottomrule
+  \end{tabular}
+  \label{nfs_data}
+\end{table}
+
 \begin{figure}[h]
   \centering
   % ttbar Run-2
@@ -1355,6 +1472,7 @@ Figures~\ref{fig:ttbar_crs} and~\ref{fig:ztt_crs} present the comparison between
 
 The values obtained for Run-3 data are consistent with the estimates discussed at the beginning of this chapter, namely 1.4 for \ztautau and 1.2 for \ttbar. The results for the Run-2 normalization factors are found to be compatible, within uncertainties, with those obtained in the previous round of the analysis. In both cases, as illustrated in the figure, good agreement between MC and data is achieved, which can be further improved when including data in the sideband SRs.
 
+The expected significance obtained from this fit for the \ttHtt signal is $2.07\,\sigma$. For \thqb production, using the asymptotic $\mathrm{CL}_{s}$ method an expected $95\%$~CL upper limit on the signal strength of $9.76^{+4.35}_{-2.93}$ is obtained (in units of the SM prediction), which does not allow to exclude cross sections as stringently as the other ATLAS result discussed at the beginning of this Chapter~\cite{ATLAS:2025irr}. This is nevertheless encouraging: that reference relies on a broader combination across multiple Higgs decay channels and categories (e.g.\ $\mathrm{H}\!\to\! b\bar b$, $\gamma\gamma$, etc.), whereas the present study focuses on the \htautau fully hadronic final state in a joint \ttH+\thqb framework. Within these differences in scope and dataset, the sensitivity achieved here is consistent and provides a solid baseline for future improvements as additional Run-3 data and further category optimisations are incorporated.
 
 
 
@@ -1362,3 +1480,13 @@ The values obtained for Run-3 data are consistent with the estimates discussed a
 
 
 
+
+
+
+%ttH expected significance 2.074623
+%=== INFO::Common::ProcessLimiOutput: Printing results of the asymptotic limit estimate 
+%=== INFO::Common::ProcessLimitOutput: Expected limit (median): 9.758079, worst case error: 0.621221
+%=== INFO::Common::ProcessLimitOutput: Expected limit (-1 sig): 6.830674, worst case error: 0.153726
+%=== INFO::Common::ProcessLimitOutput: Expected limit ( 1 sig): 14.107273, worst case error: -0.370473
+%=== INFO::Common::ProcessLimitOutput: Expected limit (-2 sig): 4.988333, worst case error: 0.086147
+%=== INFO::Common::ProcessLimitOutput: Expected limit ( 2 sig): 19.735547, worst case error: -0.217547

@@ -15,7 +15,6 @@
 
 % List of acronyms
 \usepackage[acronym]{glossaries}
-\input{metadata/acronyms.tex}
 
 % ------------------------------------------------------------------------------
 % Packages
@@ -176,17 +175,28 @@
 
 % All figures and tables should appear before the summary and conclusion.
 % The package placeins provides the macro \FloatBarrier to achieve this.
-% \FloatBarrier
+\FloatBarrier
 
 
 %-------------------------------------------------------------------------------
 \chapter{Conclusion}
 \label{chap:conclusion}
+\input{chapters/conclusion}
 %-------------------------------------------------------------------------------
 
 
 
 %-------------------------------------------------------------------------------
+\clearpage
+\addcontentsline{toc}{chapter}{Resumen}
+\chapter*{Resumen}
+\input{chapters/resumen_es}
+%-------------------------------------------------------------------------------
+
+
+
+%-------------------------------------------------------------------------------
+
 % If you use biblatex and either biber or bibtex to process the bibliography
 % just say \printbibliography here
 \clearpage
@@ -197,11 +207,8 @@
 \addcontentsline{toc}{chapter}{References}
 \footnotesize{    
   \bibliography{mydocument,bib/ATLAS,bib/CMS,bib/ConfNotes,bib/PubNotes,bib/ATLAS-useful,bib/ATLAS-SUSY}
-%  \bibliographystyle{latex/JHEP}
   \bibliographystyle{obsolete/bst/atlasBibStyleWithTitle}
-}% If you want to use the traditional BibTeX you need to use the syntax below.
-% \bibliographystyle{obsolete/bst/atlasBibStyleWoTitle}
-% \bibliography{mydocument,bib/ATLAS,bib/CMS,bib/ConfNotes,bib/PubNotes}
+}
 %-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
@@ -211,16 +218,17 @@
 \addcontentsline{toc}{part}{Appendix}
 %-------------------------------------------------------------------------------
 
-In a paper, an appendix is used for technical details that would otherwise disturb the flow of the paper.
-
 
 %-------------------------------------------------------------------------------
+\clearpage
 % List of acronyms
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{List of Acronyms}
 \printglossary[type=\acronymtype, title=List of Acronyms, toctitle=List of Acronyms]
 \markboth{List of Acronyms}{List of Acronyms}
+\input{metadata/acronyms}
+
 %-------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
@@ -230,28 +238,5 @@ In a paper, an appendix is used for technical details that would otherwise distu
 
 %\input{acknowledgements/Acknowledgements}
 
-The \texttt{atlaslatex} package contains the acknowledgements that were valid 
-at the time of the release you are using.
-These can be found in the \texttt{acknowledgements} subdirectory.
-When your ATLAS paper or PUB/CONF note is ready to be published,
-download the latest set of acknowledgements from:\\
-\url{https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComAcknowledgements}
-
-
-%-------------------------------------------------------------------------------
-% Author list - comment in this line when you are ready to include it
-% \clearpage
-% \input{atlas_authlist}
-%-------------------------------------------------------------------------------
-
-%-------------------------------------------------------------------------------
-% Auxiliary material - comment out the following line if you do not have any
-%\include{mydocument-auxmat}
-%-------------------------------------------------------------------------------
-
-%-------------------------------------------------------------------------------
-% Extra tables etc. for HepData - comment in the following line if you have any
-% \include{mydocument-hepdata}
-%-------------------------------------------------------------------------------
-
+¡
 \end{document}
