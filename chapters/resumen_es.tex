@@ -454,17 +454,17 @@ De esta nueva ronda del análisis también cabe destacar la implementación de u
       \centering
       \includegraphics[width=\textwidth]{plot_ditau_mmc_mlm_m_fix_hh_tth.pdf}
       \caption{}
-      \label{reconstructed_preselection_a}
+      \label{res:reconstructed_preselection_a}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
       \includegraphics[width=\textwidth]{plot_ditau_pt_NN_kin_hh_tth.pdf}
       \caption{}
-      \label{reconstructed_preselection_b}
+      \label{res:reconstructed_preselection_b}
   \end{subfigure}
   \caption{Distribuciones de (a) la \mmc con el rango $100-150$~GeV \textit{blinded}, y (b) $p_{\text{T}}^H$, mostradas al nivel de preselección de $t\bar{t}H$. Solo se incluyen las incertidumbres estadísticas.}
-  \label{reconstructed_preselection}
+  \label{res:reconstructed_preselection}
 \end{figure}
 
 En lo que respecta a la separación de señal y fondo, esta se lleva a cabo mediante un discriminante multivariante (MVA) entrenado con \textsc{tmva} de \textsc{root}~\cite{tmvatoolkit}, empleando un BDT multicategoría. Se entrena conjuntamente para las tres clases que tenemos, con la señal \(\ttH\) frente a los principales fondos ($\ttbar$+jets y $Z\to\tau\tau$). Las variables de entrada incluyen cinemática de los taus, jets y $b$-jets, variables angulares y reconstrucciones parciales de masas invariantes. La respuesta del discriminante proporciona una separación potente, que ha sido mejorada respecto 
@@ -480,7 +480,7 @@ de la ronda anterior de este análisis donde se usaban dos BDTs binomiales para 
     \includegraphics[width=0.33\textwidth]{images/plots_overtrain_lt200/overtrain_bkgtt_BDTG.png}
   \end{tabular}
   \caption{Distribuciones de los tres discriminantes del BDT entrenado a bajo \pth.}
-  \label{lowpt_scores}
+  \label{res:lowpt_scores}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -493,7 +493,7 @@ de la ronda anterior de este análisis donde se usaban dos BDTs binomiales para 
     \includegraphics[width=0.33\textwidth]{images/plots_overtrain_gt200/overtrain_bkgtt_BDTG.png}
   \end{tabular}
   \caption{Distribuciones de los tres discriminantes del BDT entrenado a alto \pth.}
-  \label{highpt_scores}
+  \label{res:highpt_scores}
 \end{figure}
 
 Para la definición de las regiones de este ajuste, se construyen regiones de señal (SR) centradas en altos valores del discriminante BDT, y regiones de control (CR) para normalizar los fondos dominantes: una CR para $\ttbar$ y otra para $Z\to\tau\tau$, combinando cortes en los tres discriminantes que nos proporciona el BDT, en ambas regiones de \pth. Esta estrategia asegura un control directo de las normalizaciones de los principales fondos a partir de los datos. En el ajuste final, los factores de normalización (NFs) de $\ttbar$ y $Z\to\tau\tau$ se dejan libres, lo que permite que las distribuciones se ajusten dinámicamente a los datos.
