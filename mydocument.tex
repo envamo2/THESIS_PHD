@@ -75,6 +75,7 @@
 \newcommand*{\thtthtt}{\ensuremath{(tH+t\overline{t}H)(\tau\tau)}\xspace}
 \newcommand*{\thqb}{\ensuremath{tHqb}\xspace}
 \newcommand*{\thtt}{\ensuremath{tH(\tau\tau)qb}\xspace}
+\newcommand*{\htautau}{\ensuremath{H\to\tau\tau}}\xspace}
 
 %||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -93,6 +94,15 @@
 \input{metadata/title}
 \cleardoublepage
 
+
+% Frontmatter
+\input{metadata/certificado}
+\cleardoublepage
+\input{metadata/declaracion}
+\cleardoublepage
+
+\restoregeometry
+
 \pagestyle{fancy}
 
 % First page with the abstract
@@ -101,6 +111,7 @@
 \hypersetup{linkcolor=black}
 \pagenumbering{roman}
 \tableofcontents
+\addcontentsline{toc}{chapter}{Contents}
 \clearpage
 \hypersetup{linkcolor=blue}
 \pagenumbering{arabic}
@@ -115,13 +126,16 @@
 \setlength{\parindent}{15pt} % Indentation of the first line of a paragraph
 \setlength{\parskip}{1.2mm plus 0.1mm} % Space between paragraphs
 
+
+
+
 %-------------------------------------------------------------------------------
 \chapter*{Preface}
 \label{chap:preface}
-\input{chapters/preface}
+\markboth{Preface}{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\input{metadata/preface}
 %-------------------------------------------------------------------------------
-
-\addcontentsline{toc}{section}{Preface}
 
 \clearpage
 %-------------------------------------------------------------------------------

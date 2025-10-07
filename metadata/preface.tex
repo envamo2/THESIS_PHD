@@ -1,0 +1,61 @@
+The work presented in this thesis has been carried out within the framework of the ATLAS experiment at the CERN Large Hadron Collider (LHC), during my doctoral studies at the Instituto de Física Corpuscular (IFIC, CSIC–Universitat de València). Its aim is to advance both the understanding of the Standard Model and the development of experimental techniques that enable precision measurements of the Higgs boson sector.
+
+The thesis is structured around two complementary lines of research. The first concerns the identification of electrons in the ATLAS detector. This project began as part of my qualification task in the collaboration, with the dual purpose of becoming an ATLAS author and gaining familiarity with the ATLAS software environment and working dynamics. As the project evolved, it proved highly promising and became a major focus of my doctoral research. This led me to devote increasing effort to the development of new strategies for electron identification, in particular through the use of machine learning techniques. The work culminated in the refinement, training, and optimisation of a deep neural network for electron identification, studied in detail against the likelihood-based method traditionally employed by ATLAS. This effort not only resulted in improved performance in terms of background rejection, but also fostered my broader interest in the role of advanced machine learning in high energy physics analyses.
+
+The second line of research is devoted to the study of Higgs boson production in association with top quarks through the $H\to\tau\tau$ decay channel. The $t\bar{t}H$ process provides direct sensitivity to the top-quark Yukawa coupling, the strongest fermionic interaction in the Standard Model, and plays a central role in testing the dynamics of electroweak symmetry breaking and the stability of the Higgs potential. The analysis was originally based on the full Run-2 dataset collected by ATLAS in proton-proton collisions at a centre-of-mass energy of $\sqrt{s} = 13$~TeV, corresponding to an integrated luminosity of $139~\mathrm{fb}^{-1}$. It employs a multivariate strategy to discriminate signal from the overwhelming backgrounds, and the results are interpreted in the Simplified Template Cross-Section (STXS) framework, allowing for measurements in dedicated kinematic regions and providing input for global Higgs coupling fits. Furthermore, an extension of this analysis is presented also including the early Run-3 dataset (2022–2024), which coincides with the years of my doctoral studies, combined to the reprocessed Run-2 data with a new ATLAS software release, corresponding to approximately $166~\mathrm{fb}^{-1}$ of $pp$ collisions at $\sqrt{s} = 13.6$~TeV plus $140~\mathrm{fb}^{-1}$ at $\sqrt{s} = 13.6$~TeV. In this context, in addition to the $t\bar{t}H$ process, the associated production of a Higgs boson with a single top quark ($tHqb$) is also studied, for which the $H \to \tau\tau$ channel shows promising sensitivity.
+
+The thesis is organised as follows. Chapter~1 reviews the theoretical framework of the Standard Model and the Higgs mechanism, with emphasis on the phenomenology of the top quark and the Higgs boson at the LHC. Chapter~2 introduces the LHC and the ATLAS detector, while Chapter~3 describes the data and simulated samples used in the analyses. The reconstruction of physics objects is detailed in Chapter~4. Chapter~5 presents an overview of the machine learning techniques employed, followed in Chapter~6 by the development of the deep neural network for electron identification and its performance evaluation. Chapter~7 is devoted to the $t\bar{t}H$ analysis in the $H\to\tau\tau$ channel during Run-2, including the event selection, background estimation, systematic uncertainties, and final results. Chapter~8 extends this analysis to the early Run-3 dataset and incorporates, for the first time, a study of the $tHqb$ production mode in $H \to \tau\tau$ decays. Finally, Chapter~9 summarises the main conclusions and perspectives.
+
+This thesis reflects both methodological developments in particle identification and their application to precision Higgs boson measurements, highlighting the interplay between advanced analysis techniques and the exploration of fundamental physics at the LHC.
+
+\section*{Personal contributions}
+
+As a result of my research activities within the ATLAS Collaboration during the years of my doctoral studies, the work carried out and the results obtained have been reflected in the following publications and conference presentations. A detailed description of my specific contributions to each of them is provided below.
+
+\begin{itemize}
+\item ATLAS Collaboration. \textit{Differential cross-section measurements of Higgs boson production in the \htautau decay channel in pp collisions at $\sqrt{s}=13$~TeV with the ATLAS detector}.
+\textbf{JHEP}. DOI: \href{https://link.springer.com/article/10.1007/JHEP03(2025)010}{10.1007/jhep03(2025)010}.
+
+I contributed primarily to the development and optimization of the multivariate techniques employed and described in this thesis to improve the separation of \ttHtt\ signal events from the dominant \ztautau\ and \ttbar\ backgrounds. I was also involved in the validation of this method, its implementation within the global \htautau\ analysis, the development of the statistical framework for the STXS measurement of this production mode, as well as in the preparation and study of the global fit.
+
+\item ATLAS Collaboration. \textit{Electron identification with a DNN in the ATLAS experiment}.
+\textbf{Internal Note in preparation}.
+
+A significant part of the work I have carried out in recent years has been devoted to the commissioning and performance studies of the DNN implemented for offline electron identification in ATLAS. The details of this work, together with additional validation studies and potential extensions towards Run~3 or to further address specific secondary issues encountered along the way, are summarised in a paper that is still in preparation at the time this thesis is submitted.
+
+\end{itemize}
+
+In addition to these two main publications, the research carried out during these years has been presented at the following international conferences and internal ATLAS Collaboration meetings:
+
+\begin{itemize}
+    \item Enrique Valiente Moreno on behalf of the E/Gamma group.\\ \textit{Plans for improved E/Gamma ID with AI/ML}.\\ 
+    \textbf{ATLAS Collaboration Week - Thessaloniki 2024}.
+
+    At this internal ATLAS Collaboration conference, I had the opportunity to present the progress and results obtained with the DNN for electron identification in comparison with the previous LH approach, as well as the new challenges that had to be addressed. I also provided an overview of other advanced AI/ML-based techniques being developed not only for electron but also for photon identification.
+
+    \item Enrique Valiente Moreno on behalf of the ATLAS Collaboration.\\ \textit{Improvements in the measurement of VBF and \ttH production with} \\ \textit{\htautau in ATLAS}. 
+    \textbf{Higgs Hunting 2024 - Orsay, Paris}.
+
+    On this occasion, and shortly after the publication of \href{https://link.springer.com/article/10.1007/JHEP03(2025)010}{Differential cross-section measurements in \htautau}, I had the opportunity to present at this international conference, highly relevant in both the theoretical and experimental sectors of Higgs boson studies, the advances and improvements introduced in this new round of analyses, in particular for the VBF production mode and, which constitutes the main focus of this thesis, the \ttH\ channel.
+
+    \item Enrique Valiente Moreno on behalf of the ATLAS Collaboration.\\ \textit{Measurements of Higgs boson coupling properties to leptons with}\\ \texit{the ATLAS detector}. 
+    \textbf{Higgs 2024 - Uppsala}.
+
+    At this international conference, which holds greater prominence than the previous one in the field of Higgs boson research, I was able not only to present in full the results published in the article \href{https://link.springer.com/article/10.1007/JHEP03(2025)010}{Differential cross-section measurements in \htautau}, but also had the opportunity to act as spokesperson for the main analyses involving measurements of the Higgs boson couplings to leptons in ATLAS ($H\to\tau\tau,\, \mu\mu,\, \text{LFV sources: } \tau e \text{ and }$\\ $\tau\mu$).
+
+\end{itemize}
+
+In addition to the aforementioned contributions, I also had the opportunity during the first years of my doctoral training to contribute to the development and maintenance of the software used by the ATLAS Electron Identification sub-group for most combined performance and efficiency studies: the \textsc{tagandprobe} framework. When I joined the PhD programme, this framework had just been migrated to release 22 of the centrally used \textsc{Athena} software in ATLAS, and I participated in its adaptation and commissioning, in particular by enabling the production of electron \textit{n-tuples} as an output dataset format, highly suitable for subsequent use in ML algorithms.  
+
+I also had the opportunity to contribute to ATLAS detector operations during the first three months of Run~3 data taking, performing shifts in the control room for data quality monitoring. In the following two years, I was again able to take part in monitoring tasks for periods of 2–3 months, this time carrying out shifts at the Trigger operations desk in the ATLAS control room.
+
+
+
+\section*{Institutional acknowledgements}
+
+Furthermore, I gratefully acknowledge the support received for the work presented in this thesis from:
+\begin{itemize}
+    \item FPU2021 grant funded by MICIU/AEI /10.13039/501100011033 and by the FSE+ 
+    \item Grants PID2021-124912NB-I00 and PID2021-125069OB-100 funded by MCIN/AEI/10.13039/501100011033 
+    \item Project ASFAE/2022/008 funded by MCIN, by the European Union NextGenerationEU (PRTR-C17.I01) and Generalitat Valenciana
+\end{itemize}
