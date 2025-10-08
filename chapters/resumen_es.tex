@@ -113,7 +113,7 @@ Una vez que el HLT acepta un evento, los datos registrados en las colisiones se 
 
 El primer paso en la reconstrucción es identificar las trayectorias de las partículas cargadas que atraviesan el detector interno~\cite{tracks}. Estas producen impactos precisos en los subdetectores de silicio (Pixel, SCT) y en el TRT, que bajo el campo magnético solenoidal de 2~T se curvan describiendo idealmente hélices. Cada traza reconstruida queda definida por cinco parámetros: el momento transversal ($p_{\mathrm{T}}$), los ángulos polares ($\theta, \phi$), y los parámetros de impacto transversal y longitudinal ($d_{0}, z_{0}$).  
 
-A partir de las trazas, se reconstruyen los vértices de interacción~\cite{vertex_run1,vertex_run2,vertex_run3}. El vértice primario corresponde al punto de la colisión dura, identificado como aquel con la mayor suma de $p_{\mathrm{T}}^{2}$ de las trazas asociadas, mientras que otros vértices se clasifican como \textit{pile-up} o secundarios. Estos últimos son esenciales para el etiquetado de sabor y la identificación de partículas desplazadas.
+A partir de las trazas, se reconstruyen los vértices de interacción~\cite{vertex_run1,vertex_run2,vertex_run3,vertex_run3_2}. El vértice primario corresponde al punto de la colisión dura, identificado como aquel con la mayor suma de $p_{\mathrm{T}}^{2}$ de las trazas asociadas, mientras que otros vértices se clasifican como \textit{pile-up} o secundarios. Estos últimos son esenciales para el etiquetado de sabor y la identificación de partículas desplazadas.
 
 Tras pasar por el detector interno, las partículas depositan su energía en las celdas de los calorímetros, que se agrupan en clústeres tridimensionales denominados \textit{topoclusters}. El algoritmo comienza a partir de celdas semilla con señal significativa respecto al ruido electrónico y expande iterativamente a celdas adyacentes. Posteriormente, se aplican calibraciones específicas que corrigen las pérdidas en materiales pasivos y la diferente respuesta hadrónica y electromagnética. Durante Run-2 se introdujo además el concepto de \textit{superclúster}, que agrupa dinámicamente varios topoclusters, mejorando la recuperación de energía perdida por radiación de bremsstrahlung.
 
@@ -178,13 +178,13 @@ Posteriormente, todas las variables se transformaron mediante cuantiles a distri
     \centering
     \includegraphics[width=\linewidth]{normalized_weighted_distributions/weighted_Multiclass_wtots1_train.pdf}
     \caption{$w_{stot}$}
-    \label{fig:input7}
+    \label{res:input7}
   \end{subfigure}\hfill
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\linewidth]{normalized_weighted_distributions/weighted_Multiclass_eratio_train.pdf}
     \caption{$E_{\text{ratio}}$}
-    \label{fig:input8}
+    \label{res:input8}
   \end{subfigure}
   \vspace{0.45cm}
   % Row 5
@@ -192,13 +192,13 @@ Posteriormente, todas las variables se transformaron mediante cuantiles a distri
     \centering
     \includegraphics[width=\linewidth]{normalized_weighted_distributions/weighted_Multiclass_f1_train.pdf}
     \caption{$f_1$}
-    \label{fig:input9}
+    \label{res:input9}
   \end{subfigure}\hfill
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\linewidth]{normalized_weighted_distributions/weighted_Multiclass_npixel_train.pdf}
     \caption{$n_{\text{Pixel}}$}
-    \label{fig:input11}
+    \label{res:input11}
   \end{subfigure}
   \vspace{0.45cm}
   % Row 6
@@ -206,16 +206,16 @@ Posteriormente, todas las variables se transformaron mediante cuantiles a distri
     \centering
     \includegraphics[width=\linewidth]{normalized_weighted_distributions/weighted_Multiclass_nsilicon_train.pdf}
     \caption{$n_{\text{Si}}$}
-    \label{fig:input12}
+    \label{res:input12}
   \end{subfigure}\hfill
   \begin{subfigure}[b]{0.49\textwidth}
     \centering
     \includegraphics[width=\linewidth]{normalized_weighted_distributions/weighted_Multiclass_TRTPID_train.pdf}
     \caption{TRT PID}
-    \label{fig:input18}
+    \label{res:input18}
   \end{subfigure}
   \caption{Distribuciones de algunas de las variables de entrada utilizadas para el entrenamiento de la DNN, tras los procedimientos de preprocesado.}
-  \label{fig:dnn_inputs_distributions_B}
+  \label{res:dnn_inputs_distributions_B}
 \end{figure}
 
 La arquitectura de la DNN implementada consta de cinco capas ``ocultas'' de 256 nodos cada una, aplicando funciones Leaky ReLU para la activación y normalización por \textit{batch}. La salida es multinomial, con seis nodos y función Softmax, lo que permite obtener probabilidades para cada clase. 
@@ -227,13 +227,13 @@ A partir de estas salidas se construye un discriminante binomial $D_{el}$ que co
     \centering
     \includegraphics[width=\linewidth]{discriminant_plots/panel_a.pdf}
     \caption{}
-    \label{fig:dnnDisc_a}
+    \label{res:dnnDisc_a}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.48\linewidth}
     \centering
     \includegraphics[width=\linewidth]{discriminant_plots/panel_b.pdf}
     \caption{}
-    \label{fig:dnnDisc_b}
+    \label{res:dnnDisc_b}
   \end{subfigure}
 
   \caption{$D_{\mathrm{el}}$ de la DNN mostrado para (a) electrones primarios, CF y fondos de PC y HF; y (b) electrones primarios y fondos de LFEg y LFH. Los candidatos a electrón cumplen $15<E_{T}\leq 20~\mathrm{GeV}$ y $0.0<|\eta|\leq 0.8$}
@@ -246,7 +246,7 @@ Los resultados obtenidos reflejan que se espera una mejora clara respecto al LH.
   \centering
   \includegraphics[width=0.7\linewidth]{ROC/15_20_0p0_0p8/binnedROCCurve_et15_20_eta0.0_0.8.pdf}
   \caption{Rechazo de fondo frente a eficiencia de señal (curvas ROC) para electrones primarios frente a todas las clases de fondo combinadas en un bin representativo de $(E_{T}, |\eta|)$. La incertidumbre estadística del rechazo de fondo se muestra como una banda.}
-  \label{fig:roc_allblkg}
+  \label{res:roc_allblkg}
 \end{figure}
 
 
@@ -258,20 +258,20 @@ Los resultados obtenidos reflejan que se espera una mejora clara respecto al LH.
     \centering
     \includegraphics[width=\linewidth]{ROC/15_20_0p0_0p8/binnedROCCurveLFHadron_et15_20_eta0.0_0.8.pdf}
     \caption{}
-    \label{fig:roc_pc}
+    \label{res:roc_pc}
   \end{subfigure}\hfill
   \begin{subfigure}[t]{0.5\linewidth}
     \centering
     \includegraphics[width=\linewidth]{ROC/15_20_0p0_0p8/binnedROCCurveChargeFlip_et15_20_eta0.0_0.8.pdf}
     \caption{}
-    \label{fig:roc_hf}
+    \label{res:roc_hf}
   \end{subfigure}
 
   \caption{Rechazo de fondo frente a eficiencia de señal (curvas ROC) para electrones primarios frente a:
   (a) fondo de LFH  ,
   y (e) electrones de \texit{Charge-flips}.
   Las curvas se muestran para un bin representativo de $(E_{T}, |\eta|)$, y las incertidumbres estadísticas de cada rechazo de fondo se indican como bandas.}
-  \label{fig:roc_mainbkg}
+  \label{res:roc_mainbkg}
 \end{figure}
 
 Finalmente, se presentan las medidas de eficiencia con el método \textit{tag-and-probe} en $Z\to ee$ y $J/\psi\to ee$~\cite{latest_electron_paper_2024}. Estas medidas permiten derivar factores de escala (SF) en función de $E_T$ y $\eta$, corrigiendo posibles diferencias entre datos y simulación MC. Las eficiencias de identificación obtenidas con el DNN muestran una estabilidad notable a lo largo del rango cinemático y frente al número de vértices primarios $\mu$, manteniéndose en muy buen acuerdo entre datos y MC, con SF cercanos a la unidad en todo el espacio de fase.  
@@ -284,14 +284,14 @@ En términos de eficiencia de identificación de señal, tanto el método LH com
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_15p0_20p0.png}
     \caption{$15 < p_{\mathrm{T}} < 20$~GeV}
-    \label{fig:eff_dnn_lh_ptbin1}
+    \label{res:eff_dnn_lh_ptbin1}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_30p0_35p0.png}
     \caption{$20 < p_{\mathrm{T}} < 30$~GeV}
-    \label{fig:eff_dnn_lh_ptbin2}
+    \label{res:eff_dnn_lh_ptbin2}
   \end{subfigure}
 
   \vspace{0.5cm}
@@ -300,14 +300,14 @@ En términos de eficiencia de identificación de señal, tanto el método LH com
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_40p0_45p0.png}
     \caption{$30 < p_{\mathrm{T}} < 40$~GeV}
-    \label{fig:eff_dnn_lh_ptbin3}
+    \label{res:eff_dnn_lh_ptbin3}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_primary_cluster_be2_eta_for_pt_50p0_60p0.png}
     \caption{$40 < p_{\mathrm{T}} < 45$~GeV}
-    \label{fig:eff_dnn_lh_ptbin4}
+    \label{res:eff_dnn_lh_ptbin4}
   \end{subfigure}
 
   \caption{
@@ -315,7 +315,7 @@ En términos de eficiencia de identificación de señal, tanto el método LH com
     tanto en datos como en MC, junto con los factores de escala, para el menú DNN ID-only. 
     Las eficiencias se muestran en función de $\eta$ en cuatro bins representativos de $p_{\mathrm{T}}$. 
     Las barras de error incluyen todas las incertidumbres estadísticas y sistemáticas.}
-  \label{fig:eff_sfs_dnn_vs_lh_eta_4ptbins}
+  \label{res:eff_sfs_dnn_vs_lh_eta_4ptbins}
 \end{figure}
 
 
@@ -327,14 +327,14 @@ En términos de eficiencia de identificación de señal, tanto el método LH com
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_0p1_0p6.png}
     \caption{$0.1 < \eta < 0.6$}
-    \label{fig:eff_dnn_lh_etabin1}
+    \label{res:eff_dnn_lh_etabin1}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_0p8_1p15.png}
     \caption{$0.6 < \eta < 1.0$}
-    \label{fig:eff_dnn_lh_etabin2}
+    \label{res:eff_dnn_lh_etabin2}
   \end{subfigure}
 
   \vspace{0.5cm}
@@ -343,14 +343,14 @@ En términos de eficiencia de identificación de señal, tanto el método LH com
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_1p52_1p81.png}
     \caption{$1.0 < \eta < 1.37$}
-    \label{fig:eff_dnn_lh_etabin3}
+    \label{res:eff_dnn_lh_etabin3}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/DNN_ID_effs/DNNID_LH_eff_vs_pt_for_primary_cluster_be2_eta_2p37_2p47.png}
     \caption{$1.52 < \eta < 1.81$}
-    \label{fig:eff_dnn_lh_etabin4}
+    \label{res:eff_dnn_lh_etabin4}
   \end{subfigure}
 
   \caption{
@@ -358,7 +358,7 @@ En términos de eficiencia de identificación de señal, tanto el método LH com
     tanto en datos como en MC, junto con los factores de escala, para el menú DNN ID-only. 
     Las eficiencias se muestran en función de $p_{\mathrm{T}}$ en cuatro bins representativos de $\eta$. 
     Las barras de error incluyen todas las incertidumbres estadísticas y sistemáticas.}
-  \label{fig:eff_sfs_dnn_vs_lh_pt_4etabins}
+  \label{res:eff_sfs_dnn_vs_lh_pt_4etabins}
 \end{figure}
 
 \begin{figure}[h]
@@ -368,19 +368,19 @@ En términos de eficiencia de identificación de señal, tanto el método LH com
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/significance_data/significance_vs_pt_etaBin_0.60_0.80.pdf}
     \caption{\small{Significance vs $E_{\mathrm{T}}$, $|\eta|\in[1.37,1.52]$.}}
-    \label{fig:significance_vs_pt_etaBin}
+    \label{res:significance_vs_pt_etaBin}
   \end{subfigure}\hfill
   \begin{subfigure}{0.48\textwidth}
     \centering
     \includegraphics[width=\linewidth]{electron_eff_plots/significance_data/significance_vs_eta_ptBin_25_30.pdf}
     \caption{\small{Significance vs $|\eta|$, $E_{\mathrm{T}}\in[25,35]$~GeV.}}
-    \label{fig:significance_vs_eta_ptBin}
+    \label{res:significance_vs_eta_ptBin}
   \end{subfigure}
 
   \caption{Estimación de la significancia $S_{\mathrm{eff}} \times \sqrt{\mathrm{Bkg}_{\mathrm{rej}}}$ 
   calculada en datos para los menús de identificación de DNN y LH. 
   Los resultados se muestran en función de $E_{\mathrm{T}}$ para $|\eta|$ inclusiva (a) and en función de $|\eta|$ inclusivos en $E_{\mathrm{T}}$ (b).}
-  \label{fig:significance_bins}
+  \label{res:significance_bins}
 \end{figure}
 
 
@@ -616,14 +616,14 @@ Además, el entrenamiento se realiza con las muestras MC combinadas de Run~2 y R
     \centering
     \includegraphics[width=\textwidth]{images/plots_tH_tHqb_for_thesis/dEta_bH_max_signals_ATLAS.pdf}
     \caption{Max.\ $\Delta \eta (H,b\text{jet})$}
-    \label{fig:dEta_bH_max}
+    \label{res:dEta_bH_max}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/plots_tH_tHqb_for_thesis/n_bjets_GN2v01_FixedCutBEff_70_signals_ATLAS.pdf}
     \caption{$b$-jet multiplicity}
-    \label{fig:n_bjets}
+    \label{res:n_bjets}
   \end{subfigure}
 
   % 2a fila
@@ -632,14 +632,14 @@ Además, el entrenamiento se realiza con las muestras MC combinadas de Run~2 y R
     \centering
     \includegraphics[width=\textwidth]{images/plots_tH_tHqb_for_thesis/dEta_lb_max_signals_ATLAS.pdf}
     \caption{Max.\ $\Delta \eta (l\text{jet},b-\text{jet})$}
-    \label{fig:dEta_lb_max}
+    \label{res:dEta_lb_max}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/plots_tH_tHqb_for_thesis/m_ll_max_signals_ATLAS.pdf}
     \caption{Largest invariant mass of two light jets}
-    \label{fig:m_ll_max}
+    \label{res:m_ll_max}
   \end{subfigure}
 
   \caption{Distribuciones de algunas de las variables de entrada adicionales utilizadas en el entrenamiento del BDT, mostradas para eventos simulados de \thqb y \ttH después de los cortes de preselección.

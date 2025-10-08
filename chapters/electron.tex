@@ -14,7 +14,7 @@ Although the basic workflow for constructing electron candidates mirrors the one
 
 In the following chapter, the treatment, definition, and calibration of electrons in ATLAS are discussed, especially because part of the work in this thesis has focused on the study and refinement of a DNN for electron identification and classification against other objects that can mimic their signature.  The architecture of this ML algorithm is going to be shown, as well as the electron features that are used as inputs, its performance, and how its output is handled. 
 
-This DNN is introduced as an improved method intended to replace the likelihood-based approach employed since the beginning of Run-2~\cite{Aad:2684552,Aaboud:2657964}, which is also discussed here.  Finally, efficiency measurements are compared for prompt electrons obtained with both techniques and derive scale factors to correct any mismatches between the performance in data and MC simulation.  These efficiencies are measured in data using tag-and-probe techniques on a pure and unbiased sample of electrons, typically drawn from well-known physics processes rich in prompt electrons such as the $Z\to e^+e^-$ decay, an example of which is illustrated in the event display in Figure~\ref{fig:zee}.
+This DNN is introduced as an improved method intended to replace the likelihood-based approach employed since the beginning of Run~2~\cite{Aad:2684552,Aaboud:2657964}, which is also discussed here.  Finally, efficiency measurements are compared for prompt electrons obtained with both techniques and derive scale factors to correct any mismatches between the performance in data and MC simulation.  These efficiencies are measured in data using tag-and-probe techniques on a pure and unbiased sample of electrons, typically drawn from well-known physics processes rich in prompt electrons such as the $Z\to e^+e^-$ decay, an example of which is illustrated in the event display in Figure~\ref{fig:zee}.
 
 \begin{figure}[htbp]
     \centering
@@ -92,7 +92,7 @@ This section is concluded by noting that the concept of transverse energy does n
 
 As already mentioned, there are other types of physics objects that can mimic the characteristic signature left by electrons in the ATLAS detector, and can therefore end up being reconstructed as electron candidates. 
 
-In the physics analyses carried out within the collaboration, the background coming from these objects needs to be reduced as much as possible. Moreover, not all real electrons are to be considered as signal in many cases. Only prompt isolated electrons originating from the decay of heavy bosons such as the $W$, $Z$, and Higgs bosons are of interest, while those coming from the decay of charged quarks or photon conversions are generally considered as background.
+In the physics analyses carried out within the collaboration, the background coming from these objects needs to be reduced as much as possible. Moreover, not all genuine electrons are to be considered as signal in many cases. Only prompt isolated electrons originating from the decay of heavy bosons such as the $W$, $Z$, and Higgs bosons are of interest, while those coming from the decay of charged quarks or photon conversions are generally considered as background.
 
 Therefore, in order to efficiently classify the electron candidates, a set of selections must be applied after reconstruction, which is what is known as identification. To identify the types of electrons, discriminants are typically defined based on observables or features of the physical objects that allow for a discrimination between prompt and background electrons, for instance.
 
@@ -319,7 +319,7 @@ The main interest of these two variables lies in their discriminating power for 
 \\
 Shower-shape variables characterize the development of the EM shower produced by the electron candidates in the calorimeter.
 
-In order for the DNN to be trained and to perform well when applied to real data, the distributions of the input variables for simulated electrons should resemble those of real electrons observed in data. However, due to imperfections in the detector modelling, the disagreement between MC simulations and data can be too large. % (especially for those variables involving calorimeter signal readouts. such as energy leakage due to undesired connections between LAr cells, commonly referred to as \textit{cross-talk}).
+In order for the DNN to be trained and to perform well when applied to real data, the distributions of the input variables for simulated electrons should resemble those of genuine electrons observed in data. However, due to imperfections in the detector modelling, the disagreement between MC simulations and data can be too large. % (especially for those variables involving calorimeter signal readouts. such as energy leakage due to undesired connections between LAr cells, commonly referred to as \textit{cross-talk}).
 
 Corrections are applied to these shower-shape variables in order to improve their modelling of the real data. These corrections are based on individual affine transformations applied in bins of $E_{\text{T}}$ and $\eta$, such that the mean of the distribution being stretched and/or its width shifted, depending on the severity of the discrepancy.
 
@@ -641,7 +641,7 @@ For this, the following binomial discriminant is defined, simply combining the o
 \begin{equation}
   \small
   %\footnotesize
-  \mathcal{D}_{el} = \frac{f_{El}p_{El} + (1-f_{El})p_{CF}}{f_{PC}p_{PC}+f_{HF}p_{HF}+f_{LFEg}p_{LFEg}+(1-f_{PC}-f_{HF}-f_{LFEg})p_{LFH}}
+  \mathcal{D}_{el} = \ln\left(\frac{f_{El}p_{El} + (1-f_{El})p_{CF}}{f_{PC}p_{PC}+f_{HF}p_{HF}+f_{LFEg}p_{LFEg}+(1-f_{PC}-f_{HF}-f_{LFEg})p_{LFH}}\right)
 \label{eq:dnn_discriminant}
 \end{equation}
 where $p_{X}$ are the scores provided by the DNN for each class, and $f_{X}$ are tunable parameters or weights, referred to as \textit{fractions}, which control the relative importance of the different classes in the discriminant.  
@@ -739,7 +739,7 @@ The relative contribution of each background electron class in the test sample u
   \end{subtable}\hfill
   \begin{subtable}[t]{0.49\linewidth}
     \centering
-    \subcaption{\scriptsize $15<E_{T}\leq 20~\mathrm{GeV}$, $0.0<|\eta|\leq 0.8$}
+    \subcaption{\scriptsize $15<E_{\text{T}}\leq 20~\mathrm{GeV}$, $0.0<|\eta|\leq 0.8$}
     \vspace{2pt}
     \begin{tabular}{@{}%
       >{\raggedright\arraybackslash}p{\ClassW}%
@@ -780,7 +780,7 @@ With the $ \mathcal{D}_{el} $ discriminant now completely determined by the frac
   \caption{Signal discriminant $D_{\mathrm{el}}$ of the DNN shown for (a) prompt electrons,
   Charge-Flip electrons, photon conversions, and electrons from Heavy-Flavour decays; and
   (b) prompt electrons, $e/\gamma$ objects from Light-Flavour decays, and Light-Flavour hadrons.
-  Electron candidates satisfy $15<E_{T}\leq 20~\mathrm{GeV}$ and $0.0<|\eta|\leq 0.8$.}
+  Electron candidates satisfy $15<E_{\text{T}}\leq 20~\mathrm{GeV}$ and $0.0<|\eta|\leq 0.8$.}
   \label{fig:dnn_final_disc_ab}
 \end{figure}
 
@@ -795,7 +795,7 @@ With the $ \mathcal{D}_{el} $ discriminant now completely determined by the frac
 
   \caption{Signal discriminant $D_{\mathrm{el}}$ of the DNN shown for prompt electrons versus
   the combined background (all classes except prompt and Charge-Flip).
-  Electron candidates satisfy $15<E_{T}\leq 20~\mathrm{GeV}$ and $0.0<|\eta|\leq 0.8$.}
+  Electron candidates satisfy $15<E_{\text{T}}\leq 20~\mathrm{GeV}$ and $0.0<|\eta|\leq 0.8$.}
   \label{fig:dnn_final_disc_c}
 \end{figure}
 
@@ -821,7 +821,7 @@ Figure~\ref{fig:roc_cf} includes the ROC curve calculated for the rejection of C
 \begin{equation}
   %\small
   \footnotesize
-  \mathcal{D}_{el} = \frac{p_{El}}{f_{CF}p_{CF} + f_{PC}p_{PC}+f_{HF}p_{HF}+f_{LFEg}p_{LFEg}+(1-f_{CF}_f_{PC}-f_{HF}-f_{LFEg})p_{LFH}}
+  \mathcal{D}_{el} = \ln\left(\frac{p_{El}}{f_{CF}p_{CF} + f_{PC}p_{PC}+f_{HF}p_{HF}+f_{LFEg}p_{LFEg}+(1-f_{CF}_f_{PC}-f_{HF}-f_{LFEg})p_{LFH}}\right)
 \end{equation}
 In any case, since the number of prompt electrons largely exceeds that of Charge-Flip electrons in any realistic selection, including Charge-Flip candidates within the signal definition would have a negligible impact on the overall signal efficiency.
 
@@ -833,7 +833,7 @@ The most notable gains are expected for Light-Flavour hadrons, Light-Flavour $e/
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.7\linewidth]{ROC/15_20_0p0_0p8/binnedROCCurve_et15_20_eta0.0_0.8.pdf}
-  \caption{Background rejection versus signal efficiency (ROC curves) for prompt electrons against all background classes combined in a representative $(E_{T}, |\eta|)$ bin, and the statistical uncertainty of the background rejection is shown as a band.}
+  \caption{Background rejection versus signal efficiency (ROC curves) for prompt electrons against all background classes combined in a representative $(E_{\text{T}}, |\eta|)$ bin, and the statistical uncertainty of the background rejection is shown as a band.}
   \label{fig:roc_allblkg}
 \end{figure}
 
@@ -876,7 +876,7 @@ The most notable gains are expected for Light-Flavour hadrons, Light-Flavour $e/
   (b) $e/\gamma$ from Light-Flavour decays,
   (c) Light-Flavour hadrons,
   and (e) photon conversions.
-  Curves are shown for a representative $(E_{T}, |\eta|)$ bin, and the statistical uncertainties of the each background rejection are shown as bands.}
+  Curves are shown for a representative $(E_{\text{T}}, |\eta|)$ bin, and the statistical uncertainties of the each background rejection are shown as bands.}
   \label{fig:roc_mainbkg}
 \end{figure}
 
@@ -885,7 +885,7 @@ The most notable gains are expected for Light-Flavour hadrons, Light-Flavour $e/
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.7\linewidth]{ROC/15_20_0p0_0p8/binnedROCCurveChargeFlip_et15_20_eta0.0_0.8.pdf}
-  \caption{Background rejection versus signal efficiency (ROC curve) for prompt electrons against Charge-Flip electrons in a representative $(E_{T}, |\eta|)$ bin, and the statistical uncertainty of the background rejection is shown as a band.}
+  \caption{Background rejection versus signal efficiency (ROC curve) for prompt electrons against Charge-Flip electrons in a representative $(E_{\text{T}}, |\eta|)$ bin, and the statistical uncertainty of the background rejection is shown as a band.}
   \label{fig:roc_cf}
 \end{figure}
 
@@ -895,9 +895,9 @@ The most notable gains are expected for Light-Flavour hadrons, Light-Flavour $e/
 
 As a final step, the electron identification menu is constructed on the basis of the DNN decision. This menu encapsulates the set of thresholds applied to the DNN discriminant, together with the additional rectangular cuts associated with each defined working point.
 
-In this specific case, two discriminants are combined: $\mathcal{D}_{el}$, defined in Eq.~\ref{eq:dnn_discriminant}, and $\mathcal{D}_{CF}$, defined as the simple ratio:
+In this specific case, two discriminants are combined: $\mathcal{D}_{el}$, defined in Eq.~\ref{eq:dnn_discriminant}, and $\mathcal{D}_{CF}$, defined as the ratio:
 \begin{equation}
-  \mathcal{D}_{CF} = p_{El}/p_{CF}.
+  \mathcal{D}_{CF} = \ln\left(p_{El}/p_{CF}\right).
 \label{cf_disc}
 \end{equation}
 The first discriminant is used to separate both signal electron classes from the main background sources. For analyses sensitive to the electron charge in the final state, this can be complemented with the additional discriminant $\mathcal{D}_{CF}$, which exhibits strong separation power, as illustrated in Figure~\ref{fig:cf_discriminant}. Charge-Flip electrons are more likely to appear at higher $|\eta|$, where they traverse a larger amount of detector material, as shown in Figure~\ref{fig:eta_selection}, increasing the probability of processes such as bremsstrahlung; for this reason, the $2.01 < |\eta| < 2.37$ bin is chosen for the plot.
@@ -906,7 +906,7 @@ The first discriminant is used to separate both signal electron classes from the
   \centering
   \includegraphics[width=0.6\linewidth]{discriminant_plots/panel_d.pdf}
   \caption{Charge-Flip discriminant $D_{\mathrm{CF}}$ of the DNN shown for prompt electrons and
-  Charge-Flip electrons. Electron candidates satisfy $15<E_{T}\leq 20~\mathrm{GeV}$ and $2.01<|\eta|\leq 2.37$.}
+  Charge-Flip electrons. Electron candidates satisfy $15<E_{\text{T}}\leq 20~\mathrm{GeV}$ and $2.01<|\eta|\leq 2.37$.}
   \label{fig:cf_discriminant}
 \end{figure}
 
@@ -1060,7 +1060,7 @@ This \textit{preselected probe} is then tested against the identification workin
 \end{table}
 
 For the \tp pair, both electrons must have opposite charge and an invariant mass within $75 < m_{e^+e^-} < 105$~GeV. If multiple valid pairs are found in an event (e.g.\ interchanging the roles of tag and probe), all are considered. 
-Variations in the tag definition or in the invariant-mass window are treated as systematic uncertainties, as will be explained below.
+Variations in the tag definition or in the invariant-mass window are used to evaluate systematic uncertainties, as will be explained below.
 
 
 \subsubsection{\zmass efficiency method}
@@ -1433,12 +1433,12 @@ At higher $E_{\mathrm{T}}$, the performance of LH is particularly degraded in th
 
 However, final decisions on the background performance cannot be extracted by looking at a single MC sample alone, it is necessary to also examine real collision data. A complementary validation is performed on same-sign $Z\to e^{+}e^{-}$ events in data, which are largely populated by CF electrons. Figure~\ref{fig:cf_bkg_data} shows the invariant mass distribution around the $Z$-boson peak, requiring a tag and a probe electron passing the Medium WP of the identification menus displayed in different coloured lines. The identification menu providing the best rejection of CF electrons is the one yielding the lowest curve. 
 
-It can be observed that the DNN menu, when only applying ID cuts (black), allows more CF electrons to pass, which is expected since in the original $\mathcal{D}_{el}$ (defined in Eq.~\ref{eq:dnn_discriminant}), this class is treated as signal. However, when comparing the LH+ECIDs menu and the DNN ID+CF, not only the same rejection is recovered but it is surpassed, without the need to train a dedicated algorithm. This improvement is mainly due to the inclusion of new variables in the DNN training. A reduction of about $16\%$ in CF electrons is achieved within the $[75,105]$~GeV interval around the $Z$-boson mass.
+It can be observed that the DNN menu, when only applying ID cuts (black), allows more CF electrons to pass, which is expected since in the original $\mathcal{D}_{el}$ (defined in Eq.~\ref{eq:dnn_discriminant}), this class is treated as signal. However, when comparing the LH+ECIDs menu and the DNN ID+CF, not only the same rejection is recovered but it is surpassed, without the need to train a dedicated algorithm. This improvement is mainly due to the inclusion of new variables in the DNN training. A reduction of about $16\%$ in CF electrons is achieved within the $[75,105]$~GeV mass interval around the $Z$-boson mass.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.7\textwidth]{electron_eff_plots/bkg_rejection/InvariantMassComparison_points_with_ratio.pdf}
-  \caption{Inclusive background efficiency in same-sign $Z\to e^{+}e^{-}$ events for DNN ID-only, LH, DNN ID+CF, and LH+ECIDs. Lower curves indicate better charge-misidentification rejection.}
+  \caption{Inclusive background efficiency in same-sign $Z\to e^{+}e^{-}$ events for DNN ID-only, LH, DNN ID+CF, and LH+ECIDs is shown in the top pannel. Lower curves indicate better charge-misidentification rejection. In the bottom pannel it is also shown the ratio of events passing the DNN ID+CF menu over the LH+ECIDs menu.}
   \label{fig:cf_bkg_data}
 \end{figure}
 
@@ -1469,7 +1469,7 @@ In this case, none of these trigger items include associated identification requ
 \end{table}
 
 In this way, a data sample with high purity of background electrons is obtained, allowing the treatment to follow the same approach as for the MC signal efficiency measurements, without the need to derive templates or subtract signal contamination.  
-To further reduce potential signal contamination, no tag electron is required. %, so that the only remaining signal comes from $W \to e\nu$ decays, which is negligible compared to the large contribution from QCD multijet production with fake electrons.  
+To further reduce potential signal contamination, no tag electron is required.  %, so that the only remaining signal comes from $W \to e\nu$ decays, which is negligible compared to the large contribution from QCD multijet production with fake electrons.  
 For the probes, the same requirements listed in Table~\ref{tab:tag_probe_reqs} are applied, varying only the identification WP.  
 Since no tag electron is required, no invariant mass requirements are applied and electron counting is used for estimating the efficiency (or, in this case, the rejection $1/\epsilon$) is performed directly in $(E_{\text{T}},\eta)$ bins.
 
