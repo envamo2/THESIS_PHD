@@ -17,7 +17,7 @@ Uno de los aspectos más notables del Modelo Estándar es su capacidad para unif
 \begin{figure}[htbp]
   \centering
   \includegraphics[angle=-90,width=0.7\textwidth]{images/mexican_hat.pdf}
-  \caption{Illustration of the shape of the Higgs complex scalar potential with vacuum expectation value $v$. The symmetry is spontaneously broken when a singular ground state is chosen (A $\rightarrow$ B).}
+  \caption{Ilustración de la forma del potencial escalar complejo del Higgs con $v$ el valor esperado del vacío. La simetría se rompe espontáneamente cuando se elige un estado fundamental (A $\rightarrow$ B).}
   \label{res:mexican_hat}
 \end{figure}
 
@@ -40,9 +40,9 @@ El esquema STXS permite combinar de manera coherente resultados de diferentes mo
   \subfloat[]{
       \includegraphics[width=0.46\textwidth]{atlas_combined_br.pdf}
   }
-  \caption{(a) Summary of the Higgs boson production cross-sections assuming SM values for the Higgs boson branching ratios. 
-  (b) Measurements of the Higgs boson decay branching ratios assuming SM predictions for the production cross-sections. 
-  All results are obtained using ATLAS Run-2 data, combining different analyses, and are consistent with the SM predictions within uncertainties~\cite{Nature_ATLAS}.}
+  \caption{(a) Resumen de las secciones eficaces de producción del bosón de Higgs asumiendo los valores del Modelo Estándar para los branching ratios de desintegración.
+  (b) Medidas de los branching ratios de desintegración del bosón de Higgs asumiendo las predicciones del Modelo Estándar para las secciones eficaces de producción.
+  Todos los resultados se obtienen utilizando los datos de Run~2 de ATLAS, combinando diferentes análisis, y son compatibles con las predicciones del Modelo Estándar dentro de las incertidumbres~\cite{Nature_ATLAS}.}
   \label{res:higgs_mu}
 \end{figure}
 
@@ -58,7 +58,7 @@ El Gran Colisionador de Hadrones (LHC, por sus siglas en inglés)~\cite{Evans:11
 
 Los haces de protones son inyectados en el LHC a través de un complejo de pre-aceleradores que incluye el \textit{Linac}, el \textit{Proton Synchrotron} (PS) y el \textit{Super Proton Synchrotron} (SPS). Una vez en el anillo principal, los haces se mantienen mediante 1232 dipolos superconductores de 8.3 T que guían su trayectoria y cerca de 400 cuadrupolos que enfocan el haz. El sistema opera a temperaturas criogénicas de 1.9 K utilizando helio superfluido. 
 
-Durante Run-2 (2015–2018) el LHC alcanzó colisiones protón-protón a $\sqrt{s} = 13$ TeV, con luminosidades integradas de aproximadamente $140~\text{fb}^{-1}$ para ATLAS y CMS. En Run-3 (2022–2025) la energía de colisión ha aumentado a 13.6 TeV, con el objetivo de acumular más de $300~\text{fb}^{-1}$. El futuro proyecto HL-LHC prevé incrementar este valor en un factor diez, alcanzando $3000~\text{fb}^{-1}$ de datos registrados por experimento, lo que permitirá explorar procesos raros con sensibilidad sin precedentes.
+Durante Run~2 (2015–2018) el LHC alcanzó colisiones protón-protón a $\sqrt{s} = 13$ TeV, con luminosidades integradas de aproximadamente $140~\text{fb}^{-1}$ para ATLAS y CMS. En Run~3 (2022–2025) la energía de colisión ha aumentado a 13.6 TeV, con el objetivo de acumular más de $300~\text{fb}^{-1}$. El futuro proyecto HL-LHC prevé incrementar este valor en un factor diez, alcanzando $3000~\text{fb}^{-1}$ de datos registrados por experimento, lo que permitirá explorar procesos raros con sensibilidad sin precedentes.
 
 ATLAS~\cite{ATLAS:exp,ATLAS_run3} es uno de los dos detectores generales de propósito múltiple en el LHC. Con 44~m de longitud, 25~m de altura y un peso total de 7000 toneladas, es el detector de mayor volumen construido en un acelerador. Su diseño en capas concéntricas permite una cobertura casi completa en ángulo sólido, siendo capaz de registrar leptones, fotones, jets hadrónicos y energía perdida transversal en un amplio rango de energías.
 
@@ -86,11 +86,11 @@ El análisis de los datos registrados por ATLAS requiere una infraestructura com
 
 El flujo de datos sigue un esquema jerárquico en tres niveles: los \textit{Tier-0} en el CERN procesan en tiempo real la reconstrucción inicial; los \textit{Tier-1}, distribuidos internacionalmente, almacenan y recalibran los datos; y los \textit{Tier-2} y \textit{Tier-3} proporcionan recursos para simulaciones Monte Carlo (MC) y análisis por parte de los físicos.  
 
-El software de ATLAS está basado en el framework \textsc{athena}~\cite{athena}, desarrollado en C++ y Python, que integra la simulación de eventos, la reconstrucción de objetos físicos y la aplicación de algoritmos de identificación. Las distintas versiones de \textsc{athena}, conocidas como \textit{releases}, definen la configuración oficial de reconstrucción y calibración utilizada en cada periodo de toma de datos. En paralelo, las campañas de producción MC (MC16 para Run-2, MC20 y MC23 para Run-3) proporcionan muestras coherentes con las condiciones de detector y de haz en cada época de operación del LHC.  
+El software de ATLAS está basado en el framework \textsc{athena}~\cite{athena}, desarrollado en C++ y Python, que integra la simulación de eventos, la reconstrucción de objetos físicos y la aplicación de algoritmos de identificación. Las distintas versiones de \textsc{athena}, conocidas como \textit{releases}, definen la configuración oficial de reconstrucción y calibración utilizada en cada periodo de toma de datos. En paralelo, las campañas de producción MC (MC16 para Run~2, MC20 y MC23 para Run~3) proporcionan muestras coherentes con las condiciones de detector y de haz en cada época de operación del LHC.  
 
 \section*{Datos y simulaciones}
 
-Los análisis presentados en esta tesis se basan en datos de colisiones protón-protón registrados por ATLAS en Run-2 (2015–2018) y Run-3 (2022–2024), que suman $140~\text{fb}^{-1}$ a $\sqrt{s}=13$ TeV y unos $166~\text{fb}^{-1}$ a $\sqrt{s}=13.6$ TeV, respectivamente, tras aplicar los criterios de calidad de datos. Estos conjuntos se utilizan tanto para validar nuevas estrategias de identificación de electrones como para estudiar modos poco frecuentes de producción del bosón de Higgs, incluyendo \(\ttH\) y \(tHqb\).  
+Los análisis presentados en esta tesis se basan en datos de colisiones protón-protón registrados por ATLAS en Run~2 (2015–2018) y Run~3 (2022–2024), que suman $140~\text{fb}^{-1}$ a $\sqrt{s}=13$ TeV y unos $166~\text{fb}^{-1}$ a $\sqrt{s}=13.6$ TeV, respectivamente, tras aplicar los criterios de calidad de datos. Estos conjuntos se utilizan tanto para validar nuevas estrategias de identificación de electrones como para estudiar modos poco frecuentes de producción del bosón de Higgs, incluyendo \(\ttH\) y \(tHqb\).  
 
 La modelización de las colisiones protón-protón en el LHC constituye un reto esencial, al involucrar múltiples escalas energéticas y procesos simultáneos~\cite{BUCKLEY2011145}. En QCD perturbativa, los protones se tratan como haces de partones (quarks y gluones) descritos por funciones de distribución de partones (PDFs), que definen la probabilidad de que un partón transporte una fracción $x$ del momento del protón. Los cálculos a órdenes NLO y NNLO proporcionan las secciones eficaces de los procesos duros, combinados con algoritmos de \textit{parton showering} que simulan la cascada de radiación partónica, seguidos de la hadronización en estados ligados de color neutro mediante modelos fenomenológicos. Además, se incluyen fenómenos colectivos como colisiones múltiples de partones (MPI) y el \textit{pile-up}, es decir, interacciones simultáneas en un mismo cruce de haces que afectan a la reconstrucción de objetos físicos.  
 
@@ -115,7 +115,7 @@ El primer paso en la reconstrucción es identificar las trayectorias de las part
 
 A partir de las trazas, se reconstruyen los vértices de interacción~\cite{vertex_run1,vertex_run2,vertex_run3,vertex_run3_2}. El vértice primario corresponde al punto de la colisión dura, identificado como aquel con la mayor suma de $p_{\mathrm{T}}^{2}$ de las trazas asociadas, mientras que otros vértices se clasifican como \textit{pile-up} o secundarios. Estos últimos son esenciales para el etiquetado de sabor y la identificación de partículas desplazadas.
 
-Tras pasar por el detector interno, las partículas depositan su energía en las celdas de los calorímetros, que se agrupan en clústeres tridimensionales denominados \textit{topoclusters}. El algoritmo comienza a partir de celdas semilla con señal significativa respecto al ruido electrónico y expande iterativamente a celdas adyacentes. Posteriormente, se aplican calibraciones específicas que corrigen las pérdidas en materiales pasivos y la diferente respuesta hadrónica y electromagnética. Durante Run-2 se introdujo además el concepto de \textit{superclúster}, que agrupa dinámicamente varios topoclusters, mejorando la recuperación de energía perdida por radiación de bremsstrahlung.
+Tras pasar por el detector interno, las partículas depositan su energía en las celdas de los calorímetros, que se agrupan en clústeres tridimensionales denominados \textit{topoclusters}. El algoritmo comienza a partir de celdas semilla con señal significativa respecto al ruido electrónico y expande iterativamente a celdas adyacentes. Posteriormente, se aplican calibraciones específicas que corrigen las pérdidas en materiales pasivos y la diferente respuesta hadrónica y electromagnética. Durante Run~2 se introdujo además el concepto de \textit{superclúster}, que agrupa dinámicamente varios topoclusters, mejorando la recuperación de energía perdida por radiación de bremsstrahlung.
 
 Los muones se reconstruyen combinando información del ID y del MS~\cite{muon_reco_run2}, dado su carácter de partículas mínimamente ionizantes que atraviesan el detector con escasa pérdida de energía. Existen distintas categorías de reconstrucción: muones combinados (ajuste conjunto ID+MS), extrapolados (MS únicamente), segment-tagged (traza del ID asociada a un segmento en el MS) y calorimeter-tagged (basados en depósitos mínimos de energía en el calorímetro alineados con una traza del ID). La identificación define distintos \textit{working points} (WPs, Loose, Medium, Tight, entre otros) que equilibran eficiencia frente a rechazo de fondo.
 
@@ -136,7 +136,7 @@ La reconstrucción de electrones en ATLAS comienza con la identificación de \te
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\textwidth]{images/electron_journey.png}
-  \caption{Illustration of the typical journey of an electron passing through ATLAS. In red it is represented its expected path, first going through the tracking system. Afterwards it leaves mostly all its energy in the electromagnetic calorimeter. It can be also found the possible path (dashed red) of photon radiated by bremsstrahlung when the electron interacts with the material~\cite{Aaboud:2657964}.}
+  \caption{Ilustración del recorrido típico de un electrón que atraviesa ATLAS. En rojo se representa su trayectoria esperada, que primero pasa por el detector interno. A continuación, deposita prácticamente toda su energía en el calorímetro electromagnético. También se muestra el posible recorrido (rojo discontinuo) de un fotón radiado por bremsstrahlung cuando el electrón interacciona con el material~\cite{Aaboud:2657964}.}
   \label{res:electron_journey}
 \end{figure}
 
@@ -394,7 +394,7 @@ La producción asociada de un bosón de Higgs con un par top-antitop (\ttH) cons
 
 Por otro lado, el canal de desintegración \(H\to\tau\tau\) aporta una oportunidad complementaria al permitir explorar simultáneamente el acoplamiento del Higgs a leptones de tercera generación. Aunque su tasa de desintegración es relativamente modesta, la sensibilidad conjunta a dos Yukawas diferentes lo convierte en un canal de gran interés. Dentro de este modo, la topología en la que ambos leptones $\tau$ decaen hadrónicamente (\(\tau_{\mathrm{had}}\tau_{\mathrm{had}}\)) ofrece la mayor probabilidad de desintegración, pero también plantea los mayores retos experimentales al considerar que los quarks top también se desintegran hadrónicamente: presencia de múltiples jets y \(b\)-jets en el estado final, ausencia de leptones aislados y fondos dominados por \(\ttbar\)+jets y \(Z\to\tau\tau\)+jets.  
 
-Este análisis de \ttH(\(\tau_{\mathrm{had}}\tau_{\mathrm{had}}\)) se enmarca dentro de la medida global de \(H\to\tau\tau\) en ATLAS, que combina distintos modos de producción y canales de desintegración de los leptones $\tau$, proporcionando así un marco coherente para evaluar la sensibilidad de este proceso frente a otros. Tanto ATLAS como CMS han estudiado este canal en Run-1~\cite{htau_cms_atlas_2016} y en primeras etapas de Run-2, aunque con sensibilidades limitadas y grandes incertidumbres~\cite{2022, Tumasyan_2023}.  
+Este análisis de \ttH(\(\tau_{\mathrm{had}}\tau_{\mathrm{had}}\)) se enmarca dentro de la medida global de \(H\to\tau\tau\) en ATLAS, que combina distintos modos de producción y canales de desintegración de los leptones $\tau$, proporcionando así un marco coherente para evaluar la sensibilidad de este proceso frente a otros. Tanto ATLAS como CMS han estudiado este canal en Run-1~\cite{htau_cms_atlas_2016} y en primeras etapas de Run~2, aunque con sensibilidades limitadas y grandes incertidumbres~\cite{2022, Tumasyan_2023}.  
 
 El presente trabajo constituye un paso adelante al introducir técnicas multivariantes más refinadas y una categorización optimizada, extendiendo además el análisis al marco de \textit{Simplified Template Cross Sections} (STXS). Este enfoque permite realizar una medida diferencial de la producción en distintos bins del momento transverso del bosón de Higgs, lo que proporciona una visión más rica y reduce correlaciones en las combinaciones globales. Los resultados obtenidos en este análisis se encuentran junto al resto de modos de producción y canales en la publicación de la Ref.~\cite{differential_htautau}.
 
@@ -403,7 +403,7 @@ El objetivo central del análisis es evaluar la sensibilidad del canal \ttHtt, t
   \mu_{t\bar{t}H} = \frac{\sigma_{t\bar{t}H}\times \mathcal{B}(H \to \tau \tau)}{\sigma^{\text{SM}}_{t\bar{t}H}\times \mathcal{B}^{\text{SM}}_{t\bar{t}H}(H \to \tau \tau)}
 \]  
 
-El análisis utiliza la muestra completa de datos de Run-2 de ATLAS, correspondiente a una luminosidad integrada de 140~fb$^{-1}$ a $\sqrt{s}=13$~TeV. La señal objetivo es \(\ttH(\tau_{\mathrm{had}}\tau_{\mathrm{had}})\), mientras que los principales procesos de fondo son \(\ttbar\)+jets, $Z\to\tau\tau$+jets y eventos con múltiples jets provenientes de radiaciones QCD que se reconstruyen erroneamente como \tauhad (\textit{Fakes}). Para la modelización se emplean simulaciones Monte Carlo, y para el caso del fondo estas se normalizan comparando con datos, salvo para el fondo de \textit{Fakes}, que se estima a partir de datos en regiones de control dedicadas. Los datos y MC se tratan en paralelo en campañas coherentes (mc16a/d/e).
+El análisis utiliza la muestra completa de datos de Run~2 de ATLAS, correspondiente a una luminosidad integrada de 140~fb$^{-1}$ a $\sqrt{s}=13$~TeV. La señal objetivo es \(\ttH(\tau_{\mathrm{had}}\tau_{\mathrm{had}})\), mientras que los principales procesos de fondo son \(\ttbar\)+jets, $Z\to\tau\tau$+jets y eventos con múltiples jets provenientes de radiaciones QCD que se reconstruyen erroneamente como \tauhad (\textit{Fakes}). Para la modelización se emplean simulaciones Monte Carlo, y para el caso del fondo estas se normalizan comparando con datos, salvo para el fondo de \textit{Fakes}, que se estima a partir de datos en regiones de control dedicadas. Los datos y MC se tratan en paralelo en campañas coherentes (MC16a/d/e).
 
 La selección de eventos se basa en exigir al menos la presencia de dos \tauhad, y diversa multiplicidad de jets, al igual que ciertas características cinemáticas sobre todos los objetos finales que se resume en la Tabla~\ref{res:tth_preselection}.
 
@@ -551,13 +551,13 @@ Los resultados obtenidos para los tres bins de \pth sufren de baja precisión, d
   \label{res:tth_cls_limits}
 \end{figure}
 
-En conclusión, el análisis \(\ttH(\tau_{\mathrm{had}}\tau_{\mathrm{had}})\) en ATLAS con la muestra completa de Run-2 constituye un avance significativo en la exploración de este proceso. A pesar de la dificultad experimental inherente al canal, se han obtenido resultados consistentes con el Modelo Estándar, se han reducido las incertidumbres respecto a estudios previos y se ha demostrado la viabilidad de extender la medida a categorías diferenciales en el marco STXS. La metodología desarrollada, en particular la categorización optimizada y el uso de un discriminante BDT multiclase, sienta las bases para análisis más precisos al incluir datos de Run~3, donde la estadística adicional puede reducir de forma notable las incertidumbres y mejorar las restricciones sobre el acoplamiento de Yukawa del top.
+En conclusión, el análisis \(\ttH(\tau_{\mathrm{had}}\tau_{\mathrm{had}})\) en ATLAS con la muestra completa de Run~2 constituye un avance significativo en la exploración de este proceso. A pesar de la dificultad experimental inherente al canal, se han obtenido resultados consistentes con el Modelo Estándar, se han reducido las incertidumbres respecto a estudios previos y se ha demostrado la viabilidad de extender la medida a categorías diferenciales en el marco STXS. La metodología desarrollada, en particular la categorización optimizada y el uso de un discriminante BDT multiclase, sienta las bases para análisis más precisos al incluir datos de Run~3, donde la estadística adicional puede reducir de forma notable las incertidumbres y mejorar las restricciones sobre el acoplamiento de Yukawa del top.
 
 \FloatBarrier
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Medida de \thqb + \ttH con \htautau con datos de Run-2 y parte de Run-3}
+\section*{Medida de \thqb + \ttH con \htautau con datos de Run~2 y parte de Run~3}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 La producción asociada de un bosón de Higgs con quarks top, en sus modos \ttH y \thqb, constituye una oportunidad única para estudiar la estructura de $CP$ del acoplamiento de Yukawa del top. En el Modelo Estándar el Higgs es un escalar puro y sus interacciones son $CP$-par ($CP$-even), pero escenarios con mezcla escalar–pseudoscalar siguen siendo compatibles con los datos actuales y aportarían nuevas fuentes de violación de $CP$ de interés cosmológico~\cite{Gunion:1996xu, Ellis:2013yxa, He:2015spx, Boudjema:2015nda}. 
@@ -652,31 +652,31 @@ Ahora el ajuste estadístico se construye sobre las distribuciones de los \emph{
 
 \begin{figure}[htbp]
   \centering
-  % Run-2
+  % Run~2
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run2_cat_tth_tth_sideband__sr.pdf}
-    \caption{Run-2, $t\bar{t}H$ sideband SR}
+    \caption{Run~2, $t\bar{t}H$ sideband SR}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run2_cat_tth_tth_window__sr.pdf}
-    \caption{Run-2, $t\bar{t}H$ window SR}
+    \caption{Run~2, $t\bar{t}H$ window SR}
   \end{subfigure}
 
-  % Run-3
+  % Run~3
   \vspace{0.4cm}
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run3_cat_tth_tth_sideband__sr.pdf}
-    \caption{Run-3, $t\bar{t}H$ sideband SR}
+    \caption{Run~3, $t\bar{t}H$ sideband SR}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run3_cat_tth_tth_window__sr.pdf}
-    \caption{Run-3, $t\bar{t}H$ window SR}
+    \caption{Run~3, $t\bar{t}H$ window SR}
   \end{subfigure}
 
   \caption{SRs for $t\bar{t}H$ antes del fit, mostradas por separado para Run~2 yRun~3. No se aplican factores de escala \ztautau o \ttbar. Solo se consideran incertidumbres estadísticas.}
@@ -686,31 +686,31 @@ Ahora el ajuste estadístico se construye sobre las distribuciones de los \emph{
 
 \begin{figure}[htbp]
   \centering
-  % Run-2
+  % Run~2
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run2_cat_tth_th_sideband__sr.pdf}
-    \caption{Run-2, $tHqb$ sideband SR}
+    \caption{Run~2, $tHqb$ sideband SR}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run2_cat_tth_th_window__sr.pdf}
-    \caption{Run-2, $tHqb$ window SR}
+    \caption{Run~2, $tHqb$ window SR}
   \end{subfigure}
 
-  % Run-3
+  % Run~3
   \vspace{0.4cm}
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run3_cat_tth_th_sideband__sr.pdf}
-    \caption{Run-3, $tHqb$ sideband SR}
+    \caption{Run~3, $tHqb$ sideband SR}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run3_cat_tth_th_window__sr.pdf}
-    \caption{Run-3, $tHqb$ window SR}
+    \caption{Run~3, $tHqb$ window SR}
   \end{subfigure}
 
   \caption{SRs for \thqb antes del fit, mostradas por separado para Run~2 yRun~3. No se aplican factores de escala \ztautau o \ttbar. Solo se consideran incertidumbres estadísticas.}
@@ -719,31 +719,31 @@ Ahora el ajuste estadístico se construye sobre las distribuciones de los \emph{
 
 \begin{figure}[htbp]
   \centering
-  % Run-2
+  % Run~2
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run2_cat_tth_ttbar__cr.pdf}
-    \caption{Run-2, $t\bar{t}$ CR}
+    \caption{Run~2, $t\bar{t}$ CR}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run2_cat_tth_Ztt__cr.pdf}
-    \caption{Run-2, $Z\to\tau\tau$ CR}
+    \caption{Run~2, $Z\to\tau\tau$ CR}
   \end{subfigure}
 
-  % Run-3
+  % Run~3
   \vspace{0.4cm}
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run3_cat_tth_ttbar__cr.pdf}
-    \caption{Run-3, $t\bar{t}$ CR}
+    \caption{Run~3, $t\bar{t}$ CR}
   \end{subfigure}
   \hfill
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\linewidth]{asimov_fit_th_tth/prefit/chan_hh_run3_cat_tth_Ztt__cr.pdf}
-    \caption{Run-3, $Z\to\tau\tau$ CR}
+    \caption{Run~3, $Z\to\tau\tau$ CR}
   \end{subfigure}
 
   \caption{CRs for \ttbar y \ztautau antes del fit, mostradas por separado para Run~2 yRun~3. No se aplican factores de escala \ztautau o \ttbar. Solo se consideran incertidumbres estadísticas.}
@@ -764,7 +764,7 @@ Para validar el control de los fondos en datos y justificar la aplicación de lo
   \setlength{\tabcolsep}{10pt}
   \begin{tabular}{lcc}
     \toprule
-    \textbf{Process} & \textbf{Run-3 $NF$} & \textbf{Run-2 $NF$} \\
+    \textbf{Process} & \textbf{Run~3 $NF$} & \textbf{Run~2 $NF$} \\
     \midrule
     \ztautau              & $1.47^{+0.08}_{-0.08}$ & $1.12^{+0.07}_{-0.07}$ \\
     \ttbar       & $1.22^{+0.08}_{-0.08}$ & $1.10^{+0.09}_{-0.08}$ \\

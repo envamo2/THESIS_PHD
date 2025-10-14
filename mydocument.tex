@@ -201,10 +201,24 @@
 
 
 %-------------------------------------------------------------------------------
-\clearpage
-\addcontentsline{toc}{chapter}{Resumen}
-\chapter*{Resumen}
-\input{chapters/resumen_es}
+%\clearpage
+%\addcontentsline{toc}{chapter}{Resum}
+%\chapter*{Resum}
+%\input{chapters/resumen_val}
+
+
+
+\renewcommand\thechapter{\Alph{chapter}}
+\setcounter{chapter}{18}
+\setcounter{section}{0}
+\setcounter{figure}{0}
+\cleardoublepage
+\phantomsection
+\chapter*{Resum}
+\label{chapter:resum}
+\markboth{Resum}{Resum}
+\addcontentsline{toc}{chapter}{Resum}
+\input{chapters/resumen_val}
 %-------------------------------------------------------------------------------
 
 
